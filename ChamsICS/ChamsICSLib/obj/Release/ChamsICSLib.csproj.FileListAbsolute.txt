@@ -1,0 +1,20 @@
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.dll.config
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.pdb
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.xml
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.pdb
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.dll.config
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.pdb
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.dll
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.xml
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.pdb

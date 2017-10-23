@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CICSWebPortal.Models.Transaction>
+@{
+    ViewBag.Title = "Transaction Statement";
+    Layout = null;
+}
+
+<table class="table table-striped" id="dataTable1">
+    <thead>
+        <tr>
+        <th colspan="6">
+           <span>@Model.Count() Transactions.</span>
+            <span class="pull-right">Total: ₦ @Model.Sum(x=> x.Amount).</span>
+        </th>
+        </tr>
+        <tr>
+            <th>Transaction Date</th>
+            <th>Transaction Code</th>
+            <th>Agent</th>
+            <th>Payment Details</th>
+            <th>Payment Reference</th>
+            <th>Amount</th>
+         </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.TransactionCode)</td>
+            <td>@Html.DisplayFor(modelItem => item.AgentName)</td>
+            <td>@Html.DisplayFor(modelItem => item.RevenueName) | @Html.DisplayFor(modelItem => item.RevenueHead) | @Html.DisplayFor(modelItem => item.Ministry)</td>
+            <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+        </tr>
+        }
+</tbody>
+</table>

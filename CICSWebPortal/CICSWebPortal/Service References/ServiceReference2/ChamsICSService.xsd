@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://3rdpartyservices.cics.chams.com" elementFormDefault="qualified" targetNamespace="http://3rdpartyservices.cics.chams.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/edoigr_ws/ChamsICSService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" />
+  <xs:element name="AuthoriseTerminal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q1:AuthoriseTerminalReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthoriseTerminalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="AuthoriseTerminalResult" nillable="true" type="q2:AuthoriseTerminalRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyResidentId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q3:VerifyResidentIdReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyResidentIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="VerifyResidentIdResult" nillable="true" type="q4:VerifyResidentIdRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadTransaction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q5:UploadTransactionReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadTransactionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="UploadTransactionResult" nillable="true" type="q6:UploadTransactionRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryUploadTransaction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q7:QueryTransactionReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryUploadTransactionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="QueryUploadTransactionResult" nillable="true" type="q8:QueryTransactionRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTerminalDetails">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q9:GetTerminalsReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTerminalDetailsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="GetTerminalDetailsResult" nillable="true" type="q10:GetTerminalDetailsRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTerminal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q11:FindTerminalReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTerminalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="GetTerminalResult" nillable="true" type="q12:GetTerminalsRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTerminals">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q13:GetTerminalsReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTerminalsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="GetTerminalsResult" nillable="true" type="q14:GetTerminalsRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindTerminal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q15:FindTerminalReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindTerminalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="FindTerminalResult" nillable="true" type="q16:GetTerminalsRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRevenue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q17:ServiceRevenueReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRevenueResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="GetRevenueResult" nillable="true" type="q18:GetServiceRevenueRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindRevenue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q19:ServiceFindRevenueReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindRevenueResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="FindRevenueResult" nillable="true" type="q20:GetServiceRevenueRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLattestRevenue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q21:ServiceRevenueReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLattestRevenueResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="GetLattestRevenueResult" nillable="true" type="q22:GetServiceRevenueRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAgentLocations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q23:GetAgentLocationsReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAgentLocationsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="GetAgentLocationsResult" nillable="true" type="q24:GetAgentLocationsRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

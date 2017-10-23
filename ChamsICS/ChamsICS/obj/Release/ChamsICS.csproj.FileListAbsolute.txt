@@ -1,0 +1,6 @@
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\ChamsICS.dll.config
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\ChamsICS.dll
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\ChamsICS.pdb
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\obj\Release\ChamsICS.dll
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\obj\Release\ChamsICS.pdb
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\obj\Release\ChamsICS.csprojResolveAssemblyReference.cache

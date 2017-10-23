@@ -1,0 +1,393 @@
+﻿@{ string displayStyle = string.Empty;}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="overflow-hidden">
+    <!-- Overlay Div -->
+    <div id="overlay" class="transparent"></div>
+
+    <div id="wrapper" class="preload">
+        <div id="top-nav" class="fixed skin-2">
+            <a href="#" class="brand">
+                <span>@Session["RoleName"]</span>
+                <span class="text-toggle"> </span>
+            </a><!-- /brand -->
+            <button type="button" class="navbar-toggle pull-left" id="sidebarToggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <button type="button" class="navbar-toggle pull-left hide-menu" id="menuToggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <ul class="nav-notification clearfix">
+                <li class="profile dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+                        Welcome, <strong>@Session["User"]</strong>
+
+
+                        <span><i class="fa fa-chevron-down"></i></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="clearfix" href="#">
+                                <div class="detail">
+                                    <p class="grey">@Session["User"]</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li><a href='#edit_user_modal' class="main-link" data-toggle="modal" role="button"><i class="fa fa-edit fa-lg"></i>Change Password</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" class="main-link logoutConfirm_open" href="#logoutConfirm"><i class="fa fa-lock fa-lg"></i> Log out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /top-nav-->
+
+        <aside class="fixed skin-1">
+            <div class="sidebar-inner scrollable-sidebar">
+                <div class="size-toggle">
+                    <a class="btn btn-sm" id="sizeToggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="btn btn-sm pull-right logoutConfirm_open" href="#logoutConfirm">
+                        <i class="fa fa-power-off"></i>
+                    </a>
+                </div><!-- /size-toggle -->
+                <div class="user-block clearfix">
+
+                    <div class="detail">
+
+                    </div>
+                </div><!-- /user-block -->
+
+                <div class="main-menu">
+                    <ul id="main_nav">
+                        <li>
+                            <a href="/Home/">
+                                <span class="menu-icon">
+                                    <i class="fa fa-desktop fa-lg"></i>
+                                </span>
+                                <span class="text">
+                                    Dashboard
+                                </span>
+                                <span class="menu-hover"></span>
+                            </a>
+                        </li>
+                        @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleId"]) > 2) { displayStyle = "display: none"; } }
+                        <li style="@displayStyle">
+                            <a href="/Client/">
+                                <span class="menu-icon">
+                                    <i class="fa fa-file-text fa-lg"></i>
+                                </span>
+                                <span class="text">
+                                    Client
+                                </span>
+                                <span class="menu-hover"></span>
+                            </a>
+
+                        </li>
+                        @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleId"]) > 2) { displayStyle = "display: none"; } }
+                        <li style="@displayStyle">
+                            <a href="/Identity/">
+                                <span class="menu-icon">
+                                    <i class="fa fa-cog fa-lg"></i>
+                                </span>
+                                <span class="text">
+                                    Identity
+                                </span>
+
+                                <span class="menu-hover"></span>
+                            </a>
+                        </li>
+                        @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleId"]) > 4) { displayStyle = "display: none"; } }
+                        <li style="@displayStyle">
+                            <a href="/Agent/">
+                                <span class="menu-icon">
+                                    <i class="fa fa-tag fa-lg"></i>
+                                </span>
+                                <span class="text">
+                                    Agents
+                                </span>
+
+                                <span class="menu-hover"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Location/">
+                                <span class="menu-icon">
+                                    <i class="fa fa-tag fa-lg"></i>
+                                </span>
+                                <span class="text">
+                                    Locations
+                                </span>
+
+                                <span class="menu-hover"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Terminal/">
+                                <span class="menu-icon">
+                                    <i class="fa fa-tag fa-lg"></i>
+                                </span>
+                                <span class="text">
+                                    Terminals
+                                </span>
+
+                                <span class="menu-hover"></span>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="/Transaction/">
+                                <span class="menu-icon">
+                                    <i class="fa fa-tag fa-lg"></i>
+                                </span>
+                                <span class="text">
+                                    Transactions
+                                </span>
+
+                                <span class="menu-hover"></span>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="/UploadError/">
+                                <span class="menu-icon">
+                                    <i class="fa fa-tag fa-lg"></i>
+                                </span>
+                                <span class="text">
+                                    Upload Errors
+                                </span>
+
+                                <span class="menu-hover"></span>
+                            </a>
+
+                        </li>
+                        @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleId"]) > 4) { displayStyle = "display: none"; } }
+                        <li style="@displayStyle" class="parent">
+                            <a href="#">
+                                <span data-toggle="collapse" data-target="#revenue-sub-menu">
+                                    <i class="fa fa-tag fa-lg"></i>
+                                </span>
+                                <span class="text">
+                                    Revenue
+                                </span>
+                                <span class="menu-hover">
+                                </span>
+                            </a>
+                            <ul class="nav-child collapse padding-xs" id="revenue-sub-menu">
+                                <li>
+                                    <a href="/Revenue/Ministries/">
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                        <span class="text"> Ministries</span>
+
+                                        <span class="menu-hover">
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Revenue/RevenueHeads/">
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                        <span class="text"> Revenue Heads</span>
+
+                                        <span class="menu-hover">
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Revenue/RevenueCategories/">
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                        <span class="text"> Revenue Categories</span>
+
+                                        <span class="menu-hover">
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Revenue/RevenueItems/">
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                        <span class="text"> Revenue Items</span>
+
+                                        <span class="menu-hover">
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                         </li>
+                        <li class="parent">
+                            <a href="#">
+                                <span data-toggle="collapse" data-target="#report-sub-menu">
+                                    <i class="fa fa-tasks fa-lg"></i></span>
+                                <span>
+                                    Reports
+                                </span>
+                            </a>
+                            <ul class="nav-child collapse large" id="report-sub-menu">
+                                @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleId"]) > 4) { displayStyle = "display: none"; } }
+                                <li style="@displayStyle">
+                                    <a href="/Report/">
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                        <span class="text"> Transaction Reports</span>
+                                    </a>
+                                    <br />
+                                </li>
+                                @{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleID"]) == 1 || Convert.ToInt32(Session["RoleID"]) == 2)) { displayStyle = "display: none"; } }
+                                <li style="@displayStyle">
+                                    <a href="/Report/ClientSummary/">
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                            <span class="text"> Client Summary</span>
+</a>
+                                    @{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleId"]) == 3 || Convert.ToInt32(Session["RoleId"]) == 4)) { displayStyle = "display: none"; } }
+                                </li>  
+                                <li style="@displayStyle">
+                                    <a href="/Report/AgentSummary/"> 
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                        <span class="text"> Agent Summary</span>
+                                    </a>
+                                </li>
+                                <li style="@displayStyle">
+                                    <a href="/Report/PeriodicDashBoard/">
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                        <span class="text"> Agent Positions</span>
+                                    </a>
+                                </li>
+                                <li style="@displayStyle">
+                                    <a href="/Report/LocationSummary/">
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                        <span class="text"> Location Summary</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Report/TransactionReceipt/">
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                        <span class="text">Transaction Receipt</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Report/TransactionStatement/">
+                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                        <span class="text">Transaction Statement</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>                      
+                     </ul>
+
+</div><!-- /main-menu -->
+            </div><!-- /sidebar-inner -->
+        </aside>
+        <div id="main-container">
+            @{ var clientID = @Session["ClientId"].ToString();
+            string clientLigo = clientID + ".png";
+            }<img src="~/Images/clients/@clientLigo" style="vertical-align:middle; height:50px;width:50px;">
+            <div>
+                <h3>
+                    &nbsp;
+                    <span style="vertical-align:middle; text-align:center">@Session["ClientName"]</span>
+                </h3>
+            </div>
+            @RenderBody()
+        </div><!-- /main-container -->
+        <!-- Footer
+        ================================================== -->
+        <footer>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <span class="footer-brand">
+                        <strong class="text-danger">IGR Hub</strong> Management Portal
+                    </span>                    
+                        <p>
+                            &copy; @DateTime.Now.Year <a href="http://www.chams.com">Chams plc</a>. All Rights Reserved.
+                        </p>
+                        
+                    </div><!-- /.col -->
+                    <div class="col-md-3">
+                    </div>
+                </div><!-- /.row-->
+        </footer>
+
+
+
+    </div><!-- /wrapper -->
+    <a href="" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- Logout confirmation -->
+    <div class="custom-popup width-100" id="logoutConfirm">
+
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="padding-md">
+                <h4 class="m-top-none"> Do you want to logout?</h4>
+            </div>
+            <div class="text-center">
+                <a class="btn btn-success m-right-sm" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                <a class="btn btn-danger logoutConfirm_close">Cancel</a>
+            </div>
+        }
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="edit_user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        @Html.Partial("_ChangePasswordPartial")
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="settings_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Settings</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Jquery -->
+    <!--
+    Style switcher. This is just for demo purpose only.
+    If you don't want remove the below line.
+    Some of the features of style switcher won't work on offline. THey only work when you upload it to server
+    -->
+    <!-- <script src="style-switcher/style-switcher.js"></script> -->
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @RenderSection("JavaScript", required: false)
+    <script type="text/javascript">
+    $(function () {
+        $("#main_nav li").click(function () {
+
+            $("#main_nav li").removeClass("active");
+            $(this).addClass("active");
+        });
+
+    });
+
+    </script>
+</body>
+</html>

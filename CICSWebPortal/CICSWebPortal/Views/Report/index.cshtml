@@ -1,0 +1,187 @@
+﻿@model CICSWebPortal.Models.ReportViewModel
+@{
+    string displayStyle = string.Empty;
+    ViewBag.Title = "Reports";
+}
+<div class="clearfix">
+    <h3 class="text-center">Transaction Reports</h3><hr />
+</div><!-- /main-header -->
+<div class="clearfix padding-md ">
+    <div class="form-group">
+        <div class="row padding-xs">
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2"> Start Date </span>
+                    <input type="text" class="form-control" id="StartDate" value="@Model.StartDate.ToString("dd/MM/yyyy")" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2"> End Date </span>
+                    <input type="text" class="form-control" id="EndDate" value="@Model.EndDate.ToString("dd/MM/yyyy")" />
+                </div>
+            </div>
+        </div>
+        <div class="row padding-xs">
+            @{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleID"]) == 1 || Convert.ToInt32(Session["RoleID"]) == 2)) { displayStyle = "display: none"; } }
+            <div class="col-sm-4" id="clientPanel" style="@displayStyle">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Client:</span>
+                    @Html.DropDownListFor(m => m.SelectedClientId, Model.clientList, "ALL", new { @class = "form-control", required = true })
+                </div>
+            </div>
+                @{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleID"]) < 5)) { displayStyle = "display: none"; } }
+            <div class="col-sm-4" id="agentPanel" style="@displayStyle">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Agents:</span>
+                    @Html.DropDownListFor(m => m.SelectedAgentId, Model.agentList, "ALL", new { @class = "form-control", required = true })
+                </div>
+            </div>
+            <div class="col-sm-4" id="terminalPanel">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Terminals:</span>
+                    @Html.DropDownListFor(m => m.SelectedTerminalId, Model.terminalList, "ALL", new { @class = "form-control", required = true })
+                </div>
+            </div>
+        </div>
+
+        <div class="row padding-xs">
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Revenue Heads:</span>
+                    @Html.DropDownListFor(m => m.SelectedRevenueCode, Model.revenueList, "ALL", new { @class = "form-control", required = true })
+                </div>
+            </div>
+            
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-refresh"></i></span>
+                    <button class="btn btn-primary form-control" id="btnRefresh">Refresh</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /main-header -->
+
+<div class="panel panel-default table-responsive">
+    <div class="panel-heading">        
+        <span class="label label-info pull-right">
+
+        </span>
+    </div>
+    <div class="padding-md clearfix" id="reportData">
+        <table class="table table-striped" id="dataTable1">
+            <thead>
+                <tr>
+                    <td colspan="10" class="text-center">
+                        <h4>
+                            <span class="pull-left">@Model.Report.Count().ToString("#,0") transactions between @Model.StartDate.ToString("dd/MM/yyyy") and @Model.EndDate.ToString("dd/MM/yyyy")</span>
+                            <span class="pull-right"> Total:: ₦ @Model.TotalTransactionValue.ToString("#,0.00")</span>
+                        </h4>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>TransactionCode</th>
+                    <th>Agent</th>
+                    <th>Revenue</th>
+                    <th>Revenue Head</th>
+                    <th>Ministry</th>
+                    <th>ResidentID</th>
+                    <th>Amount</th>
+                    <th>TransactionDate</th>
+                    <th width="15%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Report)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.TransactionId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TransactionCode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Agent)</td>
+                        <td>@Html.DisplayFor(modelItem => item.RevenueName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.RevenueHead)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Ministry)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ResidentId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
+                        <td>@Html.ActionLink("Details", "TransactionReceipt", "Transaction", new { id = item.TransactionId }, new { role = "button", @class = "btn btn-primary" })</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>    </div><!-- /.padding-md -->
+</div><!-- /panel -->
+<!-- Modal -->
+@section JavaScript
+{
+<script type="text/javascript">
+    function bindJQueryEvents() {
+        $("#StartDate").datepicker({
+            minDate: new Date(2015, 1 - 1, 1),
+            maxDate: new Date()
+        });
+
+        $("#EndDate").datepicker({
+            minDate: new Date(2015, 1 - 1, 1),
+            maxDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+        });
+
+        //Load the details page
+        $(".viewButton").click(function () {
+            $("#edit_modal_body").load("/Transaction/TransactionDetails/" + $(this).data("view-id"));
+        });
+
+        $('#dataTable1').dataTable({
+            "bJQueryUI": true, "order": [[0, "desc"]],
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sEmptyTable": "No Level exist."
+            },
+            dom: 'T<"clear">lfrtip',
+            tableTools: {
+                "sSwfPath": "~/swf/copy_csv_xls_pdf.swf",
+                "sRowSelect": "os",
+                "aButtons": [
+                "select_all", "select_none",
+            "copy",
+            "csv",
+            "xls",
+            {
+                "sExtends": "pdf",
+                "sPdfOrientation": "landscape",
+                "sPdfMessage": ""
+            },
+            "print"
+                ]
+            }
+        });
+    }
+
+    $(function () {
+        bindJQueryEvents();
+            $("#btnRefresh").click(function () {
+                var filter = {
+                    startDate: $("#StartDate").val(),
+                    endDate: $("#EndDate").val(),
+                    clientId: $("#SelectedClientId").val(),
+                    agentId: $("#SelectedAgentId").val(),
+                    terminalId: $("#SelectedTerminalId").val(),
+                    ministry: $("#SelectedMinistry").val(),
+                    RevenueCode: $("#SelectedRevenueCode").val()
+                }; 
+
+                $.ajax({
+                    type: 'POST',
+                    data: filter, 
+                    url: '/Report/TransactionSummary/'
+                }).done(function (data) {
+                    $("#reportData").empty();
+                    $("#reportData").html(data);
+                    bindJQueryEvents();
+                });
+            });
+        });
+</script>
+}

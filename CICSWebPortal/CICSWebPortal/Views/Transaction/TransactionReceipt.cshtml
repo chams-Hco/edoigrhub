@@ -1,0 +1,38 @@
+﻿@model CICSWebPortal.Models.Transaction
+@{
+    ViewBag.Title = "Transaction Receipt";
+}
+<div id=" = receipt_main">
+    <div class="main-header clearfix">
+        <hr />
+        <h3>Resident ID: @Model.ResidentId</h3>
+        <h3> @Model.FirstName @Model.MiddleName @Model.LastName</h3>   <hr />
+    </div><!-- /main-header -->
+
+    <div class="panel panel-default table-responsive">
+        <div class="panel-heading">
+            <h4>TransactionCode: @Model.TransactionCode</h4>
+        </div>
+        <div class="padding-md clearfix">
+            <table class="table table-striped" id="dataTable1">
+                <tbody>
+                    <tr><th>ResidentID </th> <td>@Model.ResidentId</td></tr>
+                    <tr><th>Transaction Code</th> <td>@Model.TransactionCode</td></tr>
+                    <tr><th>Agent</th> <td>@Model.AgentName</td></tr>
+                    <tr><th>Revenue</th> <td>@Model.RevenueName</td></tr>
+                    <tr><th>Revenue Head</th> <td>@Model.RevenueHead</td></tr>
+                    <tr><th>Ministry</th> <td>@Model.Ministry</td></tr>
+                    <tr><th>Payment Reference</th> <td>@Model.PaymentReference</td></tr>
+                    <tr><th>Amount</th> <td>@Model.Amount</td> </tr>
+                    <tr><th>First Name</th> <td>@Model.FirstName</td></tr>
+                    <tr><th>Middle Name</th> <td>@Model.MiddleName</td></tr>
+                    <tr><th>Surname</th> <td>@Model.LastName</td></tr>
+                    <tr><th>Email</th> <td>@Model.Email</td></tr>
+                    <tr><th>Phone</th> <td>@Model.PhoneNumber</td> </tr>
+                    <tr><th>Address</th> <td>@Model.Address</td></tr>
+                    <tr><th>Transaction Date</th> <td>@Model.TransactionDate</td> </tr>
+                </tbody>
+            </table>
+        </div><!-- /.padding-md -->
+    </div><!-- /panel -->
+</div>

@@ -1,0 +1,59 @@
+C:\Users\AYOOLA\Desktop\New folder (2)\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.config
+C:\Users\AYOOLA\Desktop\New folder (2)\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll
+C:\Users\AYOOLA\Desktop\New folder (2)\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.pdb
+C:\Users\AYOOLA\Desktop\New folder (2)\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.dll
+C:\Users\AYOOLA\Desktop\New folder (2)\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\AYOOLA\Desktop\New folder (2)\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.xml
+C:\Users\AYOOLA\Desktop\New folder (2)\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\AYOOLA\Desktop\New folder (2)\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
+C:\Users\AYOOLA\Desktop\New folder (2)\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
+C:\Users\AYOOLA\Desktop\New folder (2)\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\Developer\Documents\Visual Studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.config
+C:\Users\Developer\Documents\Visual Studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll
+C:\Users\Developer\Documents\Visual Studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.pdb
+C:\Users\Developer\Documents\Visual Studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.dll
+C:\Users\Developer\Documents\Visual Studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Developer\Documents\Visual Studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.xml
+C:\Users\Developer\Documents\Visual Studio 2015\Projects\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Developer\Documents\Visual Studio 2015\Projects\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
+C:\Users\Developer\Documents\Visual Studio 2015\Projects\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
+C:\Users\Developer\Documents\Visual Studio 2015\Projects\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.config
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.pdb
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.dll
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.xml
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
+C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.config
+C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll
+C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.pdb
+C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.dll
+C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.xml
+C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
+C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
+C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\Public\Documents\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.config
+C:\Users\Public\Documents\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll
+C:\Users\Public\Documents\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.pdb
+C:\Users\Public\Documents\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.dll
+C:\Users\Public\Documents\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Public\Documents\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.xml
+C:\Users\Public\Documents\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Public\Documents\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
+C:\Users\Public\Documents\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
+C:\Users\Public\Documents\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.config
+C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll
+C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.pdb
+C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.dll
+C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.xml
+C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
+C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
+C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csprojResolveAssemblyReference.cache

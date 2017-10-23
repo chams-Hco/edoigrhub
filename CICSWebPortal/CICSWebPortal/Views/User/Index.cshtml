@@ -1,0 +1,146 @@
+﻿@model IEnumerable<CICSWebPortal.Models.User>
+@{
+    ViewBag.Title = "User";
+}
+
+<div id="breadcrumb">
+    <ul class="breadcrumb">
+        <li><i class="fa fa-home"></i><a href="#"> Home</a></li>
+        <li class="active">User</li>
+    </ul>
+</div><!-- /breadcrumb-->
+<div class="main-header clearfix">
+
+    <h3 class="text-center">Users</h3>
+</div><!-- /main-header -->
+
+<div class="panel panel-default table-responsive">
+    <div class="panel-heading">
+        @{string displayStyle = string.Empty; if ((Convert.ToInt32(Session["RoleID"]) == 2) || (Convert.ToInt32(Session["RoleID"]) == 4) || (Convert.ToInt32(Session["RoleID"]) == 6)) { displayStyle = "display: none"; } }
+        <a style=" @displayStyle" data-target='#add_modal' role="button" class="btn btn-primary  btn_add" data-toggle="modal">Add User</a>
+        <span class="label label-info pull-right">
+            @{
+                if (Model.Any())
+                {
+                    @Model.Count()
+                }
+            }
+        </span>
+    </div>
+    <div class="padding-md clearfix">
+        <table class="table table-striped" id="dataTable1">
+            <thead>
+                <tr>
+                    <th>UserId</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th width="5%"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Mobile)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td><a data-target='#reset_modal' role='button' data-reset-id='@Html.DisplayFor(modelItem => item.UserId)' class='btn btn-default resetBtn' data-toggle='modal'><i class='fa fa-edit'></i> Reset Password</a></td>
+                        <td><a data-target='#edit_modal' role='button' data-edit-id='@Html.DisplayFor(modelItem => item.UserId)' class='btn btn-default editBtn' data-toggle='modal'><i class='fa fa-edit'></i> @{string disable = item.Status == true ? "Disable" : "Enable";}@disable</a></td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.padding-md -->
+</div><!-- /panel -->
+<!-- Modal -->
+<div class="modal fade" id="add_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="add_modal_body">
+        </div>
+    </div>
+</div>
+
+<!--Edit User-->
+<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="edit_modal_body">
+        </div>
+    </div>
+</div>
+<!--Delete User-->
+<div class="modal fade" id="reset_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="reset_password">
+        </div>
+    </div>
+</div>
+@section JavaScript
+{
+    <script type="text/javascript">
+    $(function () {
+
+
+        //Load the edit page
+        $(".btn_add").click(function () {
+            $("#add_modal_body").load("/User/Create");
+        });
+
+
+
+        //Load the edit page
+        $(".editBtn").click(function () {
+
+            $("#edit_modal_body").load("/User/ChangeStatus/" + $(this).data("edit-id"));
+        });
+
+        //Handle the delete function
+        $(".resetBtn").click(function () {
+
+            $("#reset_password").load("/User/ResetPassword/" + $(this).data("reset-id"));
+        });
+
+
+
+        $('#dataTable1').dataTable({
+            "bJQueryUI": true, "order": [[0, "desc"]],
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sEmptyTable": "No User exist."
+            }
+  ,
+            dom: 'T<"clear">lfrtip',
+            tableTools: {
+                "sSwfPath": "/swf/copy_csv_xls_pdf.swf",
+                "sRowSelect": "os",
+                "aButtons": [
+                "select_all", "select_none",
+            "copy",
+            "csv",
+            "xls",
+            {
+                "sExtends": "pdf",
+                "sPdfOrientation": "landscape",
+                "sPdfMessage": ""
+            },
+            "print"
+                ]
+            }
+        });
+
+
+    });
+
+    </script>
+
+}
+
+
+
+
+
+

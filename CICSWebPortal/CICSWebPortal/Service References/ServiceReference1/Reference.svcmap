@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1b2e3289-92da-436e-a06c-4e3257cf1a07" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://developer-hp:8020/WebService/ChamsICSService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ChamsICSService.wsdl" MetadataType="Wsdl" ID="212460e9-dee2-4e21-825d-41463261c2bb" SourceId="1" SourceUrl="http://developer-hp:8020/WebService/ChamsICSService.svc?wsdl" />
+    <MetadataFile FileName="ChamsICSService.xsd" MetadataType="Schema" ID="485f3cb2-f2d1-442c-a9cd-89a5d1f09131" SourceId="1" SourceUrl="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ChamsICSService1.xsd" MetadataType="Schema" ID="e08f13af-7c61-4b32-8689-376fd302b66c" SourceId="1" SourceUrl="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ChamsICSService2.xsd" MetadataType="Schema" ID="e856bd38-51aa-4db3-aa6d-12c38f1608ce" SourceId="1" SourceUrl="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd4" />
+    <MetadataFile FileName="ChamsICSService3.xsd" MetadataType="Schema" ID="9ff86cf1-c953-474a-8540-eaa57c76008c" SourceId="1" SourceUrl="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ChamsICSService4.xsd" MetadataType="Schema" ID="4bd4b39f-bc3d-485f-837a-3b4bb0dd5e80" SourceId="1" SourceUrl="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ChamsICSService1.wsdl" MetadataType="Wsdl" ID="4d867a8a-6336-46b8-9ca1-fb3c8ba34c2a" SourceId="1" SourceUrl="http://developer-hp:8020/WebService/ChamsICSService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="ChamsICSService2.wsdl" MetadataType="Wsdl" ID="c104c8ea-87be-46c3-86d4-f9be40d5c4f1" SourceId="1" SourceUrl="http://developer-hp:8020/WebService/ChamsICSService.svc?wsdl=wsdl1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,10 @@
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\CICSTest\bin\Release\CICSTest.exe.config
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\CICSTest\bin\Release\CICSTest.exe
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\CICSTest\bin\Release\CICSTest.pdb
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\CICSTest\bin\Release\ChamsICSLib.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\CICSTest\bin\Release\EntityFramework.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\CICSTest\bin\Release\ChamsICSLib.pdb
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\CICSTest\bin\Release\EntityFramework.xml
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\CICSTest\obj\Release\CICSTest.csprojResolveAssemblyReference.cache
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\CICSTest\obj\Release\CICSTest.exe
+C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\CICSTest\obj\Release\CICSTest.pdb

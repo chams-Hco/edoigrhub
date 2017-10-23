@@ -1,0 +1,157 @@
+﻿@model IEnumerable<CICSWebPortal.Models.Transaction>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="breadcrumb">
+    <ul class="breadcrumb">
+        <li><i class="fa fa-home"></i><a href="#"> Home</a></li>
+        <li class="active">Transactions</li>
+    </ul>
+</div><!-- /breadcrumb-->
+<div class="padding-md">
+    <a href="/Transaction/AllTransactions/" class="btn bg-danger">View All Transactions</a>
+    <a href="/UploadError/" class="btn bg-danger">View Transactions Exceptions</a>
+    <h3 class="text-center">Transactions</h3>
+</div>
+<div class="panel-heading">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon2"> Start Date </span>
+                <input type="text" class="form-control" id="StartDate" value="@ViewBag.StartDate.ToString("dd/MM/yyyy")" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon2"> End Date </span>
+                <input type="text" class="form-control" id="EndDate" value="@ViewBag.EndDate.ToString("dd/MM/yyyy")" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon2"><i class="fa fa-refresh"></i></span>
+                <button class="btn btn-primary form-control" id="btnRefresh">Refresh</button>
+            </div>
+        </div>
+    </div>
+    <br />
+    <span class="label label-info pull-right">
+        @{
+            if (Model.Any())
+            {
+                @Model.Count()
+            }
+        }
+    </span>
+</div>
+
+<div class="panel panel-default table-responsive">
+    <div class="padding-md clearfix">
+        <table class="table table-striped" id="dataTable1">
+            <thead>
+                <tr>
+                    <th>Agent</th>
+                    <th>Revenue</th>
+                    <th>RevenueHead</th>
+                    <th>Ministry</th>
+                    <th>ResidentID</th>
+                    <th>Amount</th>
+                    <th>TransactionDate</th>
+                    <th width="15%"></th>
+                    <th width="15%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.AgentName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.RevenueName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.RevenueHead)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Ministry)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ResidentId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
+                        <td><a data-target='#view_modal' role='button' data-view-id='@Html.DisplayFor(modelItem => item.TransactionId)' class='btn btn-default viewButton' data-toggle='modal'><i class='fa fa-edit'></i> View Details</a></td>
+                        <td>@Html.ActionLink("Print Receipt", "TransactionReceipt", "Transaction", new { id = item.TransactionId }, new { role = "button", @class = "btn btn-primary" })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.padding-md -->
+</div><!-- /panel -->
+<div class="modal fade" id="view_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="edit_modal_body">
+        </div>
+    </div>
+</div>
+
+
+@section JavaScript
+{
+    <script type="text/javascript">
+    $(function () {
+        $("#btnRefresh").click(function () {
+            var filter = {
+                startDate: $("#StartDate").val(),
+                endDate: $("#EndDate").val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                data: filter,
+                url: '/Transaction/AlltransactionsFilter/'
+            }).done(function (data) {
+                $("#reportData").empty();
+                $("#reportData").html(data);
+            });
+        });
+
+        $("#StartDate").datepicker({
+            minDate: new Date(2015, 1 - 1, 1),
+            maxDate: new Date()
+        });
+
+        $("#EndDate").datepicker({
+            minDate: new Date(2015, 1 - 1, 1),
+            maxDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+        });
+
+        //Load the details page
+        $(".viewButton").click(function () {
+            $("#edit_modal_body").load("/Transaction/TransactionDetails/" + $(this).data("view-id"));
+        });
+
+        $('#dataTable1').dataTable({
+            "bJQueryUI": true, "order": [[0, "desc"]],
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sEmptyTable": "No Level exist."
+            }
+  ,
+            dom: 'T<"clear">lfrtip',
+            tableTools: {
+                "sSwfPath": "../swf/copy_csv_xls_pdf.swf",
+                "sRowSelect": "os",
+                "aButtons": [
+                "select_all", "select_none",
+            "copy",
+            "csv",
+            "xls",
+            {
+                "sExtends": "pdf",
+                "sPdfOrientation": "landscape",
+                "sPdfMessage": ""
+            },
+            "print"
+                ]
+            }
+        });
+
+    });
+    </script>
+
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://portalservices.cics.chams.com" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://portalservices.cics.chams.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://portalservices.cics.chams.com/Imports">
+      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd4" namespace="http://portalservices.cics.chams.com" />
+      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd0" namespace="http://3rdpartyservices.cics.chams.com" />
+      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" />
+      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ChamsICSLib.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="iChamsICSPortalService_UserLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserLogin" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_UserLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_CreateClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateClient" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_CreateClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindClient" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllClient" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllClientResponse" />
+  </wsdl:message>
+  <wsdl:portType name="iChamsICSPortalService">
+    <wsdl:operation name="UserLogin">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/UserLogin" message="tns:iChamsICSPortalService_UserLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/UserLoginResponse" message="tns:iChamsICSPortalService_UserLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateClient">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateClient" message="tns:iChamsICSPortalService_CreateClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateClientResponse" message="tns:iChamsICSPortalService_CreateClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindClient">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClient" message="tns:iChamsICSPortalService_FindClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClientResponse" message="tns:iChamsICSPortalService_FindClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClient">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClient" message="tns:iChamsICSPortalService_GetAllClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClientResponse" message="tns:iChamsICSPortalService_GetAllClient_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

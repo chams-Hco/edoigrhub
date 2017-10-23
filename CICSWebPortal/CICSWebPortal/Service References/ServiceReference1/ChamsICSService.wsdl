@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://3rdpartyservices.cics.chams.com" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:i1="http://portalservices.cics.chams.com" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ChamsICSService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://3rdpartyservices.cics.chams.com" location="http://developer-hp:8020/WebService/ChamsICSService.svc?wsdl=wsdl0" />
+  <wsdl:import namespace="http://portalservices.cics.chams.com" location="http://developer-hp:8020/WebService/ChamsICSService.svc?wsdl=wsdl1" />
+  <wsdl:types />
+  <wsdl:binding name="BasicHttpBinding_iChamsICSService" type="i0:iChamsICSService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AuthoriseTerminal">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/AuthoriseTerminal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyResidentId">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyResidentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadTransaction">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/UploadTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUploadTransaction">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/QueryUploadTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTerminalDetails">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetTerminalDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTerminal">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetTerminal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_iChamsICSPortalService" type="i1:iChamsICSPortalService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UserLogin">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UserLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateClient">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindClient">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClient">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ChamsICSService">
+    <wsdl:port name="BasicHttpBinding_iChamsICSService" binding="tns:BasicHttpBinding_iChamsICSService">
+      <soap:address location="http://developer-hp:8020/WebService/ChamsICSService.svc/SOAP" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_iChamsICSPortalService" binding="tns:BasicHttpBinding_iChamsICSPortalService">
+      <soap:address location="http://developer-hp:8020/WebService/ChamsICSService.svc/SOAPAPI" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

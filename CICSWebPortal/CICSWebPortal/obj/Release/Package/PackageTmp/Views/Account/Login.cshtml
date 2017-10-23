@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@using CICSWebPortal.Models
+@model LoginViewModel
+@{
+
+    Layout = null;
+}
+<head>
+    <meta charset="utf-8">
+    <title>IGR Hub::. Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Endless -->
+    <link href="~/Content/endless.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="text-center">
+            <h2 class="fadeInUp animation-delay8" style="font-weight:bold">
+
+                <img src="~/Images/chams_logo.png" />
+            </h2>
+        </div>
+        <div class="login-widget animation-delay">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div class="pull-left">
+                        <i class="fa fa-lock fa-lg"></i> Login
+                    </div>
+
+                    <div class="pull-right">
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-sm-3 control-label" })
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-sm-3 control-label" })
+                            <div class="col-sm-9">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--<div class="col-sm-offset-3 col-sm-9">
+                                <label class="label-checkbox" for="RememberMe">
+                                    <input type="checkbox" id="RememberMe" name="RememberMe">
+                                    <span class="custom-checkbox"></span>
+                                    Remember me
+                                </label>
+                            </div>-->
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <!-- Button -->
+                                <button type="submit" class="btn btn-blue">Login</button>&nbsp;
+
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-3 col-sm-12">
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+
+                        </div>
+                    }
+
+                </div>
+            </div><!-- /panel -->
+
+        </div>
+        <div class="text-center">
+            <span class="text-center">
+                <strong class="text-danger text-center">IGR Hub</strong> <br />&copy; @DateTime.Now.Year <a href="http://www.chams.com">Chams plc.</a> All Rights Reserved.
+            </span>
+        </div>
+    <!-- /login-widget -->
+    </div><!-- /login-wrapper -->
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Jquery -->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- Modernizr -->
+    <script src="~/Scripts/modernizr.min.js"></script>
+
+    <!-- Pace -->
+    <script src='~/Scripts/pace.min.js'></script>
+
+    <!-- Popup Overlay -->
+    <script src='~/Scripts/jquery.popupoverlay.min.js'></script>
+
+    <!-- Slimscroll -->
+    <script src='~/Scripts/jquery.slimscroll.min.js'></script>
+
+    <!-- Cookie -->
+    <script src='~/Scripts/jquery.cookie.min.js'></script>
+    <!-- Endless -->
+    <script src="~/Scripts/endless.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,76 @@
+﻿@model CICSWebPortal.ViewModels.RevenueViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+
+}
+
+@using (Html.BeginForm("Edit", "Revenue", FormMethod.Post, new
+        {
+            @class = "form-horizontal",
+            role = "form",
+            @id = "regForm",
+
+        }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modify Revenue</h4>
+    </div>
+    <div class="modal-body">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.RevenueId)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.SelectedClientId, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.DropDownListFor(m => m.SelectedClientId, Model.ddlClients, "Please select...", new { @class = "form-control", required = true })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = true } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", required = true } })
+                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", required = true } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MDA, htmlAttributes: new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(model => model.MDA, new { htmlAttributes = new { @class = "form-control", required = true } })
+                @Html.ValidationMessageFor(model => model.MDA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.CheckBoxFor(model => model.Status)
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+
+    </div>
+
+}

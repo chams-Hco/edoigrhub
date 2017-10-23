@@ -1,0 +1,77 @@
+﻿@model CICSWebPortal.Models.IdentityService
+@{
+    ViewBag.Title = "Settings";
+}
+
+<div id="breadcrumb">
+    <ul class="breadcrumb">
+        <li><i class="fa fa-home"></i><a href="#"> Home</a></li>
+        <li class="active">Indentity Service</li>
+    </ul>
+</div><!-- /breadcrumb-->
+<div class="main-header clearfix">
+
+    <h3 class="text-center">Indentity Service</h3>
+</div><!-- /main-header -->
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+       
+
+            @using (Html.BeginForm("Create", "Client", FormMethod.Post, new
+        {
+            @class = "form-horizontal",
+            role = "form",
+            @id = "regForm",
+
+        }))
+            {
+                @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ClientUrl, htmlAttributes: new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.ClientUrl, new { htmlAttributes = new { @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.ClientUrl, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+    <div class="form-group">
+ 
+        <button type="submit" class="btn btn-primary">Save</button>
+
+    </div>
+
+            }
+        
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

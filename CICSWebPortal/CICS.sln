@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CICSWebPortal", "CICSWebPortal\CICSWebPortal.csproj", "{1EBB868D-51FD-4C46-B558-FBDF84F015D8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E14605C2-ABE7-46DE-83FD-D144722EF760} = {E14605C2-ABE7-46DE-83FD-D144722EF760}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CICSWebPortal.Tests", "CICSWebPortal.Tests\CICSWebPortal.Tests.csproj", "{B006C13B-8D83-46A9-A030-95612239C3B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamsICSLib", "..\ChamsICS\ChamsICSLib\ChamsICSLib.csproj", "{8A560F4F-4647-47C5-8F18-2B7D48B6F04C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamsICSWebService", "..\ChamsICS\ChamsICS\ChamsICSWebService.csproj", "{E14605C2-ABE7-46DE-83FD-D144722EF760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSWinService", "..\ChamsICS\ICSWinService\ICSWinService.csproj", "{CEB2990A-E76F-4BD2-8E6E-8B744BF0BA9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1EBB868D-51FD-4C46-B558-FBDF84F015D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EBB868D-51FD-4C46-B558-FBDF84F015D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EBB868D-51FD-4C46-B558-FBDF84F015D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EBB868D-51FD-4C46-B558-FBDF84F015D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B006C13B-8D83-46A9-A030-95612239C3B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B006C13B-8D83-46A9-A030-95612239C3B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B006C13B-8D83-46A9-A030-95612239C3B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B006C13B-8D83-46A9-A030-95612239C3B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A560F4F-4647-47C5-8F18-2B7D48B6F04C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A560F4F-4647-47C5-8F18-2B7D48B6F04C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A560F4F-4647-47C5-8F18-2B7D48B6F04C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A560F4F-4647-47C5-8F18-2B7D48B6F04C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E14605C2-ABE7-46DE-83FD-D144722EF760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14605C2-ABE7-46DE-83FD-D144722EF760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14605C2-ABE7-46DE-83FD-D144722EF760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14605C2-ABE7-46DE-83FD-D144722EF760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEB2990A-E76F-4BD2-8E6E-8B744BF0BA9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEB2990A-E76F-4BD2-8E6E-8B744BF0BA9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEB2990A-E76F-4BD2-8E6E-8B744BF0BA9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEB2990A-E76F-4BD2-8E6E-8B744BF0BA9B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

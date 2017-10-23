@@ -1,0 +1,14 @@
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\ChamsICSLib.dll
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\ChamsICSLib.pdb
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\obj\Release\ChamsICSWebService.csprojResolveAssemblyReference.cache
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\ChamsICSWebService.dll.config
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\ChamsICSWebService.dll
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\ChamsICSWebService.pdb
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\obj\Release\ChamsICSWebService.dll
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\obj\Release\ChamsICSWebService.pdb
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\EntityFramework.SqlServer.dll
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\EntityFramework.SqlServer.xml
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\Newtonsoft.Json.dll
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\System.Net.Http.Formatting.dll
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\Newtonsoft.Json.xml
+c:\users\developer\documents\visual studio 2015\Projects\ChamsICS\ChamsICS\bin\System.Net.Http.Formatting.xml

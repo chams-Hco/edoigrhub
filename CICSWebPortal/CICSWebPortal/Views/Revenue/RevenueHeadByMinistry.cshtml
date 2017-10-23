@@ -1,0 +1,102 @@
+﻿@model IEnumerable<CICSWebPortal.Models.RevenueHead>
+@{
+    ViewBag.Title = "Revenue Heads";
+}
+
+<div id="breadcrumb">
+    <ul class="breadcrumb">
+        <li><i class="fa fa-home"></i><a href="#"> Home</a></li>
+        <li class="active">RevenueHead</li>
+    </ul>
+</div><!-- /breadcrumb-->
+<div class="main-header clearfix">
+
+    <h3 class="text-center">Revenue Heads</h3>
+</div><!-- /main-header -->
+
+<div class="panel panel-default table-responsive">
+    <div class="panel-heading">
+        <span class="label label-info pull-right">
+            @{
+                if (Model.Any())
+                {
+                    @Model.Count()
+                }
+            }
+        </span>
+    </div>
+    <div class="padding-md clearfix">
+        <table class="table table-striped" id="dataTable1">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Ministry</th>
+                    <th>Status</th>
+                    <th></th><th></th><th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Ministry)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td>@Html.ActionLink("Categories", "CagegoryByRevenueHead", "Revenue", new { id = item.Id }, new { role = "button", @class = "btn btn-primary" })</td>
+                        <td>@Html.ActionLink("Revenues", "RevenueByRevenueHead", "Revenue", new { id = item.Id }, new { role = "button", @class = "btn btn-primary" })</td>
+                        <td><a data-target='#edit_modal' role='button' data-edit-id='@Html.DisplayFor(modelItem => item.Id)' class='btn btn-default editBtn' data-toggle='modal'><i class='fa fa-edit'></i> Edit</a></td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.padding-md -->
+</div><!-- /panel -->
+<!-- Modal -->
+
+@section JavaScript
+{
+    <script type="text/javascript">
+    $(function () {
+
+        $('#dataTable1').dataTable({
+            "bJQueryUI": true, "order": [[0, "desc"]],
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sEmptyTable": "No Level exist."
+            }
+  ,
+            dom: 'T<"clear">lfrtip',
+            tableTools: {
+                "sSwfPath": "/swf/copy_csv_xls_pdf.swf",
+                "sRowSelect": "os",
+                "aButtons": [
+                "select_all", "select_none",
+            "copy",
+            "csv",
+            "xls",
+            {
+                "sExtends": "pdf",
+                "sPdfOrientation": "landscape",
+                "sPdfMessage": ""
+            },
+            "print"
+                ]
+            }
+        });
+
+
+    });
+
+    </script>
+
+}
+
+
+
+
+
+

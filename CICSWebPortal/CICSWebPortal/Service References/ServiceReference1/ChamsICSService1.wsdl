@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://3rdpartyservices.cics.chams.com" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://3rdpartyservices.cics.chams.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://3rdpartyservices.cics.chams.com/Imports">
+      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd0" namespace="http://3rdpartyservices.cics.chams.com" />
+      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" />
+      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ChamsICSLib.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="iChamsICSService_AuthoriseTerminal_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthoriseTerminal" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_AuthoriseTerminal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthoriseTerminalResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_VerifyResidentId_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyResidentId" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_VerifyResidentId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyResidentIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_UploadTransaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:UploadTransaction" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_UploadTransaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UploadTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_QueryUploadTransaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUploadTransaction" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_QueryUploadTransaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUploadTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_GetTerminalDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTerminalDetails" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_GetTerminalDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTerminalDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_GetTerminal_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTerminal" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_GetTerminal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTerminalResponse" />
+  </wsdl:message>
+  <wsdl:portType name="iChamsICSService">
+    <wsdl:operation name="AuthoriseTerminal">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/AuthoriseTerminal" message="tns:iChamsICSService_AuthoriseTerminal_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/AuthoriseTerminalResponse" message="tns:iChamsICSService_AuthoriseTerminal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyResidentId">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyResidentId" message="tns:iChamsICSService_VerifyResidentId_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyResidentIdResponse" message="tns:iChamsICSService_VerifyResidentId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadTransaction">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/UploadTransaction" message="tns:iChamsICSService_UploadTransaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/UploadTransactionResponse" message="tns:iChamsICSService_UploadTransaction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUploadTransaction">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/QueryUploadTransaction" message="tns:iChamsICSService_QueryUploadTransaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/QueryUploadTransactionResponse" message="tns:iChamsICSService_QueryUploadTransaction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTerminalDetails">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetTerminalDetails" message="tns:iChamsICSService_GetTerminalDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetTerminalDetailsResponse" message="tns:iChamsICSService_GetTerminalDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTerminal">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetTerminal" message="tns:iChamsICSService_GetTerminal_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetTerminalResponse" message="tns:iChamsICSService_GetTerminal_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

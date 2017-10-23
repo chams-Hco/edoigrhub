@@ -1,0 +1,109 @@
+﻿@model IEnumerable<CICSWebPortal.Models.AgentSummary>
+@{
+    ViewBag.Title = "Agents";
+}
+
+<div class="clearfix">
+    <h3 class="text-center">Agents Summary</h3><hr />
+</div><!-- /main-header -->
+<div class="center paddingLR-md padding-xs">
+    <a href="#reportChart" class="btn btn-success center" data-toggle="collapse">Hide Chart</a>
+</div>
+
+    <div class="row padding-xs padding-lg" id="reportChart">
+        <div>
+            <div id="report_chart_data">
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default table-responsive padding-xs" id="reportTable">
+        <div class="padding-md clearfix">
+            <table class="table table-striped" id="dataTable1">
+                <thead>
+                    <tr>
+                        <th>Agent Name</th>
+                        <th>Total Terminals</th>
+                        <th>Total Transactions</th>
+                        <th>(₦)Transactions Value</th>
+                        <th width="5%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.AgentName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TotalTerminal)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TotalTransactionCount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TotalTransactionValue)</td>
+                            <td>@Html.ActionLink("View Transactions", "TransactionByAgent", "Transaction", new { id = item.AgentId }, new { role = "button", @class = "btn btn-primary" })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div><!-- /.padding-md -->
+    </div><!-- /panel -->
+    <!-- Modal -->
+
+    @section JavaScript
+{
+        <script type="text/javascript">
+            $(function () {
+                $('#dataTable1').dataTable({
+                    "bJQueryUI": true, "order": [[0, "desc"]],
+                    "sPaginationType": "full_numbers",
+                    "oLanguage": {
+                        "sEmptyTable": "No Level exist."
+                    }
+          ,
+                    dom: 'T<"clear">lfrtip',
+                    tableTools: {
+                        "sSwfPath": "/swf/copy_csv_xls_pdf.swf",
+                        "sRowSelect": "os",
+                        "aButtons": [
+                        "select_all", "select_none",
+                    "copy",
+                    "csv",
+                    "xls",
+                    {
+                        "sExtends": "pdf",
+                        "sPdfOrientation": "landscape",
+                        "sPdfMessage": ""
+                    },
+                    "print"
+                        ]
+                    }
+                });
+
+                //"terminals":2,"transactions":3,"transactionSum"
+                $.getJSON("/Report/AgentSummaryChart", function (json) { // callback function which gets called when your request completes.
+                    new Morris.Bar({
+                        // ID of the element in which to draw the chart.
+                        element: 'report_chart_data',
+                        // Chart data records -- each entry in this array corresponds to a point on
+                        // the chart.
+                        data: json,
+                        // The name of the data record attribute that contains x-values.
+                        xkey: 'Agent',
+                        // A list of names of data record attributes that contain y-values.
+                        ykeys: ['terminals','transactions','transactionSum'],
+                        // Labels for the ykeys -- will be displayed when you hover over the
+                        // chart.
+                        labels: ['Total Terminals','Total Transactions','Transaction Value'],
+                        barColors: ['#4cae4c', '#3ec291'],
+                        hideHover: true
+                    });
+                });
+            });
+
+        </script>
+
+    }
+
+
+
+
+
+

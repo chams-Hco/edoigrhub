@@ -1,0 +1,145 @@
+﻿@model IEnumerable<CICSWebPortal.Models.Revenue>
+@{
+    ViewBag.Title = "Revenue";
+}
+
+<div id="breadcrumb">
+    <ul class="breadcrumb">
+        <li><i class="fa fa-home"></i><a href="#"> Home</a></li>
+        <li class="active">Revenue</li>
+    </ul>
+</div><!-- /breadcrumb-->
+<div class="main-header clearfix">
+
+    <h3 class="text-center">Revenue Category</h3>
+</div><!-- /main-header -->
+
+<div class="panel panel-default table-responsive">
+    <div class="panel-heading">
+        <a data-target='#add_modal' role="button" class="btn btn-primary  btn_add" data-toggle="modal">Add Revenue</a>
+        <span class="label label-info pull-right">
+            @{
+                if (Model.Any())
+                {
+                    @Model.Count()
+                }
+            }
+        </span>
+    </div>
+    <div class="padding-md clearfix">
+        <table class="table table-striped" id="dataTable1">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>MDA</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th width="5%"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MDA)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td><a data-target='#edit_modal' role='button' data-edit-id='@Html.DisplayFor(modelItem => item.RevenueId)' class='btn btn-default editBtn' data-toggle='modal'><i class='fa fa-edit'></i> Edit</a></td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.padding-md -->
+</div><!-- /panel -->
+<!-- Modal -->
+<div class="modal fade" id="add_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="add_modal_body">
+        </div>
+    </div>
+</div>
+
+<!--Edit User-->
+<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="edit_modal_body">
+        </div>
+    </div>
+</div>
+<!--Delete User-->
+<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="delete_content">
+        </div>
+    </div>
+</div>
+@section JavaScript
+{
+    <script type="text/javascript">
+    $(function () {
+
+
+        //Load the edit page
+        $(".btn_add").click(function () {
+            $("#add_modal_body").load("/Revenue/Create");
+        });
+
+
+
+        //Load the edit page
+        $(".editBtn").click(function () {
+
+            $("#edit_modal_body").load("/Revenue/Edit/" + $(this).data("edit-id"));
+        });
+
+        //Handle the delete function
+        $(".deleteBtn").click(function () {
+
+            $("#delete_content").load("/Revenue/Delete/" + $(this).data("delete-id"));
+        });
+
+
+
+        $('#dataTable1').dataTable({
+            "bJQueryUI": true, "order": [[0, "desc"]],
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sEmptyTable": "No Level exist."
+            }
+  ,
+            dom: 'T<"clear">lfrtip',
+            tableTools: {
+                "sSwfPath": "/swf/copy_csv_xls_pdf.swf",
+                "sRowSelect": "os",
+                "aButtons": [
+                "select_all", "select_none",
+            "copy",
+            "csv",
+            "xls",
+            {
+                "sExtends": "pdf",
+                "sPdfOrientation": "landscape",
+                "sPdfMessage": ""
+            },
+            "print"
+                ]
+            }
+        });
+
+
+    });
+
+    </script>
+
+}
+
+
+
+
+
+

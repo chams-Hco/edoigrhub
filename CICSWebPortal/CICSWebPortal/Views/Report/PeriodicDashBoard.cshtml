@@ -1,0 +1,285 @@
+﻿@model CICSWebPortal.Models.ExecutiveDashboard
+@{
+    string displayStyle = string.Empty;
+    ViewBag.Title = "Reports:: Agent Positions";
+}
+<div class="clearfix">
+</div><!-- /main-header -->
+<div class="clearfix padding-md ">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2"> Start Date </span>
+                    <input type="text" class="form-control" id="StartDate" value="@Model.StartDate.ToString("dd/MM/yyyy")" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2"> End Date </span>
+                    <input type="text" class="form-control" id="EndDate" value="@Model.EndDate.ToString("dd/MM/yyyy")" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-refresh"></i></span>
+                    <button class="btn btn-primary form-control" id="btnRefresh">Refresh</button>
+                </div>
+            </div>
+        </div>
+</div>
+<div id="reportData">
+    <div class="clearfix">
+        <table class="table table-striped" id="dataTable1">
+            <tr>
+                <td class="text-center">
+                    <strong>
+                        <span class="pull-left">Transactions between @Model.StartDate.ToString("dd-MMM-yyyy") and @Model.EndDate.ToString("dd-MMM-yyyy")</span>
+                        <span class="pull-right"> @Model.TotalTransaction transactions valued at ₦ @Model.TotalTransctionValue.ToString("#,0.00")</span>
+                    </strong>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="clearfix">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home" class="bg-primary"><strong>Summary</strong></a></li>
+            <li><a data-toggle="tab" href="#menu1"  class="bg-warning"><strong>Periodic Statistics</strong></a></li>
+            <li><a data-toggle="tab" href="#menu2"  class="bg-info"><strong>Periodic Revenue Statistics</strong></a></li>
+            <li><a data-toggle="tab" href="#menu3"  class="bg-success"><strong>Overall Revenue Statistics</strong></a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="item active">
+                <table class="table table-striped">
+                    <tr> <th>Agents</th><td>@Model.TotalAgent</td></tr>
+                    <tr> <th>Terminals</th><td>@Model.TotalTerminal </td></tr>
+                    <tr> <th>Transactions</th><td> @Model.TotalTransaction </td></tr>
+                    <tr> <th>Transaction Value</th><td>₦@Model.TotalTransctionValue.ToString("#,0.00") </td></tr>
+                    <tr>
+                        <th>Leading Agent</th>
+                        <td>
+                            @Model.AgentLeaderStats.LeadingAgent ::
+                            ₦@Model.AgentLeaderStats.LeadingAgentVal.Value.ToString("#,0.00")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Trailing Agent</th>
+                        <td>
+                            @Model.AgentLeaderStats.TrailingAgent ::
+                            ₦@Model.AgentLeaderStats.TrailingAgentVal.Value.ToString("#,0.00")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Leading Revenue</th>
+                        <td>
+                            @Model.RevenueLeaderStats.LeadingRevenue ::
+                            ₦@Model.RevenueLeaderStats.LeadingRevenueVal.Value.ToString("#,0.00")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Trailing Revenue</th>
+                        <td>
+                            @Model.RevenueLeaderStats.TrailingRevenue ::
+                            ₦@Model.RevenueLeaderStats.TrailingRevenueVal.Value.ToString("#,0.00")
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <div class="item">
+                <div class="panel panel-success">
+                    <table class="table table-striped text" border="1">
+                        <tr>
+                            <th>Agent</th>
+                            <th style="text-align:center">In-Active Terminals</th>
+                            <th style="text-align:center">Active Terminals</th>
+                            <th style="text-align:center">Total Terminals</th>
+
+                            <th style="text-align:center">Periodic Transaction Volume</th>
+                            <th style="text-align:right">Periodic Transaction Value</th>
+                            <th style="text-align:center">Total Transaction Volume</th>
+                            <th style="text-align:right">Total Transaction Value</th>
+                        </tr>
+
+                        @{ foreach (var agentStats in @Model.AgentStats)
+                            {
+                                <tr>
+                                    <th>@agentStats.AgentName</th>
+                                    <td style="text-align:right">@agentStats.TerminalStats.TotalPeriodicInActiveTerminals</td>
+                                    <td style="text-align:right">@agentStats.TerminalStats.TotalPeriodicActiveTerminals</td>
+                                    <td style="text-align:right">@agentStats.TerminalStats.TotalTerminals</td>
+                                    <td style="text-align:right">@agentStats.TerminalStats.TotalPeriodicTransactions</td>
+                                    <td style="text-align:right">₦@agentStats.TerminalStats.TotalPeriodicTransactionVal.ToString("#,0.00")</td>
+                                    <td style="text-align:right">@agentStats.TerminalStats.TotalTransactions</td>
+                                    <td style="text-align:right">₦@agentStats.TerminalStats.TotalTransactionVal.ToString("#,0.00")</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <div class="item">
+                <div class="clearfix">
+                    <ul class="nav nav-tabs">
+                        @{ 
+                            int ctr = 0;
+                            foreach (var agentStats in @Model.AgentStats)
+                            {
+                                string active = ctr == 0 ? "active" : "";
+                                <li class="@active"><a data-toggle="tab" href="#@agentStats.AgentCode"  class="bg-info"><strong>@agentStats.AgentName</strong></a></li>
+                                ctr++;
+                            }
+                        }
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    @{ foreach (var agentStats in @Model.AgentStats)
+                        {
+                            <div id="@agentStats.AgentCode" class="tab-pane fade">
+                                <div class="item">
+                                    <div class="panel panel-success">
+                                        <table class="table table-striped text" border="1">
+                                            <thead>
+                                                <tr><th>Revenue </th><th>Transaction Volume</th><th>Transaction Value</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ foreach (var pRevStats in @agentStats.PeriodicRevenueStats)
+                                                    {
+                                                        <tr>
+                                                            <th>@pRevStats.RevenueName </th>
+                                                            <th>@pRevStats.TotalTransactionVol</th>
+                                                            <th>₦ @pRevStats.TotalTransactionVal.Value.ToString("#,0.00")</th>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                     } }
+                </div>
+
+            </div>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+            <div class="item">
+                <div class="clearfix">
+                    <ul class="nav nav-tabs ">
+                        @{
+                            int ctr2 = 0;
+                            foreach (var agentStats in @Model.AgentStats)
+                            {
+                                string active = ctr2 == 0 ? "active" : "";
+                                string href = "#A" + @agentStats.AgentCode;
+                                <li class="@active"><a data-toggle="tab" href="@href" class="bg-success"><strong>@agentStats.AgentName</strong></a></li>
+                                ctr2++;
+                            }
+                        }                    
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    @{ foreach (var agentStats in @Model.AgentStats)
+                        {
+                            string href = "A" + @agentStats.AgentCode;
+                            <div id="@href" class="tab-pane fade">
+                                <div class="item">
+                                    <div class="panel panel-success">
+                                        <table class="table table-striped text" border="1">
+                                            <thead>
+                                                <tr><th>Revenue </th><th>Transaction Volume</th><th>Transaction Value</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ foreach (var pRevStats in @agentStats.RevenueStats)
+                                                    {
+                                                        <tr>
+                                                            <th>@pRevStats.RevenueName </th>
+                                                            <th>@pRevStats.TotalTransactionVol</th>
+                                                            <th>₦ @pRevStats.TotalTransactionVal.Value.ToString("#,0.00")</th>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    } }
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section JavaScript
+{
+    <script type="text/javascript">
+
+        $(function () {
+            $("#btnRefresh").click(function () {
+                var filter = {
+                    startDate: $("#StartDate").val(),
+                    endDate: $("#EndDate").val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    data: filter,
+                    url: '/Report/PeriodicDashBoardData/'
+                }).done(function (data) {
+                    $("#reportData").empty();
+                    $("#reportData").html(data);
+                });
+            });
+
+            $("#StartDate").datepicker({
+                minDate: new Date(2015, 1 - 1, 1),
+                maxDate: new Date()
+            });
+
+            $("#EndDate").datepicker({
+                minDate: new Date(2015, 1 - 1, 1),
+                maxDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+            });
+
+
+            $('#dataTable1').dataTable({
+                "bJQueryUI": true, "order": [[0, "desc"]],
+                "sPaginationType": "full_numbers",
+                "oLanguage": {
+                    "sEmptyTable": "No Level exist."
+                }
+                ,
+                dom: 'T<"clear">lfrtip',
+                tableTools: {
+                    "sSwfPath": "../swf/copy_csv_xls_pdf.swf",
+                    "sRowSelect": "os",
+                    "aButtons": [
+                    "select_all", "select_none",
+                "copy",
+                "csv",
+                "xls",
+                {
+                    "sExtends": "pdf",
+                    "sPdfOrientation": "landscape",
+                    "sPdfMessage": ""
+                },
+                "print"
+                    ]
+                }
+
+            });
+        });
+    </script>
+}

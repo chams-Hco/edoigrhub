@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamsICSWebService", "ChamsICS\ChamsICSWebService.csproj", "{E14605C2-ABE7-46DE-83FD-D144722EF760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamsICSLib", "ChamsICSLib\ChamsICSLib.csproj", "{8A560F4F-4647-47C5-8F18-2B7D48B6F04C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSWinService", "ICSWinService\ICSWinService.csproj", "{CEB2990A-E76F-4BD2-8E6E-8B744BF0BA9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CICSWebPortal", "..\CICSWebPortal\CICSWebPortal\CICSWebPortal.csproj", "{1EBB868D-51FD-4C46-B558-FBDF84F015D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CICSTest", "CICSTest\CICSTest.csproj", "{4CF1E8F0-D2B5-4F17-B874-614B59913DF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E14605C2-ABE7-46DE-83FD-D144722EF760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14605C2-ABE7-46DE-83FD-D144722EF760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14605C2-ABE7-46DE-83FD-D144722EF760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14605C2-ABE7-46DE-83FD-D144722EF760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A560F4F-4647-47C5-8F18-2B7D48B6F04C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A560F4F-4647-47C5-8F18-2B7D48B6F04C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A560F4F-4647-47C5-8F18-2B7D48B6F04C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A560F4F-4647-47C5-8F18-2B7D48B6F04C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEB2990A-E76F-4BD2-8E6E-8B744BF0BA9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEB2990A-E76F-4BD2-8E6E-8B744BF0BA9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEB2990A-E76F-4BD2-8E6E-8B744BF0BA9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEB2990A-E76F-4BD2-8E6E-8B744BF0BA9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EBB868D-51FD-4C46-B558-FBDF84F015D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EBB868D-51FD-4C46-B558-FBDF84F015D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EBB868D-51FD-4C46-B558-FBDF84F015D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EBB868D-51FD-4C46-B558-FBDF84F015D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CF1E8F0-D2B5-4F17-B874-614B59913DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF1E8F0-D2B5-4F17-B874-614B59913DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF1E8F0-D2B5-4F17-B874-614B59913DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF1E8F0-D2B5-4F17-B874-614B59913DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://otunfikayo.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ChamsICS\\ChamsICSWebService.csproj
+		SccProjectName1 = ChamsICS
+		SccLocalPath1 = ChamsICS
+		SccProjectUniqueName2 = ChamsICSLib\\ChamsICSLib.csproj
+		SccProjectName2 = ChamsICSLib
+		SccLocalPath2 = ChamsICSLib
+		SccProjectUniqueName3 = CICSTest\\CICSTest.csproj
+		SccProjectName3 = CICSTest
+		SccLocalPath3 = CICSTest
+		SccProjectUniqueName4 = ICSWinService\\ICSWinService.csproj
+		SccProjectName4 = ICSWinService
+		SccLocalPath4 = ICSWinService
+		SccProjectUniqueName5 = ..\\CICSWebPortal\\CICSWebPortal\\CICSWebPortal.csproj
+		SccProjectName5 = ../CICSWebPortal
+		SccLocalPath5 = ..\\CICSWebPortal\\CICSWebPortal
+	EndGlobalSection
+EndGlobal

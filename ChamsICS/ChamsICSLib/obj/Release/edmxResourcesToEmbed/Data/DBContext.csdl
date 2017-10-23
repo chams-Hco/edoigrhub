@@ -1,0 +1,554 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CICSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CICSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agents" EntityType="CICSModel.Agent" />
+    <EntitySet Name="Clients" EntityType="CICSModel.Client" />
+    <AssociationSet Name="FK_Agent_Client" Association="CICSModel.FK_Agent_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Agent" EntitySet="Agents" />
+    </AssociationSet>
+    <EntitySet Name="IdentityServices" EntityType="CICSModel.IdentityService" />
+    <EntitySet Name="Revenues" EntityType="CICSModel.Revenue" />
+    <EntitySet Name="Terminals" EntityType="CICSModel.Terminal" />
+    <EntitySet Name="TransactionLogs" EntityType="CICSModel.TransactionLog" />
+    <EntitySet Name="TransactionStatus" EntityType="CICSModel.TransactionStatu" />
+    <EntitySet Name="UserRoles" EntityType="CICSModel.UserRole" />
+    <AssociationSet Name="FK_Terminal_Agent" Association="CICSModel.FK_Terminal_Agent">
+      <End Role="Agent" EntitySet="Agents" />
+      <End Role="Terminal" EntitySet="Terminals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionLog_Agent" Association="CICSModel.FK_TransactionLog_Agent">
+      <End Role="Agent" EntitySet="Agents" />
+      <End Role="TransactionLog" EntitySet="TransactionLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdentityService_Client" Association="CICSModel.FK_IdentityService_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="IdentityService" EntitySet="IdentityServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Revenue_Client" Association="CICSModel.FK_Revenue_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Revenue" EntitySet="Revenues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionLog_Client" Association="CICSModel.FK_TransactionLog_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="TransactionLog" EntitySet="TransactionLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionLog_Terminal" Association="CICSModel.FK_TransactionLog_Terminal">
+      <End Role="Terminal" EntitySet="Terminals" />
+      <End Role="TransactionLog" EntitySet="TransactionLogs" />
+    </AssociationSet>
+    <EntitySet Name="NotificationTypes" EntityType="CICSModel.NotificationType" />
+    <EntitySet Name="Ministries" EntityType="CICSModel.Ministry" />
+    <EntitySet Name="RevenueCategories" EntityType="CICSModel.RevenueCategory" />
+    <EntitySet Name="RevenueHeads" EntityType="CICSModel.RevenueHead" />
+    <EntitySet Name="RevenueItems" EntityType="CICSModel.RevenueItem" />
+    <EntitySet Name="AuditTrails" EntityType="CICSModel.AuditTrail" />
+    <EntitySet Name="Notifications" EntityType="CICSModel.Notification" />
+    <AssociationSet Name="FK_Notification_NotificationType" Association="CICSModel.FK_Notification_NotificationType">
+      <End Role="NotificationType" EntitySet="NotificationTypes" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <EntitySet Name="Users" EntityType="CICSModel.User" />
+    <AssociationSet Name="FK_User_UserRole" Association="CICSModel.FK_User_UserRole">
+      <End Role="UserRole" EntitySet="UserRoles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Client" Association="CICSModel.FK_User_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="TransactionLogExceptions" EntityType="CICSModel.TransactionLogException" />
+    <EntitySet Name="TransactionUploadErrors" EntityType="CICSModel.TransactionUploadError" />
+    <EntitySet Name="TerminalLocations" EntityType="CICSModel.TerminalLocation" />
+    <AssociationSet Name="FK_TerminalLocation_Agent" Association="CICSModel.FK_TerminalLocation_Agent">
+      <End Role="Agent" EntitySet="Agents" />
+      <End Role="TerminalLocation" EntitySet="TerminalLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TerminalLocation_Client" Association="CICSModel.FK_TerminalLocation_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="TerminalLocation" EntitySet="TerminalLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionLog_TerminalLocation" Association="CICSModel.FK_TransactionLog_TerminalLocation">
+      <End Role="TerminalLocation" EntitySet="TerminalLocations" />
+      <End Role="TransactionLog" EntitySet="TransactionLogs" />
+    </AssociationSet>
+    <EntitySet Name="Invoices" EntityType="CICSModel.Invoice" />
+    <EntitySet Name="InvoiceItems" EntityType="CICSModel.InvoiceItem" />
+    <EntitySet Name="Payments" EntityType="CICSModel.Payment" />
+    <EntitySet Name="Wallets" EntityType="CICSModel.Wallet" />
+  </EntityContainer>
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Company" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="AgentTerminals" Relationship="CICSModel.FK_Terminal_Agent" FromRole="Agent" ToRole="Terminal" />
+    <NavigationProperty Name="TerminalLocations" Relationship="CICSModel.FK_TerminalLocation_Agent" FromRole="Agent" ToRole="TerminalLocation" />
+    <Property Name="AgentManagerCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="Users" Relationship="CICSModel.FK_User_Client" FromRole="Client" ToRole="User" />
+    <NavigationProperty Name="TerminalLocations" Relationship="CICSModel.FK_TerminalLocation_Client" FromRole="Client" ToRole="TerminalLocation" />
+  </EntityType>
+  <Association Name="FK_Agent_Client">
+    <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+    <End Type="CICSModel.Agent" Role="Agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="IdentityService">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Revenue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MDA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Terminal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TransactionLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="TerminalId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ResidentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="RevenueCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PaymentReference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+    <Property Name="UploadDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="LocationId" Type="Int32" />
+    <NavigationProperty Name="TerminalLocation" Relationship="CICSModel.FK_TransactionLog_TerminalLocation" FromRole="TransactionLog" ToRole="TerminalLocation" />
+  </EntityType>
+  <EntityType Name="TransactionStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="CICSModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Terminal_Agent">
+    <End Type="CICSModel.Agent" Role="Agent" Multiplicity="0..1" />
+    <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Terminal">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionLog_Agent">
+    <End Type="CICSModel.Agent" Role="Agent" Multiplicity="0..1" />
+    <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionLog">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdentityService_Client">
+    <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+    <End Type="CICSModel.IdentityService" Role="IdentityService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IdentityService">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Revenue_Client">
+    <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+    <End Type="CICSModel.Revenue" Role="Revenue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Revenue">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionLog_Client">
+    <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+    <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionLog">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionLog_Terminal">
+    <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="0..1" />
+    <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Terminal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionLog">
+        <PropertyRef Name="TerminalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="NotificationType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Ministry">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="RevenueCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="RevenueHeadId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="RevenueHead">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="MinistryId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RevenueItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="MinistryId" Type="Int32" />
+    <Property Name="RevenueHeadId" Type="Int32" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="AuditTrail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="TableAffected" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AuditLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UndoCommand" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LogDate" Type="DateTime" Precision="3" />
+    <Property Name="LogType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TypeId" Type="Int32" />
+    <Property Name="RetryCount" Type="Int32" />
+    <Property Name="StatusMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="ReferenceId" Type="Int32" />
+    <Property Name="Recipient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Notification_NotificationType">
+    <End Type="CICSModel.NotificationType" Role="NotificationType" Multiplicity="0..1" />
+    <End Type="CICSModel.Notification" Role="Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotificationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="UserTypeParentId" Type="Int32" />
+    <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordStatus" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="ClientId" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_User_UserRole">
+    <End Type="CICSModel.UserRole" Role="UserRole" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="CICSModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Client">
+    <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+    <End Type="CICSModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TransactionLogException">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AgentId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TerminalId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResidentId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfBirth" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="RevenueCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentReference" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TransactionDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UploadDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UploadError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResolutionError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResolutionStatus" Type="Int32" />
+    <Property Name="ResolutionDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="TransactionUploadError">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="TerminalId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ResidentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="RevenueCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PaymentReference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+    <Property Name="UploadDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="UploadError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResolutionError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResolutionStatus" Type="Int32" />
+    <Property Name="ResolutionDate" Type="DateTime" Precision="3" />
+    <Property Name="LocationId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TerminalLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="AgentId" Type="Int32" Nullable="false" />
+    <Property Name="LocationCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LocationDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Agent" Relationship="CICSModel.FK_TerminalLocation_Agent" FromRole="TerminalLocation" ToRole="Agent" />
+    <NavigationProperty Name="Client" Relationship="CICSModel.FK_TerminalLocation_Client" FromRole="TerminalLocation" ToRole="Client" />
+    <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_TerminalLocation" FromRole="TerminalLocation" ToRole="TransactionLog" />
+  </EntityType>
+  <Association Name="FK_TerminalLocation_Agent">
+    <End Type="CICSModel.Agent" Role="Agent" Multiplicity="1" />
+    <End Type="CICSModel.TerminalLocation" Role="TerminalLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TerminalLocation">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TerminalLocation_Client">
+    <End Type="CICSModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="CICSModel.TerminalLocation" Role="TerminalLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TerminalLocation">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionLog_TerminalLocation">
+    <End Type="CICSModel.TerminalLocation" Role="TerminalLocation" Multiplicity="0..1" />
+    <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TerminalLocation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionLog">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="InvoiceItem">
+    <Key>
+      <PropertyRef Name="InvoiceItemId" />
+    </Key>
+    <Property Name="InvoiceItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentId" />
+    </Key>
+    <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RefNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="PaymentType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PaymentStatus" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Wallet">
+    <Key>
+      <PropertyRef Name="WalletId" />
+    </Key>
+    <Property Name="WalletId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+</Schema>

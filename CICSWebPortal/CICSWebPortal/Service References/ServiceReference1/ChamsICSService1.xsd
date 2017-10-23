@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ChamsICSLib.Data" />
+  <xs:complexType name="AuthoriseTerminalReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AgentCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TerminalName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TerminalSerialNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AuthoriseTerminalReq" nillable="true" type="tns:AuthoriseTerminalReq" />
+  <xs:complexType name="AuthoriseTerminalRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="TerminalCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TerminalSerialNumber" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AuthoriseTerminalRes" nillable="true" type="tns:AuthoriseTerminalRes" />
+  <xs:complexType name="ResponseModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ResponseCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResponseDescription" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseModel" nillable="true" type="tns:ResponseModel" />
+  <xs:complexType name="VerifyResidentIdReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AgentCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResidentId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TerminalCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VerifyResidentIdReq" nillable="true" type="tns:VerifyResidentIdReq" />
+  <xs:complexType name="VerifyResidentIdRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DateOfBirth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ResidentId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="VerifyResidentIdRes" nillable="true" type="tns:VerifyResidentIdRes" />
+  <xs:complexType name="UploadTransactionReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateOfBirth" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaymentReference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResidentId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RevenueCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TerminalCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TransactionCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TransactionDate" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UploadTransactionReq" nillable="true" type="tns:UploadTransactionReq" />
+  <xs:complexType name="UploadTransactionRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ResidentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TempResidentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UploadTransactionRes" nillable="true" type="tns:UploadTransactionRes" />
+  <xs:complexType name="QueryTransactionReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TerminalCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TransactionCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueryTransactionReq" nillable="true" type="tns:QueryTransactionReq" />
+  <xs:complexType name="QueryTransactionRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DateOfBirth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentReference" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ResidentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RevenueCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TerminalCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UploadDate" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryTransactionRes" nillable="true" type="tns:QueryTransactionRes" />
+  <xs:complexType name="GetTerminalDetailsReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AgentCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TerminalCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USerName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetTerminalDetailsReq" nillable="true" type="tns:GetTerminalDetailsReq" />
+  <xs:complexType name="GetTerminalDetailsRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseModel">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ChamsICSLib.Data" minOccurs="0" name="terminal" nillable="true" type="q1:Terminal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetTerminalDetailsRes" nillable="true" type="tns:GetTerminalDetailsRes" />
+  <xs:complexType name="GetTerminalsReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AgentCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USerName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetTerminalsReq" nillable="true" type="tns:GetTerminalsReq" />
+  <xs:complexType name="GetTerminalsRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseModel">
+        <xs:sequence>
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ChamsICSLib.Data" minOccurs="0" name="terminal" nillable="true" type="q2:ArrayOfTerminal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetTerminalsRes" nillable="true" type="tns:GetTerminalsRes" />
+  <xs:complexType name="UserLoginReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserRole" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserLoginReq" nillable="true" type="tns:UserLoginReq" />
+  <xs:complexType name="UserLoginRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SessionId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserLoginRes" nillable="true" type="tns:UserLoginRes" />
+  <xs:complexType name="CreateClientReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Addres" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone2" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateClientReq" nillable="true" type="tns:CreateClientReq" />
+  <xs:complexType name="CreateClientRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ClientId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CreateClientRes" nillable="true" type="tns:CreateClientRes" />
+  <xs:complexType name="FindClientRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Addres" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ClientId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Phone1" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Phone2" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FindClientRes" nillable="true" type="tns:FindClientRes" />
+  <xs:complexType name="GetAllClientsRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Clients" nillable="true" type="tns:ArrayOfClient" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetAllClientsRes" nillable="true" type="tns:GetAllClientsRes" />
+  <xs:complexType name="ArrayOfClient">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Client" nillable="true" type="tns:Client" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfClient" nillable="true" type="tns:ArrayOfClient" />
+  <xs:complexType name="Client">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Addres" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClientId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Client" nillable="true" type="tns:Client" />
+</xs:schema>

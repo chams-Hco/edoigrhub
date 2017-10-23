@@ -1,0 +1,47 @@
+﻿@model CICSWebPortal.Models.ReportViewModel
+@{
+    string displayStyle = String.Empty; Layout = null;
+    ViewBag.Title = "Reports";
+}
+<table class="table table-striped" id="dataTable1">
+    <thead>
+        <tr>
+            <td colspan="10" class="text-center">
+                <h4>
+                    <span class="pull-left">@Model.Report.Count().ToString("#,0") transactions between @Model.StartDate.ToString("dd/MM/yyyy") and @Model.EndDate.ToString("dd/MM/yyyy")</span>
+                    <span class="pull-right"> Total:: ₦ @Model.TotalTransactionValue.ToString("#,0.00")</span>
+                </h4>
+            </td>
+        </tr>
+        <tr>
+            <th>ID</th>          
+            <th>TransactionCode</th>
+            <th>Agent</th>
+            <th>Revenue</th>
+            <th>Revenue Head</th>
+            <th>Ministry</th>
+            <th>ResidentID</th>
+            <th>Amount</th>
+            <th>TransactionDate</th>
+            <th width="15%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Report)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TransactionId)</td>
+                <td>@Html.DisplayFor(modelItem => item.TransactionCode)</td>
+                <td>@Html.DisplayFor(modelItem => item.Agent)</td>
+                <td>@Html.DisplayFor(modelItem => item.RevenueName)</td>
+                <td>@Html.DisplayFor(modelItem => item.RevenueHead)</td>
+                <td>@Html.DisplayFor(modelItem => item.Ministry)</td>
+                <td>@Html.DisplayFor(modelItem => item.ResidentId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
+                <td>@Html.ActionLink("Details", "TransactionReceipt", "Transaction", new { id = item.TransactionId }, new { role = "button", @class = "btn btn-primary" })</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
