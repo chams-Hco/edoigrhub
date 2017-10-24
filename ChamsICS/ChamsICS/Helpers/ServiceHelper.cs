@@ -369,12 +369,16 @@ namespace ChamsICSWebService
             }
 
             //Validate Terminal Against Agent
-            var terminal = FindTerminalByCode(terminalCode);
-            if (terminal.AgentId != agent.Id)
-            {
-                msg = String.Format("Incompatible AgentCode:{0} and TerminalCode:{1} Supplied in TransactionCode",agentCode,terminalCode);
-                return false;
-            }
+
+            //Commented for the resolution of error in uploading transaction
+            //var terminal = FindTerminalByCode(terminalCode);
+            //if (terminal.AgentId != agent.Id)
+            //{
+            //    msg = String.Format("Incompatible AgentCode:{0} and TerminalCode:{1} Supplied in TransactionCode",agentCode,terminalCode);
+            //    return false;
+            //}
+
+
             msg = string.Empty;
             return result;
         }

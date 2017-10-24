@@ -72,3 +72,15 @@ C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICS\bin\System.Ne
 C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.csprojResolveAssemblyReference.cache
 C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.dll
 C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\ChamsICSWebService.dll.config
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\ChamsICSWebService.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\ChamsICSWebService.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\Newtonsoft.Json.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\System.Net.Http.Formatting.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\ChamsICSLib.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\Newtonsoft.Json.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\System.Net.Http.Formatting.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.pdb

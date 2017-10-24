@@ -87,3 +87,19 @@ C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ICSWinService\obj\Debu
 C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.csproj.GenerateResource.Cache
 C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.exe
 C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\ICSWinService.exe.config
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\ICSWinService.exe
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\ICSWinService.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\EntityFramework.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\ChamsICSLib.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\EntityFramework.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.About.resources
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.FormMain.resources
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.Properties.Resources.resources
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.csproj.GenerateResource.Cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.exe
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.pdb

@@ -57,3 +57,13 @@ C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\bin\Debug\
 C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
 C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
 C:\Users\Coleola\Desktop\My Workspace\EDO-IGRHub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.config
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
