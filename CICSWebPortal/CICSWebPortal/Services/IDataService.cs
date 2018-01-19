@@ -70,6 +70,7 @@ namespace CICSWebPortal.Services
         List<Models.RevenueItem> GetAllRevenueItemByMinistryId(int id);
         List<Models.RevenueItem> GetAllRevenueItemByCategoryId(int id);
         List<Models.RevenueItem> GetAllRevenueItemByRevenueHeadId(int id);
+        void GenerateExcelReport(IEnumerable<Models.Report> report);
         #endregion
 
         #region Authentication

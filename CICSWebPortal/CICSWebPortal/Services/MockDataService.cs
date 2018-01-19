@@ -737,6 +737,11 @@ namespace CICSWebPortal.Services
         {
             throw new NotImplementedException();
         }
+
+        public void GenerateExcelReport(IEnumerable<Report> report)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

@@ -47,6 +47,8 @@ namespace CICSWebPortal.Controllers
 
             ReportViewModel RVM = DataContext.GetTransactionReportSummary(filter);
 
+            RVM = (RVM != null) ? RVM : new ReportViewModel();
+
             //Fill the filters
             RVM.clientList = Utility.GetClients(DataContext,RoleId,ClientId).ToList();
             RVM.agentList = Utility.GetAgents(DataContext,RoleId,UserTypeParentId).ToList();
@@ -64,11 +66,22 @@ namespace CICSWebPortal.Controllers
                 RVM.SelectedClientId = ClientId;
             }
 
-            RVM.TotalTransactionValue = RVM.Report.Sum(x => x.Amount);
+            RVM.TotalTransactionValue = RVM.Report != null ? RVM.Report.Sum(x => x.Amount) : 0M;
             RVM.StartDate = filter.startDate;
             RVM.EndDate = filter.endDate;
+            TempData["myPrint"] = RVM.Report;
 
             return View(RVM);
+        }
+
+        public ActionResult ExportToExcel()
+        {
+            IEnumerable<Report> report = ((IEnumerable<Report>) TempData["myReport"]);
+            if (report != null && report.Count() > 0)
+            {
+                DataContext.GenerateExcelReport(report);
+            }
+            return RedirectToAction("Index", "Report");
         }
 
         [HttpPost]
@@ -92,6 +105,8 @@ namespace CICSWebPortal.Controllers
 
             RVM = DataContext.GetTransactionReportSummary(filter);
 
+            RVM = (RVM != null) ? RVM : new ReportViewModel();
+
             RVM.clientList = Utility.GetClients(DataContext,RoleId,ClientId).ToList();
             RVM.agentList = Utility.GetAgents(DataContext,RoleId, UserTypeParentId).ToList();
             RVM.terminalList = Utility.GetTerminals(DataContext,RoleId,UserTypeParentId).ToList();
@@ -108,9 +123,11 @@ namespace CICSWebPortal.Controllers
             //    RVM.SelectedClientId = ClientId;
             //}
 
-            RVM.TotalTransactionValue = RVM.Report.Sum(x => x.Amount);
+            RVM.TotalTransactionValue = RVM.Report != null ? RVM.Report.Sum(x => x.Amount) : 0M;
             RVM.StartDate = filter.startDate;
             RVM.EndDate = filter.endDate;
+
+            TempData["myReport"] = RVM.Report;
 
             return View(RVM);
         }

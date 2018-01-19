@@ -6,11 +6,104 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages.Html;
+using System.Data;
+using System.IO;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace CICSWebPortal.Helpers
 {
-    public class Utility
+    public static class Utility
     {
+        /// <summary>
+        /// Extension method to convert IEnumerable to dataset
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dataSource"></param>
+        /// <returns></returns>
+        public static DataSet ConvertToDataSet<T>(this IEnumerable<T> dataSource)
+        {
+            Type elementType = typeof(T);
+            DataSet ds = new DataSet();
+            DataTable t = new DataTable();
+            ds.Tables.Add(t);
+
+            //add a column to table for each public property on T   
+            foreach (var propInfo in elementType.GetProperties())
+            {
+                t.Columns.Add(propInfo.Name, propInfo.PropertyType);
+            }
+
+            //go through each property on T and add each value to the table   
+            foreach (T item in dataSource)
+            {
+                DataRow row = t.NewRow();
+                foreach (var propInfo in elementType.GetProperties())
+                {
+                    row[propInfo.Name] = propInfo.GetValue(item, null);
+                }
+                t.Rows.Add(row);
+            }
+            return ds;
+        }
+
+        /// <summary>
+        /// Helper method to data to excel
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <param name="ctx"></param>
+        /// <param name="Filename"></param>
+        public static void ExportToExcel(DataSet ds, HttpContext ctx, String Filename)
+        {
+            ctx.Response.Clear();
+            ctx.Response.Buffer = true;
+            ctx.Response.AddHeader("content-disposition", "attachment;filename=" + Filename + ".xls");
+            ctx.Response.Charset = "";
+            ctx.Response.ContentType = "application/vnd.ms-excel";
+            using (StringWriter sw = new StringWriter())
+            {
+                HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+                //To Export all pages
+                GridView gr = new GridView();
+                gr.DataSource = ds;
+                gr.DataBind();
+                gr.AllowPaging = false;
+
+
+                gr.HeaderRow.BackColor = Color.White;
+                foreach (TableCell cell in gr.HeaderRow.Cells)
+                {
+                    cell.BackColor = gr.HeaderStyle.BackColor;
+                }
+                foreach (GridViewRow row in gr.Rows)
+                {
+                    row.BackColor = Color.White;
+                    foreach (TableCell cell in row.Cells)
+                    {
+                        if (row.RowIndex % 2 == 0)
+                        {
+                            cell.BackColor = gr.AlternatingRowStyle.BackColor;
+                        }
+                        else
+                        {
+                            cell.BackColor = gr.RowStyle.BackColor;
+                        }
+                        cell.CssClass = "textmode";
+                    }
+                }
+
+                gr.RenderControl(hw);
+
+                //style to format numbers to string
+                string style = @"<style> .textmode { } </style>";
+                ctx.Response.Write(style);
+                ctx.Response.Output.Write(sw.ToString());
+                ctx.Response.Flush();
+                ctx.Response.End();
+            }
+        }
 
         public static IEnumerable<System.Web.Mvc.SelectListItem> GetClients(IDataService DataContext, int RoleId, int ClientId)
         {

@@ -1,5 +1,6 @@
 ﻿using CICSWebPortal.Models;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,12 +8,14 @@ using System.Web;
 using CICSWebPortal.ServiceReference2;
 using CICSWebPortal.ViewModels;
 using System.Web.Helpers;
+using CICSWebPortal.Helpers;
+using System.Data;
 
 namespace CICSWebPortal.Services
 {
     public class DataService : IDataService
     {
-
+        //private static IEnumerable<Models.Report> _reportToExport = null;
         iChamsICSPortalServiceClient _client = null;
 
         public DataService()
@@ -1397,17 +1400,20 @@ namespace CICSWebPortal.Services
         {
             ReportViewModel rvm = new ReportViewModel();
 
-            var cSummary = _client.GetReportSummary(new TransactionSummary {
+            var cSummaryList = _client.GetReportSummary(new TransactionSummary
+            {
                 clientId = request.clientId,
                 AgentId = request.agentId,
                 terminalId = request.terminalId,
                 RevenueCode = request.RevenueCode,
                 Ministry = request.ministry,
                 startDate = request.startDate,
-                endDate = request.endDate            
-            }).Report.ToList();
+                endDate = request.endDate
+            });
 
-            if (cSummary != null)
+            var cSummary = (cSummaryList != null && cSummaryList.Report != null) ? cSummaryList.Report.ToList() : null;
+
+            if (cSummary != null && cSummary.Count != 0)
             {
                 rvm.Report = cSummary.Select(x => new Models.Report
                 {
@@ -1425,12 +1431,31 @@ namespace CICSWebPortal.Services
 
                 }).ToList();
 
+                //check if the report enumerable of the RepoertViewModel is null or empty. If it isn't, assign it to _report to export.
+                //if (rvm.Report != null && rvm.Report.Any())
+                //{
+                //    _reportToExport = rvm.Report;
+                //}
+
                 return rvm;
             }
             else
             {
-                return new ReportViewModel { };
+                return null;
             }
+        }
+
+        /// <summary>
+        /// Generates the excel format for transaction Report
+        /// </summary>
+        public void GenerateExcelReport(IEnumerable<Models.Report> report)
+        {
+            var day = DateTime.Now.Day;
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
+            var fileName = $"{day}-{month}-{year}_Report";
+            DataSet dataSet = report.ConvertToDataSet();
+            Utility.ExportToExcel(dataSet, HttpContext.Current, fileName);
         }
 
         public List<Models.Notification> GetAllNotifications()
