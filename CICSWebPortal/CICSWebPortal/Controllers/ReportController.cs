@@ -6,6 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
+using System.Configuration;
+using System.Web.Script.Serialization;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace CICSWebPortal.Controllers
 {
@@ -171,6 +176,117 @@ namespace CICSWebPortal.Controllers
             return View(DataContext.GetAgentReportSummary(clientId));
         }
 
+        public ActionResult EndOfDayReport()
+        {
+            int userId = Convert.ToInt32(Session["UserId"]);
+            int RoleId = Convert.ToInt32(Session["RoleId"]);
+            int UserTypeParentId = Convert.ToInt32(Session["UserTypeParentId"]);
+
+            List<Terminal> Terminals;
+            if (RoleId == 1 || RoleId == 2)
+            {
+                Terminals = DataContext.GetAllTerminals().ToList<Terminal>() ;
+            }
+
+            //Client Admin / USser
+            else if (RoleId == 3 || RoleId == 4)
+            {
+                Terminals = DataContext.GetAllTerminalsByClientId(UserTypeParentId).ToList<Terminal>();
+            }
+
+            //Agent Admin / User
+            else if (RoleId == 5 || RoleId == 6)
+            {
+                Terminals = DataContext.GetAllTerminalsByAgentId(UserTypeParentId).ToList<Terminal>();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+            EndofDayViewModel eodvm = new EndofDayViewModel
+            {
+                userID = userId,
+                roleId = RoleId,
+                Terminals = Terminals,
+            };
+            return View(eodvm);
+        }
+
+        [HttpPost]
+        public ActionResult GetEndOfDayReport(EOD request)
+        {
+            String terminalId = "";
+            if (String.Equals("-1", request.id)) //getAllreport
+            {
+                List<Terminal> Terminals = new List<Terminal>();
+                int RoleId = Convert.ToInt32(Session["RoleId"]);
+                int UserTypeParentId = Convert.ToInt32(Session["UserTypeParentId"]);
+                if (RoleId == 1 || RoleId == 2)
+                {
+                    Terminals = DataContext.GetAllTerminals().ToList<Terminal>();
+                }
+
+                //Client Admin / USser
+                else if (RoleId == 3 || RoleId == 4)
+                {
+                    Terminals = DataContext.GetAllTerminalsByClientId(UserTypeParentId).ToList<Terminal>();
+                }
+
+
+                Terminals.ForEach(res =>
+                {
+
+                    terminalId += res.Code + ((!(Terminals.IndexOf(res) == Terminals.Count - 1)) ? "," : "");
+                });
+
+
+            }
+            else
+            {
+                terminalId = request.id;
+            }
+
+            var requestParamObject = new { GROUPTID = terminalId, EOD = "YES" };
+            var serviceUrl = ConfigurationManager.AppSettings["nasarawa_eod_post_api"];
+
+            //make web service call to get EOD report
+            HttpWebRequest serviceRequest = (HttpWebRequest) WebRequest.Create(@serviceUrl);
+            serviceRequest.Method = "POST";
+            serviceRequest.ContentType = "application/json";
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            using (var sw = new StreamWriter(serviceRequest.GetRequestStream()))
+            {
+                string json = serializer.Serialize(requestParamObject);
+                sw.Write(json);
+                sw.Flush();
+            }
+            HttpWebResponse response = (HttpWebResponse) serviceRequest.GetResponse();
+            //read response body
+            string responseText = "";
+            using (var reader = new System.IO.StreamReader(response.GetResponseStream(), System.Text.Encoding.ASCII))
+            {
+                responseText = reader.ReadToEnd();
+            }
+            responseText = responseText.Replace("\"\",", "");
+
+            List<EndOfDayServiceResponse> EODResponse = null;
+            if (!responseText.Equals("[\"\"]"))
+                  EODResponse = JsonConvert.DeserializeObject<List<EndOfDayServiceResponse>>(responseText);
+
+            return View(EODResponse);
+
+
+
+
+            //var receipt = DataContext.FindTransactionByCode(id);
+            //List<EndOfDayServiceResponse> resp = new List<EndOfDayServiceResponse>();
+            //resp.Add(new EndOfDayServiceResponse { dateTransaction = DateTime.Now, eodCount = 10, eodStatus = "PAID", total = 10000 });
+            //return View(/*new EndOfDayServiceResponse {message= "x", response = resp }*/);
+
+        }
+
         [HttpGet]
         public JsonResult AgentSummaryChart()
         {
@@ -220,6 +336,12 @@ namespace CICSWebPortal.Controllers
             ExecutiveDashboard result = new ExecutiveDashboard();
             result = DataContext.GetPeriodicDashboardSummary(filter.roleId.Value, filter.userId.Value, filter.startDate, filter.endDate);
             return View(result);
+        }
+
+        public class EOD
+        {
+            public int userId { get; set; }
+            public string id { get; set; }
         }
     }
 }

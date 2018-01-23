@@ -1,0 +1,65 @@
+﻿
+
+@model IEnumerable<CICSWebPortal.Models.EndOfDayServiceResponse>
+@{
+    ViewBag.Title = "End of Day Report";
+    Layout = null;
+
+}
+
+<table class="table table-striped" id="dataTable1">
+
+    @if (Model == null  || Model.Count()<1 )
+    {
+        <thead>
+            <tr>
+                <th colspan="2">
+                    <span>No record found.</span>
+                </th>
+            </tr>
+        </thead>
+    }
+    else
+    {
+        <thead>
+            <tr>
+                <th>
+                    <span>DATE </span>
+                </th>
+                <th>
+                    <span>TERMINAL NO </span>
+                </th>
+                <th>
+                    <span>NAME </span>
+                </th>
+                <th>
+                    <span>EMAIL </span>
+                </th>
+                <th>
+                    <span>TOTAL </span>
+                </th>
+                <th>
+                    <span>COUNT </span>
+                </th>
+                <th>
+                    <span>STATUS </span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ foreach (var response in Model)
+                {
+                    <tr>
+                        <td>@response.DATETRANSACTION.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        <td>@response.TERMINALCODE</td>
+                        <td>@response.AGENTFULLNAME</td>
+                        <td>@response.AGENTEMAIL</td>
+                        <td>@response.TOTAL</td>
+                        <td>@response.EODCOUNT</td>
+                        <td>@response.EODSTATuS</td>
+                </tr>
+                }
+            }
+        </tbody>
+                }
+</table>

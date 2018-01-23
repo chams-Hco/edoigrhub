@@ -436,6 +436,6 @@ C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrh
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.csproj.CoreCompileInputs.cache
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.dll
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.pdb
-C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.csproj.CoreCompileInputs.cache

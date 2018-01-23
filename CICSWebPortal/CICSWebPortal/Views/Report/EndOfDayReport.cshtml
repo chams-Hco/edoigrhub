@@ -1,0 +1,96 @@
+﻿@model CICSWebPortal.Models.EndofDayViewModel
+
+@{
+    ViewBag.Title = "EndOfDayReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="clearfix">
+    <h3 class="text-center">End Of Day Report</h3><hr />
+</div><!-- /main-header -->
+
+<div class="clearfix padding-md ">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-lg-offset-3 col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2"> SELECT TERMINAL ID </span>
+                    <select id="terminalcodes" class="form-control">
+                        <option value="-1" selected>-----ALL-----</option>
+                        @{
+                            foreach (var terminal in Model.Terminals)
+                            {
+                                <option value=@terminal.Code>@terminal.Code</option>
+                            }
+                        }
+                    </select>
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" id="btngenerateEndOfDayService" type="button">FETCH</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /main-header -->
+
+<div class="panel panel-default table-responsive">
+    <div class="padding-md clearfix" id="reportData">
+
+
+    </div><!-- /.padding-md -->
+</div><!-- /panel -->
+
+@section JavaScript
+{
+    <script type="text/javascript">
+
+        $(function () {
+            $("#btngenerateEndOfDayService").click(function () {
+
+                var id = $("#terminalcodes").val();
+                var userId = @Model.userID;
+
+                var request = { id: id, userId: userId };
+                $.ajax({
+                    type: 'POST',
+                    data: { id: id, userId: userId },
+                    url: '@Url.Action("GetEndOfDayReport","Report")',
+                   
+                }).done(function (response) {
+                    $("#reportData").empty();
+                    $("#reportData").html(response);
+                   
+                });
+            });
+
+            $('#dataTable1').dataTable({
+                "bJQueryUI": true,
+                "order": [[0, "desc"]],
+                "sPaginationType": "full_numbers",
+                "oLanguage": {"sEmptyTable": "No Level exist."},
+                dom: 'T<"clear">lfrtip',
+                tableTools: {
+                    "sSwfPath": "/swf/copy_csv_xls_pdf.swf",
+                    "sRowSelect": "os",
+                    "aButtons": [
+                    "select_all", "select_none",
+                "copy",
+                "csv",
+                "xls",
+                {
+                    "sExtends": "pdf",
+                    "sPdfOrientation": "landscape",
+                    "sPdfMessage": ""
+                },
+                "print"
+                    ]
+                }
+
+            });
+        });
+    </script>
+}
+
+
+
+

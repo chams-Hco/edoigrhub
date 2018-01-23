@@ -197,6 +197,8 @@
     <Compile Include="Models\AgentSummary.cs" />
     <Compile Include="Models\AssessmentReq.cs" />
     <Compile Include="Models\Biodata.cs" />
+    <Compile Include="Models\EndOfDayServiceResponse.cs" />
+    <Compile Include="Models\EndofDayViewModel.cs" />
     <Compile Include="Models\ErrorTransactionFilter.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Location.cs" />
@@ -746,6 +748,8 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Report\EndOfDayReport.cshtml" />
+    <Content Include="Views\Report\GetEndOfDayReport.cshtml" />
     <None Include="Web References\EmailSv\WebService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

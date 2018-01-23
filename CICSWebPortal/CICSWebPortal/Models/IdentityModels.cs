@@ -31,5 +31,7 @@ namespace CICSWebPortal.Models
         }
 
         public System.Data.Entity.DbSet<CICSWebPortal.Models.Invoice> Invoices { get; set; }
+
+        public System.Data.Entity.DbSet<CICSWebPortal.Models.Terminal> Terminals { get; set; }
     }
 }
