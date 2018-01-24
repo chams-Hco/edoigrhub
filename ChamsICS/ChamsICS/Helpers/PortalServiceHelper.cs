@@ -2628,6 +2628,8 @@ namespace ChamsICSWebService
                                };
 
 
+            //var all_agents = db.Agents.Where(b=>b.ClientId == userClientId).ToList();
+            //agentRecords = db.TransactionLogs.Where(a => a.ClientId == userClientId).GroupBy(b => b.AgentId).Select(a => new { ID = a.FirstOrDefault().AgentId, SUM = a.Sum(c => c.Amount), NAME = (all_agents.FirstOrDefault(z => z.Id == a.FirstOrDefault().AgentId).Name) });
             stats.LeadingAgent = agentRecords.OrderByDescending(x => x.SUM).Select(x => x.NAME).FirstOrDefault();
             stats.TrailingAgent = agentRecords.OrderBy(x => x.SUM).Select(x => x.NAME).FirstOrDefault();
             stats.LeadingAgentVal = agentRecords.OrderByDescending(x => x.SUM).Select(x => x.SUM).FirstOrDefault().Value;

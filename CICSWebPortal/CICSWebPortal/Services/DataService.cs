@@ -1022,61 +1022,71 @@ namespace CICSWebPortal.Services
             ed.TotalNotification = e.TotalNotification;
             ed.TotalTransctionValue = e.TotalTransctionValue;
 
-            ed.AgentLeaderStats = new Models.AgentLeaderStats
+            if (e.AgentLeaderStats != null)
             {
-                LeadingAgent = e.AgentLeaderStats.LeadingAgent,
-                LeadingAgentVal = e.AgentLeaderStats.LeadingAgentVal,
-                TrailingAgent = e.AgentLeaderStats.TrailingAgent,
-                TrailingAgentVal = e.AgentLeaderStats.TrailingAgentVal
-            };
+                ed.AgentLeaderStats = new Models.AgentLeaderStats
+                {
+                    LeadingAgent = e.AgentLeaderStats.LeadingAgent,
+                    LeadingAgentVal = e.AgentLeaderStats.LeadingAgentVal,
+                    TrailingAgent = e.AgentLeaderStats.TrailingAgent,
+                    TrailingAgentVal = e.AgentLeaderStats.TrailingAgentVal
+                };
+            }
 
-            ed.RevenueLeaderStats = new Models.RevenueLeaderStats
+            if(e.RevenueLeaderStats != null)
             {
-                LeadingRevenue = e.RevenueLeaderStats.LeadingRevenue,
-                LeadingRevenueVal = e.RevenueLeaderStats.LeadingRevenueVal,
-                TrailingRevenue = e.RevenueLeaderStats.TrailingRevenue,
-                TrailingRevenueVal = e.RevenueLeaderStats.TrailingRevenueVal
-            };
+                ed.RevenueLeaderStats = new Models.RevenueLeaderStats
+                {
+                    LeadingRevenue = e.RevenueLeaderStats.LeadingRevenue,
+                    LeadingRevenueVal = e.RevenueLeaderStats.LeadingRevenueVal,
+                    TrailingRevenue = e.RevenueLeaderStats.TrailingRevenue,
+                    TrailingRevenueVal = e.RevenueLeaderStats.TrailingRevenueVal
+                };
+            }
+            
            
 
             List<Models.AgentStats> AgentStats = new List<Models.AgentStats>();
-            foreach (var aStats in e.AgentStats)
+            if (e.AgentStats != null && e.AgentStats.Length > 0)
             {
-                Models.AgentStats stat = new Models.AgentStats
+                foreach (var aStats in e.AgentStats)
                 {
-                    AgentCode = aStats.AgentCode,
-                    AgentId = aStats.AgentId,
-                    AgentName = aStats.AgentName,
-                    TerminalStats = new Models.AgentTerminalStats
+                    Models.AgentStats stat = new Models.AgentStats
                     {
-                        Total30DaysActiveTerminals = aStats.TerminalStats.Total30DaysActiveTerminals,
-                        Total30DaysInActiveTerminals = aStats.TerminalStats.Total30DaysInActiveTerminals,
-                        Total30DaysTransactions = aStats.TerminalStats.Total30DaysTransactions,
-                        Total30DaysTransactionVal = aStats.TerminalStats.Total30DaysTransactionVal,
-                        Total3MonthsActiveTerminals = aStats.TerminalStats.Total3MonthsActiveTerminals,
-                        Total3MonthsInActiveTerminals = aStats.TerminalStats.Total3MonthsInActiveTerminals,
-                        Total3MonthsTransactions = aStats.TerminalStats.Total3MonthsTransactions,
-                        Total3MonthsTransactionVal = aStats.TerminalStats.Total3MonthsTransactionVal,
-                        Total6MonthsActiveTerminals = aStats.TerminalStats.Total6MonthsActiveTerminals,
-                        Total6MonthsInActiveTerminals = aStats.TerminalStats.Total6MonthsInActiveTerminals,
-                        Total6MonthsTransactions = aStats.TerminalStats.Total6MonthsTransactions,
-                        Total6MonthsTransactionVal = aStats.TerminalStats.Total6MonthsTransactionVal,
-                        Total7DaysActiveTerminals = aStats.TerminalStats.Total7DaysActiveTerminals,
-                        Total7DaysInActiveTerminals = aStats.TerminalStats.Total7DaysInActiveTerminals,
-                        Total7DaysTransactions = aStats.TerminalStats.Total7DaysTransactions,
-                        Total7DaysTransactionVal = aStats.TerminalStats.Total7DaysTransactionVal,
-                        TotalActiveTerminals = aStats.TerminalStats.TotalActiveTerminals,
-                        TotalInActiveTerminals = aStats.TerminalStats.TotalInActiveTerminals,
-                        TotalTerminals = aStats.TerminalStats.TotalTerminals,
-                        TotalTodayActiveTerminals = aStats.TerminalStats.TotalTodayActiveTerminals,
-                        TotalTodayInActiveTerminals = aStats.TerminalStats.TotalTodayInActiveTerminals,
-                        TotalTodayTransactions = aStats.TerminalStats.TotalTodayTransactions,
-                        TotalTodayTransactionVal = aStats.TerminalStats.TotalTodayTransactionVal,
-                        TotalTransactions = aStats.TerminalStats.TotalTransactions,
-                        TotalTransactionVal = aStats.TerminalStats.TotalTransactionVal
-                    }
-                };
-                AgentStats.Add(stat);
+                        AgentCode = aStats.AgentCode,
+                        AgentId = aStats.AgentId,
+                        AgentName = aStats.AgentName,
+                        TerminalStats = new Models.AgentTerminalStats
+                        {
+                            Total30DaysActiveTerminals = aStats.TerminalStats.Total30DaysActiveTerminals,
+                            Total30DaysInActiveTerminals = aStats.TerminalStats.Total30DaysInActiveTerminals,
+                            Total30DaysTransactions = aStats.TerminalStats.Total30DaysTransactions,
+                            Total30DaysTransactionVal = aStats.TerminalStats.Total30DaysTransactionVal,
+                            Total3MonthsActiveTerminals = aStats.TerminalStats.Total3MonthsActiveTerminals,
+                            Total3MonthsInActiveTerminals = aStats.TerminalStats.Total3MonthsInActiveTerminals,
+                            Total3MonthsTransactions = aStats.TerminalStats.Total3MonthsTransactions,
+                            Total3MonthsTransactionVal = aStats.TerminalStats.Total3MonthsTransactionVal,
+                            Total6MonthsActiveTerminals = aStats.TerminalStats.Total6MonthsActiveTerminals,
+                            Total6MonthsInActiveTerminals = aStats.TerminalStats.Total6MonthsInActiveTerminals,
+                            Total6MonthsTransactions = aStats.TerminalStats.Total6MonthsTransactions,
+                            Total6MonthsTransactionVal = aStats.TerminalStats.Total6MonthsTransactionVal,
+                            Total7DaysActiveTerminals = aStats.TerminalStats.Total7DaysActiveTerminals,
+                            Total7DaysInActiveTerminals = aStats.TerminalStats.Total7DaysInActiveTerminals,
+                            Total7DaysTransactions = aStats.TerminalStats.Total7DaysTransactions,
+                            Total7DaysTransactionVal = aStats.TerminalStats.Total7DaysTransactionVal,
+                            TotalActiveTerminals = aStats.TerminalStats.TotalActiveTerminals,
+                            TotalInActiveTerminals = aStats.TerminalStats.TotalInActiveTerminals,
+                            TotalTerminals = aStats.TerminalStats.TotalTerminals,
+                            TotalTodayActiveTerminals = aStats.TerminalStats.TotalTodayActiveTerminals,
+                            TotalTodayInActiveTerminals = aStats.TerminalStats.TotalTodayInActiveTerminals,
+                            TotalTodayTransactions = aStats.TerminalStats.TotalTodayTransactions,
+                            TotalTodayTransactionVal = aStats.TerminalStats.TotalTodayTransactionVal,
+                            TotalTransactions = aStats.TerminalStats.TotalTransactions,
+                            TotalTransactionVal = aStats.TerminalStats.TotalTransactionVal
+                        }
+                    };
+                    AgentStats.Add(stat);
+                }
             }
 
             ed.AgentStats = AgentStats;

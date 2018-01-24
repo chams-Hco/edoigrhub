@@ -314,7 +314,10 @@ namespace CICSWebPortal.Controllers
         {
             var roleId = Session["RoleId"];
             var userId = Session["UserId"];
-            return View(DataContext.GetExecutiveDashBoardSummary(Convert.ToInt32(roleId), Convert.ToInt32(userId)));
+            var executiveDashboard = DataContext.GetExecutiveDashBoardSummary(Convert.ToInt32(roleId), Convert.ToInt32(userId));
+            if (executiveDashboard.AgentLeaderStats != null && executiveDashboard.RevenueLeaderStats != null)
+                return View(executiveDashboard);
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult PeriodicDashboard()
