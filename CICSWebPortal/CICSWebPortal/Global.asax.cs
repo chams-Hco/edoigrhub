@@ -19,7 +19,10 @@ namespace CICSWebPortal
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalFilters.Filters.Add(new CustomAuthorize());
+           
         }
+
+        
     }
 
 }

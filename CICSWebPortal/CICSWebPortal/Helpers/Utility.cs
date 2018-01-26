@@ -136,7 +136,7 @@ namespace CICSWebPortal.Helpers
 
             if (roleId == 1)
             {
-                int[] rangeValue = { 2, 3, 4 };
+                int[] rangeValue = { 2, 3, 4, 8 };
                 var types = DataContext.GetAllRoles().Where(e => rangeValue.Contains(e.RoleId)).Select(x =>
                                   new System.Web.Mvc.SelectListItem
                                   {
