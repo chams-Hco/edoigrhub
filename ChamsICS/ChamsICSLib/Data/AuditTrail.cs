@@ -17,10 +17,10 @@ namespace ChamsICSLib.Data
         public int Id { get; set; }
         public Nullable<int> ClientId { get; set; }
         public Nullable<int> UserId { get; set; }
+        public string LogType { get; set; }
         public string TableAffected { get; set; }
         public string AuditLog { get; set; }
         public string UndoCommand { get; set; }
         public Nullable<System.DateTime> LogDate { get; set; }
-        public string LogType { get; set; }
     }
 }

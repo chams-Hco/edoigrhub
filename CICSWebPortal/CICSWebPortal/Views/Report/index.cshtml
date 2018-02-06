@@ -77,7 +77,7 @@
                         <h4>
                             @if (Model.Report != null)
                             {
-                                <span class="pull-left">Model.Report.Count().ToString("#,0") transactions between Model.StartDate.ToString("dd/MM/yyyy") and Model.EndDate.ToString("dd/MM/yyyy")</span>
+                                <span class="pull-left">Model.Report.Count().ToString("#,0") transactions between @Model.StartDate.ToString("dd/MM/yyyy") and @Model.EndDate.ToString("dd/MM/yyyy")</span>
                             }
                             <span class="pull-right"> Total:: ₦ @Model.TotalTransactionValue.ToString("#,0.00")</span>
                         </h4>
@@ -140,6 +140,7 @@
                 $("#edit_modal_body").load("/Transaction/TransactionDetails/" + $(this).data("view-id"));
             });
 
+            //dataTable 
             $('#dataTable1').dataTable({
                 "bJQueryUI": true, "order": [[0, "desc"]],
                 "sPaginationType": "full_numbers",

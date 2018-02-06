@@ -14,21 +14,10 @@ namespace ChamsICSLib.Data
     
     public partial class TerminalLocation
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TerminalLocation()
-        {
-            this.TransactionLogs = new HashSet<TransactionLog>();
-        }
-    
         public int Id { get; set; }
         public int ClientId { get; set; }
         public int AgentId { get; set; }
         public string LocationCode { get; set; }
         public string LocationDescription { get; set; }
-    
-        public virtual Agent Agent { get; set; }
-        public virtual Client Client { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
     }
 }

@@ -197,8 +197,8 @@
     <Compile Include="Models\AgentSummary.cs" />
     <Compile Include="Models\AssessmentReq.cs" />
     <Compile Include="Models\Biodata.cs" />
-    <Compile Include="Models\EndOfDayServiceResponse.cs" />
-    <Compile Include="Models\EndofDayViewModel.cs" />
+    <Compile Include="Models\EndOfDay.cs" />
+    <Compile Include="ViewModels\EndofDayViewModel.cs" />
     <Compile Include="Models\ErrorTransactionFilter.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Location.cs" />
@@ -372,25 +372,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <None Include="Service References\ServiceReference2\ChamsICSService.wsdl" />
-    <None Include="Service References\ServiceReference2\ChamsICSService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference2\ChamsICSService1.wsdl" />
-    <None Include="Service References\ServiceReference2\ChamsICSService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference2\ChamsICSService2.wsdl" />
-    <None Include="Service References\ServiceReference2\ChamsICSService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference2\ChamsICSService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.AgentSummaryRes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.AssessmentModelRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.AuthoriseTerminalRes.datasource">
@@ -528,13 +510,7 @@
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.RoleRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.Taxpayer.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.TaxpayerDashboardRes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.TaxpayersRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.TransactionSummaryRes.datasource">
@@ -547,6 +523,27 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.VerifyResidentIdRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ServiceReference2\ChamsICSService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference2\ChamsICSService3.wsdl" />
+    <None Include="Service References\ServiceReference2\ChamsICSService31.wsdl" />
+    <None Include="Service References\ServiceReference2\ChamsICSService32.wsdl" />
+    <None Include="Service References\ServiceReference2\ChamsICSService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference2\ChamsICSService41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference2\ChamsICSService42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference2\ChamsICSService43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FetchEndOfDayRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\ServiceReference\ChamsICSService.xsd">
@@ -571,9 +568,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.AgentSummaryRes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.AssessmentModelRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.AuthoriseTerminalRes.datasource">
@@ -711,13 +705,7 @@
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.RoleRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.Taxpayer.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.TaxpayerDashboardRes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.TaxpayersRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.TransactionSummaryRes.datasource">
@@ -732,6 +720,12 @@
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.VerifyResidentIdRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.FetchEndOfDayRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ServiceReference\ChamsICSService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceReference\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference\configuration.svcinfo" />
     <None Include="Service References\ServiceReference\Reference.svcmap">

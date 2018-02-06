@@ -6,38 +6,47 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\WebService</_PublishTargetUrl>
+    <_PublishTargetUrl>http://localhost:9000/igrwebservice</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/ChamsICS.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/ChamsICSLib.dll">
-      <publishTime>09/12/2017 15:52:32</publishTime>
+      <publishTime>02/06/2018 18:53:35</publishTime>
+    </File>
+    <File Include="bin/ChamsICSLib.dll.config">
+      <publishTime>02/02/2018 16:15:15</publishTime>
+    </File>
+    <File Include="bin/ChamsICSLib.pdb">
+      <publishTime>02/06/2018 18:53:35</publishTime>
     </File>
     <File Include="bin/ChamsICSWebService.dll">
-      <publishTime>09/12/2017 15:52:35</publishTime>
+      <publishTime>02/06/2018 18:53:38</publishTime>
+    </File>
+    <File Include="bin/ChamsICSWebService.pdb">
+      <publishTime>02/06/2018 18:53:38</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>12/21/2015 13:49:00</publishTime>
+      <publishTime>01/12/2018 14:12:34</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>12/21/2015 13:49:00</publishTime>
+      <publishTime>01/12/2018 14:12:34</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>12/21/2015 13:53:28</publishTime>
+      <publishTime>01/12/2018 14:12:38</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>12/21/2015 13:53:44</publishTime>
+      <publishTime>01/12/2018 14:12:36</publishTime>
     </File>
     <File Include="ChamsICSService.svc">
-      <publishTime>12/21/2015 09:33:06</publishTime>
+      <publishTime>01/12/2018 14:12:30</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>12/22/2015 23:57:16</publishTime>
+      <publishTime>01/12/2018 14:12:30</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/12/2017 15:52:35</publishTime>
+      <publishTime>02/06/2018 18:53:41</publishTime>
     </File>
   </ItemGroup>
 </Project>

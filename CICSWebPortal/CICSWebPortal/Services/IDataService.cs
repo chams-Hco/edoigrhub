@@ -115,6 +115,7 @@ namespace CICSWebPortal.Services
         IList<Models.AgentSummary> GetAgentReportSummary(int clientId);
         IList<Models.ClientSummary> GetClientReportSummary();
         ReportViewModel GetTransactionReportSummary(ReportFilter request);
+        EndofDayViewModel GetEODReport(ReportFilter request);
         #endregion
 
         #region Location

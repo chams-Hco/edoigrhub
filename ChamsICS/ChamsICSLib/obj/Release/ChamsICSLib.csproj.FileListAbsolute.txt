@@ -18,3 +18,14 @@ C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\C
 C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.csprojResolveAssemblyReference.cache
 C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.dll
 C:\Users\GABRIEL\Documents\Projects\Office Projects\Web\IGRHub\IGRHub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.dll.config
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.csproj.CoreCompileInputs.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.pdb

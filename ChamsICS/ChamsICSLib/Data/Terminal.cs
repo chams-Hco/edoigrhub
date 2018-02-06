@@ -14,11 +14,31 @@ namespace ChamsICSLib.Data
     
     public partial class Terminal
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Terminal()
+        {
+            this.EODs = new HashSet<EOD>();
+            this.TerminalUpdateLogs = new HashSet<TerminalUpdateLog>();
+            this.TransactionLogs = new HashSet<TransactionLog>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> AgentId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public string SerialNumber { get; set; }
         public Nullable<int> Status { get; set; }
+        public string Channel { get; set; }
+        public string HandlerName { get; set; }
+        public string HandlerEmail { get; set; }
+        public string HandlerPhone { get; set; }
+    
+        public virtual Agent Agent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EOD> EODs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TerminalUpdateLog> TerminalUpdateLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
     }
 }

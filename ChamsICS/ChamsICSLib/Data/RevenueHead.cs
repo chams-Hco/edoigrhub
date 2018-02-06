@@ -14,11 +14,11 @@ namespace ChamsICSLib.Data
     
     public partial class RevenueHead
     {
+        public int Id { get; set; }
         public Nullable<int> ClientId { get; set; }
         public Nullable<int> MinistryId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public Nullable<int> Status { get; set; }
-        public int Id { get; set; }
     }
 }

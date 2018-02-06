@@ -17,8 +17,12 @@ namespace ChamsICSLib.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
         {
+            this.Agents = new HashSet<Agent>();
+            this.IdentityServices = new HashSet<IdentityService>();
+            this.Revenues = new HashSet<Revenue>();
+            this.TransactionLogs = new HashSet<TransactionLog>();
             this.Users = new HashSet<User>();
-            this.TerminalLocations = new HashSet<TerminalLocation>();
+            this.UserClients = new HashSet<UserClient>();
         }
     
         public int Id { get; set; }
@@ -31,8 +35,16 @@ namespace ChamsICSLib.Data
         public Nullable<int> Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Agent> Agents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IdentityService> IdentityServices { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Revenue> Revenues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TerminalLocation> TerminalLocations { get; set; }
+        public virtual ICollection<UserClient> UserClients { get; set; }
     }
 }

@@ -202,6 +202,9 @@ namespace ChamsICSWebService
 
         [OperationContract]
         GetAuditTrailsRes GetAllAuditTrails();
+
+        [OperationContract]
+        FetchEndOfDayRes GetEODReport(FetchEndOfDayReq request);
         #endregion
 
         #region Location
@@ -248,16 +251,16 @@ namespace ChamsICSWebService
         #endregion
 
         #region Taxpayer
-        [OperationContract]
-        TaxpayersRes GetAllTaxpayers();
-        [OperationContract]
-        Response AddTaxpayer(Taxpayer taxpayer);
-        [OperationContract]
-        Taxpayer GetTaxpayerById(int id);
-        [OperationContract]
-        AssessmentModelRes GetAssessmentByRole(AssessmentReq assessmentReq);
-        [OperationContract]
-        Response GenerateInvoice(GenerateInvoice generateInvoice);
+        //[OperationContract]
+        //TaxpayersRes GetAllTaxpayers();
+        //[OperationContract]
+        //Response AddTaxpayer(Taxpayer taxpayer);
+        //[OperationContract]
+        //Taxpayer GetTaxpayerById(int id);
+        //[OperationContract]
+        //AssessmentModelRes GetAssessmentByRole(AssessmentReq assessmentReq);
+        //[OperationContract]
+        //Response GenerateInvoice(GenerateInvoice generateInvoice);
         #endregion
 
     }

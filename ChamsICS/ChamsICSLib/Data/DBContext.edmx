@@ -21,6 +21,19 @@
           <Property Name="Status" Type="int" />
           <Property Name="AgentManagerCode" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="AgentManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="AuditTrail">
           <Key>
             <PropertyRef Name="Id" />
@@ -33,18 +46,6 @@
           <Property Name="AuditLog" Type="text" />
           <Property Name="UndoCommand" Type="text" />
           <Property Name="LogDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Biodata">
-          <Key>
-            <PropertyRef Name="Biodataid" />
-          </Key>
-          <Property Name="Biodataid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RIN" Type="int" Nullable="false" />
-          <Property Name="Userid" Type="int" Nullable="false" />
-          <Property Name="EntryDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -59,6 +60,18 @@
           <Property Name="Phone2" Type="nvarchar" MaxLength="15" />
           <Property Name="Status" Type="int" />
         </EntityType>
+        <EntityType Name="EOD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="TerminalId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
         <EntityType Name="IdentityService">
           <Key>
             <PropertyRef Name="Id" />
@@ -70,34 +83,11 @@
           <Property Name="Password" Type="text" />
           <Property Name="Status" Type="int" />
         </EntityType>
-        <EntityType Name="Invoice">
-          <Key>
-            <PropertyRef Name="InvoiceId" />
-          </Key>
-          <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="InvoiceNo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="EntryDate" Type="datetime" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="RevenueCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="InvoiceItem">
-          <Key>
-            <PropertyRef Name="InvoiceItemId" />
-          </Key>
-          <Property Name="InvoiceItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="InvoiceId" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="EntryDate" Type="datetime" Nullable="false" />
-        </EntityType>
         <EntityType Name="Ministry">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="ClientId" Type="int" />
           <Property Name="Code" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
@@ -120,24 +110,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="20" />
-        </EntityType>
-        <EntityType Name="Payment">
-          <Key>
-            <PropertyRef Name="PaymentId" />
-          </Key>
-          <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Reference" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Target" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="EntryDate" Type="datetime" Nullable="false" />
-          <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="Method" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="WalletId" Type="int" />
-          <Property Name="TransactionId" Type="int" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Revenue">
           <Key>
@@ -155,7 +129,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="ClientId" Type="int" />
           <Property Name="RevenueHeadId" Type="int" />
           <Property Name="Code" Type="nvarchar" MaxLength="50" />
@@ -177,7 +151,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="ClientId" Type="int" />
           <Property Name="MinistryId" Type="int" />
           <Property Name="RevenueHeadId" Type="int" />
@@ -197,21 +171,10 @@
           <Property Name="Name" Type="nchar" MaxLength="50" />
           <Property Name="SerialNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Status" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'CICS_LIVE.dbo.terminal_backup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="terminal_backup">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Code" />
-            <PropertyRef Name="SerialNumber" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AgentId" Type="int" />
-          <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="50" />
-          <Property Name="SerialNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Status" Type="int" />
+          <Property Name="Channel" Type="nvarchar" MaxLength="20" />
+          <Property Name="HandlerName" Type="varchar" MaxLength="50" />
+          <Property Name="HandlerEmail" Type="varchar" MaxLength="50" />
+          <Property Name="HandlerPhone" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TerminalLocation">
           <Key>
@@ -222,6 +185,18 @@ warning 6002: The table/view 'CICS_LIVE.dbo.terminal_backup' does not have a pri
           <Property Name="AgentId" Type="int" Nullable="false" />
           <Property Name="LocationCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="LocationDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TerminalUpdateLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="TerminalId" Type="int" Nullable="false" />
+          <Property Name="Field" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="OldValues" Type="varchar" MaxLength="50" />
+          <Property Name="NewValues" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Detail" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -248,61 +223,7 @@ warning 6002: The table/view 'CICS_LIVE.dbo.terminal_backup' does not have a pri
           <Property Name="UploadDate" Type="datetime" />
           <Property Name="Status" Type="int" />
           <Property Name="LocationId" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'CICS_LIVE.dbo.TransactionLogBackup_02Aug2017' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="TransactionLogBackup_02Aug2017">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientId" Type="int" />
-          <Property Name="AgentId" Type="int" />
-          <Property Name="TerminalId" Type="int" />
-          <Property Name="Code" Type="nvarchar" MaxLength="50" />
-          <Property Name="ResidentId" Type="nvarchar" MaxLength="50" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
-          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Lastname" Type="nvarchar" MaxLength="100" />
-          <Property Name="Address" Type="nvarchar" MaxLength="100" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateOfBirth" Type="date" />
-          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
-          <Property Name="RevenueCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="PaymentReference" Type="nvarchar" MaxLength="100" />
-          <Property Name="TransactionDate" Type="datetime" />
-          <Property Name="UploadDate" Type="datetime" />
-          <Property Name="Status" Type="int" />
-          <Property Name="LocationId" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="transactionLogBackup_18apr2016">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientId" Type="int" />
-          <Property Name="AgentId" Type="int" />
-          <Property Name="TerminalId" Type="int" />
-          <Property Name="Code" Type="nvarchar" MaxLength="50" />
-          <Property Name="ResidentId" Type="nvarchar" MaxLength="50" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
-          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Lastname" Type="nvarchar" MaxLength="100" />
-          <Property Name="Address" Type="nvarchar" MaxLength="100" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateOfBirth" Type="date" />
-          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
-          <Property Name="RevenueCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="PaymentReference" Type="nvarchar" MaxLength="100" />
-          <Property Name="TransactionDate" Type="datetime" />
-          <Property Name="UploadDate" Type="datetime" />
-          <Property Name="Status" Type="int" />
+          <Property Name="LocationCode" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TransactionLogException">
           <Key>
@@ -407,16 +328,6 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Wallet">
-          <Key>
-            <PropertyRef Name="WalletId" />
-          </Key>
-          <Property Name="WalletId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
-          <Property Name="EntryDate" Type="datetime" Nullable="false" />
-        </EntityType>
         <Association Name="FK_Agent_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
@@ -426,6 +337,18 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             </Principal>
             <Dependent Role="Agent">
               <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EOD_Terminal">
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="1" />
+          <End Role="EOD" Type="Self.EOD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EOD">
+              <PropertyRef Name="TerminalId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -453,42 +376,6 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Payment_TransactionLog">
-          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="0..1" />
-          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransactionLog">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="TransactionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payment_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payment_Wallet">
-          <End Role="Wallet" Type="Self.Wallet" Multiplicity="0..1" />
-          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wallet">
-              <PropertyRef Name="WalletId" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="WalletId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Revenue_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="Revenue" Type="Self.Revenue" Multiplicity="*" />
@@ -510,6 +397,18 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             </Principal>
             <Dependent Role="Terminal">
               <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TerminalUpdateLog_Terminal">
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="1" />
+          <End Role="TerminalUpdateLog" Type="Self.TerminalUpdateLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TerminalUpdateLog">
+              <PropertyRef Name="TerminalId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -549,6 +448,18 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserRole">
           <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -563,6 +474,18 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserAgents_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="UserAgent" Type="Self.UserAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAgent">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserAgents_User">
           <End Role="User" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -574,6 +497,18 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             </Principal>
             <Dependent Role="UserAgent">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClients_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="UserClient" Type="Self.UserClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserClient">
+              <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -593,22 +528,21 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
         </Association>
         <EntityContainer Name="CICSModelStoreContainer">
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgentManager" EntityType="Self.AgentManager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditTrail" EntityType="Self.AuditTrail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Biodata" EntityType="Self.Biodata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EOD" EntityType="Self.EOD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IdentityService" EntityType="Self.IdentityService" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InvoiceItem" EntityType="Self.InvoiceItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ministry" EntityType="Self.Ministry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotificationType" EntityType="Self.NotificationType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Revenue" EntityType="Self.Revenue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RevenueCategory" EntityType="Self.RevenueCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RevenueHead" EntityType="Self.RevenueHead" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RevenueItem" EntityType="Self.RevenueItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Terminal" EntityType="Self.Terminal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TerminalLocation" EntityType="Self.TerminalLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TerminalUpdateLog" EntityType="Self.TerminalUpdateLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionLogException" EntityType="Self.TransactionLogException" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionStatus" EntityType="Self.TransactionStatus" Schema="dbo" store:Type="Tables" />
@@ -617,69 +551,13 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <EntitySet Name="UserAgent" EntityType="Self.UserAgent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserClient" EntityType="Self.UserClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Wallet" EntityType="Self.Wallet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="terminal_backup" EntityType="Self.terminal_backup" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [terminal_backup].[Id] AS [Id], 
-    [terminal_backup].[AgentId] AS [AgentId], 
-    [terminal_backup].[Code] AS [Code], 
-    [terminal_backup].[Name] AS [Name], 
-    [terminal_backup].[SerialNumber] AS [SerialNumber], 
-    [terminal_backup].[Status] AS [Status]
-    FROM [dbo].[terminal_backup] AS [terminal_backup]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TransactionLogBackup_02Aug2017" EntityType="Self.TransactionLogBackup_02Aug2017" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TransactionLogBackup_02Aug2017].[Id] AS [Id], 
-    [TransactionLogBackup_02Aug2017].[ClientId] AS [ClientId], 
-    [TransactionLogBackup_02Aug2017].[AgentId] AS [AgentId], 
-    [TransactionLogBackup_02Aug2017].[TerminalId] AS [TerminalId], 
-    [TransactionLogBackup_02Aug2017].[Code] AS [Code], 
-    [TransactionLogBackup_02Aug2017].[ResidentId] AS [ResidentId], 
-    [TransactionLogBackup_02Aug2017].[FirstName] AS [FirstName], 
-    [TransactionLogBackup_02Aug2017].[MiddleName] AS [MiddleName], 
-    [TransactionLogBackup_02Aug2017].[Lastname] AS [Lastname], 
-    [TransactionLogBackup_02Aug2017].[Address] AS [Address], 
-    [TransactionLogBackup_02Aug2017].[Email] AS [Email], 
-    [TransactionLogBackup_02Aug2017].[PhoneNumber] AS [PhoneNumber], 
-    [TransactionLogBackup_02Aug2017].[DateOfBirth] AS [DateOfBirth], 
-    [TransactionLogBackup_02Aug2017].[Gender] AS [Gender], 
-    [TransactionLogBackup_02Aug2017].[RevenueCode] AS [RevenueCode], 
-    [TransactionLogBackup_02Aug2017].[Amount] AS [Amount], 
-    [TransactionLogBackup_02Aug2017].[PaymentReference] AS [PaymentReference], 
-    [TransactionLogBackup_02Aug2017].[TransactionDate] AS [TransactionDate], 
-    [TransactionLogBackup_02Aug2017].[UploadDate] AS [UploadDate], 
-    [TransactionLogBackup_02Aug2017].[Status] AS [Status], 
-    [TransactionLogBackup_02Aug2017].[LocationId] AS [LocationId]
-    FROM [dbo].[TransactionLogBackup_02Aug2017] AS [TransactionLogBackup_02Aug2017]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="transactionLogBackup_18apr2016" EntityType="Self.transactionLogBackup_18apr2016" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [transactionLogBackup_18apr2016].[Id] AS [Id], 
-    [transactionLogBackup_18apr2016].[ClientId] AS [ClientId], 
-    [transactionLogBackup_18apr2016].[AgentId] AS [AgentId], 
-    [transactionLogBackup_18apr2016].[TerminalId] AS [TerminalId], 
-    [transactionLogBackup_18apr2016].[Code] AS [Code], 
-    [transactionLogBackup_18apr2016].[ResidentId] AS [ResidentId], 
-    [transactionLogBackup_18apr2016].[FirstName] AS [FirstName], 
-    [transactionLogBackup_18apr2016].[MiddleName] AS [MiddleName], 
-    [transactionLogBackup_18apr2016].[Lastname] AS [Lastname], 
-    [transactionLogBackup_18apr2016].[Address] AS [Address], 
-    [transactionLogBackup_18apr2016].[Email] AS [Email], 
-    [transactionLogBackup_18apr2016].[PhoneNumber] AS [PhoneNumber], 
-    [transactionLogBackup_18apr2016].[DateOfBirth] AS [DateOfBirth], 
-    [transactionLogBackup_18apr2016].[Gender] AS [Gender], 
-    [transactionLogBackup_18apr2016].[RevenueCode] AS [RevenueCode], 
-    [transactionLogBackup_18apr2016].[Amount] AS [Amount], 
-    [transactionLogBackup_18apr2016].[PaymentReference] AS [PaymentReference], 
-    [transactionLogBackup_18apr2016].[TransactionDate] AS [TransactionDate], 
-    [transactionLogBackup_18apr2016].[UploadDate] AS [UploadDate], 
-    [transactionLogBackup_18apr2016].[Status] AS [Status]
-    FROM [dbo].[transactionLogBackup_18apr2016] AS [transactionLogBackup_18apr2016]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Agent_Client" Association="Self.FK_Agent_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EOD_Terminal" Association="Self.FK_EOD_Terminal">
+            <End Role="Terminal" EntitySet="Terminal" />
+            <End Role="EOD" EntitySet="EOD" />
           </AssociationSet>
           <AssociationSet Name="FK_IdentityService_Client" Association="Self.FK_IdentityService_Client">
             <End Role="Client" EntitySet="Client" />
@@ -689,18 +567,6 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             <End Role="NotificationType" EntitySet="NotificationType" />
             <End Role="Notification" EntitySet="Notification" />
           </AssociationSet>
-          <AssociationSet Name="FK_Payment_TransactionLog" Association="Self.FK_Payment_TransactionLog">
-            <End Role="TransactionLog" EntitySet="TransactionLog" />
-            <End Role="Payment" EntitySet="Payment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payment_User" Association="Self.FK_Payment_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Payment" EntitySet="Payment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payment_Wallet" Association="Self.FK_Payment_Wallet">
-            <End Role="Wallet" EntitySet="Wallet" />
-            <End Role="Payment" EntitySet="Payment" />
-          </AssociationSet>
           <AssociationSet Name="FK_Revenue_Client" Association="Self.FK_Revenue_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Revenue" EntitySet="Revenue" />
@@ -708,6 +574,10 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <AssociationSet Name="FK_Terminal_Agent" Association="Self.FK_Terminal_Agent">
             <End Role="Agent" EntitySet="Agent" />
             <End Role="Terminal" EntitySet="Terminal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminalUpdateLog_Terminal" Association="Self.FK_TerminalUpdateLog_Terminal">
+            <End Role="Terminal" EntitySet="Terminal" />
+            <End Role="TerminalUpdateLog" EntitySet="TerminalUpdateLog" />
           </AssociationSet>
           <AssociationSet Name="FK_TransactionLog_Agent" Association="Self.FK_TransactionLog_Agent">
             <End Role="Agent" EntitySet="Agent" />
@@ -721,13 +591,25 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             <End Role="Terminal" EntitySet="Terminal" />
             <End Role="TransactionLog" EntitySet="TransactionLog" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_Client" Association="Self.FK_User_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
             <End Role="UserRole" EntitySet="UserRole" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserAgents_Agent" Association="Self.FK_UserAgents_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="UserAgent" EntitySet="UserAgent" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserAgents_User" Association="Self.FK_UserAgents_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserAgent" EntitySet="UserAgent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClients_Client" Association="Self.FK_UserClients_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="UserClient" EntitySet="UserClient" />
           </AssociationSet>
           <AssociationSet Name="FK_UserClients_User" Association="Self.FK_UserClients_User">
             <End Role="User" EntitySet="User" />
@@ -740,17 +622,33 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
       <Schema Namespace="CICSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="CICSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Agents" EntityType="CICSModel.Agent" />
+          <EntitySet Name="AgentManagers" EntityType="CICSModel.AgentManager" />
+          <EntitySet Name="AuditTrails" EntityType="CICSModel.AuditTrail" />
           <EntitySet Name="Clients" EntityType="CICSModel.Client" />
+          <EntitySet Name="EODs" EntityType="CICSModel.EOD" />
+          <EntitySet Name="IdentityServices" EntityType="CICSModel.IdentityService" />
+          <EntitySet Name="Ministries" EntityType="CICSModel.Ministry" />
+          <EntitySet Name="Notifications" EntityType="CICSModel.Notification" />
+          <EntitySet Name="NotificationTypes" EntityType="CICSModel.NotificationType" />
+          <EntitySet Name="Revenues" EntityType="CICSModel.Revenue" />
+          <EntitySet Name="RevenueCategories" EntityType="CICSModel.RevenueCategory" />
+          <EntitySet Name="RevenueHeads" EntityType="CICSModel.RevenueHead" />
+          <EntitySet Name="RevenueItems" EntityType="CICSModel.RevenueItem" />
+          <EntitySet Name="Terminals" EntityType="CICSModel.Terminal" />
+          <EntitySet Name="TerminalLocations" EntityType="CICSModel.TerminalLocation" />
+          <EntitySet Name="TerminalUpdateLogs" EntityType="CICSModel.TerminalUpdateLog" />
+          <EntitySet Name="TransactionLogs" EntityType="CICSModel.TransactionLog" />
+          <EntitySet Name="TransactionLogExceptions" EntityType="CICSModel.TransactionLogException" />
+          <EntitySet Name="TransactionStatus" EntityType="CICSModel.TransactionStatu" />
+          <EntitySet Name="TransactionUploadErrors" EntityType="CICSModel.TransactionUploadError" />
+          <EntitySet Name="Users" EntityType="CICSModel.User" />
+          <EntitySet Name="UserAgents" EntityType="CICSModel.UserAgent" />
+          <EntitySet Name="UserClients" EntityType="CICSModel.UserClient" />
+          <EntitySet Name="UserRoles" EntityType="CICSModel.UserRole" />
           <AssociationSet Name="FK_Agent_Client" Association="CICSModel.FK_Agent_Client">
             <End Role="Client" EntitySet="Clients" />
             <End Role="Agent" EntitySet="Agents" />
           </AssociationSet>
-          <EntitySet Name="IdentityServices" EntityType="CICSModel.IdentityService" />
-          <EntitySet Name="Revenues" EntityType="CICSModel.Revenue" />
-          <EntitySet Name="Terminals" EntityType="CICSModel.Terminal" />
-          <EntitySet Name="TransactionLogs" EntityType="CICSModel.TransactionLog" />
-          <EntitySet Name="TransactionStatus" EntityType="CICSModel.TransactionStatu" />
-          <EntitySet Name="UserRoles" EntityType="CICSModel.UserRole" />
           <AssociationSet Name="FK_Terminal_Agent" Association="CICSModel.FK_Terminal_Agent">
             <End Role="Agent" EntitySet="Agents" />
             <End Role="Terminal" EntitySet="Terminals" />
@@ -758,6 +656,10 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <AssociationSet Name="FK_TransactionLog_Agent" Association="CICSModel.FK_TransactionLog_Agent">
             <End Role="Agent" EntitySet="Agents" />
             <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAgents_Agent" Association="CICSModel.FK_UserAgents_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="UserAgent" EntitySet="UserAgents" />
           </AssociationSet>
           <AssociationSet Name="FK_IdentityService_Client" Association="CICSModel.FK_IdentityService_Client">
             <End Role="Client" EntitySet="Clients" />
@@ -771,54 +673,34 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             <End Role="Client" EntitySet="Clients" />
             <End Role="TransactionLog" EntitySet="TransactionLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK_TransactionLog_Terminal" Association="CICSModel.FK_TransactionLog_Terminal">
-            <End Role="Terminal" EntitySet="Terminals" />
-            <End Role="TransactionLog" EntitySet="TransactionLogs" />
-          </AssociationSet>
-          <EntitySet Name="NotificationTypes" EntityType="CICSModel.NotificationType" />
-          <EntitySet Name="Ministries" EntityType="CICSModel.Ministry" />
-          <EntitySet Name="RevenueCategories" EntityType="CICSModel.RevenueCategory" />
-          <EntitySet Name="RevenueHeads" EntityType="CICSModel.RevenueHead" />
-          <EntitySet Name="RevenueItems" EntityType="CICSModel.RevenueItem" />
-          <EntitySet Name="AuditTrails" EntityType="CICSModel.AuditTrail" />
-          <EntitySet Name="Notifications" EntityType="CICSModel.Notification" />
-          <AssociationSet Name="FK_Notification_NotificationType" Association="CICSModel.FK_Notification_NotificationType">
-            <End Role="NotificationType" EntitySet="NotificationTypes" />
-            <End Role="Notification" EntitySet="Notifications" />
-          </AssociationSet>
-          <EntitySet Name="Users" EntityType="CICSModel.User" />
-          <AssociationSet Name="FK_User_UserRole" Association="CICSModel.FK_User_UserRole">
-            <End Role="UserRole" EntitySet="UserRoles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_Client" Association="CICSModel.FK_User_Client">
             <End Role="Client" EntitySet="Clients" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="TransactionLogExceptions" EntityType="CICSModel.TransactionLogException" />
-          <EntitySet Name="TransactionUploadErrors" EntityType="CICSModel.TransactionUploadError" />
-          <EntitySet Name="TerminalLocations" EntityType="CICSModel.TerminalLocation" />
-          <AssociationSet Name="FK_TerminalLocation_Agent" Association="CICSModel.FK_TerminalLocation_Agent">
-            <End Role="Agent" EntitySet="Agents" />
-            <End Role="TerminalLocation" EntitySet="TerminalLocations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TerminalLocation_Client" Association="CICSModel.FK_TerminalLocation_Client">
+          <AssociationSet Name="FK_UserClients_Client" Association="CICSModel.FK_UserClients_Client">
             <End Role="Client" EntitySet="Clients" />
-            <End Role="TerminalLocation" EntitySet="TerminalLocations" />
+            <End Role="UserClient" EntitySet="UserClients" />
           </AssociationSet>
-          <AssociationSet Name="FK_TransactionLog_TerminalLocation" Association="CICSModel.FK_TransactionLog_TerminalLocation">
-            <End Role="TerminalLocation" EntitySet="TerminalLocations" />
+          <AssociationSet Name="FK_EOD_Terminal" Association="CICSModel.FK_EOD_Terminal">
+            <End Role="Terminal" EntitySet="Terminals" />
+            <End Role="EOD" EntitySet="EODs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_NotificationType" Association="CICSModel.FK_Notification_NotificationType">
+            <End Role="NotificationType" EntitySet="NotificationTypes" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminalUpdateLog_Terminal" Association="CICSModel.FK_TerminalUpdateLog_Terminal">
+            <End Role="Terminal" EntitySet="Terminals" />
+            <End Role="TerminalUpdateLog" EntitySet="TerminalUpdateLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionLog_Terminal" Association="CICSModel.FK_TransactionLog_Terminal">
+            <End Role="Terminal" EntitySet="Terminals" />
             <End Role="TransactionLog" EntitySet="TransactionLogs" />
           </AssociationSet>
-          <EntitySet Name="Invoices" EntityType="CICSModel.Invoice" />
-          <EntitySet Name="InvoiceItems" EntityType="CICSModel.InvoiceItem" />
-          <EntitySet Name="Payments" EntityType="CICSModel.Payment" />
-          <EntitySet Name="Wallets" EntityType="CICSModel.Wallet" />
-          <EntitySet Name="UserAgents" EntityType="CICSModel.UserAgent" />
-          <EntitySet Name="UserClients" EntityType="CICSModel.UserClient" />
-          <EntitySet Name="terminal_backup" EntityType="CICSModel.terminal_backup" />
-          <EntitySet Name="TransactionLogBackup_02Aug2017" EntityType="CICSModel.TransactionLogBackup_02Aug2017" />
-          <EntitySet Name="transactionLogBackup_18apr2016" EntityType="CICSModel.transactionLogBackup_18apr2016" />
+          <AssociationSet Name="FK_User_UserRole" Association="CICSModel.FK_User_UserRole">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserAgents_User" Association="CICSModel.FK_UserAgents_User">
             <End Role="User" EntitySet="Users" />
             <End Role="UserAgent" EntitySet="UserAgents" />
@@ -827,19 +709,6 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             <End Role="User" EntitySet="Users" />
             <End Role="UserClient" EntitySet="UserClients" />
           </AssociationSet>
-          <AssociationSet Name="FK_Payment_TransactionLog" Association="CICSModel.FK_Payment_TransactionLog">
-            <End Role="TransactionLog" EntitySet="TransactionLogs" />
-            <End Role="Payment" EntitySet="Payments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payment_User" Association="CICSModel.FK_Payment_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Payment" EntitySet="Payments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payment_Wallet" Association="CICSModel.FK_Payment_Wallet">
-            <End Role="Wallet" EntitySet="Wallets" />
-            <End Role="Payment" EntitySet="Payments" />
-          </AssociationSet>
-          <EntitySet Name="Biodatas" EntityType="CICSModel.Biodata" />
         </EntityContainer>
         <EntityType Name="Agent">
           <Key>
@@ -855,9 +724,37 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
-          <NavigationProperty Name="AgentTerminals" Relationship="CICSModel.FK_Terminal_Agent" FromRole="Agent" ToRole="Terminal" />
-          <NavigationProperty Name="TerminalLocations" Relationship="CICSModel.FK_TerminalLocation_Agent" FromRole="Agent" ToRole="TerminalLocation" />
           <Property Name="AgentManagerCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_Agent_Client" FromRole="Agent" ToRole="Client" />
+          <NavigationProperty Name="Terminals" Relationship="CICSModel.FK_Terminal_Agent" FromRole="Agent" ToRole="Terminal" />
+          <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Agent" FromRole="Agent" ToRole="TransactionLog" />
+          <NavigationProperty Name="UserAgents" Relationship="CICSModel.FK_UserAgents_Agent" FromRole="Agent" ToRole="UserAgent" />
+        </EntityType>
+        <EntityType Name="AgentManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AuditTrail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="LogType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TableAffected" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuditLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UndoCommand" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LogDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -871,21 +768,26 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Agents" Relationship="CICSModel.FK_Agent_Client" FromRole="Client" ToRole="Agent" />
+          <NavigationProperty Name="IdentityServices" Relationship="CICSModel.FK_IdentityService_Client" FromRole="Client" ToRole="IdentityService" />
+          <NavigationProperty Name="Revenues" Relationship="CICSModel.FK_Revenue_Client" FromRole="Client" ToRole="Revenue" />
+          <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Client" FromRole="Client" ToRole="TransactionLog" />
           <NavigationProperty Name="Users" Relationship="CICSModel.FK_User_Client" FromRole="Client" ToRole="User" />
-          <NavigationProperty Name="TerminalLocations" Relationship="CICSModel.FK_TerminalLocation_Client" FromRole="Client" ToRole="TerminalLocation" />
+          <NavigationProperty Name="UserClients" Relationship="CICSModel.FK_UserClients_Client" FromRole="Client" ToRole="UserClient" />
         </EntityType>
-        <Association Name="FK_Agent_Client">
-          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
-          <End Type="CICSModel.Agent" Role="Agent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Agent">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="EOD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TerminalId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_EOD_Terminal" FromRole="EOD" ToRole="Terminal" />
+        </EntityType>
         <EntityType Name="IdentityService">
           <Key>
             <PropertyRef Name="Id" />
@@ -896,6 +798,39 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_IdentityService_Client" FromRole="IdentityService" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Ministry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="ReferenceId" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Recipient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RetryCount" Type="Int32" />
+          <Property Name="StatusMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="NotificationType" Relationship="CICSModel.FK_Notification_NotificationType" FromRole="Notification" ToRole="NotificationType" />
+        </EntityType>
+        <EntityType Name="NotificationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Notifications" Relationship="CICSModel.FK_Notification_NotificationType" FromRole="NotificationType" ToRole="Notification" />
         </EntityType>
         <EntityType Name="Revenue">
           <Key>
@@ -906,6 +841,43 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MDA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_Revenue_Client" FromRole="Revenue" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="RevenueCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="RevenueHeadId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RevenueHead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="MinistryId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RevenueItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="MinistryId" Type="Int32" />
+          <Property Name="RevenueHeadId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Status" Type="Int32" />
         </EntityType>
@@ -919,6 +891,37 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Channel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HandlerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HandlerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HandlerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Agent" Relationship="CICSModel.FK_Terminal_Agent" FromRole="Terminal" ToRole="Agent" />
+          <NavigationProperty Name="EODs" Relationship="CICSModel.FK_EOD_Terminal" FromRole="Terminal" ToRole="EOD" />
+          <NavigationProperty Name="TerminalUpdateLogs" Relationship="CICSModel.FK_TerminalUpdateLog_Terminal" FromRole="Terminal" ToRole="TerminalUpdateLog" />
+          <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Terminal" FromRole="Terminal" ToRole="TransactionLog" />
+        </EntityType>
+        <EntityType Name="TerminalLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="AgentId" Type="Int32" Nullable="false" />
+          <Property Name="LocationCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LocationDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TerminalUpdateLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TerminalId" Type="Int32" Nullable="false" />
+          <Property Name="Field" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OldValues" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NewValues" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Detail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_TerminalUpdateLog_Terminal" FromRole="TerminalUpdateLog" ToRole="Terminal" />
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -945,8 +948,39 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <Property Name="UploadDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" />
           <Property Name="LocationId" Type="Int32" />
-          <NavigationProperty Name="TerminalLocation" Relationship="CICSModel.FK_TransactionLog_TerminalLocation" FromRole="TransactionLog" ToRole="TerminalLocation" />
-          <NavigationProperty Name="Payments" Relationship="CICSModel.FK_Payment_TransactionLog" FromRole="TransactionLog" ToRole="Payment" />
+          <Property Name="LocationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agent" Relationship="CICSModel.FK_TransactionLog_Agent" FromRole="TransactionLog" ToRole="Agent" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_TransactionLog_Client" FromRole="TransactionLog" ToRole="Client" />
+          <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_TransactionLog_Terminal" FromRole="TransactionLog" ToRole="Terminal" />
+        </EntityType>
+        <EntityType Name="TransactionLogException">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AgentId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TerminalId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResidentId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RevenueCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentReference" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TransactionDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UploadDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UploadError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResolutionError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResolutionStatus" Type="Int32" />
+          <Property Name="ResolutionDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TransactionStatu">
           <Key>
@@ -954,6 +988,74 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TransactionUploadError">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="AgentId" Type="Int32" />
+          <Property Name="TerminalId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RevenueCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentReference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="UploadDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="UploadError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResolutionError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResolutionStatus" Type="Int32" />
+          <Property Name="ResolutionDate" Type="DateTime" Precision="3" />
+          <Property Name="LocationId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="UserTypeParentId" Type="Int32" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordStatus" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_User_Client" FromRole="User" ToRole="Client" />
+          <NavigationProperty Name="UserRole" Relationship="CICSModel.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
+          <NavigationProperty Name="UserAgents" Relationship="CICSModel.FK_UserAgents_User" FromRole="User" ToRole="UserAgent" />
+          <NavigationProperty Name="UserClients" Relationship="CICSModel.FK_UserClients_User" FromRole="User" ToRole="UserClient" />
+        </EntityType>
+        <EntityType Name="UserAgent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="AgentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agent" Relationship="CICSModel.FK_UserAgents_Agent" FromRole="UserAgent" ToRole="Agent" />
+          <NavigationProperty Name="User" Relationship="CICSModel.FK_UserAgents_User" FromRole="UserAgent" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_UserClients_Client" FromRole="UserClient" ToRole="Client" />
+          <NavigationProperty Name="User" Relationship="CICSModel.FK_UserClients_User" FromRole="UserClient" ToRole="User" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -963,6 +1065,18 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="CICSModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
         </EntityType>
+        <Association Name="FK_Agent_Client">
+          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="CICSModel.Agent" Role="Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Terminal_Agent">
           <End Type="CICSModel.Agent" Role="Agent" Multiplicity="0..1" />
           <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="*" />
@@ -983,6 +1097,18 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="TransactionLog">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAgents_Agent">
+          <End Type="CICSModel.Agent" Role="Agent" Multiplicity="1" />
+          <End Type="CICSModel.UserAgent" Role="UserAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAgent">
               <PropertyRef Name="AgentId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1023,97 +1149,42 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TransactionLog_Terminal">
-          <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="0..1" />
-          <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
+        <Association Name="FK_User_Client">
+          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="CICSModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClients_Client">
+          <End Type="CICSModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="CICSModel.UserClient" Role="UserClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserClient">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EOD_Terminal">
+          <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="1" />
+          <End Type="CICSModel.EOD" Role="EOD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Terminal">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="TransactionLog">
+            <Dependent Role="EOD">
               <PropertyRef Name="TerminalId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="NotificationType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Ministry">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="RevenueCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" />
-          <Property Name="RevenueHeadId" Type="Int32" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="RevenueHead">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="ClientId" Type="Int32" />
-          <Property Name="MinistryId" Type="Int32" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="Id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="RevenueItem">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" />
-          <Property Name="MinistryId" Type="Int32" />
-          <Property Name="RevenueHeadId" Type="Int32" />
-          <Property Name="CategoryId" Type="Int32" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="AuditTrail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="TableAffected" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AuditLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="UndoCommand" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="LogDate" Type="DateTime" Precision="3" />
-          <Property Name="LogType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Notification">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TypeId" Type="Int32" />
-          <Property Name="RetryCount" Type="Int32" />
-          <Property Name="StatusMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="ReferenceId" Type="Int32" />
-          <Property Name="Recipient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <Association Name="FK_Notification_NotificationType">
           <End Type="CICSModel.NotificationType" Role="NotificationType" Multiplicity="0..1" />
           <End Type="CICSModel.Notification" Role="Notification" Multiplicity="*" />
@@ -1126,23 +1197,30 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleId" Type="Int32" />
-          <Property Name="UserTypeParentId" Type="Int32" />
-          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PasswordStatus" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="ClientId" Type="Int32" />
-          <NavigationProperty Name="UserAgents" Relationship="CICSModel.FK_UserAgents_User" FromRole="User" ToRole="UserAgent" />
-          <NavigationProperty Name="UserClients" Relationship="CICSModel.FK_UserClients_User" FromRole="User" ToRole="UserClient" />
-          <NavigationProperty Name="Payments" Relationship="CICSModel.FK_Payment_User" FromRole="User" ToRole="Payment" />
-        </EntityType>
+        <Association Name="FK_TerminalUpdateLog_Terminal">
+          <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="1" />
+          <End Type="CICSModel.TerminalUpdateLog" Role="TerminalUpdateLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TerminalUpdateLog">
+              <PropertyRef Name="TerminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionLog_Terminal">
+          <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="0..1" />
+          <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="TerminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserRole">
           <End Type="CICSModel.UserRole" Role="UserRole" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1157,261 +1235,6 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Client">
-          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
-          <End Type="CICSModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="TransactionLogException">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="AgentId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TerminalId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ResidentId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="DateOfBirth" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="RevenueCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Amount" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PaymentReference" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TransactionDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="UploadDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="UploadError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ResolutionError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ResolutionStatus" Type="Int32" />
-          <Property Name="ResolutionDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="TransactionUploadError">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" />
-          <Property Name="AgentId" Type="Int32" />
-          <Property Name="TerminalId" Type="Int32" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResidentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="RevenueCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PaymentReference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
-          <Property Name="UploadDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="UploadError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ResolutionError" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ResolutionStatus" Type="Int32" />
-          <Property Name="ResolutionDate" Type="DateTime" Precision="3" />
-          <Property Name="LocationId" Type="Int32" />
-        </EntityType>
-        <EntityType Name="TerminalLocation">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="AgentId" Type="Int32" Nullable="false" />
-          <Property Name="LocationCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LocationDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Agent" Relationship="CICSModel.FK_TerminalLocation_Agent" FromRole="TerminalLocation" ToRole="Agent" />
-          <NavigationProperty Name="Client" Relationship="CICSModel.FK_TerminalLocation_Client" FromRole="TerminalLocation" ToRole="Client" />
-          <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_TerminalLocation" FromRole="TerminalLocation" ToRole="TransactionLog" />
-        </EntityType>
-        <Association Name="FK_TerminalLocation_Agent">
-          <End Type="CICSModel.Agent" Role="Agent" Multiplicity="1" />
-          <End Type="CICSModel.TerminalLocation" Role="TerminalLocation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Agent">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TerminalLocation">
-              <PropertyRef Name="AgentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TerminalLocation_Client">
-          <End Type="CICSModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="CICSModel.TerminalLocation" Role="TerminalLocation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TerminalLocation">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransactionLog_TerminalLocation">
-          <End Type="CICSModel.TerminalLocation" Role="TerminalLocation" Multiplicity="0..1" />
-          <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TerminalLocation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TransactionLog">
-              <PropertyRef Name="LocationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Invoice">
-          <Key>
-            <PropertyRef Name="InvoiceId" />
-          </Key>
-          <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InvoiceNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="RevenueCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="InvoiceItem">
-          <Key>
-            <PropertyRef Name="InvoiceItemId" />
-          </Key>
-          <Property Name="InvoiceItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="EntryDate" Type="DateTime" Precision="3" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Payment">
-          <Key>
-            <PropertyRef Name="PaymentId" />
-          </Key>
-          <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Target" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Boolean" Nullable="false" />
-          <Property Name="Method" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="WalletId" Type="Int32" />
-          <Property Name="TransactionId" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
-          <NavigationProperty Name="TransactionLog" Relationship="CICSModel.FK_Payment_TransactionLog" FromRole="Payment" ToRole="TransactionLog" />
-          <NavigationProperty Name="User" Relationship="CICSModel.FK_Payment_User" FromRole="Payment" ToRole="User" />
-          <NavigationProperty Name="Wallet" Relationship="CICSModel.FK_Payment_Wallet" FromRole="Payment" ToRole="Wallet" />
-        </EntityType>
-        <EntityType Name="Wallet">
-          <Key>
-            <PropertyRef Name="WalletId" />
-          </Key>
-          <Property Name="WalletId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Payments" Relationship="CICSModel.FK_Payment_Wallet" FromRole="Wallet" ToRole="Payment" />
-        </EntityType>
-        <EntityType Name="UserAgent">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="AgentId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="CICSModel.FK_UserAgents_User" FromRole="UserAgent" ToRole="User" />
-        </EntityType>
-        <EntityType Name="UserClient">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="CICSModel.FK_UserClients_User" FromRole="UserClient" ToRole="User" />
-        </EntityType>
-        <EntityType Name="terminal_backup">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Code" />
-            <PropertyRef Name="SerialNumber" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AgentId" Type="Int32" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="TransactionLogBackup_02Aug2017">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" />
-          <Property Name="AgentId" Type="Int32" />
-          <Property Name="TerminalId" Type="Int32" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResidentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="RevenueCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PaymentReference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
-          <Property Name="UploadDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="LocationId" Type="Int32" />
-        </EntityType>
-        <EntityType Name="transactionLogBackup_18apr2016">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" />
-          <Property Name="AgentId" Type="Int32" />
-          <Property Name="TerminalId" Type="Int32" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResidentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="RevenueCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PaymentReference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
-          <Property Name="UploadDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
         <Association Name="FK_UserAgents_User">
           <End Type="CICSModel.User" Role="User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1440,54 +1263,6 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Payment_TransactionLog">
-          <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="0..1" />
-          <End Type="CICSModel.Payment" Role="Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransactionLog">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="TransactionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payment_User">
-          <End Type="CICSModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="CICSModel.Payment" Role="Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payment_Wallet">
-          <End Type="CICSModel.Wallet" Role="Wallet" Multiplicity="0..1" />
-          <End Type="CICSModel.Payment" Role="Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wallet">
-              <PropertyRef Name="WalletId" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="WalletId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Biodata">
-          <Key>
-            <PropertyRef Name="Biodataid" />
-          </Key>
-          <Property Name="Biodataid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RIN" Type="Int32" Nullable="false" />
-          <Property Name="Userid" Type="Int32" Nullable="false" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1511,6 +1286,34 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AgentManagers">
+            <EntityTypeMapping TypeName="CICSModel.AgentManager">
+              <MappingFragment StoreEntitySet="AgentManager">
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditTrails">
+            <EntityTypeMapping TypeName="CICSModel.AuditTrail">
+              <MappingFragment StoreEntitySet="AuditTrail">
+                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+                <ScalarProperty Name="UndoCommand" ColumnName="UndoCommand" />
+                <ScalarProperty Name="AuditLog" ColumnName="AuditLog" />
+                <ScalarProperty Name="TableAffected" ColumnName="TableAffected" />
+                <ScalarProperty Name="LogType" ColumnName="LogType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="CICSModel.Client">
               <MappingFragment StoreEntitySet="Client">
@@ -1521,6 +1324,19 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EODs">
+            <EntityTypeMapping TypeName="CICSModel.EOD">
+              <MappingFragment StoreEntitySet="EOD">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1537,12 +1353,10 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Revenues">
-            <EntityTypeMapping TypeName="CICSModel.Revenue">
-              <MappingFragment StoreEntitySet="Revenue">
+          <EntitySetMapping Name="Ministries">
+            <EntityTypeMapping TypeName="CICSModel.Ministry">
+              <MappingFragment StoreEntitySet="Ministry">
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="MDA" ColumnName="MDA" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
@@ -1550,58 +1364,17 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Terminals">
-            <EntityTypeMapping TypeName="CICSModel.Terminal">
-              <MappingFragment StoreEntitySet="Terminal">
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="CICSModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="StatusMessage" ColumnName="StatusMessage" />
+                <ScalarProperty Name="RetryCount" ColumnName="RetryCount" />
+                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TransactionLogs">
-            <EntityTypeMapping TypeName="CICSModel.TransactionLog">
-              <MappingFragment StoreEntitySet="TransactionLog">
-                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-                <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="RevenueCode" ColumnName="RevenueCode" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
-                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TransactionStatus">
-            <EntityTypeMapping TypeName="CICSModel.TransactionStatu">
-              <MappingFragment StoreEntitySet="TransactionStatus">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="CICSModel.UserRole">
-              <MappingFragment StoreEntitySet="UserRole">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1613,10 +1386,12 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Ministries">
-            <EntityTypeMapping TypeName="CICSModel.Ministry">
-              <MappingFragment StoreEntitySet="Ministry">
+          <EntitySetMapping Name="Revenues">
+            <EntityTypeMapping TypeName="CICSModel.Revenue">
+              <MappingFragment StoreEntitySet="Revenue">
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="MDA" ColumnName="MDA" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
@@ -1639,12 +1414,12 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
           <EntitySetMapping Name="RevenueHeads">
             <EntityTypeMapping TypeName="CICSModel.RevenueHead">
               <MappingFragment StoreEntitySet="RevenueHead">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="MinistryId" ColumnName="MinistryId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1663,45 +1438,70 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AuditTrails">
-            <EntityTypeMapping TypeName="CICSModel.AuditTrail">
-              <MappingFragment StoreEntitySet="AuditTrail">
-                <ScalarProperty Name="LogType" ColumnName="LogType" />
-                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
-                <ScalarProperty Name="UndoCommand" ColumnName="UndoCommand" />
-                <ScalarProperty Name="AuditLog" ColumnName="AuditLog" />
-                <ScalarProperty Name="TableAffected" ColumnName="TableAffected" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <EntitySetMapping Name="Terminals">
+            <EntityTypeMapping TypeName="CICSModel.Terminal">
+              <MappingFragment StoreEntitySet="Terminal">
+                <ScalarProperty Name="HandlerPhone" ColumnName="HandlerPhone" />
+                <ScalarProperty Name="HandlerEmail" ColumnName="HandlerEmail" />
+                <ScalarProperty Name="HandlerName" ColumnName="HandlerName" />
+                <ScalarProperty Name="Channel" ColumnName="Channel" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TerminalLocations">
+            <EntityTypeMapping TypeName="CICSModel.TerminalLocation">
+              <MappingFragment StoreEntitySet="TerminalLocation">
+                <ScalarProperty Name="LocationDescription" ColumnName="LocationDescription" />
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Notifications">
-            <EntityTypeMapping TypeName="CICSModel.Notification">
-              <MappingFragment StoreEntitySet="Notification">
-                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
-                <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="StatusMessage" ColumnName="StatusMessage" />
-                <ScalarProperty Name="RetryCount" ColumnName="RetryCount" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
+          <EntitySetMapping Name="TerminalUpdateLogs">
+            <EntityTypeMapping TypeName="CICSModel.TerminalUpdateLog">
+              <MappingFragment StoreEntitySet="TerminalUpdateLog">
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="NewValues" ColumnName="NewValues" />
+                <ScalarProperty Name="OldValues" ColumnName="OldValues" />
+                <ScalarProperty Name="Field" ColumnName="Field" />
+                <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="CICSModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <EntitySetMapping Name="TransactionLogs">
+            <EntityTypeMapping TypeName="CICSModel.TransactionLog">
+              <MappingFragment StoreEntitySet="TransactionLog">
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="PasswordStatus" ColumnName="PasswordStatus" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="RevenueCode" ColumnName="RevenueCode" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="UserTypeParentId" ColumnName="UserTypeParentId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1732,6 +1532,14 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
                 <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
                 <ScalarProperty Name="AgentId" ColumnName="AgentId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionStatus">
+            <EntityTypeMapping TypeName="CICSModel.TransactionStatu">
+              <MappingFragment StoreEntitySet="TransactionStatus">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1767,67 +1575,18 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TerminalLocations">
-            <EntityTypeMapping TypeName="CICSModel.TerminalLocation">
-              <MappingFragment StoreEntitySet="TerminalLocation">
-                <ScalarProperty Name="LocationDescription" ColumnName="LocationDescription" />
-                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
-                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Invoices">
-            <EntityTypeMapping TypeName="CICSModel.Invoice">
-              <MappingFragment StoreEntitySet="Invoice">
-                <ScalarProperty Name="RevenueCode" ColumnName="RevenueCode" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
-                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InvoiceItems">
-            <EntityTypeMapping TypeName="CICSModel.InvoiceItem">
-              <MappingFragment StoreEntitySet="InvoiceItem">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="InvoiceItemId" ColumnName="InvoiceItemId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="CICSModel.Payment">
-              <MappingFragment StoreEntitySet="Payment">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
-                <ScalarProperty Name="WalletId" ColumnName="WalletId" />
-                <ScalarProperty Name="Method" ColumnName="Method" />
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CICSModel.User">
+              <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Target" ColumnName="Target" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="PasswordStatus" ColumnName="PasswordStatus" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Wallets">
-            <EntityTypeMapping TypeName="CICSModel.Wallet">
-              <MappingFragment StoreEntitySet="Wallet">
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="WalletId" ColumnName="WalletId" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="UserTypeParentId" ColumnName="UserTypeParentId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1849,81 +1608,11 @@ warning 6002: The table/view 'CICS_LIVE.dbo.transactionLogBackup_18apr2016' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="terminal_backup">
-            <EntityTypeMapping TypeName="CICSModel.terminal_backup">
-              <MappingFragment StoreEntitySet="terminal_backup">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TransactionLogBackup_02Aug2017">
-            <EntityTypeMapping TypeName="CICSModel.TransactionLogBackup_02Aug2017">
-              <MappingFragment StoreEntitySet="TransactionLogBackup_02Aug2017">
-                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-                <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="RevenueCode" ColumnName="RevenueCode" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
-                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="transactionLogBackup_18apr2016">
-            <EntityTypeMapping TypeName="CICSModel.transactionLogBackup_18apr2016">
-              <MappingFragment StoreEntitySet="transactionLogBackup_18apr2016">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-                <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="RevenueCode" ColumnName="RevenueCode" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
-                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Biodatas">
-            <EntityTypeMapping TypeName="CICSModel.Biodata">
-              <MappingFragment StoreEntitySet="Biodata">
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="Userid" ColumnName="Userid" />
-                <ScalarProperty Name="RIN" ColumnName="RIN" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Biodataid" ColumnName="Biodataid" />
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="CICSModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

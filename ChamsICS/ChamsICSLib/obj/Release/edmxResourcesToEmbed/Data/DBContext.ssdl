@@ -16,6 +16,19 @@
     <Property Name="Status" Type="int" />
     <Property Name="AgentManagerCode" Type="nvarchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="AgentManager">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="70" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" />
+    <Property Name="EntryDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="AuditTrail">
     <Key>
       <PropertyRef Name="Id" />
@@ -42,6 +55,18 @@
     <Property Name="Phone2" Type="nvarchar" MaxLength="15" />
     <Property Name="Status" Type="int" />
   </EntityType>
+  <EntityType Name="EOD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="TerminalId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Count" Type="int" />
+  </EntityType>
   <EntityType Name="IdentityService">
     <Key>
       <PropertyRef Name="Id" />
@@ -53,31 +78,11 @@
     <Property Name="Password" Type="text" />
     <Property Name="Status" Type="int" />
   </EntityType>
-  <EntityType Name="Invoice">
-    <Key>
-      <PropertyRef Name="InvoiceId" />
-    </Key>
-    <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="InvoiceNo" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="EntryDate" Type="datetime" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="InvoiceItem">
-    <Key>
-      <PropertyRef Name="InvoiceItemId" />
-    </Key>
-    <Property Name="InvoiceItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="InvoiceId" Type="int" Nullable="false" />
-    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="EntryDate" Type="datetime" />
-  </EntityType>
   <EntityType Name="Ministry">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="ClientId" Type="int" />
     <Property Name="Code" Type="nvarchar" MaxLength="50" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" />
@@ -100,20 +105,8 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Type" Type="nvarchar" MaxLength="20" />
-  </EntityType>
-  <EntityType Name="Payment">
-    <Key>
-      <PropertyRef Name="PaymentId" />
-    </Key>
-    <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RefNo" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="PaymentType" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="EntryDate" Type="datetime" Nullable="false" />
-    <Property Name="PaymentStatus" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Revenue">
     <Key>
@@ -131,7 +124,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="ClientId" Type="int" />
     <Property Name="RevenueHeadId" Type="int" />
     <Property Name="Code" Type="nvarchar" MaxLength="50" />
@@ -153,7 +146,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="ClientId" Type="int" />
     <Property Name="MinistryId" Type="int" />
     <Property Name="RevenueHeadId" Type="int" />
@@ -173,6 +166,10 @@
     <Property Name="Name" Type="nchar" MaxLength="50" />
     <Property Name="SerialNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Status" Type="int" />
+    <Property Name="Channel" Type="nvarchar" MaxLength="20" />
+    <Property Name="HandlerName" Type="varchar" MaxLength="50" />
+    <Property Name="HandlerEmail" Type="varchar" MaxLength="50" />
+    <Property Name="HandlerPhone" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TerminalLocation">
     <Key>
@@ -183,6 +180,18 @@
     <Property Name="AgentId" Type="int" Nullable="false" />
     <Property Name="LocationCode" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="LocationDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TerminalUpdateLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="TerminalId" Type="int" Nullable="false" />
+    <Property Name="Field" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="OldValues" Type="varchar" MaxLength="50" />
+    <Property Name="NewValues" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Detail" Type="varchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="TransactionLog">
     <Key>
@@ -209,6 +218,7 @@
     <Property Name="UploadDate" Type="datetime" />
     <Property Name="Status" Type="int" />
     <Property Name="LocationId" Type="int" />
+    <Property Name="LocationCode" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TransactionLogException">
     <Key>
@@ -290,22 +300,28 @@
     <Property Name="PasswordStatus" Type="int" />
     <Property Name="Status" Type="int" />
   </EntityType>
+  <EntityType Name="UserAgent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="AgentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserClient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="UserRole">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="Wallet">
-    <Key>
-      <PropertyRef Name="WalletId" />
-    </Key>
-    <Property Name="WalletId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
-    <Property Name="EntryDate" Type="datetime" Nullable="false" />
   </EntityType>
   <Association Name="FK_Agent_Client">
     <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
@@ -316,6 +332,18 @@
       </Principal>
       <Dependent Role="Agent">
         <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EOD_Terminal">
+    <End Role="Terminal" Type="Self.Terminal" Multiplicity="1" />
+    <End Role="EOD" Type="Self.EOD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Terminal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EOD">
+        <PropertyRef Name="TerminalId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -367,6 +395,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TerminalUpdateLog_Terminal">
+    <End Role="Terminal" Type="Self.Terminal" Multiplicity="1" />
+    <End Role="TerminalUpdateLog" Type="Self.TerminalUpdateLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Terminal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TerminalUpdateLog">
+        <PropertyRef Name="TerminalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TransactionLog_Agent">
     <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
     <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
@@ -403,6 +443,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_User_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_User_UserRole">
     <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -417,33 +469,90 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserAgents_Agent">
+    <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+    <End Role="UserAgent" Type="Self.UserAgent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserAgent">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAgents_User">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserAgent" Type="Self.UserAgent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserAgent">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserClients_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="UserClient" Type="Self.UserClient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserClient">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserClients_User">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserClient" Type="Self.UserClient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserClient">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="CICSModelStoreContainer">
     <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AgentManager" EntityType="Self.AgentManager" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AuditTrail" EntityType="Self.AuditTrail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EOD" EntityType="Self.EOD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IdentityService" EntityType="Self.IdentityService" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="InvoiceItem" EntityType="Self.InvoiceItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ministry" EntityType="Self.Ministry" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NotificationType" EntityType="Self.NotificationType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Revenue" EntityType="Self.Revenue" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RevenueCategory" EntityType="Self.RevenueCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RevenueHead" EntityType="Self.RevenueHead" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RevenueItem" EntityType="Self.RevenueItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Terminal" EntityType="Self.Terminal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TerminalLocation" EntityType="Self.TerminalLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TerminalUpdateLog" EntityType="Self.TerminalUpdateLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransactionLogException" EntityType="Self.TransactionLogException" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransactionStatus" EntityType="Self.TransactionStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransactionUploadError" EntityType="Self.TransactionUploadError" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAgent" EntityType="Self.UserAgent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserClient" EntityType="Self.UserClient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Wallet" EntityType="Self.Wallet" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Agent_Client" Association="Self.FK_Agent_Client">
       <End Role="Client" EntitySet="Client" />
       <End Role="Agent" EntitySet="Agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EOD_Terminal" Association="Self.FK_EOD_Terminal">
+      <End Role="Terminal" EntitySet="Terminal" />
+      <End Role="EOD" EntitySet="EOD" />
     </AssociationSet>
     <AssociationSet Name="FK_IdentityService_Client" Association="Self.FK_IdentityService_Client">
       <End Role="Client" EntitySet="Client" />
@@ -461,6 +570,10 @@
       <End Role="Agent" EntitySet="Agent" />
       <End Role="Terminal" EntitySet="Terminal" />
     </AssociationSet>
+    <AssociationSet Name="FK_TerminalUpdateLog_Terminal" Association="Self.FK_TerminalUpdateLog_Terminal">
+      <End Role="Terminal" EntitySet="Terminal" />
+      <End Role="TerminalUpdateLog" EntitySet="TerminalUpdateLog" />
+    </AssociationSet>
     <AssociationSet Name="FK_TransactionLog_Agent" Association="Self.FK_TransactionLog_Agent">
       <End Role="Agent" EntitySet="Agent" />
       <End Role="TransactionLog" EntitySet="TransactionLog" />
@@ -473,9 +586,29 @@
       <End Role="Terminal" EntitySet="Terminal" />
       <End Role="TransactionLog" EntitySet="TransactionLog" />
     </AssociationSet>
+    <AssociationSet Name="FK_User_Client" Association="Self.FK_User_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
     <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
       <End Role="UserRole" EntitySet="UserRole" />
       <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAgents_Agent" Association="Self.FK_UserAgents_Agent">
+      <End Role="Agent" EntitySet="Agent" />
+      <End Role="UserAgent" EntitySet="UserAgent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAgents_User" Association="Self.FK_UserAgents_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserAgent" EntitySet="UserAgent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserClients_Client" Association="Self.FK_UserClients_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="UserClient" EntitySet="UserClient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserClients_User" Association="Self.FK_UserClients_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserClient" EntitySet="UserClient" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

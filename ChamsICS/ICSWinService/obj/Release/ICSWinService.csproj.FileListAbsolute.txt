@@ -14,3 +14,21 @@ C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ICSWinService\
 C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ICSWinService\obj\Release\ICSWinService.csproj.GenerateResource.Cache
 C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ICSWinService\obj\Release\ICSWinService.exe
 C:\Users\Developer\documents\visual studio 2015\Projects\ChamsICS\ICSWinService\obj\Release\ICSWinService.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Release\ICSWinService.exe.config
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Release\ICSWinService.exe
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Release\ICSWinService.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Release\ChamsICSLib.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Release\EntityFramework.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Release\ChamsICSLib.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Release\ChamsICSLib.dll.config
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Release\EntityFramework.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Release\ICSWinService.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Release\ICSWinService.About.resources
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Release\ICSWinService.FormMain.resources
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Release\ICSWinService.Properties.Resources.resources
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Release\ICSWinService.csproj.GenerateResource.Cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Release\ICSWinService.csproj.CoreCompileInputs.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Release\ICSWinService.exe
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Release\ICSWinService.pdb

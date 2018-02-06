@@ -14,12 +14,6 @@ namespace ChamsICSLib.Data
     
     public partial class TransactionLog
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TransactionLog()
-        {
-            this.Payments = new HashSet<Payment>();
-        }
-    
         public int Id { get; set; }
         public Nullable<int> ClientId { get; set; }
         public Nullable<int> AgentId { get; set; }
@@ -41,9 +35,10 @@ namespace ChamsICSLib.Data
         public Nullable<System.DateTime> UploadDate { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<int> LocationId { get; set; }
+        public string LocationCode { get; set; }
     
-        public virtual TerminalLocation TerminalLocation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual Agent Agent { get; set; }
+        public virtual Client Client { get; set; }
+        public virtual Terminal Terminal { get; set; }
     }
 }

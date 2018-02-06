@@ -1643,6 +1643,41 @@ namespace ChamsICSWebService
             }
         }
 
+        /// <summary>
+        /// Sets service response based service call result
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>End of day report to DataService</returns>
+        public FetchEndOfDayRes GetEODReport(FetchEndOfDayReq request)
+        {
+            FetchEndOfDayRes res = new FetchEndOfDayRes();
+            try
+            {
+                List<EndOfDayModel> report = ServiceHelper.GetEndOfDayReport(request);
+                if (report != null && report.Count > 0)
+                {
+                    res.EndOfDayReport = report;
+                    res.ResponseCode = ResponseHelper.SUCCESS;
+                    res.ResponseDescription = "Success";
+                    return res;
+                }
+                else
+                {
+                    res.ResponseCode = ResponseHelper.FAILED;
+                    res.ResponseDescription = "Failed to Load Data";
+                    return res;
+                }
+            }
+            catch(Exception ex)
+            {
+
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
+
         #endregion
 
         #region Audit and Notifications
@@ -2023,118 +2058,118 @@ namespace ChamsICSWebService
         #endregion
 
         #region Taxpayer
-        public TaxpayersRes GetAllTaxpayers()
-        {
-            TaxpayersRes res = new TaxpayersRes();
-            try
-            {
+        //public TaxpayersRes GetAllTaxpayers()
+        //{
+        //    TaxpayersRes res = new TaxpayersRes();
+        //    try
+        //    {
 
-                res = ServiceHelper.GetAllTaxpayers();
-                res.ResponseCode = ResponseHelper.SUCCESS;
-                res.ResponseDescription = "Successful";
+        //        res = ServiceHelper.GetAllTaxpayers();
+        //        res.ResponseCode = ResponseHelper.SUCCESS;
+        //        res.ResponseDescription = "Successful";
 
-                return res;
-            }
-            catch (Exception ex)
-            {
-                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                res.ResponseDescription = ex.Message;
-                Logger.logToFile(ex, ErrorLogPath);
-                return res;
-            }
-        }
+        //        return res;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+        //        res.ResponseDescription = ex.Message;
+        //        Logger.logToFile(ex, ErrorLogPath);
+        //        return res;
+        //    }
+        //}
 
-        public Response AddTaxpayer(Taxpayer taxpayer)
-        {
-            Response res = new Response();
-            try
-            {
-                bool result = ServiceHelper.AddTaxpayer(taxpayer);
-                if (!result)
-                {
-                    res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
-                    res.ResponseDescription = "Operation Not Succesful";
-                    return res;
-                }
-                else
-                {
-                    res.ResponseCode = ResponseHelper.SUCCESS;
-                    res.ResponseDescription = "Taxpayer Added Succesfully";
-                    return res;
-                }
-            }
-            catch (Exception ex)
-            {
-                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                res.ResponseDescription = ex.Message;
-                Logger.logToFile(ex, ErrorLogPath);
-                return res;
-            }
-        }
+        //public Response AddTaxpayer(Taxpayer taxpayer)
+        //{
+        //    Response res = new Response();
+        //    try
+        //    {
+        //        bool result = ServiceHelper.AddTaxpayer(taxpayer);
+        //        if (!result)
+        //        {
+        //            res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+        //            res.ResponseDescription = "Operation Not Succesful";
+        //            return res;
+        //        }
+        //        else
+        //        {
+        //            res.ResponseCode = ResponseHelper.SUCCESS;
+        //            res.ResponseDescription = "Taxpayer Added Succesfully";
+        //            return res;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+        //        res.ResponseDescription = ex.Message;
+        //        Logger.logToFile(ex, ErrorLogPath);
+        //        return res;
+        //    }
+        //}
 
-        public Model.Taxpayer GetTaxpayerById(int userid)
-        {
-            Model.Taxpayer res = new Model.Taxpayer();
-            try
-            {
-                res = ServiceHelper.GetTaxpayerById(userid);
+        //public Model.Taxpayer GetTaxpayerById(int userid)
+        //{
+        //    Model.Taxpayer res = new Model.Taxpayer();
+        //    try
+        //    {
+        //        res = ServiceHelper.GetTaxpayerById(userid);
 
-                return res;
-            }
-            catch (Exception ex)
-            {
-                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                res.ResponseDescription = ex.Message;
-                Logger.logToFile(ex, ErrorLogPath);
-                return res;
-            }
-        }
+        //        return res;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+        //        res.ResponseDescription = ex.Message;
+        //        Logger.logToFile(ex, ErrorLogPath);
+        //        return res;
+        //    }
+        //}
 
-        public AssessmentModelRes GetAssessmentByRole(AssessmentReq assessmentReq)
-        {
-            AssessmentModelRes res = new AssessmentModelRes();
-            try
-            {
-                res = ServiceHelper.GetAssessmentByRole(assessmentReq);
+        //public AssessmentModelRes GetAssessmentByRole(AssessmentReq assessmentReq)
+        //{
+        //    AssessmentModelRes res = new AssessmentModelRes();
+        //    try
+        //    {
+        //        res = ServiceHelper.GetAssessmentByRole(assessmentReq);
 
-                return res;
-            }
-            catch (Exception ex)
-            {
-                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                res.ResponseDescription = ex.Message;
-                Logger.logToFile(ex, ErrorLogPath);
-                return res;
-            }
-        }
+        //        return res;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+        //        res.ResponseDescription = ex.Message;
+        //        Logger.logToFile(ex, ErrorLogPath);
+        //        return res;
+        //    }
+        //}
 
-        public Response GenerateInvoice(GenerateInvoice generateInvoice)
-        {
-            Response res = new Response();
-            try
-            {
-                bool result = ServiceHelper.GenerateInvoice(generateInvoice);
-                if (!result)
-                {
-                    res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
-                    res.ResponseDescription = "Operation Not Succesful";
-                    return res;
-                }
-                else
-                {
-                    res.ResponseCode = ResponseHelper.SUCCESS;
-                    res.ResponseDescription = "Invoive Generated Succesfully";
-                    return res;
-                }
-            }
-            catch (Exception ex)
-            {
-                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                res.ResponseDescription = ex.Message;
-                Logger.logToFile(ex, ErrorLogPath);
-                return res;
-            }
-        }
+        //public Response GenerateInvoice(GenerateInvoice generateInvoice)
+        //{
+        //    Response res = new Response();
+        //    try
+        //    {
+        //        bool result = ServiceHelper.GenerateInvoice(generateInvoice);
+        //        if (!result)
+        //        {
+        //            res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+        //            res.ResponseDescription = "Operation Not Succesful";
+        //            return res;
+        //        }
+        //        else
+        //        {
+        //            res.ResponseCode = ResponseHelper.SUCCESS;
+        //            res.ResponseDescription = "Invoive Generated Succesfully";
+        //            return res;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+        //        res.ResponseDescription = ex.Message;
+        //        Logger.logToFile(ex, ErrorLogPath);
+        //        return res;
+        //    }
+        //}
         #endregion
     }
 }

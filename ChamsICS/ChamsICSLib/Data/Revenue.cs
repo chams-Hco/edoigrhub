@@ -21,5 +21,7 @@ namespace ChamsICSLib.Data
         public string MDA { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public Nullable<int> Status { get; set; }
+    
+        public virtual Client Client { get; set; }
     }
 }

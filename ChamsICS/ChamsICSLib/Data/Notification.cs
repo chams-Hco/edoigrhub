@@ -15,12 +15,14 @@ namespace ChamsICSLib.Data
     public partial class Notification
     {
         public int Id { get; set; }
-        public string Message { get; set; }
         public Nullable<int> TypeId { get; set; }
+        public Nullable<int> ReferenceId { get; set; }
+        public string Message { get; set; }
+        public string Recipient { get; set; }
         public Nullable<int> RetryCount { get; set; }
         public string StatusMessage { get; set; }
         public Nullable<int> Status { get; set; }
-        public Nullable<int> ReferenceId { get; set; }
-        public string Recipient { get; set; }
+    
+        public virtual NotificationType NotificationType { get; set; }
     }
 }

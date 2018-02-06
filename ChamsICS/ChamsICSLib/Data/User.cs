@@ -19,24 +19,23 @@ namespace ChamsICSLib.Data
         {
             this.UserAgents = new HashSet<UserAgent>();
             this.UserClients = new HashSet<UserClient>();
-            this.Payments = new HashSet<Payment>();
         }
     
         public int Id { get; set; }
         public Nullable<int> RoleId { get; set; }
+        public Nullable<int> ClientId { get; set; }
         public Nullable<int> UserTypeParentId { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public Nullable<int> PasswordStatus { get; set; }
         public Nullable<int> Status { get; set; }
-        public Nullable<int> ClientId { get; set; }
     
+        public virtual Client Client { get; set; }
+        public virtual UserRole UserRole { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserAgent> UserAgents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserClient> UserClients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

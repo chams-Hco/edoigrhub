@@ -11,6 +11,7 @@ using System.Configuration;
 using System.Web.Script.Serialization;
 using System.IO;
 using Newtonsoft.Json;
+using CICSWebPortal.ViewModels;
 
 namespace CICSWebPortal.Controllers
 {
@@ -178,113 +179,57 @@ namespace CICSWebPortal.Controllers
 
         public ActionResult EndOfDayReport()
         {
-            int userId = Convert.ToInt32(Session["UserId"]);
             int RoleId = Convert.ToInt32(Session["RoleId"]);
             int UserTypeParentId = Convert.ToInt32(Session["UserTypeParentId"]);
 
-            List<Terminal> Terminals;
-            if (RoleId == 1 || RoleId == 2)
-            {
-                Terminals = DataContext.GetAllTerminals().ToList<Terminal>() ;
-            }
+            ReportFilter filter = new ReportFilter();
 
-            //Client Admin / USser
-            else if (RoleId == 3 || RoleId == 4)
-            {
-                Terminals = DataContext.GetAllTerminalsByClientId(UserTypeParentId).ToList<Terminal>();
-            }
+            filter.startDate = DateTime.Now.AddDays(-1);
+            filter.endDate = DateTime.Now.AddDays(1);
+            filter.TerminalIds = Utility.GetTerminalsByCode(DataContext, RoleId, UserTypeParentId).ToList().Select(a=>a.Value).ToList();
 
-            //Agent Admin / User
-            else if (RoleId == 5 || RoleId == 6)
-            {
-                Terminals = DataContext.GetAllTerminalsByAgentId(UserTypeParentId).ToList<Terminal>();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            EndofDayViewModel EODVM = DataContext.GetEODReport(filter);
 
+            EODVM = (EODVM != null) ? EODVM : new EndofDayViewModel();
 
-            EndofDayViewModel eodvm = new EndofDayViewModel
-            {
-                userID = userId,
-                roleId = RoleId,
-                Terminals = Terminals,
-            };
-            return View(eodvm);
+            //Fill the filters
+            //EODVM.clientList = Utility.GetClients(DataContext, RoleId, ClientId).ToList();
+            EODVM.agentList = Utility.GetAgents(DataContext, RoleId, UserTypeParentId).ToList();
+            EODVM.terminalList = Utility.GetTerminalsByCode(DataContext, RoleId, UserTypeParentId).ToList();
+            EODVM.statusList = Utility.GetStatusList();
+
+            EODVM.TotalTransactionValue = EODVM.EODReport != null ? EODVM.EODReport.Sum(x => x.Amount) : 0M;
+            EODVM.StartDate = filter.startDate;
+            EODVM.EndDate = filter.endDate;
+            TempData["eodTempData"] = EODVM.EODReport;
+            return View(EODVM);
         }
 
         [HttpPost]
-        public ActionResult GetEndOfDayReport(EOD request)
+        public ActionResult GetEndOfDayReport(ReportFilter filter)
         {
-            String terminalId = "";
-            if (String.Equals("-1", request.id)) //getAllreport
+            int RoleId = Convert.ToInt32(Session["RoleId"]);
+            int UserTypeParentId = Convert.ToInt32(Session["UserTypeParentId"]);
+
+            if(filter.terminalId == null)
             {
-                List<Terminal> Terminals = new List<Terminal>();
-                int RoleId = Convert.ToInt32(Session["RoleId"]);
-                int UserTypeParentId = Convert.ToInt32(Session["UserTypeParentId"]);
-                if (RoleId == 1 || RoleId == 2)
-                {
-                    Terminals = DataContext.GetAllTerminals().ToList<Terminal>();
-                }
-
-                //Client Admin / USser
-                else if (RoleId == 3 || RoleId == 4)
-                {
-                    Terminals = DataContext.GetAllTerminalsByClientId(UserTypeParentId).ToList<Terminal>();
-                }
-
-
-                Terminals.ForEach(res =>
-                {
-
-                    terminalId += res.Code + ((!(Terminals.IndexOf(res) == Terminals.Count - 1)) ? "," : "");
-                });
-
-
-            }
-            else
-            {
-                terminalId = request.id;
+                filter.TerminalIds = Utility.GetTerminalsByCode(DataContext, RoleId, UserTypeParentId).ToList().Select(a => a.Value).ToList();
             }
 
-            var requestParamObject = new { GROUPTID = terminalId, EOD = "YES" };
-            var serviceUrl = ConfigurationManager.AppSettings["nasarawa_eod_post_api"];
+            EndofDayViewModel EODVM = DataContext.GetEODReport(filter);
 
-            //make web service call to get EOD report
-            HttpWebRequest serviceRequest = (HttpWebRequest) WebRequest.Create(@serviceUrl);
-            serviceRequest.Method = "POST";
-            serviceRequest.ContentType = "application/json";
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            using (var sw = new StreamWriter(serviceRequest.GetRequestStream()))
-            {
-                string json = serializer.Serialize(requestParamObject);
-                sw.Write(json);
-                sw.Flush();
-            }
-            HttpWebResponse response = (HttpWebResponse) serviceRequest.GetResponse();
-            //read response body
-            string responseText = "";
-            using (var reader = new System.IO.StreamReader(response.GetResponseStream(), System.Text.Encoding.ASCII))
-            {
-                responseText = reader.ReadToEnd();
-            }
-            responseText = responseText.Replace("\"\",", "");
+            EODVM = (EODVM != null) ? EODVM : new EndofDayViewModel();
 
-            List<EndOfDayServiceResponse> EODResponse = null;
-            if (!responseText.Equals("[\"\"]"))
-                  EODResponse = JsonConvert.DeserializeObject<List<EndOfDayServiceResponse>>(responseText);
+            EODVM.agentList = Utility.GetAgents(DataContext, RoleId, UserTypeParentId).ToList();
+            EODVM.terminalList = Utility.GetTerminalsByCode(DataContext, RoleId, UserTypeParentId).ToList();
+            EODVM.statusList = Utility.GetStatusList();
 
-            return View(EODResponse);
+            EODVM.TotalTransactionValue = EODVM.EODReport != null ? EODVM.EODReport.Sum(x => x.Amount) : 0M;
+            EODVM.StartDate = filter.startDate;
+            EODVM.EndDate = filter.endDate;
+            TempData["eodTempData"] = EODVM.EODReport;
 
-
-
-
-            //var receipt = DataContext.FindTransactionByCode(id);
-            //List<EndOfDayServiceResponse> resp = new List<EndOfDayServiceResponse>();
-            //resp.Add(new EndOfDayServiceResponse { dateTransaction = DateTime.Now, eodCount = 10, eodStatus = "PAID", total = 10000 });
-            //return View(/*new EndOfDayServiceResponse {message= "x", response = resp }*/);
-
+            return View(EODVM);
         }
 
         [HttpGet]

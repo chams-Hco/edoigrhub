@@ -20,5 +20,7 @@ namespace ChamsICSLib.Data
         public string Username { get; set; }
         public string Password { get; set; }
         public Nullable<int> Status { get; set; }
+    
+        public virtual Client Client { get; set; }
     }
 }

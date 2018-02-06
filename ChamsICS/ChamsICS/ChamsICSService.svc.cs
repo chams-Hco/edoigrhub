@@ -458,5 +458,10 @@ namespace ChamsICSWebService
         {
             return ServiceHelper.FundWallet(payment);
         }
+        
+        //FetchEndOfDayRes iChamsICSPortalService.GetEODReport(FetchEndOfDayReq request)
+        //{
+        //    return ServiceHelper.GetEndOfDayReport(request);
+        //}
     }
 }
