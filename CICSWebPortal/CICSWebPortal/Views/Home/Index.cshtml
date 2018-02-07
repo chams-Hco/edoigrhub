@@ -108,9 +108,9 @@
         @*<h4 class="m-top-none" id="visitorCount">[ @Model.TotalTransaction ]</h4>*@
         <h4 class="m-top-none" id="visitorCount">
             [
-            @if (Model.TotalEODCount.HasValue && Model.TotalEODCount.Value > 0)
+            @if (Model.TotalTransaction > 0)
             {
-                <text>@Model.TotalEODCount.ToString() </text>
+                <text>@Model.TotalTransaction.ToString() </text>
             }
             else
             {
@@ -135,9 +135,9 @@
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         @*<h4 class="m-top-none" id="orderCount">[ ₦@Model.TransctionValue.ToString("#,0.00") ]</h4>*@
         <h4 class="m-top-none" id="orderCount">[
-            @if (Model.TotalEODAmount > 0)
+            @if (Model.TransctionValue > 0)
             {
-                <text>₦@Model.TotalEODAmount.ToString() </text>
+                <text>₦@Model.TransctionValue.ToString() </text>
             }
             else
             {

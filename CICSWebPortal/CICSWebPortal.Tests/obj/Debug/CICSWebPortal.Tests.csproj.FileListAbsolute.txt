@@ -259,3 +259,4 @@ C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrh
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal.Tests\obj\Debug\CICSWebPortal.Tests.csprojResolveAssemblyReference.cache
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal.Tests\obj\Debug\CICSWebPortal.Tests.dll
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal.Tests\obj\Debug\CICSWebPortal.Tests.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal.Tests\bin\Debug\CICSWebPortal.XmlSerializers.dll

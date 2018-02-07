@@ -13,19 +13,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/ChamsICSLib.dll">
-      <publishTime>02/06/2018 18:53:35</publishTime>
+      <publishTime>02/07/2018 10:40:50</publishTime>
     </File>
     <File Include="bin/ChamsICSLib.dll.config">
       <publishTime>02/02/2018 16:15:15</publishTime>
     </File>
     <File Include="bin/ChamsICSLib.pdb">
-      <publishTime>02/06/2018 18:53:35</publishTime>
+      <publishTime>02/07/2018 10:40:50</publishTime>
     </File>
     <File Include="bin/ChamsICSWebService.dll">
-      <publishTime>02/06/2018 18:53:38</publishTime>
+      <publishTime>02/07/2018 14:22:59</publishTime>
     </File>
     <File Include="bin/ChamsICSWebService.pdb">
-      <publishTime>02/06/2018 18:53:38</publishTime>
+      <publishTime>02/07/2018 14:22:59</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>01/12/2018 14:12:34</publishTime>
@@ -46,7 +46,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/12/2018 14:12:30</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/06/2018 18:53:41</publishTime>
+      <publishTime>02/07/2018 10:40:57</publishTime>
     </File>
   </ItemGroup>
 </Project>

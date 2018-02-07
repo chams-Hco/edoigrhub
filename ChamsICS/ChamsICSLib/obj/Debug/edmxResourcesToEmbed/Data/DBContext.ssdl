@@ -65,7 +65,7 @@
     <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Status" Type="bit" Nullable="false" />
     <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-    <Property Name="Count" Type="int" />
+    <Property Name="Count" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="IdentityService">
     <Key>

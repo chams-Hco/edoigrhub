@@ -1440,10 +1440,12 @@ namespace ChamsICSWebService
         #region Dashboard
         public DashboardRes GetDashboardSummary(DashboardReq req)
         {
+            Logger.logToFile(req?.UserId + " " + req?.RoleId, ErrorLogPath); //please remove when complete.
             DashboardRes res = new DashboardRes();
             try
             {
                 res = ServiceHelper.GetDashBoardData(req);
+                
                 if (res != null)
                 {
                     res.ResponseCode = ResponseHelper.SUCCESS;
@@ -1490,7 +1492,7 @@ namespace ChamsICSWebService
             {
                 res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
                 res.ResponseDescription = ex.Message;
-                Logger.logToFile(ex, ErrorLogPath);
+                
 
                 return res;
             }
@@ -1504,6 +1506,7 @@ namespace ChamsICSWebService
                 res = ServiceHelper.GetExecutiveDashboardData(req);
                 if (res != null)
                 {
+                    
                     res.ResponseCode = ResponseHelper.SUCCESS;
                     res.ResponseDescription = "Success";
                     return res;

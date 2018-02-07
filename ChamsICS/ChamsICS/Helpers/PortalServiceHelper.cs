@@ -2436,61 +2436,19 @@ on x.MinistryId equals y.Id
             {
                 //This is Client User
                 int UserClientId = db.Users.FirstOrDefault(x => x.Id == req.UserId).UserTypeParentId.Value;
+                res.TotalAgent = db.Agents.Where(x => x.ClientId == UserClientId).Count();
 
-                try
-                {
-                    res.TotalAgent = db.Agents.Where(x => x.ClientId == UserClientId).Count();
-                }
-                catch (Exception)
-                {
-                    res.TotalAgent = -1;
-                }
-                try
-                {
-                    IList<int> ClientAgents = db.Agents.Where(x => x.ClientId == UserClientId).Select(x => x.Id).ToList();
-                    res.TotalTerminal = db.Terminals.Where(x => x.Status == 1).Where(x => ClientAgents.Contains(x.AgentId.Value)).Count();
-                }
-                catch (Exception)
-                {
-                    res.TotalTerminal = -1;
-                }
-                //res.TotalTransaction = db.TransactionLogs.Where(x => x.ClientId == UserClientId).Count();
-                //res.TransctionValue = Convert.ToDecimal(db.TransactionLogs.Where(x => x.ClientId == UserClientId).Sum(x => x.Amount));
+                IList<int> ClientAgents = db.Agents.Where(x => x.ClientId == UserClientId).Select(x => x.Id).ToList();
+                res.TotalTerminal = db.Terminals.Where(x => x.Status == 1).Where(x => ClientAgents.Contains(x.AgentId.Value)).Count();
+
+                res.TotalTransaction = db.TransactionLogs.Where(x => x.ClientId == UserClientId).Count();
+                res.TransctionValue = Convert.ToDecimal(db.TransactionLogs.Where(x => x.ClientId == UserClientId).Sum(x => x.Amount));
 
                 //for EOD report summary in dashboard
-                try
-                {
-                    res.TotalEODAmount = Convert.ToDecimal(db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).ToList().Sum(x => x.Amount));
-                }
-                catch (Exception)
-                {
-                    res.TotalEODAmount = -1;
-                }
-                try
-                {
-                    res.TotalAmountPaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == true).ToList().Sum(x => x.Amount));
-                }
-                catch (Exception)
-                {
-                    res.TotalAmountPaid = -1;
-                }
-                try
-                {
-                    res.TotalAmountUnpaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == false).ToList().Sum(x => x.Amount));
-                }
-                catch (Exception)
-                {
-
-                    res.TotalAmountUnpaid = -1;
-                }
-                try
-                {
-                    res.TotalEODCount = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).ToList().Sum(x => x.Count);
-                }
-                catch (Exception)
-                {
-                    res.TotalEODCount = -1;
-                }
+                res.TotalEODAmount = Convert.ToDecimal(db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).ToList().Sum(x => x.Amount));
+                res.TotalAmountPaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == true).ToList().Sum(x => x.Amount));
+                res.TotalAmountUnpaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == false).ToList().Sum(x => x.Amount));
+                res.TotalEODCount = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).ToList().Sum(x => x.Count);
 
                 return res;
             }
@@ -3170,7 +3128,7 @@ on x.MinistryId equals y.Id
         internal List<EndOfDayModel> GetEndOfDayReport(FetchEndOfDayReq request)
         {
             List<EndOfDayModel> res = new List<EndOfDayModel>();
-            
+
             if (request.TerminalId == null)
             {
                 if ((request.AgentId != null || request.AgentId > 0))
@@ -3214,11 +3172,11 @@ on x.MinistryId equals y.Id
                 if (request.status != null)
                 {
                     res = res.Where(a => a.Status == request.status).ToList();
-                    
+
                 }
-                
+
             }
-            else 
+            else
             {
                 var result = db.EODs.Where(a => a.TerminalId.ToString() == request.TerminalId && (a.Date >= request.startDate && a.Date <= request.endDate)).Select(a => new EndOfDayModel
                 {
@@ -3236,7 +3194,7 @@ on x.MinistryId equals y.Id
                 });
                 res.AddRange(result.ToList());
             }
-            
+
             return res;
         }
         #endregion

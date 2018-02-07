@@ -110,3 +110,4 @@ C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrh
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\obj\Release\CICSWebPortal.dll
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\obj\Release\CICSWebPortal.pdb
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\obj\Release\CICSWebPortal.XmlSerializers.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\CICSWebPortal\CICSWebPortal\obj\Release\CICSWebPortal.csprojResolveAssemblyReference.cache

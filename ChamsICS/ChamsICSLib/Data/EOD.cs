@@ -20,7 +20,7 @@ namespace ChamsICSLib.Data
         public decimal Amount { get; set; }
         public bool Status { get; set; }
         public byte[] timestamp { get; set; }
-        public Nullable<int> Count { get; set; }
+        public int Count { get; set; }
     
         public virtual Terminal Terminal { get; set; }
     }
