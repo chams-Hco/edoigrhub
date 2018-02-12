@@ -634,6 +634,7 @@ namespace ChamsICSWebService
                             AgentName = z.Name,
                             LocationName = location.LocationDescription,
                             TerminalId = tlogs.TerminalId.Value,
+                            TerminalCode = tlogs.Terminal.Code,
                             LocationId = tlogs.LocationId,
                             TransactionCode = tlogs.Code,
                             ResidentId = tlogs.ResidentId,
@@ -2446,10 +2447,9 @@ on x.MinistryId equals y.Id
 
                 //for EOD report summary in dashboard
                 res.TotalEODAmount = Convert.ToDecimal(db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).ToList().Sum(x => x.Amount));
-                res.TotalAmountPaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == true).ToList().Sum(x => x.Amount));
-                res.TotalAmountUnpaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == false).ToList().Sum(x => x.Amount));
+                res.TotalAmountPaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == true && x.Terminal.Agent.Client.Id == UserClientId).ToList().Sum(x => x.Amount));
+                res.TotalAmountUnpaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == false && x.Terminal.Agent.Client.Id == UserClientId).ToList().Sum(x => x.Amount));
                 res.TotalEODCount = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).ToList().Sum(x => x.Count);
-
                 return res;
             }
             else if (req.RoleId == 5 || req.RoleId == 6)
@@ -2463,8 +2463,8 @@ on x.MinistryId equals y.Id
 
                 //for EOD report summary in dashboard
                 res.TotalEODAmount = Convert.ToDecimal(db.EODs.Where(x => x.Terminal.Agent.Id == UserAgentId).ToList().Sum(x => x.Amount));
-                res.TotalAmountPaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == true).ToList().Sum(x => x.Amount));
-                res.TotalAmountUnpaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == false).ToList().Sum(x => x.Amount));
+                res.TotalAmountPaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == true && x.Terminal.Agent.Id == UserAgentId).ToList().Sum(x => x.Amount));
+                res.TotalAmountUnpaid = Convert.ToDecimal(db.EODs.Where(x => x.Status == false && x.Terminal.Agent.Id == UserAgentId).ToList().Sum(x => x.Amount));
                 res.TotalEODCount = db.EODs.Where(x => x.Terminal.Agent.Id == UserAgentId).ToList().Sum(x => x.Count);
 
                 return res;

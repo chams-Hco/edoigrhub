@@ -110,7 +110,7 @@
             [
             @if (Model.TotalTransaction > 0)
             {
-                <text>@Model.TotalTransaction.ToString() </text>
+                <text>@Model.TotalTransaction.ToString("#,0.00") </text>
             }
             else
             {
@@ -137,7 +137,7 @@
         <h4 class="m-top-none" id="orderCount">[
             @if (Model.TransctionValue > 0)
             {
-                <text>₦@Model.TransctionValue.ToString() </text>
+                <text>₦@Model.TransctionValue.ToString("#,0.00") </text>
             }
             else
             {
@@ -162,7 +162,7 @@
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="visitorCount">[ 
         @if (Model.TotalAmountPaid > 0) { 
-            <text>₦@Model.TotalAmountPaid.ToString() </text>
+            <text>₦@Model.TotalAmountPaid.ToString("#,0.00") </text>
         }
         else
         {
@@ -188,7 +188,7 @@
         <h4 class="m-top-none" id="visitorCount">[
             @if (Model.TotalAmountUnpaid > 0)
             {
-                <text>₦@Model.TotalAmountUnpaid.ToString() </text>
+                <text>₦@Model.TotalAmountUnpaid.ToString("#,0.00") </text>
             }
             else
             {
