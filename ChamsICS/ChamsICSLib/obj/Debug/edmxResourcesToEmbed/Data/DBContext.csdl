@@ -167,6 +167,7 @@
     <Property Name="timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
     <Property Name="Count" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_EOD_Terminal" FromRole="EOD" ToRole="Terminal" />
+    <Property Name="RemitanceCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="IdentityService">
     <Key>

@@ -66,6 +66,7 @@
     <Property Name="Status" Type="bit" Nullable="false" />
     <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="RemitanceCode" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="IdentityService">
     <Key>

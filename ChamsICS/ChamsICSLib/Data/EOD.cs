@@ -21,6 +21,7 @@ namespace ChamsICSLib.Data
         public bool Status { get; set; }
         public byte[] timestamp { get; set; }
         public int Count { get; set; }
+        public string RemitanceCode { get; set; }
     
         public virtual Terminal Terminal { get; set; }
     }

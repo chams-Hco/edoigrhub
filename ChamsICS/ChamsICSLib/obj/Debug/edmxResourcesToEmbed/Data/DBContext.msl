@@ -63,6 +63,7 @@
     <EntitySetMapping Name="EODs">
       <EntityTypeMapping TypeName="CICSModel.EOD">
         <MappingFragment StoreEntitySet="EOD">
+          <ScalarProperty Name="RemitanceCode" ColumnName="RemitanceCode" />
           <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="timestamp" ColumnName="timestamp" />
           <ScalarProperty Name="Status" ColumnName="Status" />
