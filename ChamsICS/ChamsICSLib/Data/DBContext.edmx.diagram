@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="CICSModel.AgentManager" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="CICSModel.AuditTrail" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="CICSModel.Client" Width="1.5" PointX="0.75" PointY="13.25" />
-        <EntityTypeShape EntityType="CICSModel.EOD" Width="1.5" PointX="7.5" PointY="21.5" />
         <EntityTypeShape EntityType="CICSModel.IdentityService" Width="1.5" PointX="3" PointY="23.125" />
         <EntityTypeShape EntityType="CICSModel.Ministry" Width="1.5" PointX="4.75" PointY="4.75" />
         <EntityTypeShape EntityType="CICSModel.Notification" Width="1.5" PointX="3" PointY="1" />
@@ -38,13 +37,16 @@
         <AssociationConnector Association="CICSModel.FK_TransactionLog_Client" />
         <AssociationConnector Association="CICSModel.FK_User_Client" />
         <AssociationConnector Association="CICSModel.FK_UserClients_Client" />
-        <AssociationConnector Association="CICSModel.FK_EOD_Terminal" />
         <AssociationConnector Association="CICSModel.FK_Notification_NotificationType" />
         <AssociationConnector Association="CICSModel.FK_TerminalUpdateLog_Terminal" />
         <AssociationConnector Association="CICSModel.FK_TransactionLog_Terminal" />
         <AssociationConnector Association="CICSModel.FK_User_UserRole" />
         <AssociationConnector Association="CICSModel.FK_UserAgents_User" />
         <AssociationConnector Association="CICSModel.FK_UserClients_User" />
+        <EntityTypeShape EntityType="CICSModel.EOD" Width="1.5" PointX="7.5" PointY="15.25" />
+        <AssociationConnector Association="CICSModel.FK_EOD_Terminal" />
+        <EntityTypeShape EntityType="CICSModel.EODPaymentNotificationLog" Width="1.5" PointX="9.75" PointY="17.25" />
+        <AssociationConnector Association="CICSModel.FK_EODPaymentNotificationLog_EOD" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

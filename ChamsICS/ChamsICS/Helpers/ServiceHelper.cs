@@ -25,7 +25,7 @@ namespace ChamsICSWebService
         CICSEntities db = new CICSEntities();
         static string DebugLogPath = ConfigurationManager.AppSettings["DebugLoggingPath"];
         static string ErrorLogPath = ConfigurationManager.AppSettings["ErrorLoggingPath"];
-        static bool sms_notification = ConfigurationManager.AppSettings["sms_notification_for_transactions"]=="1"? true : false;
+        static bool sms_notification = ConfigurationManager.AppSettings["sms_notification_for_transactions"] == "1" ? true : false;
         static bool email_notification = ConfigurationManager.AppSettings["email_notification_for_transactions"] == "1" ? true : false;
 
         public void Dispose()
@@ -42,7 +42,7 @@ namespace ChamsICSWebService
             {
                 Email = Username,
                 UserPassword = Password
-            },out loginRes);
+            }, out loginRes);
 
             if (!result)
             {
@@ -64,7 +64,7 @@ namespace ChamsICSWebService
             }
             //Validate that the request is comming in with the right AgentCode
             var agentId = loginRes.UserDashBoardData.UserTypeParentId;
-            var userAgent = db.Agents.FirstOrDefault(x => x.Id == agentId && x.Code==AgentCode);
+            var userAgent = db.Agents.FirstOrDefault(x => x.Id == agentId && x.Code == AgentCode);
 
             if (userAgent == null)
             {
@@ -164,7 +164,7 @@ namespace ChamsICSWebService
 
             //Validate AgentCode Exists
             var ac = db.Agents.FirstOrDefault(x => x.Code == req.AgentCode.Trim());
-            if (ac==null)
+            if (ac == null)
             {
                 msg = "Invalid Agent Code";
                 return false;
@@ -172,9 +172,9 @@ namespace ChamsICSWebService
             //Validate Terminal Serial Does Not Exists for AgentTerminals
             var ts = db.Terminals.FirstOrDefault(x => x.SerialNumber == req.TerminalSerialNumber.Trim());
 
-            if (ts!=null)
+            if (ts != null)
             {
-                msg = String.Format("Terminal Serial Numeber {0} Exists: ",req.TerminalSerialNumber);
+                msg = String.Format("Terminal Serial Numeber {0} Exists: ", req.TerminalSerialNumber);
                 return false;
             }
 
@@ -222,9 +222,9 @@ namespace ChamsICSWebService
 
             //Validate Date Of Birth
             DateTime testDob;
-            if (!(DateTime.TryParse(req.DateOfBirth,out testDob)))
+            if (!(DateTime.TryParse(req.DateOfBirth, out testDob)))
             {
-                msg = string.Format("Invalid Date Of Birth: {0} Correct format is: [yyyy-MM-dd]. e.g, {1} ",req.DateOfBirth,DateTime.Now.ToString("yyyy-MM-dd"));
+                msg = string.Format("Invalid Date Of Birth: {0} Correct format is: [yyyy-MM-dd]. e.g, {1} ", req.DateOfBirth, DateTime.Now.ToString("yyyy-MM-dd"));
 
                 return false;
             }
@@ -232,7 +232,7 @@ namespace ChamsICSWebService
             //Validate Transaction Date
             if (!(DateTime.TryParse(req.TransactionDate, out testDob)))
             {
-                msg = string.Format("Invalid Transaction Date: {0} Correct format is: [yyyy-MM-dd HH:mm:ss]. e.g, ",req.TransactionDate, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                msg = string.Format("Invalid Transaction Date: {0} Correct format is: [yyyy-MM-dd HH:mm:ss]. e.g, ", req.TransactionDate, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                 return false;
             }
@@ -255,9 +255,9 @@ namespace ChamsICSWebService
             //}
 
             //Validate FirstName and 
-            string lName = req.LastName!=null ? req.LastName.Trim() : "";
+            string lName = req.LastName != null ? req.LastName.Trim() : "";
             string fName = req.FirstName != null ? req.FirstName.Trim() : "";
-            if (lName.Length<2 || fName.Length<2)
+            if (lName.Length < 2 || fName.Length < 2)
             {
                 msg = "Invalid FirtName/Lastname";
 
@@ -267,7 +267,7 @@ namespace ChamsICSWebService
             //Validate ResidentId and Upload
             if (!ValidateUploadResidentId(AgentCode, TerminalCode, req, out msg, out tempResId))
             {
-                msg = msg.Trim()==string.Empty? "Failed to Upload transaction" : msg;
+                msg = msg.Trim() == string.Empty ? "Failed to Upload transaction" : msg;
                 return false;
             }
 
@@ -302,9 +302,9 @@ namespace ChamsICSWebService
                 return false;
             }
 
-            if (revenue.Amount!=0 && revenue.Amount!=decimal.Parse(revenueAmount))
+            if (revenue.Amount != 0 && revenue.Amount != decimal.Parse(revenueAmount))
             {
-                msg = "Invalid Amount for Revenue: "+revenue.Name;
+                msg = "Invalid Amount for Revenue: " + revenue.Name;
                 return false;
             }
             return result;
@@ -364,7 +364,7 @@ namespace ChamsICSWebService
             var agent = FindAgentByCode(agentCode);
             if (agent == null)
             {
-                msg = "Invalid AgentCode: "+agentCode;
+                msg = "Invalid AgentCode: " + agentCode;
                 return false;
             }
 
@@ -407,7 +407,7 @@ namespace ChamsICSWebService
                     return false;
                 }
                 //If the Terminal Provided the ResidendID, Attempt to Validate
-                if (req.ResidentId != null && req.ResidentId.Trim() != string.Empty && req.ResidentId.Length!=0)
+                if (req.ResidentId != null && req.ResidentId.Trim() != string.Empty && req.ResidentId.Length != 0)
                 {
                     int ResidentIDStatus = 0;
                     VerifyIdResponse resident = ValidateResidentID(identityService.URL, identityService.Username, identityService.Password, req.ResidentId, out ResidentIDStatus);
@@ -433,7 +433,7 @@ namespace ChamsICSWebService
                     {
                         //Log Transaction in Exception Table
                         msg = "Internal Service Error: Unable to Complete Resident ID Validation.";
-                       
+
                         return false;
                     }
                 }
@@ -445,13 +445,13 @@ namespace ChamsICSWebService
                 {
                     UploadTemporaryTransaction(client.Id, agent.Id, terminal.Id, req, out tempResId);
                 }
-                return true;       
+                return true;
             }
             catch (Exception e)
             {
-                msg = "Application Error: "+e.Message;
+                msg = "Application Error: " + e.Message;
                 return false;
-            }            
+            }
         }
 
         internal GetServiceRevenueRes GetServiceRevenue(string agentCode)
@@ -460,7 +460,7 @@ namespace ChamsICSWebService
 
             var agent = db.Agents.FirstOrDefault(x => x.Code == agentCode);
 
-            if (agent==null)
+            if (agent == null)
             {
                 res.ResponseCode = ResponseHelper.FAILED;
                 res.ResponseDescription = "Invalid Agent Code";
@@ -475,21 +475,21 @@ namespace ChamsICSWebService
                                join a in db.Ministries on x.MinistryId equals a.Id
 
                                where x.ClientId == clientId
-                               where x.Status ==1
+                               where x.Status == 1
                                select new Model.ServiceRevenue
-            {
-                RevenueCode = x.Code,
-                Name = x.Name,
-                Amount = x.Amount.Value,
-                Ministry = a.Name,
-                RevenueHead = z.Name,
-                Category = y.Name,
-                Status = y.Status
-            };
-            
+                               {
+                                   RevenueCode = x.Code,
+                                   Name = x.Name,
+                                   Amount = x.Amount.Value,
+                                   Ministry = a.Name,
+                                   RevenueHead = z.Name,
+                                   Category = y.Name,
+                                   Status = y.Status
+                               };
+
             res.ResponseCode = ResponseHelper.SUCCESS;
             res.ResponseDescription = "Success";
-            res.ServiceRevenues = revenueItems.ToList();            
+            res.ServiceRevenues = revenueItems.ToList();
             return res;
         }
 
@@ -499,7 +499,7 @@ namespace ChamsICSWebService
 
             var agent = db.Agents.FirstOrDefault(x => x.Code == req.AgentCode);
 
-            if (agent==null)
+            if (agent == null)
             {
                 res.ResponseCode = ResponseHelper.FAILED;
                 res.ResponseDescription = "Invalid Agent Code";
@@ -517,19 +517,19 @@ namespace ChamsICSWebService
                                where x.Code == req.RevenueCode
 
                                select new Model.ServiceRevenue
-            {
-                RevenueCode = x.Code,
-                Name = x.Name,
-                Amount = x.Amount.Value,
-                Ministry = a.Name,
-                RevenueHead = z.Name,
-                Category = y.Name,
-                Status = x.Status
-            };
-            
+                               {
+                                   RevenueCode = x.Code,
+                                   Name = x.Name,
+                                   Amount = x.Amount.Value,
+                                   Ministry = a.Name,
+                                   RevenueHead = z.Name,
+                                   Category = y.Name,
+                                   Status = x.Status
+                               };
+
             res.ResponseCode = ResponseHelper.SUCCESS;
             res.ResponseDescription = "Success";
-            res.ServiceRevenues = revenueItems.ToList();            
+            res.ServiceRevenues = revenueItems.ToList();
             return res;
         }
 
@@ -539,8 +539,8 @@ namespace ChamsICSWebService
 
             var agent = db.Agents.FirstOrDefault(x => x.Code == agentCode);
             int agentId = agent.Id;
-            
-            var terminal = db.Terminals.Where(x => x.AgentId == agentId && x.Code==terminalCode).Select(obj => new Model.ServiceTerminal
+
+            var terminal = db.Terminals.Where(x => x.AgentId == agentId && x.Code == terminalCode).Select(obj => new Model.ServiceTerminal
             {
                 Code = obj.Code,
                 Name = obj.Name,
@@ -603,7 +603,7 @@ namespace ChamsICSWebService
 
         internal TransactionLog QueryTransaction(string transactionCode)
         {
-            TransactionLog tLog = db.TransactionLogs.FirstOrDefault(x=> x.Code==transactionCode.Trim());
+            TransactionLog tLog = db.TransactionLogs.FirstOrDefault(x => x.Code == transactionCode.Trim());
             return tLog;
         }
 
@@ -621,17 +621,17 @@ namespace ChamsICSWebService
                                {
                                    ResponseCode = "00",
                                    ResponseDescription = "OK",
-                                    FIRSTNAME = tlog.FirstName,
-                                    MIDDLENAME = tlog.MiddleName,
-                                    SURNAME = tlog.Lastname,
-                                    RESIDENTIAL_ADDRESS = tlog.Address,
-                                    EMAIL = tlog.Email,
-                                    MOBILENUMBER = tlog.PhoneNumber,
-                                    DOB = tlog.DateOfBirth.Value.ToString(),
-                                    GENDER = tlog.Gender
+                                   FIRSTNAME = tlog.FirstName,
+                                   MIDDLENAME = tlog.MiddleName,
+                                   SURNAME = tlog.Lastname,
+                                   RESIDENTIAL_ADDRESS = tlog.Address,
+                                   EMAIL = tlog.Email,
+                                   MOBILENUMBER = tlog.PhoneNumber,
+                                   DOB = tlog.DateOfBirth.Value.ToString(),
+                                   GENDER = tlog.Gender
                                };
 
-            if(ResidentData.Count()>0)
+            if (ResidentData.Count() > 0)
             {
                 status = 3;
                 return ResidentData.FirstOrDefault();
@@ -650,8 +650,8 @@ namespace ChamsICSWebService
                 {
 
                     string json =
-                        "{"+
-                        "\"Password\":" + "\""+Password + "\"" + ","+
+                        "{" +
+                        "\"Password\":" + "\"" + Password + "\"" + "," +
                         "\"ResidentId\":" + "\"" + ResidentId + "\"" + "," +
                         "\"Username\":" + "\"" + Username + "\"" + "," +
                         "}";
@@ -668,11 +668,12 @@ namespace ChamsICSWebService
                     status = 1;
                     return resident;
                 }
-                else {
+                else
+                {
                     status = 0;
                     return null;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -712,7 +713,7 @@ namespace ChamsICSWebService
             tLog.Address = req.Address;
             tLog.Amount = Convert.ToDecimal(req.Amount);
             tLog.Code = req.TransactionCode;
-            tLog.DateOfBirth = DateTime.Parse(req.DateOfBirth );
+            tLog.DateOfBirth = DateTime.Parse(req.DateOfBirth);
             tLog.Email = req.Email;
             tLog.FirstName = req.FirstName;
             tLog.Gender = req.Gender;
@@ -777,8 +778,8 @@ namespace ChamsICSWebService
             ChamsICSLib.Data.Terminal terminal = FindTerminalByCode(TerminalCode);
 
             ChamsICSLib.Data.Client client = null;
-            if (agent!=null)
-            client = db.Clients.FirstOrDefault(x => x.Id == agent.ClientId);
+            if (agent != null)
+                client = db.Clients.FirstOrDefault(x => x.Id == agent.ClientId);
 
             string result = string.Empty;
             TransactionUploadError tLog = new TransactionUploadError();
@@ -802,11 +803,11 @@ namespace ChamsICSWebService
                 tLog.LocationId = 0;
 
             if (client != null)
-            tLog.ClientId = client.Id;
-            if(agent!=null)
-            tLog.AgentId = agent.Id;
-            if(terminal!=null)
-            tLog.TerminalId = terminal.Id;
+                tLog.ClientId = client.Id;
+            if (agent != null)
+                tLog.AgentId = agent.Id;
+            if (terminal != null)
+                tLog.TerminalId = terminal.Id;
 
             tLog.ResidentId = req.ResidentId;
             tLog.Address = req.Address;
@@ -824,7 +825,7 @@ namespace ChamsICSWebService
             tLog.PhoneNumber = req.PhoneNumber;
             tLog.RevenueCode = req.RevenueCode;
 
-            tLog.TransactionDate = DateTime.TryParse(req.TransactionDate,out dateParser) ? dateParser : DateTime.Now;
+            tLog.TransactionDate = DateTime.TryParse(req.TransactionDate, out dateParser) ? dateParser : DateTime.Now;
 
             tLog.UploadDate = DateTime.Now;
             tLog.PaymentReference = req.PaymentReference;
@@ -853,7 +854,7 @@ namespace ChamsICSWebService
                     ReferenceId = tLog.Id,
                     Status = 0
                 };
-                db.Notifications.Add(smsNotification); 
+                db.Notifications.Add(smsNotification);
             }
             if (email_notification)
             {
@@ -881,10 +882,10 @@ namespace ChamsICSWebService
                           join z in db.RevenueHeads on x.RevenueHeadId equals z.Id
                           join y in db.Ministries on x.MinistryId equals y.Id
                           join a in db.Clients on y.ClientId equals a.Id
-                         
-                         select new TransactionNaration { RevenueItem = x.Name, RevenueHead = z.Name, Ministry = y.Name, Client = a.Name}).FirstOrDefault();
-            
-            return result.RevenueItem + " / " + result.RevenueHead + " / " + result.Ministry+ " / " + result.Client;
+
+                          select new TransactionNaration { RevenueItem = x.Name, RevenueHead = z.Name, Ministry = y.Name, Client = a.Name }).FirstOrDefault();
+
+            return result.RevenueItem + " / " + result.RevenueHead + " / " + result.Ministry + " / " + result.Client;
         }
 
         public bool ValidateTransactionCodeLength(string TransactionCode, out string msg)
@@ -977,6 +978,266 @@ namespace ChamsICSWebService
             }
             return result;
         }
+        #endregion
+
+        #region END OF DAY
+        /// <summary>
+        /// Adds a new EOD transaction to the DB
+        /// </summary>
+        /// <param name="req"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        internal CreateEndOfDayRes createEODTransaction(CreateEndOfDayReq req, out string msg, out string terminalCode, out bool isCreated)
+        {
+            var endOfDayRes = new CreateEndOfDayRes();
+            //check if terminal with that id exists
+            var terminal = db.Terminals.FirstOrDefault(t => t.Id == req.TerminalId);
+            if (terminal != null)
+            {
+                terminalCode = terminal.Code;
+                //for a new EOD transaction the status is always unpaid
+                var eod = new EOD
+                {
+                    TerminalId = req.TerminalId,
+                    Amount = req.Amount,
+                    Status = false,
+                    Count = req.EODCount,
+                    Date = DateTime.Now,
+                    TransactionReference = GenerateEODReference(terminalCode)
+                };
+                db.EODs.Add(eod);
+                var affectedRows = db.SaveChanges();
+                if (affectedRows > 0)
+                {
+                    endOfDayRes.TerminalId = eod.TerminalId;
+                    endOfDayRes.TransactionRef = eod.TransactionReference;
+                    msg = $"End Of Day transaction for terminal with code {terminalCode} created successfully";
+                    isCreated = true;
+                }
+                else
+                {
+                    msg = $"failed to create End Of Day transaction for terminal with code {terminalCode}";
+                    isCreated = false;
+                }
+            }
+            else
+            {
+                msg = $"Terminal with id {req.TerminalId} doesn't exist";
+                terminalCode = string.Empty;
+                isCreated = true;
+            }
+            return endOfDayRes;
+        }
+        /// <summary>
+        /// Auto-generates a unique reference number for the EOD transaction
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        internal string GenerateEODReference(String terminalCode)
+        {
+            //var guid = System.Text.RegularExpressions.Regex.Replace(Convert.ToBase64String(Guid.NewGuid().ToByteArray()), "[/+=]", "").ToUpper();
+            var reference = DateTime.Now.Ticks.ToString();
+            return reference;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="req"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        internal QueryEndOfDayStatusRes GetEODStatus(string req, out string msg)
+        {
+            var eodStatusRes = new QueryEndOfDayStatusRes();
+            //fetch EOD by transaction id
+            var eod = db.EODs.SingleOrDefault(x => x.TransactionReference == req);
+            if (eod != null)
+            {
+                eodStatusRes.Status = eod.Status ? "PAID" : "UNPAID";
+                msg = $"Transaction with REF_N0: {req} has status {eodStatusRes.Status}";
+            }
+            else
+                msg = $"Transaction with REF_N0: {req} doesn't exist";
+            return eodStatusRes;
+        }
+
+        internal bool ValidateEODTransaction(ValidationRequest req, out string msg, out string[] data, out string errorCode)
+        {
+            var res = new ValidationResponse();
+            bool isValid = false;
+            msg = "";
+            decimal amount = 0M;
+            string phoneNumber = null;
+            string email = null;
+            data = new string[] { };
+            errorCode = NIBSSResponseHelper.ApprovedOrCompleted;
+            //req.Params.Count > 0 ? req.Params.ToList().ForEach(x => 
+            //    x.Key.Equals("amount")
+            //);
+            foreach (var item in req.Param)
+            {
+                switch (item.Key)
+                {
+                    case "amount":
+                        msg = Decimal.TryParse(item.Value, out amount) ? "" : "Failed to convert string amount to decimal";
+                        errorCode = NIBSSResponseHelper.InvalidAmount;
+                        break;
+                    case "phoneNumber":
+                        phoneNumber = item.Value;
+                        break;
+                    case "email":
+                        email = item.Value;
+                        break;
+                    default:
+                        msg = "Keys: phoneNumber, email, amount do not exist in the parameter being passed. Check XML data";
+                        break;
+                }
+            }
+
+            if (msg != "")
+                return isValid;
+
+            var eod = db.EODs.SingleOrDefault(x => x.Terminal.Agent.Email == email
+            && (x.Terminal.Agent.Phone1 == phoneNumber || x.Terminal.Agent.Phone2 == phoneNumber)
+            && x.Amount == amount);
+
+            if (eod == null)
+            {
+                msg = "Invalid End Of Day Transaction";
+                errorCode = NIBSSResponseHelper.InvalidTransaction;
+            }
+            else
+            {
+                isValid = true;
+                data = new string[] { phoneNumber, eod.Terminal.Agent.Name, "valid", email };
+            }
+            return isValid;
+        }
+
+        internal bool SendEODNotification(NotificationRequest req, out string msg, out string[] data, out string errorCode)
+        {
+            var res = new ValidationResponse();
+            bool isValid = false;
+            msg = "";
+            decimal amount = 0M;
+            string phoneNumber = null;
+            string email = null;
+            string name = null;
+            data = new string[] { };
+            errorCode = NIBSSResponseHelper.ApprovedOrCompleted;
+            
+            foreach (var item in req.Param)
+            {
+                switch (item.Key)
+                {
+                    case "Amount":
+                        msg = Decimal.TryParse(item.Value, out amount) ? "" : "Failed to convert string amount to decimal";
+                        errorCode = NIBSSResponseHelper.InvalidAmount;
+                        break;
+                    case "Phone Number":
+                        phoneNumber = item.Value;
+                        break;
+                    case "Email":
+                        email = item.Value;
+                        break;
+                    case "Name":
+                        name = item.Value;
+                        break;
+                    default:
+                        msg = "Keys: Phone Number, Email, Amount, Name do not exist in the parameter being passed. Check XML data";
+                        break;
+                }
+            }
+
+            if (msg != "")
+                return isValid;
+
+            //var ticks = DateTime.Now.Ticks;
+            //var datetime = new DateTime(req.TransactionApprovalDate);
+            //var dateString = datetime.ToString();
+
+            if (req.PaymentReference != null && req.PaymentReference != "")
+            {
+                var eod = db.EODs.SingleOrDefault(x => x.Terminal.Agent.Email == email
+                && (x.Terminal.Agent.Phone1 == phoneNumber || x.Terminal.Agent.Phone2 == phoneNumber)
+                && x.Amount == amount && x.Terminal.Agent.Name == name);
+                if (eod == null)
+                {
+                    errorCode = NIBSSResponseHelper.InvalidTransaction;
+                    return isValid;
+                }
+                else if (eod.Status)
+                {
+                    errorCode = NIBSSResponseHelper.DuplicateTransaction;
+                    return isValid;
+                }
+                else
+                {
+                    db.Entry(eod).State = System.Data.Entity.EntityState.Modified;
+                }
+                db.EODPaymentNotificationLogs.Add(new EODPaymentNotificationLog {
+                    BillerId = req.BillerID,
+                    BillerName = req.BillerName,
+                    ChannelCode = req.ChannelCode,
+                    CustomerName = req.CustomerName,
+                    DestinationBankCode = req.DestinationBankCode,
+                    EODId = eod.Id,
+                    Fee = req.Fee,
+                    Narration = req.Narration,
+                    PaymentReference = req.PaymentReference,
+                    ProductId = req.ProductID,
+                    ProductName = req.ProductName,
+                    SessionId = req.SessionID,
+                    SourceBankCode = req.SourceBankCode,
+                    SplitType = req.SplitType,
+                    TotalAmount = req.TotalAmount,
+                    TransactionApprovalDate = new DateTime(req.TransactionApprovalDate),
+                    TransactionFeeBearer = req.TransactionFeeBearer,
+                    TransactionInitiatedDate = new DateTime(req.TransactionInitiatedDate)
+                });
+                isValid = db.SaveChanges() > 0 ? true : false;
+                if (isValid)
+                    data = new string[] { phoneNumber, eod.Terminal.Agent.Name, email };
+                else
+                    errorCode = NIBSSResponseHelper.DuplicateRecord;
+            }
+            else
+            {
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        //private object SortKeyValuePairs (KeyValuePair<string, string> item, out string[] data)
+        //{
+        //    data[0] = null;
+        //    phoneNumber = null;
+        //    email = null;
+        //    bool isSorted = false;
+
+        //    switch (item.Key)
+        //    {
+        //        case "amount":
+        //            msg = Decimal.TryParse(item.Value, out amount) ? "" : "Failed to convert string amount to decimal";
+        //            isSorted = msg == "" ? false : true;
+        //            break;
+        //        case "phoneNumber":
+        //            phoneNumber = item.Value;
+        //            isSorted = true;
+        //            msg = "";
+        //            break;
+        //        case "email":
+        //            email = item.Value;
+        //            isSorted = true;
+        //            msg = "";
+        //            break;
+        //        default:
+        //            msg = "Keys: phoneNumber, email, amount do not exist in the parameter being passed. Check XML data";
+        //            isSorted = false;;
+        //            break;
+        //    }
+        //    return isSorted;
+        //}
         #endregion
     }
 }

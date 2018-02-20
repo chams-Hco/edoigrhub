@@ -169,4 +169,60 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CreateEODTransaction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q25:CreateEndOfDayReq" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateEODTransactionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="CreateEODTransactionResult" nillable="true" type="q26:CreateEndOfDayRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryEODStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TransactionRef" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryEODStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="QueryEODStatusResult" nillable="true" type="q27:QueryEndOfDayStatusRes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidateTransaction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q28:ValidationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidateTransactionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="ValidateTransactionResult" nillable="true" type="q29:ValidationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendNotification">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="req" nillable="true" type="q30:NotificationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendNotificationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" minOccurs="0" name="SendNotificationResult" nillable="true" type="q31:NotificationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

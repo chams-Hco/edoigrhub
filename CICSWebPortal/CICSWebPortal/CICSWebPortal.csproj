@@ -546,6 +546,18 @@
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FetchEndOfDayRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.CreateEndOfDayRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.QueryEndOfDayStatusRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.ValidationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.NotificationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceReference\ChamsICSService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -726,6 +738,18 @@
     <None Include="Service References\ServiceReference\ChamsICSService4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.CreateEndOfDayRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.QueryEndOfDayStatusRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.ValidationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.NotificationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceReference\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference\configuration.svcinfo" />
     <None Include="Service References\ServiceReference\Reference.svcmap">

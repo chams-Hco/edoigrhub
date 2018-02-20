@@ -185,7 +185,7 @@ namespace CICSWebPortal.Controllers
             ReportFilter filter = new ReportFilter();
 
             filter.startDate = DateTime.Now.AddDays(-1);
-            filter.endDate = DateTime.Now.AddDays(1);
+            filter.endDate = DateTime.Now;
             filter.TerminalIds = Utility.GetTerminalsByCode(DataContext, RoleId, UserTypeParentId).ToList().Select(a=>a.Value).ToList();
 
             EndofDayViewModel EODVM = DataContext.GetEODReport(filter);

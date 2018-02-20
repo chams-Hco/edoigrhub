@@ -75,6 +75,47 @@ namespace ChamsICSWebService
         [Description("Call this service to get all locations details for the agent. For Technical support, contact itsupport@chams.com ")]
         GetAgentLocationsRes GetAgentLocations(GetAgentLocationsReq req);
 
+        //service interface for End of day transaction
+        #region EOD SERVICE INTERFACE
+        /// <summary>
+        /// POST method called by terminal vendor to create new EOD
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/EOD/CreateEODTransaction", BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Call this service to create new EndOfDay transaction. For Technical support, contact itsupport@chams.com ")]
+        CreateEndOfDayRes CreateEODTransaction(CreateEndOfDayReq req);
+
+        /// <summary>
+        /// POST method called by NIBSS to check if an EndOfDay transaction exists
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        //[OperationContract]
+        //[WebInvoke(Method = "POST", UriTemplate = "/EOD/ValidateEODTransaction", BodyStyle = WebMessageBodyStyle.Bare)]
+        //[Description("Call this service to check if an EndOfDay transaction exists. For Technical support, contact itsupport@chams.com ")]
+        //ValidateEndOfDayRes ValidateEODTransaction(ValidateEndOfDayReq req);
+
+        /// <summary>
+        /// POST method called by terminal vendor to check the payment status of an EndOfDay transaction
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebGet(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/EOD/QueryEODStatus/{TransactionRef}")]
+        //[WebInvoke(Method = "POST", UriTemplate = "/EOD/QueryEODStatus", BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Call this service to check the payment status of an EndOfDay transaction. For Technical support, contact itsupport@chams.com ")]
+        QueryEndOfDayStatusRes QueryEODStatus(string TransactionRef);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/EOD/ValidateTransaction", BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Call this service to validate an EndOfDay transaction. For Technical support, contact itsupport@chams.com ")]
+        ValidationResponse ValidateTransaction(ValidationRequest req);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/EOD/SendNotification", BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Call this service to validate an EndOfDay transaction. For Technical support, contact itsupport@chams.com ")]
+        NotificationResponse SendNotification(NotificationRequest req);
+        #endregion
     }
 
 }

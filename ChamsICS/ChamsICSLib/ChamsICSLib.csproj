@@ -87,6 +87,9 @@
     <Compile Include="Data\EOD.cs">
       <DependentUpon>DBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\EODPaymentNotificationLog.cs">
+      <DependentUpon>DBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\IdentityService.cs">
       <DependentUpon>DBContext.tt</DependentUpon>
     </Compile>

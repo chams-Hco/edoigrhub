@@ -262,6 +262,114 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TerminalLocation" nillable="true" type="tns:TerminalLocation" />
+  <xs:complexType name="CreateEndOfDayReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="EODCount" type="xs:int" />
+      <xs:element minOccurs="0" name="TerminalId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateEndOfDayReq" nillable="true" type="tns:CreateEndOfDayReq" />
+  <xs:complexType name="CreateEndOfDayRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="TerminalId" type="xs:int" />
+          <xs:element minOccurs="0" name="TransactionRef" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CreateEndOfDayRes" nillable="true" type="tns:CreateEndOfDayRes" />
+  <xs:complexType name="QueryEndOfDayStatusRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QueryEndOfDayStatusRes" nillable="true" type="tns:QueryEndOfDayStatusRes" />
+  <xs:complexType name="ValidationRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EODServiceBaseReq">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="InstitutionCode" type="xs:int" />
+          <xs:element minOccurs="0" name="SourceBankName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Step" type="xs:int" />
+          <xs:element minOccurs="0" name="StepCount" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ValidationRequest" nillable="true" type="tns:ValidationRequest" />
+  <xs:complexType name="EODServiceBaseReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BillerID" type="xs:int" />
+      <xs:element minOccurs="0" name="BillerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChannelCode" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerAccountNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Param" nillable="true" type="tns:ArrayOfParam" />
+      <xs:element minOccurs="0" name="ProductID" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceBankCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EODServiceBaseReq" nillable="true" type="tns:EODServiceBaseReq" />
+  <xs:complexType name="ArrayOfParam">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Param" nillable="true" type="tns:Param" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfParam" nillable="true" type="tns:ArrayOfParam" />
+  <xs:complexType name="Param">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Param" nillable="true" type="tns:Param" />
+  <xs:complexType name="ValidationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BillerID" type="xs:int" />
+      <xs:element minOccurs="0" name="NextStep" type="xs:int" />
+      <xs:element minOccurs="0" name="Param" nillable="true" type="tns:ArrayOfParam" />
+      <xs:element minOccurs="0" name="ResponseCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValidationResponse" nillable="true" type="tns:ValidationResponse" />
+  <xs:complexType name="NotificationRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EODServiceBaseReq">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DestinationBankCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Fee" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Narration" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentReference" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SessionID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SplitType" type="xs:int" />
+          <xs:element minOccurs="0" name="TotalAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TransactionApprovalDate" type="xs:long" />
+          <xs:element minOccurs="0" name="TransactionFeeBearer" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionInitiatedDate" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NotificationRequest" nillable="true" type="tns:NotificationRequest" />
+  <xs:complexType name="NotificationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BillerID" type="xs:int" />
+      <xs:element minOccurs="0" name="Param" nillable="true" type="tns:ArrayOfParam" />
+      <xs:element minOccurs="0" name="ResponseCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResponseMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SessionID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NotificationResponse" nillable="true" type="tns:NotificationResponse" />
   <xs:complexType name="GetUserInvoicesRes">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Response">

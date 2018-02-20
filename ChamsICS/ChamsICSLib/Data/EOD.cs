@@ -14,6 +14,12 @@ namespace ChamsICSLib.Data
     
     public partial class EOD
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EOD()
+        {
+            this.EODPaymentNotificationLogs = new HashSet<EODPaymentNotificationLog>();
+        }
+    
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public int TerminalId { get; set; }
@@ -21,8 +27,10 @@ namespace ChamsICSLib.Data
         public bool Status { get; set; }
         public byte[] timestamp { get; set; }
         public int Count { get; set; }
-        public string RemitanceCode { get; set; }
+        public string TransactionReference { get; set; }
     
         public virtual Terminal Terminal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EODPaymentNotificationLog> EODPaymentNotificationLogs { get; set; }
     }
 }

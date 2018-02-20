@@ -153,7 +153,7 @@ namespace ChamsICSWebService
                     res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
                     res.ResponseDescription = "Application Error";
                     return res;
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -185,7 +185,7 @@ namespace ChamsICSWebService
                     string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(req);
 
                     //====Log Failed Upload to File===
-                    Logger.logToFile(msgLog, DebugLogPath+"\\Failed_Upload\\",true,req.TransactionCode,"xml",true);
+                    Logger.logToFile(msgLog, DebugLogPath + "\\Failed_Upload\\", true, req.TransactionCode, "xml", true);
 
                     //====Log Failed Upload to Database====
                     ServiceHelper.UploadExceptionToDb(msg, req);
@@ -245,14 +245,14 @@ namespace ChamsICSWebService
             //Validate AgentCode Section of Transaction Code is Valid and Terminal is Assigned to It
             if (!ServiceHelper.ValidateAgentCode(AgentCode, TerminalCode, out msg))
             {
-                res.ResponseCode =ResponseHelper.VALIDATION_ERROR;
+                res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
                 res.ResponseDescription = msg;
                 return res;
             }
 
             //Get Transaction Details;
             TransactionLog tLog = ServiceHelper.QueryTransaction(req.TransactionCode);
-            if (tLog==null)
+            if (tLog == null)
             {
                 res.ResponseCode = ResponseHelper.UNKNOWN_ERROR;
                 res.ResponseDescription = "Unable to retrieve Transaction Details";
@@ -291,7 +291,8 @@ namespace ChamsICSWebService
             return res;
         }
 
-        public GetTerminalDetailsRes GetTerminalDetails(GetTerminalsReq req) {
+        public GetTerminalDetailsRes GetTerminalDetails(GetTerminalsReq req)
+        {
             GetTerminalDetailsRes res = new GetTerminalDetailsRes();
 
             return res;
@@ -311,7 +312,7 @@ namespace ChamsICSWebService
                     return res;
                 }
 
-                res = ServiceHelper.FindServiceTerminal(req.AgentCode,req.TerminalCode);
+                res = ServiceHelper.FindServiceTerminal(req.AgentCode, req.TerminalCode);
 
                 return res;
             }
@@ -458,10 +459,190 @@ namespace ChamsICSWebService
         {
             return ServiceHelper.FundWallet(payment);
         }
-        
-        //FetchEndOfDayRes iChamsICSPortalService.GetEODReport(FetchEndOfDayReq request)
-        //{
-        //    return ServiceHelper.GetEndOfDayReport(request);
-        //}
+
+        /// <summary>
+        /// method called by terminal vendors toCreate new EOD transaction
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        public CreateEndOfDayRes CreateEODTransaction(CreateEndOfDayReq req)
+        {
+            var res = new CreateEndOfDayRes();
+            if (req == null)
+            {
+                throw new ArgumentNullException("Invalid CreateEODTransaction Request");
+            }
+            string msg = string.Empty;
+            string terminalCode = string.Empty;
+            try
+            {
+                res = ServiceHelper.createEODTransaction(req, out msg, out terminalCode, out bool isCreated);
+                if (isCreated == false)
+                {
+                    //Log Failed Upload Request
+                    string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(req);
+
+                    //====Log Failed Upload to File===
+                    Logger.logToFile(msgLog, DebugLogPath + "\\Failed_EOD_Transactions\\", true, terminalCode, "xml", true);
+
+                    //====Log Failed Upload to Database====
+                    //ServiceHelper.UploadExceptionToDb(msg, req);
+
+                    res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                    res.ResponseDescription = msg;
+                }
+                else
+                {
+                    res.ResponseCode = ResponseHelper.SUCCESS;
+                    res.ResponseDescription = "Successful";
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.logToFile(e, ErrorLogPath);
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = "Application Error";
+            }
+            return res;
+        }
+
+        public QueryEndOfDayStatusRes QueryEODStatus(string req)
+        {
+            var res = new QueryEndOfDayStatusRes();
+            if (req == null)
+            {
+                throw new ArgumentNullException("Invalid Status Query Request");
+            }
+            string msg = string.Empty;
+            string terminalCode = string.Empty;
+            try
+            {
+                res = ServiceHelper.GetEODStatus(req, out msg);
+                if (string.IsNullOrEmpty(res.Status))
+                {
+                    //Log Failed Upload Request
+                    string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(req);
+
+                    //====Log Failed status queries to File===
+                    Logger.logToFile(msgLog, DebugLogPath + "\\Failed_EOD_Status_Queries\\", true, terminalCode, "xml", true);
+
+                    //====Log Failed Upload to Database====
+                    //ServiceHelper.UploadExceptionToDb(msg, req);
+
+                    res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                    res.ResponseDescription = msg;
+                }
+                else
+                {
+                    res.ResponseCode = ResponseHelper.SUCCESS;
+                    res.ResponseDescription = "Successful";
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.logToFile(e, ErrorLogPath);
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = "Application Error";
+            }
+            return res;
+        }
+        /// <summary>
+        /// Method Called by NIBSS to validate transaction
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        public ValidationResponse ValidateTransaction(ValidationRequest req)
+        {
+            var res = new ValidationResponse();
+            var data = new string[] { };
+            string errorCode = "";
+            if (req == null)
+            {
+                throw new ArgumentNullException("Invalid Status Query Request");
+            }
+            string msg = string.Empty;
+            string terminalCode = string.Empty;
+            try
+            {
+                var isValid = ServiceHelper.ValidateEODTransaction(req, out msg, out data, out errorCode);
+                if (isValid)
+                {
+                    res.ResponseCode = errorCode;
+                    res.NextStep = 0;
+                    res.BillerID = req.BillerID;
+                    res.Param.Add(new Param { Key = "Name", Value = data[1] });
+                    res.Param.Add(new Param { Key = "Status", Value = data[2] });
+                    res.Param.Add(new Param { Key = "amount", Value = req.Amount.ToString() });
+                    res.Param.Add(new Param { Key = "Phone Number", Value = data[0] });
+                    res.Param.Add(new Param { Key = "Email", Value = data[3] });
+                }
+                else
+                {
+                    //Log Failed Upload Request(req);
+                    string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(req);
+
+                    //====Log Failed status queries to File===
+                    Logger.logToFile(msgLog, DebugLogPath + "\\Failed_EOD_Validation\\", true, terminalCode, "xml", true);
+
+                    //====Log Failed Upload to Database====
+                    //ServiceHelper.UploadExceptionToDb(msg, req);
+
+                    res.ResponseCode = errorCode;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.logToFile(e, ErrorLogPath);
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+            }
+            
+            return res;
+        }
+
+        public NotificationResponse SendNotification(NotificationRequest req)
+        {
+            var res = new NotificationResponse();
+            var data = new string[] { };
+            string errorCode = "";
+            if (req == null)
+            {
+                throw new ArgumentNullException("Invalid Status Query Request");
+            }
+            string msg = string.Empty;
+            string terminalCode = string.Empty;
+            try
+            {
+                var isValid = ServiceHelper.SendEODNotification(req, out msg, out data, out errorCode);
+                if (isValid)
+                {
+                    res.ResponseCode = errorCode;
+                    res.BillerID = req.BillerID;
+                    res.Param.Add(new Param { Key = "amount", Value = req.Amount.ToString() });
+                    res.Param.Add(new Param { Key = "Phone Number", Value = data[0] });
+                    res.Param.Add(new Param { Key = "Name", Value = data[1] });
+                    res.Param.Add(new Param { Key = "Email", Value = data[2] });
+                }
+                else
+                {
+                    //Log Failed Upload Request(req);
+                    string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(req);
+
+                    //====Log Failed status queries to File===
+                    Logger.logToFile(msgLog, DebugLogPath + "\\Wrong_EOD_Notification\\", true, terminalCode, "xml", true);
+
+                    //====Log Failed Upload to Database====
+                    //ServiceHelper.UploadExceptionToDb(msg, req);
+
+                    res.ResponseCode = errorCode;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.logToFile(e, ErrorLogPath);
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+            }
+            res.ResponseMessage = NIBSSResponseHelper.getResponseMessage(errorCode);
+            return res;
+        }
     }
 }

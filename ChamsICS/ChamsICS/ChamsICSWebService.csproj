@@ -91,6 +91,7 @@
     </Compile>
     <Compile Include="CICSPortalService.cs" />
     <Compile Include="Helpers\DataHelper.cs" />
+    <Compile Include="Helpers\NIBSSResponseHelper.cs" />
     <Compile Include="Model\AgentTransactionsModel.cs" />
     <Compile Include="Model\AssessmentModel.cs" />
     <Compile Include="Model\AuditTrailData.cs" />

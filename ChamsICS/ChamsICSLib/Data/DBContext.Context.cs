@@ -29,7 +29,6 @@ namespace ChamsICSLib.Data
         public virtual DbSet<AgentManager> AgentManagers { get; set; }
         public virtual DbSet<AuditTrail> AuditTrails { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<EOD> EODs { get; set; }
         public virtual DbSet<IdentityService> IdentityServices { get; set; }
         public virtual DbSet<Ministry> Ministries { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
@@ -49,5 +48,7 @@ namespace ChamsICSLib.Data
         public virtual DbSet<UserAgent> UserAgents { get; set; }
         public virtual DbSet<UserClient> UserClients { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<EOD> EODs { get; set; }
+        public virtual DbSet<EODPaymentNotificationLog> EODPaymentNotificationLogs { get; set; }
     }
 }
