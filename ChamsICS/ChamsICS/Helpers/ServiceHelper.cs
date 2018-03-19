@@ -987,23 +987,41 @@ namespace ChamsICSWebService
         /// <param name="req"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        internal CreateEndOfDayRes createEODTransaction(CreateEndOfDayReq req, out string msg, out string terminalCode, out bool isCreated)
+        internal CreateEndOfDayRes CreateEODTransaction(CreateEndOfDayReq req, out string msg, out bool isCreated)
         {
             var endOfDayRes = new CreateEndOfDayRes();
+            msg = "";
+            isCreated = false;
+            //msg = ValidateTAMSRequest(req, TAMSRequestHelper.CREATIONREQUEST);
+            msg = req.Amount <= 0M ? "Pls provide valid Amount\n" : "";
+            msg += req.EODCount <= 0 ? "Invalid End Of Day Transaction count\n" : "";
+            msg += string.IsNullOrEmpty(req.Password) || string.IsNullOrEmpty(req.Username) ? "Pls provide authentication parameters\n" : "";
+            msg += string.IsNullOrEmpty(req.TerminalCode) ? "Pls provide terminal code parameter" : "";
+
+            if (msg != "")
+            {
+                endOfDayRes.ResponseCode = NIBSSResponseHelper.FormatError;
+                return endOfDayRes;
+            }
+            //authenticate request sender
+            if (AuthenticateRequestSender(req.Username, req.Password) == false)
+            {
+                endOfDayRes.ResponseCode = NIBSSResponseHelper.InvalidSender;
+                return endOfDayRes;
+            }
             //check if terminal with that id exists
-            var terminal = db.Terminals.FirstOrDefault(t => t.Id == req.TerminalId);
+            var terminal = db.Terminals.FirstOrDefault(t => t.Code == req.TerminalCode);
             if (terminal != null)
             {
-                terminalCode = terminal.Code;
                 //for a new EOD transaction the status is always unpaid
                 var eod = new EOD
                 {
-                    TerminalId = req.TerminalId,
+                    TerminalId = terminal.Id,
                     Amount = req.Amount,
                     Status = false,
                     Count = req.EODCount,
                     Date = DateTime.Now,
-                    TransactionReference = GenerateEODReference(terminalCode)
+                    TransactionReference = GenerateEODReference()
                 };
                 db.EODs.Add(eod);
                 var affectedRows = db.SaveChanges();
@@ -1011,45 +1029,68 @@ namespace ChamsICSWebService
                 {
                     endOfDayRes.TerminalId = eod.TerminalId;
                     endOfDayRes.TransactionRef = eod.TransactionReference;
-                    msg = $"End Of Day transaction for terminal with code {terminalCode} created successfully";
+                    endOfDayRes.TerminalCode = eod.Terminal.Code;
+                    msg = $"End Of Day transaction for terminal with code {endOfDayRes.TerminalCode} created successfully";
                     isCreated = true;
                 }
                 else
                 {
-                    msg = $"failed to create End Of Day transaction for terminal with code {terminalCode}";
-                    isCreated = false;
+                    msg = $"failed to create End Of Day transaction for terminal with code {endOfDayRes.TerminalCode}";
                 }
             }
             else
             {
-                msg = $"Terminal with id {req.TerminalId} doesn't exist";
-                terminalCode = string.Empty;
-                isCreated = true;
+                msg = $"Terminal with code {req.TerminalCode} doesn't exist";
             }
             return endOfDayRes;
         }
+        //private string ValidateTAMSRequest(string data[] req, string requestType)
+        //{
+        //    string msg = "";
+        //    switch (requestType)
+        //    {
+        //        case TAMSRequestHelper.CREATIONREQUEST:
+        //            msg = req.Amount <= 0M ? "Pls provide valid Amount\n" : "";
+        //            msg += req.EODCount <= 0 ? "Invalid End Of Day Transaction count\n" : "";
+        //            msg += string.IsNullOrEmpty(req.Password) || string.IsNullOrEmpty(req.Username) ? "Pls provide authentication parameters\n" : "";
+        //            msg += string.IsNullOrEmpty(req.TerminalCode) ? "Pls provide terminal code parameter" : "";
+        //            break;
+        //        case TAMSRequestHelper.STATUSREQUEST:
+        //            msg += string.IsNullOrEmpty(req.Password) || string.IsNullOrEmpty(req.Username) ? "Pls provide authentication parameters\n" : "";
+        //            msg += string.IsNullOrEmpty(req.) ? "Pls provide terminal code parameter" : "";
+        //        default:
+        //            break;
+        //    }
+            
+        //    return msg;
+        //}
         /// <summary>
         /// Auto-generates a unique reference number for the EOD transaction
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        internal string GenerateEODReference(String terminalCode)
-        {
-            //var guid = System.Text.RegularExpressions.Regex.Replace(Convert.ToBase64String(Guid.NewGuid().ToByteArray()), "[/+=]", "").ToUpper();
-            var reference = DateTime.Now.Ticks.ToString();
-            return reference;
-        }
+        private string GenerateEODReference() => DateTime.Now.Ticks.ToString();
         /// <summary>
         /// 
         /// </summary>
         /// <param name="req"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        internal QueryEndOfDayStatusRes GetEODStatus(string req, out string msg)
+        internal QueryEndOfDayStatusRes GetEODStatus(QueryEndOfDayStatusReq req, out string msg)
         {
             var eodStatusRes = new QueryEndOfDayStatusRes();
+            //msg = ValidateTAMSRequest(req);
+            msg = "";
+            msg += string.IsNullOrEmpty(req.Password) || string.IsNullOrEmpty(req.Username) ? "Pls provide authentication parameters\n" : "";
+            msg += string.IsNullOrEmpty(req.TransactionRef) ? "Pls provide transaction reference parameter" : "";
+
+            if (msg != "")
+            {
+                eodStatusRes.ResponseCode = NIBSSResponseHelper.FormatError;
+                return eodStatusRes;
+            }
             //fetch EOD by transaction id
-            var eod = db.EODs.SingleOrDefault(x => x.TransactionReference == req);
+            var eod = db.EODs.SingleOrDefault(x => x.TransactionReference == req.TransactionRef);
             if (eod != null)
             {
                 eodStatusRes.Status = eod.Status ? "PAID" : "UNPAID";
@@ -1060,184 +1101,259 @@ namespace ChamsICSWebService
             return eodStatusRes;
         }
 
-        internal bool ValidateEODTransaction(ValidationRequest req, out string msg, out string[] data, out string errorCode)
+        internal bool ValidateEODTransaction(ValidationRequest req, out string msg, out List<Param> param, out string errorCode)
         {
-            var res = new ValidationResponse();
             bool isValid = false;
             msg = "";
-            decimal amount = 0M;
-            string phoneNumber = null;
-            string email = null;
-            data = new string[] { };
-            errorCode = NIBSSResponseHelper.ApprovedOrCompleted;
+            errorCode = "";
+            var data = SortParams(req.Param, NIBSSRequestHelper.VALIDATIONREQUEST, out msg);
+            param = new List<Param>();
             //req.Params.Count > 0 ? req.Params.ToList().ForEach(x => 
             //    x.Key.Equals("amount")
             //);
-            foreach (var item in req.Param)
+
+            //exit method if there is an error msg
+            if (msg != "")
             {
-                switch (item.Key)
+                errorCode = NIBSSResponseHelper.FormatError;
+                return isValid;
+            }
+
+            //if (AuthenticateRequestSender(data[2], data[3]) == false)
+            //{
+            //    errorCode = NIBSSResponseHelper.InvalidSender;
+            //    return isValid;
+            //}
+
+            //assign sorted params to their respective variables
+            string remittanceCode = "", amount = "", phoneNumber = "", email = "", name = "";
+            //if (data.Length == 5)
+            //{
+            //    remittanceCode = data[4]; amount = data[0]; phoneNumber = data[1]; email = data[2]; name = data[3];
+            //}
+            if (data.Length == 4)
+            {
+                remittanceCode = data[1]; amount = data[0];
+            }
+
+            msg = Decimal.TryParse(amount, out decimal decimalAmount) ? "" : "Failed to convert string amount to decimal";
+            // exit if there is an error msg in converting from string to decimal
+            if (msg != "")
+            {
+                errorCode = NIBSSResponseHelper.FormatError;
+                return isValid;
+            }
+
+            var eod = db.EODs.SingleOrDefault(x => x.TransactionReference == remittanceCode && x.Amount == decimalAmount && x.Status == false);
+            if (eod == null)
+            {
+                msg = "Invalid End Of Day Transaction";
+                errorCode = NIBSSResponseHelper.UnableToLocateRecord;
+                param.Add(new Param { Key = "Status", Value = "InValid" });
+                param.Add(new Param { Key = "RemittanceCode", Value = remittanceCode });
+                param.Add(new Param { Key = "Amount", Value = amount });
+            }
+            else
+            {
+                isValid = true;
+                phoneNumber = eod.Terminal.Agent.Phone1 ?? eod.Terminal.Agent.Phone2;
+                name = eod.Terminal.Agent.Name;
+                email = eod.Terminal.Agent.Email;
+                param.Add(new Param { Key = "Amount", Value = amount });
+                param.Add(new Param { Key = "PhoneNumber", Value = phoneNumber });
+                param.Add(new Param { Key = "Name", Value = name });
+                param.Add(new Param { Key = "Email", Value = email });
+                param.Add(new Param { Key = "Status", Value = "Valid" });
+                param.Add(new Param { Key = "RemittanceCode", Value = remittanceCode });
+            }
+            return isValid;
+        }
+
+        internal bool SendEODNotification(NotificationRequest req, out string msg, out List<Param> param, out string errorCode)
+        {
+            bool isValid = false;
+            msg = "";
+            errorCode = "";
+            var data = SortParams(req.Param, NIBSSRequestHelper.NOTIFICATIONREQUEST, out msg);
+            param = new List<Param>();
+            //exit method if there is an error msg
+            if (msg != "")
+            {
+                errorCode = NIBSSResponseHelper.FormatError;
+                return isValid;
+            }
+
+            //if (AuthenticateRequestSender(data[5], data[6]) == false)
+            //{
+            //    errorCode = NIBSSResponseHelper.InvalidSender;
+            //    return isValid;
+            //}
+
+            //assign sorted params to their respective variables
+            string remittanceCode = "", amount = "", phoneNumber = "", email = "", name = "";
+            if (data.Length == 7)
+            {
+                remittanceCode = data[4]; amount = data[0]; phoneNumber = data[1]; email = data[2]; name = data[3];
+            }
+           
+            //convert amount string to decimal
+            msg = Decimal.TryParse(amount, out decimal decimalAmount) ? "" : "Failed to convert string amount to decimal";
+            // exit if there is an error msg in converting from string to decimal
+            if (msg != "")
+            {
+                errorCode = NIBSSResponseHelper.FormatError;
+                return isValid;
+            }
+            //fetch EOD
+            var eod = db.EODs.SingleOrDefault(x => x.TransactionReference == remittanceCode && x.Amount == decimalAmount);
+
+            if (eod == null)
+            {
+                errorCode = NIBSSResponseHelper.UnableToLocateRecord;
+                return isValid;
+            }
+            else if (eod.Status)
+            {
+                errorCode = NIBSSResponseHelper.DuplicateTransaction;
+                return isValid;
+            }
+            else
+            {
+                eod.Status = true;
+                db.Entry(eod).State = System.Data.Entity.EntityState.Modified;
+            }
+            //insert into EOD payment log
+            db.EODPaymentNotificationLogs.Add(new EODPaymentNotificationLog
+            {
+                BillerId = req.BillerID,
+                BillerName = req.BillerName,
+                ChannelCode = req.ChannelCode,
+                CustomerName = req.CustomerName,
+                DestinationBankCode = req.DestinationBankCode,
+                EODId = eod.Id,
+                Fee = req.Fee,
+                Narration = req.Narration,
+                PaymentReference = req.PaymentReference,
+                ProductId = req.ProductID,
+                ProductName = req.ProductName,
+                SessionId = req.SessionID,
+                SourceBankCode = req.SourceBankCode,
+                SplitType = req.SplitType,
+                TotalAmount = req.TotalAmount,
+                TransactionApprovalDate = new DateTime(req.TransactionApprovalDate),
+                TransactionFeeBearer = req.TransactionFeeBearer,
+                TransactionInitiatedDate = new DateTime(req.TransactionInitiatedDate)
+            });
+            //set isValid depending on whether EOD status and payment log is saved
+            isValid = db.SaveChanges() > 0 ? true : false;
+            if (isValid == false)
+            {
+                errorCode = NIBSSResponseHelper.SystemMalfunction;
+                param.Add(new Param { Key = "Amount", Value = amount });
+                param.Add(new Param { Key = "PhoneNumber", Value = phoneNumber });
+                param.Add(new Param { Key = "Name", Value = name });
+                param.Add(new Param { Key = "Email", Value = email });
+                param.Add(new Param { Key = "Status", Value = "Unpaid" });
+                param.Add(new Param { Key = "RemittanceCode", Value = remittanceCode });
+            }
+            else
+            {
+                param.Add(new Param { Key = "Amount", Value = amount });
+                param.Add(new Param { Key = "PhoneNumber", Value = phoneNumber });
+                param.Add(new Param { Key = "Name", Value = name });
+                param.Add(new Param { Key = "Email", Value = email });
+                param.Add(new Param { Key = "Status", Value = eod.Status ? "Paid" : "Unpaid" });
+                param.Add(new Param { Key = "RemittanceCode", Value = remittanceCode });
+            }
+            return isValid;
+        }
+
+        private string[] SortParams(List<Param> reqParams, string requestType, out string msg)
+        {
+            string username = null, password = null, amount = null, phoneNumber = null, email = null, name = null, remittanceCode = null;
+            msg = "";
+            var data = new string[] { };
+
+            foreach (var item in reqParams)
+            {
+                switch (item.Key.ToLower())
                 {
+                    //case "username":
+                    //    username = item.Value;
+                    //    break;
+                    //case "password":
+                    //    password = item.Value;
+                    //    break;
                     case "amount":
-                        msg = Decimal.TryParse(item.Value, out amount) ? "" : "Failed to convert string amount to decimal";
-                        errorCode = NIBSSResponseHelper.InvalidAmount;
+                        //msg = Decimal.TryParse(item.Value, out amount) ? "" : "Failed to convert string amount to decimal";
+                        amount = item.Value;
                         break;
-                    case "phoneNumber":
+                    case "phonenumber":
                         phoneNumber = item.Value;
                         break;
                     case "email":
                         email = item.Value;
                         break;
-                    default:
-                        msg = "Keys: phoneNumber, email, amount do not exist in the parameter being passed. Check XML data";
-                        break;
-                }
-            }
-
-            if (msg != "")
-                return isValid;
-
-            var eod = db.EODs.SingleOrDefault(x => x.Terminal.Agent.Email == email
-            && (x.Terminal.Agent.Phone1 == phoneNumber || x.Terminal.Agent.Phone2 == phoneNumber)
-            && x.Amount == amount);
-
-            if (eod == null)
-            {
-                msg = "Invalid End Of Day Transaction";
-                errorCode = NIBSSResponseHelper.InvalidTransaction;
-            }
-            else
-            {
-                isValid = true;
-                data = new string[] { phoneNumber, eod.Terminal.Agent.Name, "valid", email };
-            }
-            return isValid;
-        }
-
-        internal bool SendEODNotification(NotificationRequest req, out string msg, out string[] data, out string errorCode)
-        {
-            var res = new ValidationResponse();
-            bool isValid = false;
-            msg = "";
-            decimal amount = 0M;
-            string phoneNumber = null;
-            string email = null;
-            string name = null;
-            data = new string[] { };
-            errorCode = NIBSSResponseHelper.ApprovedOrCompleted;
-            
-            foreach (var item in req.Param)
-            {
-                switch (item.Key)
-                {
-                    case "Amount":
-                        msg = Decimal.TryParse(item.Value, out amount) ? "" : "Failed to convert string amount to decimal";
-                        errorCode = NIBSSResponseHelper.InvalidAmount;
-                        break;
-                    case "Phone Number":
-                        phoneNumber = item.Value;
-                        break;
-                    case "Email":
-                        email = item.Value;
-                        break;
-                    case "Name":
+                    case "name":
                         name = item.Value;
+                        break;
+                    case "remittancecode":
+                        remittanceCode = item.Value;
                         break;
                     default:
                         msg = "Keys: Phone Number, Email, Amount, Name do not exist in the parameter being passed. Check XML data";
                         break;
                 }
             }
-
+            // msg is set if none of the cases are met for a param
             if (msg != "")
-                return isValid;
-
-            //var ticks = DateTime.Now.Ticks;
-            //var datetime = new DateTime(req.TransactionApprovalDate);
-            //var dateString = datetime.ToString();
-
-            if (req.PaymentReference != null && req.PaymentReference != "")
             {
-                var eod = db.EODs.SingleOrDefault(x => x.Terminal.Agent.Email == email
-                && (x.Terminal.Agent.Phone1 == phoneNumber || x.Terminal.Agent.Phone2 == phoneNumber)
-                && x.Amount == amount && x.Terminal.Agent.Name == name);
-                if (eod == null)
-                {
-                    errorCode = NIBSSResponseHelper.InvalidTransaction;
-                    return isValid;
-                }
-                else if (eod.Status)
-                {
-                    errorCode = NIBSSResponseHelper.DuplicateTransaction;
-                    return isValid;
-                }
-                else
-                {
-                    db.Entry(eod).State = System.Data.Entity.EntityState.Modified;
-                }
-                db.EODPaymentNotificationLogs.Add(new EODPaymentNotificationLog {
-                    BillerId = req.BillerID,
-                    BillerName = req.BillerName,
-                    ChannelCode = req.ChannelCode,
-                    CustomerName = req.CustomerName,
-                    DestinationBankCode = req.DestinationBankCode,
-                    EODId = eod.Id,
-                    Fee = req.Fee,
-                    Narration = req.Narration,
-                    PaymentReference = req.PaymentReference,
-                    ProductId = req.ProductID,
-                    ProductName = req.ProductName,
-                    SessionId = req.SessionID,
-                    SourceBankCode = req.SourceBankCode,
-                    SplitType = req.SplitType,
-                    TotalAmount = req.TotalAmount,
-                    TransactionApprovalDate = new DateTime(req.TransactionApprovalDate),
-                    TransactionFeeBearer = req.TransactionFeeBearer,
-                    TransactionInitiatedDate = new DateTime(req.TransactionInitiatedDate)
-                });
-                isValid = db.SaveChanges() > 0 ? true : false;
-                if (isValid)
-                    data = new string[] { phoneNumber, eod.Terminal.Agent.Name, email };
-                else
-                    errorCode = NIBSSResponseHelper.DuplicateRecord;
+                return data;
             }
-            else
-            {
-                isValid = false;
-            }
-            
-            return isValid;
+
+            //data = new string[] { amount, phoneNumber, email, name, remittanceCode, username, password };
+            data = new string[] { amount, phoneNumber, email, name, remittanceCode };
+
+            var prepData = ValidateParams(data, requestType, out msg);
+
+            return msg == "" ? prepData : data;
         }
 
-        //private object SortKeyValuePairs (KeyValuePair<string, string> item, out string[] data)
-        //{
-        //    data[0] = null;
-        //    phoneNumber = null;
-        //    email = null;
-        //    bool isSorted = false;
+        private string[] ValidateParams(string[] data, string requestType, out string msg)
+        {
+            var prepData = new string[] { };
+            msg = "";
+            switch (requestType)
+            {
+                case NIBSSRequestHelper.VALIDATIONREQUEST:
+                    //msg = string.IsNullOrEmpty(data[5]) ? "Username parameter not provided" : "";
+                    //msg += string.IsNullOrEmpty(data[6]) ? "Password parameter not provided" : "";
+                    msg += string.IsNullOrEmpty(data[0]) ? "Amount parameter not provided" : "";
+                    msg += string.IsNullOrEmpty(data[4]) ? "Remmittance parameter not provided" : "";
+                    //prepData = new string[] { data[0], data[4], data[5], data[6] };
+                    prepData = new string[] { data[0], data[4] };
+                    break;
+                case NIBSSRequestHelper.NOTIFICATIONREQUEST:
+                    //msg = string.IsNullOrEmpty(data[5]) ? "Username parameter not provided" : "";
+                    //msg += string.IsNullOrEmpty(data[6]) ? "Password parameter not provided" : "";
+                    msg = string.IsNullOrEmpty(data[0]) ? "Amount parameter not provided" : "";
+                    msg += string.IsNullOrEmpty(data[1]) ? "Phone number parameter not provided" : "";
+                    msg += string.IsNullOrEmpty(data[2]) ? "Email parameter not provided" : "";
+                    msg += string.IsNullOrEmpty(data[3]) ? "Name parameter not provided" : "";
+                    msg += string.IsNullOrEmpty(data[4]) ? "Remmittance parameter not provided" : "";
+                    //prepData = new string[] { data[0], data[1], data[2], data[3], data[4], data[5], data[6] };
+                    prepData = new string[] { data[0], data[1], data[2], data[3], data[4] };
 
-        //    switch (item.Key)
-        //    {
-        //        case "amount":
-        //            msg = Decimal.TryParse(item.Value, out amount) ? "" : "Failed to convert string amount to decimal";
-        //            isSorted = msg == "" ? false : true;
-        //            break;
-        //        case "phoneNumber":
-        //            phoneNumber = item.Value;
-        //            isSorted = true;
-        //            msg = "";
-        //            break;
-        //        case "email":
-        //            email = item.Value;
-        //            isSorted = true;
-        //            msg = "";
-        //            break;
-        //        default:
-        //            msg = "Keys: phoneNumber, email, amount do not exist in the parameter being passed. Check XML data";
-        //            isSorted = false;;
-        //            break;
-        //    }
-        //    return isSorted;
-        //}
+                    break;
+                default:
+                    msg = "Invalid request type";
+                    break;
+            }
+
+            return prepData;
+        }
+
+        private bool AuthenticateRequestSender(string username, string password) => username == "test_user" && password == "_ch@m5123" ? true : false;
         #endregion
     }
 }

@@ -8291,11 +8291,11 @@ namespace CICSWebPortal.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EODServiceBaseReq", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NIBSSEODServiceBaseReq", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.NotificationRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.ValidationRequest))]
-    public partial class EODServiceBaseReq : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class NIBSSEODServiceBaseReq : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -8484,7 +8484,7 @@ namespace CICSWebPortal.ServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="NotificationRequest", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
     [System.SerializableAttribute()]
-    public partial class NotificationRequest : CICSWebPortal.ServiceReference.EODServiceBaseReq {
+    public partial class NotificationRequest : CICSWebPortal.ServiceReference.NIBSSEODServiceBaseReq {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DestinationBankCodeField;
@@ -8651,7 +8651,7 @@ namespace CICSWebPortal.ServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ValidationRequest", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
     [System.SerializableAttribute()]
-    public partial class ValidationRequest : CICSWebPortal.ServiceReference.EODServiceBaseReq {
+    public partial class ValidationRequest : CICSWebPortal.ServiceReference.NIBSSEODServiceBaseReq {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int InstitutionCodeField;
@@ -8781,102 +8781,11 @@ namespace CICSWebPortal.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ValidationResponse", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NIBSSEODServiceBaseRes", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
     [System.SerializableAttribute()]
-    public partial class ValidationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int BillerIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int NextStepField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CICSWebPortal.ServiceReference.Param[] ParamField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ResponseCodeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int BillerID {
-            get {
-                return this.BillerIDField;
-            }
-            set {
-                if ((this.BillerIDField.Equals(value) != true)) {
-                    this.BillerIDField = value;
-                    this.RaisePropertyChanged("BillerID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int NextStep {
-            get {
-                return this.NextStepField;
-            }
-            set {
-                if ((this.NextStepField.Equals(value) != true)) {
-                    this.NextStepField = value;
-                    this.RaisePropertyChanged("NextStep");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CICSWebPortal.ServiceReference.Param[] Param {
-            get {
-                return this.ParamField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ParamField, value) != true)) {
-                    this.ParamField = value;
-                    this.RaisePropertyChanged("Param");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ResponseCode {
-            get {
-                return this.ResponseCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ResponseCodeField, value) != true)) {
-                    this.ResponseCodeField = value;
-                    this.RaisePropertyChanged("ResponseCode");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="NotificationResponse", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
-    [System.SerializableAttribute()]
-    public partial class NotificationResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.NotificationResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.ValidationResponse))]
+    public partial class NIBSSEODServiceBaseRes : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -8892,9 +8801,6 @@ namespace CICSWebPortal.ServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ResponseMessageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SessionIDField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -8958,6 +8864,25 @@ namespace CICSWebPortal.ServiceReference {
             }
         }
         
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NotificationResponse", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class NotificationResponse : CICSWebPortal.ServiceReference.NIBSSEODServiceBaseRes {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SessionIDField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string SessionID {
             get {
@@ -8970,13 +8895,27 @@ namespace CICSWebPortal.ServiceReference {
                 }
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ValidationResponse", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class ValidationResponse : CICSWebPortal.ServiceReference.NIBSSEODServiceBaseRes {
         
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NextStepField;
         
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NextStep {
+            get {
+                return this.NextStepField;
+            }
+            set {
+                if ((this.NextStepField.Equals(value) != true)) {
+                    this.NextStepField = value;
+                    this.RaisePropertyChanged("NextStep");
+                }
             }
         }
     }

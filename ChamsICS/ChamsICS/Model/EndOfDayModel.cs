@@ -44,19 +44,24 @@ namespace ChamsICSWebService.Model
         public List<string> TerminalIds { get; set; } //timi added
         public bool? status { get; set; }
     }
-
+    [DataContract]
+    public class TAMSBaseRequest
+    {
+        [DataMember]
+        public string Username { get; set; }
+        [DataMember]
+        public string Password { get; set; }
+    }
     /// <summary>
     /// model that holds data passed by external caller for the creation of new EOD transaction
     /// </summary>
     [DataContract]
-    public class CreateEndOfDayReq
+    public class CreateEndOfDayReq : TAMSBaseRequest
     {
         [DataMember]
-        public int TerminalId { get; set; }
+        public string TerminalCode { get; set; }
         [DataMember]
         public decimal Amount { get; set; }
-        //[DataMember]
-        //public bool Status { get; set; }
         [DataMember]
         public int EODCount { get; set; }
     }
@@ -69,6 +74,8 @@ namespace ChamsICSWebService.Model
         [DataMember]
         public int TerminalId { get; set; }
         [DataMember]
+        public string TerminalCode { get; set; }
+        [DataMember]
         public string TransactionRef { get; set; }
     }
     /// <summary>
@@ -79,8 +86,8 @@ namespace ChamsICSWebService.Model
     {
         [DataMember]
         public string TransactionRef { get; set; }
+        [DataMember]
         public string SourceBankCode { get; set; }
-        public int MyProperty { get; set; }
     }
     /// <summary>
     /// model that holds the data to be returned to external caller after validate an EOD transactioni
@@ -96,7 +103,7 @@ namespace ChamsICSWebService.Model
     /// Model that holds data passed by external caller to check payment status of an EOD transaction
     /// </summary>
     [DataContract]
-    public class QueryEndOfDayStatusReq
+    public class QueryEndOfDayStatusReq : TAMSBaseRequest
     {
         [DataMember]
         public string TransactionRef { get; set; }
@@ -108,11 +115,20 @@ namespace ChamsICSWebService.Model
         [DataMember]
         public string Status { get; set; }
     }
+
+    [DataContract]
+    public class AuthenticatableReq
+    {
+        [DataMember]
+        public string Username { get; set; }
+        [DataMember]
+        public string password { get; set; }
+    }
     /// <summary>
     /// 
     /// </summary>
     [DataContract]
-    public class EODServiceBaseReq
+    public class NIBSSEODServiceBaseReq
     {
         [DataMember]
         public string SourceBankCode { get; set; }
@@ -139,7 +155,7 @@ namespace ChamsICSWebService.Model
     /// Model that holds request data from NIBSS to validate a transaction
     /// </summary>
     [DataContract]
-    public class ValidationRequest : EODServiceBaseReq
+    public class ValidationRequest : NIBSSEODServiceBaseReq
     {
         [DataMember]
         public string SourceBankName { get; set; }
@@ -160,20 +176,14 @@ namespace ChamsICSWebService.Model
     /// Model that holds response data sent to NIBSS for transaction validation
     /// </summary>
     [DataContract]
-    public class ValidationResponse
+    public class ValidationResponse : NIBSSEODServiceBaseRes
     {
         [DataMember]
-        public int BillerID { get; set; }
-        [DataMember]
         public int NextStep { get; set; }
-        [DataMember]
-        public string ResponseCode { get; set; }
-        [DataMember]
-        public List<Param> Param { get; set; } = new List<Param>();
     }
 
     [DataContract]
-    public class NotificationRequest : EODServiceBaseReq
+    public class NotificationRequest : NIBSSEODServiceBaseReq
     {
         [DataMember]
         public string SessionID { get; set; }
@@ -198,10 +208,15 @@ namespace ChamsICSWebService.Model
     }
 
     [DataContract]
-    public class NotificationResponse
+    public class NotificationResponse : NIBSSEODServiceBaseRes
     {
         [DataMember]
         public string SessionID { get; set; }
+    }
+
+    [DataContract]
+    public class NIBSSEODServiceBaseRes
+    {
         [DataMember]
         public int BillerID { get; set; }
         [DataMember]

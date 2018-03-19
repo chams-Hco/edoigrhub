@@ -64,11 +64,29 @@ namespace ChamsICSWebService
                 case DuplicateRecord:
                     responseMsg = "Duplicate Record";
                     break;
+                case SystemMalfunction:
+                    responseMsg = "System Malfunction";
+                    break;
+                case FormatError:
+                    responseMsg = "Format Error";
+                    break;
+                case InvalidSender:
+                    responseMsg = "Invalid Sender. You are not authorized to make this request";
+                    break;
+                case UnableToLocateRecord:
+                    responseMsg = "Unable to locate record";
+                    break;
                 default:
                     responseMsg = "Response code doesn't exist";
                     break;
             }
             return responseMsg;
         }
+    }
+
+    public class NIBSSRequestHelper
+    {
+        public const string VALIDATIONREQUEST = "validation";
+        public const string NOTIFICATIONREQUEST = "notification";
     }
 }

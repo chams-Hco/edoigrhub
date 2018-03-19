@@ -5,7 +5,6 @@
     <EntitySet Name="AgentManagers" EntityType="CICSModel.AgentManager" />
     <EntitySet Name="AuditTrails" EntityType="CICSModel.AuditTrail" />
     <EntitySet Name="Clients" EntityType="CICSModel.Client" />
-    <EntitySet Name="EODs" EntityType="CICSModel.EOD" />
     <EntitySet Name="IdentityServices" EntityType="CICSModel.IdentityService" />
     <EntitySet Name="Ministries" EntityType="CICSModel.Ministry" />
     <EntitySet Name="Notifications" EntityType="CICSModel.Notification" />
@@ -61,10 +60,6 @@
       <End Role="Client" EntitySet="Clients" />
       <End Role="UserClient" EntitySet="UserClients" />
     </AssociationSet>
-    <AssociationSet Name="FK_EOD_Terminal" Association="CICSModel.FK_EOD_Terminal">
-      <End Role="Terminal" EntitySet="Terminals" />
-      <End Role="EOD" EntitySet="EODs" />
-    </AssociationSet>
     <AssociationSet Name="FK_Notification_NotificationType" Association="CICSModel.FK_Notification_NotificationType">
       <End Role="NotificationType" EntitySet="NotificationTypes" />
       <End Role="Notification" EntitySet="Notifications" />
@@ -88,6 +83,16 @@
     <AssociationSet Name="FK_UserClients_User" Association="CICSModel.FK_UserClients_User">
       <End Role="User" EntitySet="Users" />
       <End Role="UserClient" EntitySet="UserClients" />
+    </AssociationSet>
+    <EntitySet Name="EODs" EntityType="CICSModel.EOD" />
+    <AssociationSet Name="FK_EOD_Terminal" Association="CICSModel.FK_EOD_Terminal">
+      <End Role="Terminal" EntitySet="Terminals" />
+      <End Role="EOD" EntitySet="EODs" />
+    </AssociationSet>
+    <EntitySet Name="EODPaymentNotificationLogs" EntityType="CICSModel.EODPaymentNotificationLog" />
+    <AssociationSet Name="FK_EODPaymentNotificationLog_EOD" Association="CICSModel.FK_EODPaymentNotificationLog_EOD">
+      <End Role="EOD" EntitySet="EODs" />
+      <End Role="EODPaymentNotificationLog" EntitySet="EODPaymentNotificationLogs" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Agent">
@@ -154,19 +159,6 @@
     <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Client" FromRole="Client" ToRole="TransactionLog" />
     <NavigationProperty Name="Users" Relationship="CICSModel.FK_User_Client" FromRole="Client" ToRole="User" />
     <NavigationProperty Name="UserClients" Relationship="CICSModel.FK_UserClients_Client" FromRole="Client" ToRole="UserClient" />
-  </EntityType>
-  <EntityType Name="EOD">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="TerminalId" Type="Int32" Nullable="false" />
-    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Status" Type="Boolean" Nullable="false" />
-    <Property Name="timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-    <Property Name="Count" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_EOD_Terminal" FromRole="EOD" ToRole="Terminal" />
   </EntityType>
   <EntityType Name="IdentityService">
     <Key>
@@ -276,9 +268,9 @@
     <Property Name="HandlerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="HandlerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Agent" Relationship="CICSModel.FK_Terminal_Agent" FromRole="Terminal" ToRole="Agent" />
-    <NavigationProperty Name="EODs" Relationship="CICSModel.FK_EOD_Terminal" FromRole="Terminal" ToRole="EOD" />
     <NavigationProperty Name="TerminalUpdateLogs" Relationship="CICSModel.FK_TerminalUpdateLog_Terminal" FromRole="Terminal" ToRole="TerminalUpdateLog" />
     <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Terminal" FromRole="Terminal" ToRole="TransactionLog" />
+    <NavigationProperty Name="EODs" Relationship="CICSModel.FK_EOD_Terminal" FromRole="Terminal" ToRole="EOD" />
   </EntityType>
   <EntityType Name="TerminalLocation">
     <Key>
@@ -553,18 +545,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EOD_Terminal">
-    <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="1" />
-    <End Type="CICSModel.EOD" Role="EOD" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Terminal">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="EOD">
-        <PropertyRef Name="TerminalId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Notification_NotificationType">
     <End Type="CICSModel.NotificationType" Role="NotificationType" Multiplicity="0..1" />
     <End Type="CICSModel.Notification" Role="Notification" Multiplicity="*" />
@@ -640,6 +620,70 @@
       </Principal>
       <Dependent Role="UserClient">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EOD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TerminalId" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Count" Type="Int32" Nullable="false" />
+    <Property Name="TransactionReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_EOD_Terminal" FromRole="EOD" ToRole="Terminal" />
+    <NavigationProperty Name="EODPaymentNotificationLogs" Relationship="CICSModel.FK_EODPaymentNotificationLog_EOD" FromRole="EOD" ToRole="EODPaymentNotificationLog" />
+  </EntityType>
+  <Association Name="FK_EOD_Terminal">
+    <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="1" />
+    <End Type="CICSModel.EOD" Role="EOD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Terminal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EOD">
+        <PropertyRef Name="TerminalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EODPaymentNotificationLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EODId" Type="Int32" Nullable="false" />
+    <Property Name="SessionId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SourceBankCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ChannelCode" Type="Int32" Nullable="false" />
+    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BillerId" Type="Int32" Nullable="false" />
+    <Property Name="BillerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Fee" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TransactionFeeBearer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SplitType" Type="Int32" Nullable="false" />
+    <Property Name="DestinationBankCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Narration" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentReference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TransactionInitiatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TransactionApprovalDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="EOD" Relationship="CICSModel.FK_EODPaymentNotificationLog_EOD" FromRole="EODPaymentNotificationLog" ToRole="EOD" />
+  </EntityType>
+  <Association Name="FK_EODPaymentNotificationLog_EOD">
+    <End Type="CICSModel.EOD" Role="EOD" Multiplicity="1" />
+    <End Type="CICSModel.EODPaymentNotificationLog" Role="EODPaymentNotificationLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EOD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EODPaymentNotificationLog">
+        <PropertyRef Name="EODId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

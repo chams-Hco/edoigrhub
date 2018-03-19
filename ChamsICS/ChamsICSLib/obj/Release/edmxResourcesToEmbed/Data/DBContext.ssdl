@@ -66,6 +66,31 @@
     <Property Name="Status" Type="bit" Nullable="false" />
     <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="TransactionReference" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EODPaymentNotificationLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EODId" Type="int" Nullable="false" />
+    <Property Name="SessionId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SourceBankCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ChannelCode" Type="int" Nullable="false" />
+    <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BillerId" Type="int" Nullable="false" />
+    <Property Name="BillerName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Fee" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TransactionFeeBearer" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SplitType" Type="int" Nullable="false" />
+    <Property Name="DestinationBankCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Narration" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PaymentReference" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TransactionInitiatedDate" Type="datetime" Nullable="false" />
+    <Property Name="TransactionApprovalDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="IdentityService">
     <Key>
@@ -347,6 +372,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EODPaymentNotificationLog_EOD">
+    <End Role="EOD" Type="Self.EOD" Multiplicity="1" />
+    <End Role="EODPaymentNotificationLog" Type="Self.EODPaymentNotificationLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EOD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EODPaymentNotificationLog">
+        <PropertyRef Name="EODId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IdentityService_Client">
     <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
     <End Role="IdentityService" Type="Self.IdentityService" Multiplicity="*" />
@@ -527,6 +564,7 @@
     <EntitySet Name="AuditTrail" EntityType="Self.AuditTrail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EOD" EntityType="Self.EOD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EODPaymentNotificationLog" EntityType="Self.EODPaymentNotificationLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IdentityService" EntityType="Self.IdentityService" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ministry" EntityType="Self.Ministry" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
@@ -553,6 +591,10 @@
     <AssociationSet Name="FK_EOD_Terminal" Association="Self.FK_EOD_Terminal">
       <End Role="Terminal" EntitySet="Terminal" />
       <End Role="EOD" EntitySet="EOD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EODPaymentNotificationLog_EOD" Association="Self.FK_EODPaymentNotificationLog_EOD">
+      <End Role="EOD" EntitySet="EOD" />
+      <End Role="EODPaymentNotificationLog" EntitySet="EODPaymentNotificationLog" />
     </AssociationSet>
     <AssociationSet Name="FK_IdentityService_Client" Association="Self.FK_IdentityService_Client">
       <End Role="Client" EntitySet="Client" />

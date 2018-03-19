@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio\2017\enterprise\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="15.0">
+ <Targets>
+  <Target Name="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll">
+   <Modules>
+    <Module Name="chamsicslib.dll">
+     <Namespaces>
+      <Namespace Name="ChamsICSLib.Data">
+       <Types>
+        <Type Name="Agent" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Agent.cs" Line="18">'Agent.Agent()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Agent..ctor()&#xD;&#xA;Agent.set_Terminals(ICollection&lt;Terminal&gt;):Void</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Agent.cs" Line="18">'Agent.Agent()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Agent..ctor()&#xD;&#xA;Agent.set_TransactionLogs(ICollection&lt;TransactionLog&gt;):Void</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Agent.cs" Line="18">'Agent.Agent()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Agent..ctor()&#xD;&#xA;Agent.set_UserAgents(ICollection&lt;UserAgent&gt;):Void</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Terminals" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+          <Member Name="#TransactionLogs" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+          <Member Name="#UserAgents" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Client" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Client.cs" Line="18">'Client.Client()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Client..ctor()&#xD;&#xA;Client.set_Agents(ICollection&lt;Agent&gt;):Void</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Client.cs" Line="18">'Client.Client()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Client..ctor()&#xD;&#xA;Client.set_IdentityServices(ICollection&lt;IdentityService&gt;):Void</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Client.cs" Line="18">'Client.Client()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Client..ctor()&#xD;&#xA;Client.set_Revenues(ICollection&lt;Revenue&gt;):Void</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Client.cs" Line="18">'Client.Client()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Client..ctor()&#xD;&#xA;Client.set_TransactionLogs(ICollection&lt;TransactionLog&gt;):Void</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Client.cs" Line="18">'Client.Client()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Client..ctor()&#xD;&#xA;Client.set_UserClients(ICollection&lt;UserClient&gt;):Void</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Client.cs" Line="18">'Client.Client()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Client..ctor()&#xD;&#xA;Client.set_Users(ICollection&lt;User&gt;):Void</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Agents" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+          <Member Name="#IdentityServices" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+          <Member Name="#Revenues" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+          <Member Name="#TransactionLogs" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+          <Member Name="#UserClients" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+          <Member Name="#Users" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="EOD" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="EOD.cs" Line="18">'EOD.EOD()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;EOD..ctor()&#xD;&#xA;EOD.set_EODPaymentNotificationLogs(ICollection&lt;EODPaymentNotificationLog&gt;):Void</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#EODPaymentNotificationLogs" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="NotificationType" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="NotificationType.cs" Line="18">'NotificationType.NotificationType()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;NotificationType..ctor()&#xD;&#xA;NotificationType.set_Notifications(ICollection&lt;Notification&gt;):Void</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Notifications" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Terminal" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Terminal.cs" Line="18">'Terminal.Terminal()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Terminal..ctor()&#xD;&#xA;Terminal.set_EODs(ICollection&lt;EOD&gt;):Void</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Terminal.cs" Line="18">'Terminal.Terminal()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Terminal..ctor()&#xD;&#xA;Terminal.set_TerminalUpdateLogs(ICollection&lt;TerminalUpdateLog&gt;):Void</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="Terminal.cs" Line="18">'Terminal.Terminal()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;Terminal..ctor()&#xD;&#xA;Terminal.set_TransactionLogs(ICollection&lt;TransactionLog&gt;):Void</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#EODs" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+          <Member Name="#TerminalUpdateLogs" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+          <Member Name="#TransactionLogs" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="User" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="User.cs" Line="18">'User.User()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;User..ctor()&#xD;&#xA;User.set_UserAgents(ICollection&lt;UserAgent&gt;):Void</Issue>
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="User.cs" Line="18">'User.User()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;User..ctor()&#xD;&#xA;User.set_UserClients(ICollection&lt;UserClient&gt;):Void</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#UserAgents" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+          <Member Name="#UserClients" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="UserRole" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Data" File="UserRole.cs" Line="18">'UserRole.UserRole()' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;UserRole..ctor()&#xD;&#xA;UserRole.set_Users(ICollection&lt;User&gt;):Void</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Users" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="ExcludedInSource" Created="2018-02-21 18:27:32Z" FixCategory="Breaking" LastSeen="0001-01-01 00:00:00Z" />
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="ChamsICSLib.Utilities">
+       <Types>
+        <Type Name="AESEncryption" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Decrypt(System.String,System.String,System.String,System.String,System.Int32,System.String,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="EASEnctyption.cs" Line="119">Object 'CryptoStream' can be disposed more than once in method 'AESEncryption.Decrypt(string, string, string, string, int, string, int)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 119</Issue>
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="EASEnctyption.cs" Line="118">Object 'MemStream' can be disposed more than once in method 'AESEncryption.Decrypt(string, string, string, string, int, string, int)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 118, 119, 120</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Encrypt(System.String,System.String,System.String,System.String,System.Int32,System.String,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="EASEnctyption.cs" Line="75">Object 'CryptoStream' can be disposed more than once in method 'AESEncryption.Encrypt(string, string, string, string, int, string, int)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 75</Issue>
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="EASEnctyption.cs" Line="74">Object 'MemStream' can be disposed more than once in method 'AESEncryption.Encrypt(string, string, string, string, int, string, int)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 74, 75, 76</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="CryptoRandom" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">Implement IDisposable on 'CryptoRandom' because it creates members of the following IDisposable types: 'RNGCryptoServiceProvider'. If 'CryptoRandom' has previously shipped, adding new members that implement IDisposable to this type is considered a breaking change to existing consumers.</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="Dice" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">Implement IDisposable on 'Dice' because it creates members of the following IDisposable types: 'RNGCryptoServiceProvider'. If 'Dice' has previously shipped, adding new members that implement IDisposable to this type is considered a breaking change to existing consumers.</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="SecureRandom" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">Implement IDisposable on 'SecureRandom' because it creates members of the following IDisposable types: 'RNGCryptoServiceProvider'. If 'SecureRandom' has previously shipped, adding new members that implement IDisposable to this type is considered a breaking change to existing consumers.</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="Security" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Decrypt(System.String)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="Security.cs" Line="146">Object 'cs' can be disposed more than once in method 'Security.Decrypt(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 146</Issue>
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="Security.cs" Line="146">Object 'ms' can be disposed more than once in method 'Security.Decrypt(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 146, 148</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Encrypt(System.String)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="Security.cs" Line="123">Object 'cs' can be disposed more than once in method 'Security.Encrypt(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 123</Issue>
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="Security.cs" Line="123">Object 'ms' can be disposed more than once in method 'Security.Encrypt(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 123, 125</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#EncryptFile(System.String,System.String,System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="Security.cs" Line="55">Object 'fsEncrypted' can be disposed more than once in method 'Security.EncryptFile(string, string, string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 55</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ZeroMemory(System.IntPtr,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">Because it is a P/Invoke method, 'Security.ZeroMemory(IntPtr, int)' should be defined in a class named NativeMethods, SafeNativeMethods, or UnsafeNativeMethods.</Issue>
+            </Message>
+            <Message TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="Breaking">
+             <Issue Certainty="50" Level="CriticalError">Change the accessibility of P/Invoke 'Security.ZeroMemory(IntPtr, int)' so that it is no longer visible from outside its assembly.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Utils" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#PerformCryptoGraphicAction(System.Byte[],System.Security.Cryptography.ICryptoTransform)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="Utils.cs" Line="79">Object 'ms' can be disposed more than once in method 'Utils.PerformCryptoGraphicAction(byte[], ICryptoTransform)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 79</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="XMLHelper" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#serializeObjectToXMLString(System.Object)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="XMLHelper.cs" Line="28">Object 'ms' can be disposed more than once in method 'XMLHelper.serializeObjectToXMLString(object)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 28</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#XmlSerialize(System.Object)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2018-02-21 18:27:32Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\Utilities" File="XMLHelper.cs" Line="73">Object 'stringWriter' can be disposed more than once in method 'XMLHelper.XmlSerialize(object)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 73</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227">
+   <Name>Collection properties should be read only</Name>
+   <Description>Properties that return collections should be read-only so that users cannot entirely replace the backing store. Users can still modify the contents of the collection by calling relevant methods on the collection. Note that the XmlSerializer class has special support for deserializing read-only collections. See the XmlSerializer overview for more information.</Description>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182327.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="usagerules.dll" Version="15.0.0.0" />
+  </Rule>
+  <Rule TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202">
+   <Name>Do not dispose objects multiple times</Name>
+   <Description>A correctly implemented Dispose method can be called multiple times without throwing an exception. However, this is not guaranteed and to avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.</Description>
+   <Resolution Name="Default">Object {0} can be disposed more than once in method {1}. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 73</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182334.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="15.0.0.0" />
+  </Rule>
+  <Rule TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214">
+   <Name>Do not call overridable methods in constructors</Name>
+   <Description>Virtual methods defined on the class should not be called from constructors. If a derived class has overridden the method, the derived class version will be called (before the derived class constructor is called).</Description>
+   <Resolution Name="Default">{0} contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: {1}</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182331.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalWarning</MessageLevel>
+   <File Name="usagerules.dll" Version="15.0.0.0" />
+  </Rule>
+  <Rule TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060">
+   <Name>Move P/Invokes to NativeMethods class</Name>
+   <Description>This type contains members with the DllImport attribute. Members with the DllImport attribute should be contained in classes named NativeMethods, SafeNativeMethods, or UnsafeNativeMethods.</Description>
+   <Resolution Name="Default">Because it is a P/Invoke method, {0} should be defined in a class named NativeMethods, SafeNativeMethods, or UnsafeNativeMethods.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182161.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalWarning</MessageLevel>
+   <File Name="designrules.dll" Version="15.0.0.0" />
+  </Rule>
+  <Rule TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401">
+   <Name>P/Invokes should not be visible</Name>
+   <Description>Interop layer should not be public. The DllImport attribute should not be applied to publicly accessible members (public or protected).</Description>
+   <Resolution Name="Default">Change the accessibility of P/Invoke {0} so that it is no longer visible from outside its assembly.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182209.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="50">CriticalError</MessageLevel>
+   <File Name="interoperabilityrules.dll" Version="15.0.0.0" />
+  </Rule>
+  <Rule TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001">
+   <Name>Types that own disposable fields should be disposable</Name>
+   <Description>Types that declare disposable members should also implement IDisposable. If the type does not own any unmanaged resources, do not implement a finalizer on it.</Description>
+   <Resolution Name="DependsOnFix">Implement IDisposable on {0} because it creates members of the following IDisposable types: {1}. If {0} has previously shipped, adding new members that implement IDisposable to this type is considered a breaking change to existing consumers.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182172.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="designrules.dll" Version="15.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Category</String>
+  <String Key="Certainty">Certainty</String>
+  <String Key="CollapseAll">Collapse All</String>
+  <String Key="CheckId">Check Id</String>
+  <String Key="Error">Error</String>
+  <String Key="Errors">error(s)</String>
+  <String Key="ExpandAll">Expand All</String>
+  <String Key="Help">Help</String>
+  <String Key="Line">Line</String>
+  <String Key="Messages">message(s)</String>
+  <String Key="LocationNotStoredInPdb">[Location not stored in Pdb]</String>
+  <String Key="Project">Project</String>
+  <String Key="Resolution">Resolution</String>
+  <String Key="Rule">Rule</String>
+  <String Key="RuleFile">Rule File</String>
+  <String Key="RuleDescription">Rule Description</String>
+  <String Key="Source">Source</String>
+  <String Key="Status">Status</String>
+  <String Key="Target">Target</String>
+  <String Key="Warning">Warning</String>
+  <String Key="Warnings">warning(s)</String>
+  <String Key="ReportTitle">Code Analysis Report</String>
+ </Localized>
+</FxCopReport>

@@ -60,19 +60,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="EODs">
-      <EntityTypeMapping TypeName="CICSModel.EOD">
-        <MappingFragment StoreEntitySet="EOD">
-          <ScalarProperty Name="Count" ColumnName="Count" />
-          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="IdentityServices">
       <EntityTypeMapping TypeName="CICSModel.IdentityService">
         <MappingFragment StoreEntitySet="IdentityService">
@@ -345,6 +332,45 @@
         <MappingFragment StoreEntitySet="UserRole">
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EODs">
+      <EntityTypeMapping TypeName="CICSModel.EOD">
+        <MappingFragment StoreEntitySet="EOD">
+          <ScalarProperty Name="TransactionReference" ColumnName="TransactionReference" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EODPaymentNotificationLogs">
+      <EntityTypeMapping TypeName="CICSModel.EODPaymentNotificationLog">
+        <MappingFragment StoreEntitySet="EODPaymentNotificationLog">
+          <ScalarProperty Name="TransactionApprovalDate" ColumnName="TransactionApprovalDate" />
+          <ScalarProperty Name="TransactionInitiatedDate" ColumnName="TransactionInitiatedDate" />
+          <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="DestinationBankCode" ColumnName="DestinationBankCode" />
+          <ScalarProperty Name="SplitType" ColumnName="SplitType" />
+          <ScalarProperty Name="TransactionFeeBearer" ColumnName="TransactionFeeBearer" />
+          <ScalarProperty Name="Fee" ColumnName="Fee" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="BillerName" ColumnName="BillerName" />
+          <ScalarProperty Name="BillerId" ColumnName="BillerId" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="ChannelCode" ColumnName="ChannelCode" />
+          <ScalarProperty Name="SourceBankCode" ColumnName="SourceBankCode" />
+          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+          <ScalarProperty Name="EODId" ColumnName="EODId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

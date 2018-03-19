@@ -121,3 +121,5 @@ C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrh
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.csproj.CoreCompileInputs.cache
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.exe
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\ICSWinService.exe.CodeAnalysisLog.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ICSWinService\bin\Debug\ICSWinService.exe.lastcodeanalysissucceeded

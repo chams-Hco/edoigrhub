@@ -476,7 +476,7 @@ namespace ChamsICSWebService
             string terminalCode = string.Empty;
             try
             {
-                res = ServiceHelper.createEODTransaction(req, out msg, out terminalCode, out bool isCreated);
+                res = ServiceHelper.CreateEODTransaction(req, out msg, out bool isCreated);
                 if (isCreated == false)
                 {
                     //Log Failed Upload Request
@@ -554,7 +554,7 @@ namespace ChamsICSWebService
         public ValidationResponse ValidateTransaction(ValidationRequest req)
         {
             var res = new ValidationResponse();
-            var data = new string[] { };
+            //var paramList = new List<Param>();
             string errorCode = "";
             if (req == null)
             {
@@ -562,19 +562,17 @@ namespace ChamsICSWebService
             }
             string msg = string.Empty;
             string terminalCode = string.Empty;
+            //Authenticate the service call
+            
             try
             {
-                var isValid = ServiceHelper.ValidateEODTransaction(req, out msg, out data, out errorCode);
+                var isValid = ServiceHelper.ValidateEODTransaction(req, out msg, out List<Param> param, out errorCode);
+                res.Param = param;
                 if (isValid)
                 {
-                    res.ResponseCode = errorCode;
+                    res.ResponseCode = NIBSSResponseHelper.ApprovedOrCompleted;
                     res.NextStep = 0;
                     res.BillerID = req.BillerID;
-                    res.Param.Add(new Param { Key = "Name", Value = data[1] });
-                    res.Param.Add(new Param { Key = "Status", Value = data[2] });
-                    res.Param.Add(new Param { Key = "amount", Value = req.Amount.ToString() });
-                    res.Param.Add(new Param { Key = "Phone Number", Value = data[0] });
-                    res.Param.Add(new Param { Key = "Email", Value = data[3] });
                 }
                 else
                 {
@@ -593,16 +591,15 @@ namespace ChamsICSWebService
             catch (Exception e)
             {
                 Logger.logToFile(e, ErrorLogPath);
-                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseCode = NIBSSResponseHelper.SystemMalfunction;
             }
-            
+            res.ResponseMessage = NIBSSResponseHelper.getResponseMessage(res.ResponseCode);
             return res;
         }
 
         public NotificationResponse SendNotification(NotificationRequest req)
         {
             var res = new NotificationResponse();
-            var data = new string[] { };
             string errorCode = "";
             if (req == null)
             {
@@ -610,17 +607,16 @@ namespace ChamsICSWebService
             }
             string msg = string.Empty;
             string terminalCode = string.Empty;
+            //Authenticate the service call
+            
             try
             {
-                var isValid = ServiceHelper.SendEODNotification(req, out msg, out data, out errorCode);
+                var isValid = ServiceHelper.SendEODNotification(req, out msg, out List<Param> param, out errorCode);
+                res.Param = param;
                 if (isValid)
                 {
-                    res.ResponseCode = errorCode;
+                    res.ResponseCode = NIBSSResponseHelper.ApprovedOrCompleted;
                     res.BillerID = req.BillerID;
-                    res.Param.Add(new Param { Key = "amount", Value = req.Amount.ToString() });
-                    res.Param.Add(new Param { Key = "Phone Number", Value = data[0] });
-                    res.Param.Add(new Param { Key = "Name", Value = data[1] });
-                    res.Param.Add(new Param { Key = "Email", Value = data[2] });
                 }
                 else
                 {
@@ -639,9 +635,9 @@ namespace ChamsICSWebService
             catch (Exception e)
             {
                 Logger.logToFile(e, ErrorLogPath);
-                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseCode = NIBSSResponseHelper.SystemMalfunction;
             }
-            res.ResponseMessage = NIBSSResponseHelper.getResponseMessage(errorCode);
+            res.ResponseMessage = NIBSSResponseHelper.getResponseMessage(res.ResponseCode);
             return res;
         }
     }

@@ -77,4 +77,5 @@ C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrh
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csproj.CoreCompileInputs.cache
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
-C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.CodeAnalysisLog.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.lastcodeanalysissucceeded

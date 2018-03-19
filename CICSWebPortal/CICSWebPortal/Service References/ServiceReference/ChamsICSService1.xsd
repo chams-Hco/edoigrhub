@@ -293,7 +293,7 @@
   <xs:element name="QueryEndOfDayStatusRes" nillable="true" type="tns:QueryEndOfDayStatusRes" />
   <xs:complexType name="ValidationRequest">
     <xs:complexContent mixed="false">
-      <xs:extension base="tns:EODServiceBaseReq">
+      <xs:extension base="tns:NIBSSEODServiceBaseReq">
         <xs:sequence>
           <xs:element minOccurs="0" name="InstitutionCode" type="xs:int" />
           <xs:element minOccurs="0" name="SourceBankName" nillable="true" type="xs:string" />
@@ -304,7 +304,7 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ValidationRequest" nillable="true" type="tns:ValidationRequest" />
-  <xs:complexType name="EODServiceBaseReq">
+  <xs:complexType name="NIBSSEODServiceBaseReq">
     <xs:sequence>
       <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
       <xs:element minOccurs="0" name="BillerID" type="xs:int" />
@@ -318,7 +318,7 @@
       <xs:element minOccurs="0" name="SourceBankCode" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="EODServiceBaseReq" nillable="true" type="tns:EODServiceBaseReq" />
+  <xs:element name="NIBSSEODServiceBaseReq" nillable="true" type="tns:NIBSSEODServiceBaseReq" />
   <xs:complexType name="ArrayOfParam">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Param" nillable="true" type="tns:Param" />
@@ -333,17 +333,27 @@
   </xs:complexType>
   <xs:element name="Param" nillable="true" type="tns:Param" />
   <xs:complexType name="ValidationResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="BillerID" type="xs:int" />
-      <xs:element minOccurs="0" name="NextStep" type="xs:int" />
-      <xs:element minOccurs="0" name="Param" nillable="true" type="tns:ArrayOfParam" />
-      <xs:element minOccurs="0" name="ResponseCode" nillable="true" type="xs:string" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NIBSSEODServiceBaseRes">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="NextStep" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="ValidationResponse" nillable="true" type="tns:ValidationResponse" />
+  <xs:complexType name="NIBSSEODServiceBaseRes">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BillerID" type="xs:int" />
+      <xs:element minOccurs="0" name="Param" nillable="true" type="tns:ArrayOfParam" />
+      <xs:element minOccurs="0" name="ResponseCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResponseMessage" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NIBSSEODServiceBaseRes" nillable="true" type="tns:NIBSSEODServiceBaseRes" />
   <xs:complexType name="NotificationRequest">
     <xs:complexContent mixed="false">
-      <xs:extension base="tns:EODServiceBaseReq">
+      <xs:extension base="tns:NIBSSEODServiceBaseReq">
         <xs:sequence>
           <xs:element minOccurs="0" name="DestinationBankCode" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Fee" type="xs:decimal" />
@@ -361,13 +371,13 @@
   </xs:complexType>
   <xs:element name="NotificationRequest" nillable="true" type="tns:NotificationRequest" />
   <xs:complexType name="NotificationResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="BillerID" type="xs:int" />
-      <xs:element minOccurs="0" name="Param" nillable="true" type="tns:ArrayOfParam" />
-      <xs:element minOccurs="0" name="ResponseCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ResponseMessage" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="SessionID" nillable="true" type="xs:string" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NIBSSEODServiceBaseRes">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SessionID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="NotificationResponse" nillable="true" type="tns:NotificationResponse" />
   <xs:complexType name="GetUserInvoicesRes">
