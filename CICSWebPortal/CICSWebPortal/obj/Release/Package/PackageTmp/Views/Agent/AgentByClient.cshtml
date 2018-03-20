@@ -1,22 +1,22 @@
 ﻿@model IEnumerable<CICSWebPortal.Models.Agent>
 @{
-    ViewBag.Title = "Zones";
+    ViewBag.Title = "Agents";
 }
 
 <div id="breadcrumb">
     <ul class="breadcrumb">
         <li><i class="fa fa-home"></i><a href="#"> Home</a></li>
-        <li class="active">Zones</li>
+        <li class="active">Agents</li>
     </ul>
 </div><!-- /breadcrumb-->
 <div class="main-header clearfix">
 
-    <h3 class="text-center">Zones</h3>
+    <h3 class="text-center">Agents</h3>
 </div><!-- /main-header -->
 
 <div class="panel panel-default table-responsive">
     <div class="panel-heading">
-        <a data-target='#add_modal' role="button" class="btn btn-primary  btn_add" data-toggle="modal">Add Zone</a>
+        <a data-target='#add_modal' role="button" class="btn btn-primary  btn_add" data-toggle="modal">Add Agent</a>
         <span class="label label-info pull-right">
             @{
                 if (Model.Any())

@@ -19,5 +19,7 @@ namespace CICSWebPortal.Models
 
         public string SerialNumber { get; set; }
         public bool status { get; set; }
+
+
     }
 }

@@ -85,7 +85,7 @@
     <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Fee" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="TransactionFeeBearer" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="SplitType" Type="int" Nullable="false" />
+    <Property Name="SplitType" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="DestinationBankCode" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Narration" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="PaymentReference" Type="varchar" MaxLength="50" Nullable="false" />

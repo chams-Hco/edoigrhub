@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
-
+using System.Xml.Serialization;
 namespace ChamsICSWebService.Model
 {
     public class EndOfDayModel
@@ -78,26 +79,6 @@ namespace ChamsICSWebService.Model
         [DataMember]
         public string TransactionRef { get; set; }
     }
-    /// <summary>
-    /// Model that holds data passed by external caller to validate if an EOD transaction exists
-    /// </summary>
-    [DataContract]
-    public class ValidateEndOfDayReq
-    {
-        [DataMember]
-        public string TransactionRef { get; set; }
-        [DataMember]
-        public string SourceBankCode { get; set; }
-    }
-    /// <summary>
-    /// model that holds the data to be returned to external caller after validate an EOD transactioni
-    /// </summary>
-    [DataContract]
-    public class ValidateEndOfDayRes : Response
-    {
-        [DataMember]
-        public EndOfDayModel EODTransaction { get; set; }
-    }
 
     /// <summary>
     /// Model that holds data passed by external caller to check payment status of an EOD transaction
@@ -127,44 +108,98 @@ namespace ChamsICSWebService.Model
     /// <summary>
     /// 
     /// </summary>
-    [DataContract]
+    //[DataContract]
+    [Serializable]
     public class NIBSSEODServiceBaseReq
     {
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "SourceBankCode")]
         public string SourceBankCode { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "ChannelCode")]
         public int ChannelCode { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "CustomerName")]
         public string CustomerName { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "CustomerAccountNumber")]
         public string CustomerAccountNumber { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "BillerID")]
         public int BillerID { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "BillerName")]
         public string BillerName { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "ProductID")]
         public int ProductID { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "ProductName")]
         public string ProductName { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "Amount")]
         public decimal Amount { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "Param")]
         public List<Param> Param { get; set; } = new List<Param>();
+        //[DataMember]
+        //public Param Param { get; set; }
     }
     /// <summary>
     /// Model that holds request data from NIBSS to validate a transaction
     /// </summary>
+    //[DataContract]
     [DataContract]
-    public class ValidationRequest : NIBSSEODServiceBaseReq
+    public class ValidationRequest
     {
         [DataMember]
+        [XmlElement(ElementName = "SourceBankCode")]
+        public string SourceBankCode { get; set; }
+        [DataMember]
+        [XmlElement(ElementName = "ChannelCode")]
+        public int ChannelCode { get; set; }
+        [DataMember]
+        [XmlElement(ElementName = "CustomerName")]
+        public string CustomerName { get; set; }
+        [DataMember]
+        [XmlElement(ElementName = "CustomerAccountNumber")]
+        public string CustomerAccountNumber { get; set; }
+        [DataMember]
+        [XmlElement(ElementName = "BillerID")]
+        public int BillerID { get; set; }
+        [DataMember]
+        [XmlElement(ElementName = "BillerName")]
+        public string BillerName { get; set; }
+        [DataMember]
+        [XmlElement(ElementName = "ProductID")]
+        public int ProductID { get; set; }
+        [DataMember]
+        [XmlElement(ElementName = "ProductName")]
+        public string ProductName { get; set; }
+        [DataMember]
+        [XmlElement(ElementName = "Amount")]
+        public decimal Amount { get; set; }
+        [DataMember]
+        [XmlElement("Param")]
+        //[XmlArray(ElementName = "Param", IsNullable = false, Order = 1)]
+        public List<Param> Param { get; set; } = new List<Param>();
+
+
+
+        //[DataMember]
+        [XmlElement(ElementName = "SourceBankName")]
         public string SourceBankName { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "InstitutionCode")]
         public int InstitutionCode { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "Step")]
         public int Step { get; set; }
-        [DataMember]
+        //[DataMember]
+        [XmlElement(ElementName = "StepCount")]
         public string StepCount { get; set; }
+        //[DataMember]
+        //public Param Param { get; set; }
     }
 
     public class Param
@@ -175,6 +210,8 @@ namespace ChamsICSWebService.Model
     /// <summary>
     /// Model that holds response data sent to NIBSS for transaction validation
     /// </summary>
+    //[Serializable]
+    //[XmlRoot(IsNullable = false)]
     [DataContract]
     public class ValidationResponse : NIBSSEODServiceBaseRes
     {
@@ -194,7 +231,7 @@ namespace ChamsICSWebService.Model
         [DataMember]
         public string TransactionFeeBearer { get; set; }
         [DataMember]
-        public int SplitType { get; set; }
+        public string SplitType { get; set; }
         [DataMember]
         public string DestinationBankCode { get; set; }
         [DataMember]
@@ -205,9 +242,10 @@ namespace ChamsICSWebService.Model
         public long TransactionInitiatedDate { get; set; }
         [DataMember]
         public long TransactionApprovalDate { get; set; }
+        //[DataMember]
+        //public List<Param> Params { get; set; } = new List<Param>();
     }
 
-    [DataContract]
     public class NotificationResponse : NIBSSEODServiceBaseRes
     {
         [DataMember]
@@ -225,5 +263,13 @@ namespace ChamsICSWebService.Model
         public string ResponseMessage { get; set; }
         [DataMember]
         public List<Param> Param { get; set; } = new List<Param>();
+    }
+
+    [DataContract]
+    public class CustomStreamContent : System.Net.Http.StreamContent
+    {
+        public CustomStreamContent(Stream content) : base(content)
+        {
+        }
     }
 }

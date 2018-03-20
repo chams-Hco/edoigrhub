@@ -1035,7 +1035,7 @@ namespace ChamsICSWebService
                 }
                 else
                 {
-                    msg = $"failed to create End Of Day transaction for terminal with code {endOfDayRes.TerminalCode}";
+                    msg = $"failed to create End Of Day transaction for terminal with code {endOfDayRes.TerminalCode}, Couldnt connect to DB";
                 }
             }
             else
@@ -1107,62 +1107,36 @@ namespace ChamsICSWebService
             msg = "";
             errorCode = "";
             var data = SortParams(req.Param, NIBSSRequestHelper.VALIDATIONREQUEST, out msg);
+            //var data = SortParams(new List<Param> { req.Param }, NIBSSRequestHelper.VALIDATIONREQUEST, out msg);
             param = new List<Param>();
-            //req.Params.Count > 0 ? req.Params.ToList().ForEach(x => 
-            //    x.Key.Equals("amount")
-            //);
-
             //exit method if there is an error msg
             if (msg != "")
             {
                 errorCode = NIBSSResponseHelper.FormatError;
                 return isValid;
             }
-
-            //if (AuthenticateRequestSender(data[2], data[3]) == false)
-            //{
-            //    errorCode = NIBSSResponseHelper.InvalidSender;
-            //    return isValid;
-            //}
-
             //assign sorted params to their respective variables
-            string remittanceCode = "", amount = "", phoneNumber = "", email = "", name = "";
-            //if (data.Length == 5)
-            //{
-            //    remittanceCode = data[4]; amount = data[0]; phoneNumber = data[1]; email = data[2]; name = data[3];
-            //}
-            if (data.Length == 4)
+            string remittanceCode = "";
+            if (data.Length == 1)
             {
-                remittanceCode = data[1]; amount = data[0];
+                remittanceCode = data[0];
             }
-
-            msg = Decimal.TryParse(amount, out decimal decimalAmount) ? "" : "Failed to convert string amount to decimal";
-            // exit if there is an error msg in converting from string to decimal
-            if (msg != "")
-            {
-                errorCode = NIBSSResponseHelper.FormatError;
-                return isValid;
-            }
-
-            var eod = db.EODs.SingleOrDefault(x => x.TransactionReference == remittanceCode && x.Amount == decimalAmount && x.Status == false);
+            //fetch transaction from DB
+            var eod = db.EODs.SingleOrDefault(x => x.TransactionReference == remittanceCode && x.Status == false);
             if (eod == null)
             {
                 msg = "Invalid End Of Day Transaction";
                 errorCode = NIBSSResponseHelper.UnableToLocateRecord;
                 param.Add(new Param { Key = "Status", Value = "InValid" });
                 param.Add(new Param { Key = "RemittanceCode", Value = remittanceCode });
-                param.Add(new Param { Key = "Amount", Value = amount });
+                param.Add(new Param { Key = "Amount", Value = eod.Amount.ToString() });
             }
             else
             {
-                isValid = true;
-                phoneNumber = eod.Terminal.Agent.Phone1 ?? eod.Terminal.Agent.Phone2;
-                name = eod.Terminal.Agent.Name;
-                email = eod.Terminal.Agent.Email;
-                param.Add(new Param { Key = "Amount", Value = amount });
-                param.Add(new Param { Key = "PhoneNumber", Value = phoneNumber });
-                param.Add(new Param { Key = "Name", Value = name });
-                param.Add(new Param { Key = "Email", Value = email });
+                param.Add(new Param { Key = "Amount", Value = eod.Amount.ToString() });
+                param.Add(new Param { Key = "PhoneNumber", Value = eod.Terminal.Agent.Phone1 ?? eod.Terminal.Agent.Phone2 });
+                param.Add(new Param { Key = "Name", Value = eod.Terminal.Agent.Name });
+                param.Add(new Param { Key = "Email", Value = eod.Terminal.Agent.Email });
                 param.Add(new Param { Key = "Status", Value = "Valid" });
                 param.Add(new Param { Key = "RemittanceCode", Value = remittanceCode });
             }
@@ -1175,6 +1149,7 @@ namespace ChamsICSWebService
             msg = "";
             errorCode = "";
             var data = SortParams(req.Param, NIBSSRequestHelper.NOTIFICATIONREQUEST, out msg);
+            //var data = SortParams(new List<Param> { req.Param }, NIBSSRequestHelper.NOTIFICATIONREQUEST, out msg);
             param = new List<Param>();
             //exit method if there is an error msg
             if (msg != "")
@@ -1182,16 +1157,9 @@ namespace ChamsICSWebService
                 errorCode = NIBSSResponseHelper.FormatError;
                 return isValid;
             }
-
-            //if (AuthenticateRequestSender(data[5], data[6]) == false)
-            //{
-            //    errorCode = NIBSSResponseHelper.InvalidSender;
-            //    return isValid;
-            //}
-
             //assign sorted params to their respective variables
             string remittanceCode = "", amount = "", phoneNumber = "", email = "", name = "";
-            if (data.Length == 7)
+            if (data.Length == 5)
             {
                 remittanceCode = data[4]; amount = data[0]; phoneNumber = data[1]; email = data[2]; name = data[3];
             }
@@ -1278,12 +1246,6 @@ namespace ChamsICSWebService
             {
                 switch (item.Key.ToLower())
                 {
-                    //case "username":
-                    //    username = item.Value;
-                    //    break;
-                    //case "password":
-                    //    password = item.Value;
-                    //    break;
                     case "amount":
                         //msg = Decimal.TryParse(item.Value, out amount) ? "" : "Failed to convert string amount to decimal";
                         amount = item.Value;
@@ -1326,22 +1288,15 @@ namespace ChamsICSWebService
             switch (requestType)
             {
                 case NIBSSRequestHelper.VALIDATIONREQUEST:
-                    //msg = string.IsNullOrEmpty(data[5]) ? "Username parameter not provided" : "";
-                    //msg += string.IsNullOrEmpty(data[6]) ? "Password parameter not provided" : "";
-                    msg += string.IsNullOrEmpty(data[0]) ? "Amount parameter not provided" : "";
                     msg += string.IsNullOrEmpty(data[4]) ? "Remmittance parameter not provided" : "";
-                    //prepData = new string[] { data[0], data[4], data[5], data[6] };
-                    prepData = new string[] { data[0], data[4] };
+                    prepData = new string[] { data[4] };
                     break;
                 case NIBSSRequestHelper.NOTIFICATIONREQUEST:
-                    //msg = string.IsNullOrEmpty(data[5]) ? "Username parameter not provided" : "";
-                    //msg += string.IsNullOrEmpty(data[6]) ? "Password parameter not provided" : "";
                     msg = string.IsNullOrEmpty(data[0]) ? "Amount parameter not provided" : "";
                     msg += string.IsNullOrEmpty(data[1]) ? "Phone number parameter not provided" : "";
                     msg += string.IsNullOrEmpty(data[2]) ? "Email parameter not provided" : "";
                     msg += string.IsNullOrEmpty(data[3]) ? "Name parameter not provided" : "";
                     msg += string.IsNullOrEmpty(data[4]) ? "Remmittance parameter not provided" : "";
-                    //prepData = new string[] { data[0], data[1], data[2], data[3], data[4], data[5], data[6] };
                     prepData = new string[] { data[0], data[1], data[2], data[3], data[4] };
 
                     break;

@@ -10,6 +10,12 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel.Channels;
+using System.Xml;
+using System.IO;
+using System.Xml.Serialization;
+using System.Net;
+using System.Xml.Linq;
 
 namespace ChamsICSWebService
 {
@@ -501,12 +507,12 @@ namespace ChamsICSWebService
             {
                 Logger.logToFile(e, ErrorLogPath);
                 res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                res.ResponseDescription = "Application Error";
+                res.ResponseDescription = $"Application Error...\n{msg}...\n{e.Message}";
             }
             return res;
         }
 
-        public QueryEndOfDayStatusRes QueryEODStatus(string req)
+        public QueryEndOfDayStatusRes QueryEODStatus(QueryEndOfDayStatusReq req)
         {
             var res = new QueryEndOfDayStatusRes();
             if (req == null)
@@ -551,8 +557,15 @@ namespace ChamsICSWebService
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        public ValidationResponse ValidateTransaction(ValidationRequest req)
+        public string ValidateTransaction(CustomStreamContent streamContent)
         {
+            var stream = streamContent.ReadAsStreamAsync().Result;
+            //conversion
+            StreamReader reader = new StreamReader(stream);
+            string text = reader.ReadToEnd();
+            text.FromXml(typeof(ValidationRequest));
+            var req = new ValidationRequest() ;
+
             var res = new ValidationResponse();
             //var paramList = new List<Param>();
             string errorCode = "";
@@ -562,8 +575,12 @@ namespace ChamsICSWebService
             }
             string msg = string.Empty;
             string terminalCode = string.Empty;
-            //Authenticate the service call
-            
+
+            //Extract params key value pairs
+            //var req = request.ExtractNotificationRequest();
+            //var reqObject = request.FromXml(new ValidationRequest().GetType());
+            //var req = reqObject as ValidationRequest;
+
             try
             {
                 var isValid = ServiceHelper.ValidateEODTransaction(req, out msg, out List<Param> param, out errorCode);
@@ -594,10 +611,12 @@ namespace ChamsICSWebService
                 res.ResponseCode = NIBSSResponseHelper.SystemMalfunction;
             }
             res.ResponseMessage = NIBSSResponseHelper.getResponseMessage(res.ResponseCode);
-            return res;
+            return res.SerializeNIBSSResponse();
         }
 
-        public NotificationResponse SendNotification(NotificationRequest req)
+        
+
+        public string SendNotification(NotificationRequest req)
         {
             var res = new NotificationResponse();
             string errorCode = "";
@@ -607,8 +626,10 @@ namespace ChamsICSWebService
             }
             string msg = string.Empty;
             string terminalCode = string.Empty;
-            //Authenticate the service call
-            
+            //Extract params key value pairs
+            //var req = request.ExtractNotificationRequest();
+            //var reqObject = request.FromXml(new NotificationRequest().GetType());
+            //var req = reqObject as NotificationRequest;
             try
             {
                 var isValid = ServiceHelper.SendEODNotification(req, out msg, out List<Param> param, out errorCode);
@@ -617,6 +638,7 @@ namespace ChamsICSWebService
                 {
                     res.ResponseCode = NIBSSResponseHelper.ApprovedOrCompleted;
                     res.BillerID = req.BillerID;
+                    res.SessionID = req.SessionID;
                 }
                 else
                 {
@@ -625,10 +647,6 @@ namespace ChamsICSWebService
 
                     //====Log Failed status queries to File===
                     Logger.logToFile(msgLog, DebugLogPath + "\\Wrong_EOD_Notification\\", true, terminalCode, "xml", true);
-
-                    //====Log Failed Upload to Database====
-                    //ServiceHelper.UploadExceptionToDb(msg, req);
-
                     res.ResponseCode = errorCode;
                 }
             }
@@ -638,7 +656,8 @@ namespace ChamsICSWebService
                 res.ResponseCode = NIBSSResponseHelper.SystemMalfunction;
             }
             res.ResponseMessage = NIBSSResponseHelper.getResponseMessage(res.ResponseCode);
-            return res;
+
+            return res.SerializeNIBSSResponse();
         }
     }
 }

@@ -14,4 +14,9 @@ namespace ChamsICSWebService
         public const string VERIFICATION_SERVICE_ERROR = "1004";
         public const string UNKNOWN_ERROR = "1005";
     }
+    public class TAMSRequestHelper
+    {
+        public const string CREATIONREQUEST = "validation";
+        public const string STATUSREQUEST = "notification";
+    }
 }

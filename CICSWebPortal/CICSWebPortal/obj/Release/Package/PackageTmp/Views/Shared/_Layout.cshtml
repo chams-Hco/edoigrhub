@@ -1,6 +1,4 @@
-﻿@{ string displayStyle = string.Empty;
-    int roleId = Convert.ToInt32(Session["RoleId"]);
-    }
+﻿@{ string displayStyle = string.Empty;}
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,7 +85,7 @@
                                 <span class="menu-hover"></span>
                             </a>
                         </li>
-                        @{displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
+                        @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleId"]) > 2) { displayStyle = "display: none"; } }
                         <li style="@displayStyle">
                             <a href="/Client/">
                                 <span class="menu-icon">
@@ -100,7 +98,7 @@
                             </a>
 
                         </li>
-                        @{displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
+                        @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleId"]) > 2) { displayStyle = "display: none"; } }
                         <li style="@displayStyle">
                             <a href="/Identity/">
                                 <span class="menu-icon">
@@ -113,21 +111,20 @@
                                 <span class="menu-hover"></span>
                             </a>
                         </li>
-                        @{displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; } }
+                        @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleId"]) > 4) { displayStyle = "display: none"; } }
                         <li style="@displayStyle">
                             <a href="/Agent/">
                                 <span class="menu-icon">
                                     <i class="fa fa-tag fa-lg"></i>
                                 </span>
                                 <span class="text">
-                                    Zones
+                                    Agents
                                 </span>
 
                                 <span class="menu-hover"></span>
                             </a>
                         </li>
-                        @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
-                        <li style="@displayStyle">
+                        <li>
                             <a href="/Location/">
                                 <span class="menu-icon">
                                     <i class="fa fa-tag fa-lg"></i>
@@ -139,8 +136,7 @@
                                 <span class="menu-hover"></span>
                             </a>
                         </li>
-                        @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
-                        <li style="@displayStyle">
+                        <li>
                             <a href="/Terminal/">
                                 <span class="menu-icon">
                                     <i class="fa fa-tag fa-lg"></i>
@@ -153,8 +149,7 @@
                             </a>
 
                         </li>
-                        @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
-                        <li style="@displayStyle">
+                        <li>
                             <a href="/Transaction/">
                                 <span class="menu-icon">
                                     <i class="fa fa-tag fa-lg"></i>
@@ -167,97 +162,20 @@
                             </a>
 
                         </li>
-                       
-                        @*@{displayStyle = string.Empty; if (roleId != 3) { displayStyle = "display: none"; } }
-                        <li style="@displayStyle">
-                            <a href="/Invoice/">
+                        <li>
+                            <a href="/UploadError/">
                                 <span class="menu-icon">
                                     <i class="fa fa-tag fa-lg"></i>
                                 </span>
                                 <span class="text">
-                                    Invoices
+                                    Upload Errors
                                 </span>
 
                                 <span class="menu-hover"></span>
                             </a>
 
                         </li>
-                        @{displayStyle = string.Empty; if (roleId != 3) { displayStyle = "display: none"; } }
-                        <li style="@displayStyle">
-                            <a href="/Taxpayer/">
-                                <span class="menu-icon">
-                                    <i class="fa fa-tag fa-lg"></i>
-                                </span>
-                                <span class="text">
-                                    Taxpayers
-                                </span>
-
-                                <span class="menu-hover"></span>
-                            </a>
-
-                        </li>*@
-
-                        
-                       <!--for tax payers -->
-                        @{displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; } }
-                        <li style="@displayStyle" class="parent">
-                            <a href="/Wallet/">
-                                <span class="menu-icon">
-                                    <i class="fa fa-tag fa-lg"></i>
-                                </span>
-                                <span class="text">
-                                    Wallet
-                                </span>
-
-                                <span class="menu-hover"></span>
-                            </a>
-
-                        </li>
-                        @{displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; } }
-                        <li style="@displayStyle" class="parent">
-                            <a href="/Invoice/">
-                                <span class="menu-icon">
-                                    <i class="fa fa-tag fa-lg"></i>
-                                </span>
-                                <span class="text">
-                                    Invoices
-                                </span>
-
-                                <span class="menu-hover"></span>
-                            </a>
-
-                        </li>
-                        @{displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; } }
-                        <li style="@displayStyle" class="parent">
-                            <a href="/Payments/">
-                                <span class="menu-icon">
-                                    <i class="fa fa-tag fa-lg"></i>
-                                </span>
-                                <span class="text">
-                                    Payment
-                                </span>
-
-                                <span class="menu-hover"></span>
-                            </a>
-
-                        </li>
-                        @{displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; } }
-                        <li style="@displayStyle" class="parent">
-                            <a href="#">
-                                <span class="menu-icon">
-                                    <i class="fa fa-tag fa-lg"></i>
-                                </span>
-                                <span class="text">
-                                    Notification
-                                </span>
-
-                                <span class="menu-hover"></span>
-                            </a>
-
-                        </li>
-
-
-                        @{displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; } }
+                        @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleId"]) > 4) { displayStyle = "display: none"; } }
                         <li style="@displayStyle" class="parent">
                             <a href="#">
                                 <span data-toggle="collapse" data-target="#revenue-sub-menu">
@@ -317,7 +235,7 @@
                                 </span>
                             </a>
                             <ul class="nav-child collapse large" id="report-sub-menu">
-                                @{displayStyle = string.Empty; if (roleId > 4 && roleId != 7) { displayStyle = "display: none"; } }
+                                @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleId"]) > 4) { displayStyle = "display: none"; } }
                                 <li style="@displayStyle">
                                     <a href="/Report/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
@@ -325,24 +243,24 @@
                                     </a>
                                     <br />
                                 </li>
-                                @{displayStyle = string.Empty; if (!(roleId == 1 || roleId == 2)) { displayStyle = "display: none"; } }
+                                @{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleID"]) == 1 || Convert.ToInt32(Session["RoleID"]) == 2)) { displayStyle = "display: none"; } }
                                 <li style="@displayStyle">
                                     <a href="/Report/ClientSummary/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                        <span class="text"> Client Summary</span>
-                                    </a>
+                                            <span class="text"> Client Summary</span>
+</a>
+                                    @{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleId"]) == 3 || Convert.ToInt32(Session["RoleId"]) == 4)) { displayStyle = "display: none"; } }
                                 </li>  
-                                @{displayStyle = string.Empty; if (!(roleId == 3 || roleId == 4)) { displayStyle = "display: none"; } }                               
                                 <li style="@displayStyle">
                                     <a href="/Report/AgentSummary/"> 
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                        <span class="text"> Zone Summary</span>
+                                        <span class="text"> Agent Summary</span>
                                     </a>
                                 </li>
                                 <li style="@displayStyle">
                                     <a href="/Report/PeriodicDashBoard/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                        <span class="text"> Zone Positions</span>
+                                        <span class="text"> Agent Positions</span>
                                     </a>
                                 </li>
                                 <li style="@displayStyle">
@@ -361,12 +279,6 @@
                                     <a href="/Report/TransactionStatement/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
                                         <span class="text">Transaction Statement</span>
-                                    </a>
-                                </li> 
-                                <li>
-                                    <a href="/Report/EndOfDayReport/">
-                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                        <span class="text">End Of Day Report</span>
                                     </a>
                                 </li>
                             </ul>
@@ -473,11 +385,6 @@
             $("#main_nav li").removeClass("active");
             $(this).addClass("active");
         });
-
-        //**************validate number input cotrol
-        $(function () {
-            $('._numberInput').on('keydown', function (e) { -1 !== $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/.test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) || 35 <= e.keyCode && 40 >= e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) && (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault() });
-        })
 
     });
 

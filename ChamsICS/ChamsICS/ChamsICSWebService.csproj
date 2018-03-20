@@ -81,9 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ChamsICSService.svc" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChamsICSService.svc.cs">
@@ -150,6 +147,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\ChamsICSWebService.pubxml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -158,6 +158,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CICSWebPortal\CustomTextMessageEncoder\CustomTextMessageEncoder.csproj">
+      <Project>{47ca1755-2d1b-4122-a9d7-4a292a1de40d}</Project>
+      <Name>CustomTextMessageEncoder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChamsICSLib\ChamsICSLib.csproj">
       <Project>{8a560f4f-4647-47c5-8f18-2b7d48b6f04c}</Project>
       <Name>ChamsICSLib</Name>

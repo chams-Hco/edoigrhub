@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="FTsom61Z0DxJLy6zSz4GVtmLC/s=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="P2mlldHlMQH59SckYhXpg7mLOs0=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_iChamsICSService">
       <properties>
@@ -221,10 +221,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_iChamsICSService" contract="ServiceReference2.iChamsICSService" bindingType="basicHttpBinding" address="http://localhost:39562/ChamsICSService.svc/SOAP" bindingConfiguration="BasicHttpBinding_iChamsICSService">
+    <endpoint name="BasicHttpBinding_iChamsICSService" contract="ServiceReference2.iChamsICSService" bindingType="basicHttpBinding" address="http://localhost/edoigr_ws/ChamsICSService.svc/SOAP" bindingConfiguration="BasicHttpBinding_iChamsICSService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:39562/ChamsICSService.svc/SOAP</serializedValue>
+          <serializedValue>http://localhost/edoigr_ws/ChamsICSService.svc/SOAP</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -306,10 +306,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="BasicHttpBinding_iChamsICSPortalService" contract="ServiceReference2.iChamsICSPortalService" bindingType="basicHttpBinding" address="http://localhost:39562/ChamsICSService.svc/SOAPAPI" bindingConfiguration="BasicHttpBinding_iChamsICSPortalService">
+    <endpoint name="BasicHttpBinding_iChamsICSPortalService" contract="ServiceReference2.iChamsICSPortalService" bindingType="basicHttpBinding" address="http://localhost/edoigr_ws/ChamsICSService.svc/SOAPAPI" bindingConfiguration="BasicHttpBinding_iChamsICSPortalService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:39562/ChamsICSService.svc/SOAPAPI</serializedValue>
+          <serializedValue>http://localhost/edoigr_ws/ChamsICSService.svc/SOAPAPI</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

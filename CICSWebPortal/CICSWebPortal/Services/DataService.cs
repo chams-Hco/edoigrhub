@@ -988,7 +988,7 @@ namespace CICSWebPortal.Services
         public Dashboard GetDashBoardSummary(int roleId, int userId)
         {
             var e = _client.GetDashboardSummary(new DashboardReq() { RoleId = roleId, UserId = userId });
-            var dashboard =  new Dashboard
+            return new Models.Dashboard
             {
                 TotalClient = e.TotalClient,
                 TotalAgent = e.TotalAgent,
@@ -996,14 +996,8 @@ namespace CICSWebPortal.Services
                 TotalTransaction = e.TotalTransaction,
                 TransctionValue = e.TransctionValue,
                 TotalNotifications = e.TotalNotifications,
-                TotalEODAmount = e.TotalEODAmount,
-                TotalAmountUnpaid = e.TotalAmountUnpaid,
-                TotalAmountPaid = e.TotalAmountPaid,
-                TotalEODCount = e.TotalEODCount,
                 Chart = GetChart()
             };
-
-            return dashboard;
         }
 
         public Dashboard GetTaxpayerDashboardSummary(int roleId, int userId, string userEmail)
@@ -1444,52 +1438,21 @@ namespace CICSWebPortal.Services
                     TransactionCode = x.TransactionCode,
                     TransactionDate = x.TransactionDate,
                     TransactionId = x.TransactionId
+
                 }).ToList();
+
+                //check if the report enumerable of the RepoertViewModel is null or empty. If it isn't, assign it to _report to export.
+                //if (rvm.Report != null && rvm.Report.Any())
+                //{
+                //    _reportToExport = rvm.Report;
+                //}
+
                 return rvm;
             }
             else
             {
                 return null;
             }
-        }
-
-        public EndofDayViewModel GetEODReport(ReportFilter request)
-        {
-            var cSummaryList = _client.GetEODReport(new FetchEndOfDayReq
-            {
-                TerminalId = request.Terminal,
-                AgentId = request.agentId,
-                status = request.Status,
-                startDate = request.startDate,
-                endDate = request.endDate,
-                TerminalIds = request.TerminalIds.ToArray()
-            });
-
-            var cSummary = (cSummaryList != null && cSummaryList.EndOfDayReport != null) ? cSummaryList.EndOfDayReport.ToList() : null;
-
-            if (cSummary != null && cSummary.Count != 0)
-            {
-                EndofDayViewModel EODVM = new EndofDayViewModel();
-
-                EODVM.EODReport = cSummary.Select(x => new Models.EndOfDay
-                {
-                    Id = x.Id,
-                    TerminalId = x.TerminalId,
-                    TerminalCode = x.TerminalCode,
-                    EODCount = x.EODCount,
-                    Amount = x.Amount,
-                    EODStatus = x.Status == true ? "PAID" : "UNPAID",
-                    AgentId = x.AgentId,
-                    AgentName = x.HandlerName,
-                    AgentEmail = x.HandlerEmail,
-                    AgentPhone = x.HandlerPhone,
-                    TransactionDate = x.Date
-                }).ToList();
-
-                return EODVM;
-            }
-
-            return null;
         }
 
         /// <summary>
@@ -1804,93 +1767,88 @@ namespace CICSWebPortal.Services
         #region Taxpayer
         public List<Models.Biodata> GetAllTaxPayers()
         {
-            //return _client.GetAllTaxpayers().Taxpayers.Select(x => new Models.Biodata
-            //{
-            //   BiodataId = x.BiodataId,
-            //   Email = x.Email,
-            //   EntryDate = x.EntryDate,
-            //   Firstname = x.Firstname,
-            //   Surname = x.Surname,
-            //   RIN = x.RIN,
-            //   UserId = x.UserId,
+            return _client.GetAllTaxpayers().Taxpayers.Select(x => new Models.Biodata
+            {
+               BiodataId = x.BiodataId,
+               Email = x.Email,
+               EntryDate = x.EntryDate,
+               Firstname = x.Firstname,
+               Surname = x.Surname,
+               RIN = x.RIN,
+               UserId = x.UserId,
 
-            //}).ToList();
-            throw new NotImplementedException();
+            }).ToList();
         }
         
         public Boolean AddTaxpayer(Models.Taxpayer taxpayer)
         {
-            //ServiceReference2.Taxpayer _taxpayerReq = new ServiceReference2.Taxpayer
-            //{
-            //    Email = taxpayer.Email,
-            //    Firstname = taxpayer.Firstname,
-            //    Surname = taxpayer.Surname,
-            //    Mobile = taxpayer.Mobile,
-            //    Password = taxpayer.Password,
-            //    RIN = taxpayer.RIN,
-            //    RoleId = taxpayer.RoleId,                
-            //};
-            //var result = _client.AddTaxpayer(_taxpayerReq);
+            ServiceReference2.Taxpayer _taxpayerReq = new ServiceReference2.Taxpayer
+            {
+                Email = taxpayer.Email,
+                Firstname = taxpayer.Firstname,
+                Surname = taxpayer.Surname,
+                Mobile = taxpayer.Mobile,
+                Password = taxpayer.Password,
+                RIN = taxpayer.RIN,
+                RoleId = taxpayer.RoleId,                
+            };
+            var result = _client.AddTaxpayer(_taxpayerReq);
 
-            //if (result.ResponseCode == "0000")
-            //{
-            //    return true;
-            //}
-            //return false;
-            throw new NotImplementedException();
+            if (result.ResponseCode == "0000")
+            {
+                return true;
+            }
+            return false;
         }
 
         public Models.Taxpayer GetTaxpayerById(int id)
         {
-            //var taxpayer = _client.GetTaxpayerById(id);
+            var taxpayer = _client.GetTaxpayerById(id);
 
-            //return new Models.Taxpayer
-            //{
-            //    BiodataId = taxpayer.BiodataId,
-            //    Email = taxpayer.Email,
-            //    Firstname = taxpayer.Firstname,
-            //    Surname = taxpayer.Surname,
-            //    RIN = taxpayer.RIN,
-            //    UserId = taxpayer.UserId,
-            //    Mobile = taxpayer.Mobile
-            //};
-            throw new NotImplementedException();
+            return new Models.Taxpayer
+            {
+                BiodataId = taxpayer.BiodataId,
+                Email = taxpayer.Email,
+                Firstname = taxpayer.Firstname,
+                Surname = taxpayer.Surname,
+                RIN = taxpayer.RIN,
+                UserId = taxpayer.UserId,
+                Mobile = taxpayer.Mobile
+            };
         }
 
         public List<Models.RevenueItem> GetAssessmentByRole(Models.AssessmentReq assessmentReq)
         {
-            //ServiceReference2.AssessmentReq _assessmentRequest = new ServiceReference2.AssessmentReq
-            //{
-            //    roleid = assessmentReq.roleid,
-            //    email = assessmentReq.email,
-            //};
+            ServiceReference2.AssessmentReq _assessmentRequest = new ServiceReference2.AssessmentReq
+            {
+                roleid = assessmentReq.roleid,
+                email = assessmentReq.email,
+            };
 
-            //return _client.GetAssessmentByRole(_assessmentRequest).RevenueItems.Select(x => new Models.RevenueItem
-            //{
-            //    Amount = x.Amount.HasValue ? x.Amount.Value : 0,
-            //    Name = x.Name,
-            //    Code = x.Code,
+            return _client.GetAssessmentByRole(_assessmentRequest).RevenueItems.Select(x => new Models.RevenueItem
+            {
+                Amount = x.Amount.HasValue ? x.Amount.Value : 0,
+                Name = x.Name,
+                Code = x.Code,
+                
 
-
-            //}).ToList();
-            throw new NotImplementedException();
+            }).ToList();
         }
 
         public Boolean GenerateInvoice(Models.GenerateInvoice generateInvoice)
         {
-            //ServiceReference2.GenerateInvoice _generateInvoice = new ServiceReference2.GenerateInvoice
-            //{
-            //    RevenueCode = generateInvoice.RevenueCode,
-            //    TaxpayerId = generateInvoice.TaxpayerId,
-            //};
-            //var result = _client.GenerateInvoice(_generateInvoice);
+            ServiceReference2.GenerateInvoice _generateInvoice = new ServiceReference2.GenerateInvoice
+            {
+                RevenueCode = generateInvoice.RevenueCode,
+                TaxpayerId = generateInvoice.TaxpayerId,
+            };
+            var result = _client.GenerateInvoice(_generateInvoice);
 
-            //if (result.ResponseCode == "0000")
-            //{
-            //    return true;
-            //}
-            //return false;
-            throw new NotImplementedException();
+            if (result.ResponseCode == "0000")
+            {
+                return true;
+            }
+            return false;
         }
         #endregion
     }

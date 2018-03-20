@@ -1,57 +1,70 @@
-﻿@model CICSWebPortal.ViewModels.EndofDayViewModel
+﻿
 
+@model IEnumerable<CICSWebPortal.Models.EndOfDayServiceResponse>
 @{
-    string displayStyle = string.Empty;
     ViewBag.Title = "End of Day Report";
     Layout = null;
+
 }
 
-<div class="row">
-    <table class="table table-striped" id="dataTable1">
+<table class="table table-striped" id="dataTable1">
+
+    @if (Model == null || Model.Count() < 1)
+    {
         <thead>
             <tr>
-                <td colspan="10" class="text-center">
-                    <h4>
-                        @if (Model != null && Model.EODReport != null)
-                        {
-                            <span class="pull-left">@Model.EODReport.Count().ToString("#,0") transactions between @Model.StartDate.ToString("dd/MM/yyyy") and @Model.EndDate.ToString("dd/MM/yyyy")</span>
-                        }
-                        <span class="pull-right"> Total:: ₦ @Model.TotalTransactionValue.ToString("#,0.00")</span>
-                    </h4>
-                </td>
+                <th colspan="2">
+                    <span>No record found.</span>
+                </th>
             </tr>
+        </thead>
+    }
+    else
+    {
+        <thead>
             <tr>
-                <th><span>TERMINAL CODE</span></th>
-                <th><span>NAME </span></th>
-                <th><span>EMAIL </span></th>
-                <th><span>COUNT </span></th>
-                <th><span>STATUS </span></th>
-                <th><span>DATE </span></th>
-                <th><span>TOTAL </span></th>
+                <th>
+                    <span>DATE </span>
+                </th>
+                <th>
+                    <span>TERMINAL NO </span>
+                </th>
+                <th>
+                    <span>NAME </span>
+                </th>
+                <th>
+                    <span>EMAIL </span>
+                </th>
+                <th>
+                    <span>TOTAL </span>
+                </th>
+                <th>
+                    <span>COUNT </span>
+                </th>
+                <th>
+                    <span>STATUS </span>
+                </th>
             </tr>
         </thead>
         <tbody>
-            @if (Model.EODReport != null)
-            {
-                foreach (var item in Model.EODReport)
+            @{ foreach (var response in Model)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.TerminalCode)</td>
-                        <td>@Html.DisplayFor(modelItem => item.AgentName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.AgentEmail)</td>
-                        <td>@Html.DisplayFor(modelItem => item.EODCount)</td>
-                        <td>@Html.DisplayFor(modelItem => item.EODStatus)</td>
-                        <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-
+                        <td>@response.DATETRANSACTION.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        <td>@response.TERMINALCODE</td>
+                        <td>@response.AGENTFULLNAME</td>
+                        <td>@response.AGENTEMAIL</td>
+                        <td>@response.TOTAL</td>
+                        <td>@response.EODCOUNT</td>
+                        <td>@response.EODSTATuS</td>
                     </tr>
                 }
             }
         </tbody>
-    </table>
-</div>
+                }
+</table>
 
-@*@section JavaScript
+@section JavaScript
 {
     <script type="text/javascript">
         function bindJQueryEvents() {
@@ -81,4 +94,4 @@
             });
         }
     </script>
-}*@
+}

@@ -84,8 +84,6 @@ C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\Cham
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.csprojResolveAssemblyReference.cache
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.dll
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.pdb
-C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.csprojResolveAssemblyReference.cache
-C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.csproj.CoreCompileInputs.cache
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\ChamsICSWebService.dll.config
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\ChamsICSWebService.dll
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\ChamsICSWebService.pdb
@@ -96,5 +94,7 @@ C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrh
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\ChamsICSLib.dll.config
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\Newtonsoft.Json.xml
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\System.Net.Http.Formatting.xml
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.csprojResolveAssemblyReference.cache
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.csproj.CoreCompileInputs.cache
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.dll
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Debug\ChamsICSWebService.pdb

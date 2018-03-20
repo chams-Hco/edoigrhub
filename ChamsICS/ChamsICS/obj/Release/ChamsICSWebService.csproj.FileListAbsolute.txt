@@ -38,3 +38,5 @@ C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrh
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Release\ChamsICSWebService.csproj.CoreCompileInputs.cache
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Release\ChamsICSWebService.dll
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\obj\Release\ChamsICSWebService.pdb
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\CustomTextMessageEncoder.dll
+C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICS\bin\CustomTextMessageEncoder.pdb

@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ChamsICSWebService.Model;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace ChamsICSWebService
 {
@@ -82,11 +87,138 @@ namespace ChamsICSWebService
             }
             return responseMsg;
         }
+
+        public static string SerializeNIBSSResponse(this NIBSSEODServiceBaseRes res)
+        {
+            var stringwriter = new StringWriter();
+            var serializer = new XmlSerializer(res.GetType());
+            serializer.Serialize(stringwriter, res);
+            var xmlString = stringwriter.ToString();
+
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(new StringReader(xmlString));
+
+            var xmldecl = xmlDocument.CreateXmlDeclaration("1.0", "UTF-8", "yes");
+            var text = xmlDocument.InnerXml.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>")
+                .Replace("<Params>", "").Replace("</Params>", "");
+
+            stringwriter.Close();
+            stringwriter.Dispose();
+
+            return text;
+        }
     }
 
-    public class NIBSSRequestHelper
+    public static class NIBSSRequestHelper
     {
         public const string VALIDATIONREQUEST = "validation";
         public const string NOTIFICATIONREQUEST = "notification";
+
+        //public static NotificationRequest ExtractNotificationRequest(this string req)
+        //{
+        //    XDocument xmldoc = XDocument.Parse(req);
+        //    //xmlDoc.Element("Param").
+
+        //    NotificationRequest request = new NotificationRequest();
+
+        //    try
+        //    {
+        //        XmlDocument xmlDoc = new XmlDocument();
+        //        xmlDoc.LoadXml(req);
+        //        var xmlnode = xmlDoc.GetElementsByTagName("Param");
+        //        for (int i = 0; i <= xmlnode.Count - 1; i++)
+        //        {
+        //            xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
+        //            var key = xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
+        //            var value = xmlnode[i].ChildNodes.Item(1).InnerText.Trim();
+        //            request.Params.Add(new Param { Key = key, Value = value });
+        //        }
+        //        request.SessionID = XElement.Parse(req).Element("SessionID").Value;
+        //    }
+        //    catch (XmlException e)
+        //    {
+        //        throw e;
+        //    }
+        //    return request;
+        //}
+
+        //public static ValidationRequest ExtractValidationRequest(this string req)
+        //{
+        //    var requestString = req.Replace("<?xml version=\"1.0\" encoding=\"UTF - 8\"?>", "");
+
+        //    var request = new ValidationRequest();
+        //    try
+        //    {
+        //        XmlDocument xmlDoc = new XmlDocument();
+        //        xmlDoc.LoadXml(req);
+        //        var xmlnode = xmlDoc.GetElementsByTagName("Param");
+        //        for (int i = 0; i <= xmlnode.Count - 1; i++)
+        //        {
+        //            xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
+        //            var key = xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
+        //            var value = xmlnode[i].ChildNodes.Item(1).InnerText.Trim();
+        //            request.Params.Add(new Param { Key = key, Value = value });
+        //        }
+        //        request.Amount = decimal.Parse(XElement.Parse(req).Element("Amount").Value);
+        //        request.BillerID = int.Parse(XElement.Parse(req).Element("BillerID").Value);
+        //    }
+        //    catch (XmlException e)
+        //    {
+        //        throw e;
+        //    }
+        //    return request;
+        //}
+
+        public static object FromXml(this string Xml, System.Type ObjType)
+        {
+            var editedXml = Xml.Replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>", "").Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "")
+                .Replace("<?xml version=\"1.0\" encoding=\"utf-8\" standalone = \"yes\"?>", "");
+            XmlSerializer ser;
+            ser = new XmlSerializer(ObjType);
+            StringReader stringReader;
+            stringReader = new StringReader(editedXml);
+            XmlTextReader xmlReader;
+            xmlReader = new XmlTextReader(stringReader);
+            object obj;
+            obj = ser.Deserialize(xmlReader);
+            xmlReader.Close();
+            stringReader.Close();
+            //object objectToReturn;
+            try
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(editedXml);
+                var xmlnode = xmlDoc.GetElementsByTagName("Param");
+                if (ObjType == new NotificationRequest().GetType())
+                {
+                    var notificationObj = obj as NotificationRequest;
+                    for (int i = 0; i <= xmlnode.Count - 1; i++)
+                    {
+                        xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
+                        var key = xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
+                        var value = xmlnode[i].ChildNodes.Item(1).InnerText.Trim();
+                        notificationObj.Param.Add(new Param { Key = key, Value = value });
+                    }
+                    return notificationObj;
+                }
+                if (ObjType == new ValidationRequest().GetType())
+                {
+                    var validationObj = obj as ValidationRequest;
+                    for (int i = 0; i <= xmlnode.Count - 1; i++)
+                    {
+                        xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
+                        var key = xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
+                        var value = xmlnode[i].ChildNodes.Item(1).InnerText.Trim();
+                        validationObj.Param.Add(new Param { Key = key, Value = value });
+                    }
+                    return validationObj;
+                }
+            }
+            catch (XmlException)
+            {
+                throw;
+            }
+            return obj;
+        }
     }
 }

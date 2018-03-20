@@ -31,19 +31,19 @@
         <div id="home" class="tab-pane fade in active">
             <div class="item active">
                 <table class="table table-striped">
-                    <tr> <th>Zones</th><td>@Model.TotalAgent</td></tr>
+                    <tr> <th>Agents</th><td>@Model.TotalAgent</td></tr>
                     <tr> <th>Terminals</th><td>@Model.TotalTerminal </td></tr>
                     <tr> <th>Transactions</th><td> @Model.TotalTransaction </td></tr>
                     <tr> <th>Transaction Value</th><td>₦@Model.TotalTransctionValue.ToString("#,0.00") </td></tr>
                     <tr>
-                        <th>Leading Zone</th>
+                        <th>Leading Agent</th>
                         <td>
                             @Model.AgentLeaderStats.LeadingAgent ::
                             ₦@Model.AgentLeaderStats.LeadingAgentVal.Value.ToString("#,0.00")
                         </td>
                     </tr>
                     <tr>
-                        <th>Trailing Zone</th>
+                        <th>Trailing Agent</th>
                         <td>
                             @Model.AgentLeaderStats.TrailingAgent ::
                             ₦@Model.AgentLeaderStats.TrailingAgentVal.Value.ToString("#,0.00")
@@ -72,7 +72,7 @@
                 <div class="panel panel-success">
                     <table class="table table-striped text" border="1">
                         <tr>
-                            <th>Zone</th>
+                            <th>Agent</th>
                             <th style="text-align:center">In-Active Terminals</th>
                             <th style="text-align:center">Active Terminals</th>
                             <th style="text-align:center">Total Terminals</th>

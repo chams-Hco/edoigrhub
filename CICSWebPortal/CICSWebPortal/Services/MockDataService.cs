@@ -599,11 +599,6 @@ namespace CICSWebPortal.Services
             throw new NotImplementedException();
         }
 
-        public EndofDayViewModel GetEODReport(ReportFilter request)
-        {
-            throw new NotImplementedException();
-        }
-
         #region Location
         public IList<Location> GetAllLocations()
         {

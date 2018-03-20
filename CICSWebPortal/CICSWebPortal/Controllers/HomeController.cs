@@ -44,10 +44,9 @@ namespace CICSWebPortal.Controllers
                 
                 return View(taxpayerDashboard);
             }
+            
 
-            var dashboard = _dataContext.GetDashBoardSummary(Convert.ToInt32(roleId), Convert.ToInt32(userId));
-
-            return View(dashboard);
+            return View(_dataContext.GetDashBoardSummary(Convert.ToInt32(roleId),Convert.ToInt32(userId)));
         }
 
         public ActionResult About()

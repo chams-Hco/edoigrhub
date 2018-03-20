@@ -27,7 +27,7 @@ namespace ChamsICSLib.Data
         public decimal TotalAmount { get; set; }
         public decimal Fee { get; set; }
         public string TransactionFeeBearer { get; set; }
-        public int SplitType { get; set; }
+        public string SplitType { get; set; }
         public string DestinationBankCode { get; set; }
         public string Narration { get; set; }
         public string PaymentReference { get; set; }

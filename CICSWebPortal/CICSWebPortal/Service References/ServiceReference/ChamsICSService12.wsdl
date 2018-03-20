@@ -113,54 +113,9 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CreateEODTransaction">
-      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/CreateEODTransaction" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="QueryEODStatus">
-      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/QueryEODStatus" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ValidateTransaction">
-      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/ValidateTransaction" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SendNotification">
-      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/SendNotification" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_iChamsICSPortalService" type="i1:iChamsICSPortalService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetAllInvoices">
-      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllInvoices" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetInvoiceById">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetInvoiceById" style="document" />
       <wsdl:input>
@@ -190,6 +145,51 @@
     </wsdl:operation>
     <wsdl:operation name="MakePayment">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/MakePayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTaxpayers">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTaxpayers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTaxpayer">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/AddTaxpayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaxpayerById">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetTaxpayerById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssessmentByRole">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAssessmentByRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateInvoice">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GenerateInvoice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -872,15 +872,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetEODReport">
-      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="CreateLocation">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateLocation" style="document" />
       <wsdl:input>
@@ -955,6 +946,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserInvoices">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetUserInvoices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllInvoices">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllInvoices" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
