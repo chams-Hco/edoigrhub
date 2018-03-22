@@ -1,0 +1,72 @@
+﻿@model CICSWebPortal.Models.Invoice
+
+@{
+    ViewBag.Title = "PayWithWallet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    @using (Html.BeginForm("PayWithWallet", "Invoice", FormMethod.Post, new
+    {
+        @class = "form-horizontal",
+        role = "form",
+        @id = "paymentForm",
+
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="breadcrumb">
+            <ul class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="/edoigr/Home/"> Home</a></li>
+                <li><a href="/edoigr/Invoice/"> Invoice</a></li>
+                <li class="active">Pay with Wallet</li>
+            </ul>
+        </div><!-- /breadcrumb-->
+        <a class="btn btn-default" href="/edoigr/Invoice/" style="margin:10px 10px 10px 20px;">Back</a>
+        <h4 style="margin: 20px;display: inline;margin-left:10px">Pay With e-Wallet</h4>
+        
+        <div>
+            <div class="col-md-7 well" style="margin-left: 20px;">
+                @{ string status = string.Empty; if (Convert.ToInt32(Session["amountLeft"]) == 0) { status = "Status: Paid"; } else { status = ""; } }
+                <div>
+                    <h5><b>Invoice Info</b></h5>
+                    Invoice Number: @Html.DisplayFor(modelItem => Model.InvoiceNo) <br />
+                    Description: @Html.DisplayFor(modelItem => Model.Description) <br />
+                    Amount: ₦ @Html.DisplayFor(modelItem => Model.Amount) <br />
+                    @status
+                </div>
+                <br /><br />
+                <div>
+                    @{ string displayStyle = string.Empty; if (Convert.ToInt32(Session["amountLeft"]) == 0) { displayStyle = "display: none"; } }
+                    <div class="form-group" style="@displayStyle">
+                        <label for="payment" class="col-sm-4 control-label">Enter Amount to Pay (₦) </label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("paymentamount", "", new { @class = "form-control _numberInput", @style = "text-align: center" } )
+                            @*<input type="text" style="text-align: center" class="form-control" id="paymentamount"/>*@
+                        </div>
+                        <div class="col-sm-3">
+                            
+                            <!-- Button -->
+                            <button type="submit" class="btn btn-blue">Complete Payment</button>&nbsp;
+                        </div>
+                    </div>
+                    <div style="text-align: center"> @ViewBag.displayMessage </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="well" style="margin-left: 20px;">
+                    <h5><b>Transaction Details</b></h5>
+                    Amount Paid :   @ViewBag.AmountPaid <br />
+                    Amount Left :   @ViewBag.AmountLeft <br />
+
+                </div>
+                <div class="well" style="margin-left: 20px;">
+                    <h5>Wallet Balance</h5>
+                    <h3 style="text-align: center"> ₦  @ViewBag.WalletBalance</h3>
+                </div>                
+            </div>
+            
+        </div>
+    }
+</div>

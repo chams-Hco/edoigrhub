@@ -2,7 +2,13 @@
 @{
     ViewBag.Title = "Home Page";
     string displayStyle = string.Empty;
+    int roleId = Convert.ToInt32(Session["RoleID"]);
 }
+
+@{displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; } }
+<div style="@displayStyle; padding-left: 20px">
+    <h4>Welcome, @ViewBag.TaxpayerName</h4>
+</div>
 
 <div id="breadcrumb">
     <ul class="breadcrumb">
@@ -11,15 +17,16 @@
     </ul>
 </div><!-- /breadcrumb-->
 <div class="main-header clearfix">
-    <div class="page-title">
+    @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
+    <div class="page-title" style="@displayStyle">
         <h3 class="no-margin">Dashboard 
         <a href="/Report/ExecutiveDashboard/" class="btn btn-primary">View Executive Dashboard</a>
-            <a href="/Report/PeriodicDashBoard/" class="btn bg-danger">View Agent Positions</a>
+            <a href="/Report/PeriodicDashBoard/" class="btn bg-danger">View Zone Positions</a>
         </h3>
     </div><!-- /page-title -->
 </div><!-- /main-header -->
 
-@{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleID"]) == 2 || Convert.ToInt32(Session["RoleID"]) == 4 || Convert.ToInt32(Session["RoleID"]) == 6) { displayStyle = "display: none"; } }
+@{displayStyle = string.Empty; if (roleId == 2 || roleId == 4 || roleId == 6 || roleId == 7) { displayStyle = "display: none"; } }
 <div class="grey-container main-header clearfix" style="margin:0 10px 10px 0; @displayStyle">
 
     <a href="/User/" class="shortcut-link">
@@ -28,14 +35,14 @@
         </span>
         <span class="text">Users</span>
     </a>
-    @{ displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleID"]) > 2) { displayStyle = "display: none"; } }
+    @{ displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
     <a style="@displayStyle" href="/Notification/" class="shortcut-link">
         <span class="shortcut-icon">
             <i class="fa fa-user"></i>
         </span>
         <span class="text">Notifications</span>
     </a>
-    @{ displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleID"]) > 2) { displayStyle = "display: none"; } }
+    @{ displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
     <a style="@displayStyle" href="/AuditTrail/" class="shortcut-link">
         <span class="shortcut-icon">
             <i class="fa fa-search"></i>
@@ -47,7 +54,7 @@
 
 <div class="padding-md">
 
-    @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleID"]) > 2) { displayStyle = "display: none"; } }
+    @{displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <a href="/Client/">
             <h4 class="m-top-none" id="userCount">[ @Model.TotalClient ]</h4>
@@ -64,10 +71,10 @@
             </div>
         </a>
     </div>
-    @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleID"]) > 4) { displayStyle = "display: none"; } }
+    @{displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; } }
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none"><span id="serverloadCount">[ @Model.TotalAgent ]</span></h4>
-        <h5>Agents</h5>
+        <h5>Zones</h5>
 
         <div class="stat-icon">
             <i class="fa fa-bar-chart-o fa-3x"></i>
@@ -80,7 +87,8 @@
         </div>
     </div>
 
-    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0;">
+    @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
+    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="orderCount">[ @Model.TotalTerminal ]</h4>
         <h5>Terminals</h5>
 
@@ -95,7 +103,8 @@
         </div>
     </div>
 
-    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0;">
+    @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
+    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="visitorCount">[ @Model.TotalTransaction ]</h4>
         <h5>Transactions</h5>
 
@@ -110,7 +119,8 @@
         </div>
     </div>
 
-    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0;">
+    @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
+    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="orderCount">[ ₦@Model.TransctionValue.ToString("#,0.00") ]</h4>
         <h5>Transaction Value</h5>
 
@@ -125,9 +135,55 @@
         </div>
     </div>
 
-    @{displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleID"]) > 2) { displayStyle = "display: none"; } }
+    @{displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="visitorCount">[ @Model.TotalNotifications ]</h4>
+        <h5>Notifications</h5>
+
+        <div class="stat-icon">
+            <i class="fa fa-bar-chart-o fa-3x"></i>
+        </div>
+        <div class="refresh-button">
+            <i class="fa fa-refresh"></i>
+        </div>
+        <div class="loading-overlay">
+            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+        </div>
+    </div>
+
+    @{displayStyle = string.Empty; string walletValue = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
+        if (Model.Wallet.HasValue) { walletValue = Model.Wallet.Value.ToString("#,0.00"); }}
+    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+        <h4 class="m-top-none" id="visitorCount">[ ₦ @walletValue  ]</h4>
+        <h5>Wallet</h5>
+
+        <div class="stat-icon">
+            <i class="fa fa-bar-chart-o fa-3x"></i>
+        </div>
+        <div class="refresh-button">
+            <i class="fa fa-refresh"></i>
+        </div>
+        <div class="loading-overlay">
+            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+        </div>
+    </div>
+    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+        <h4 class="m-top-none" id="visitorCount">[ @Model.Invoices ]</h4>
+        <h5>Invoices</h5>
+
+        <div class="stat-icon">
+            <i class="fa fa-bar-chart-o fa-3x"></i>
+        </div>
+        <div class="refresh-button">
+            <i class="fa fa-refresh"></i>
+        </div>
+        <div class="loading-overlay">
+            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+        </div>
+    </div>
+
+    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+        <h4 class="m-top-none" id="visitorCount">[ @Model.Notification ]</h4>
         <h5>Notifications</h5>
 
         <div class="stat-icon">

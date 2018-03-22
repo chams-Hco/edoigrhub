@@ -30,10 +30,10 @@
                     @Html.DropDownListFor(m => m.SelectedClientId, Model.clientList, "ALL", new { @class = "form-control", required = true })
                 </div>
             </div>
-                @{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleID"]) < 5)) { displayStyle = "display: none"; } }
+            @{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleID"]) < 5)) { displayStyle = "display: none"; } }
             <div class="col-sm-4" id="agentPanel" style="@displayStyle">
                 <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2">Agents:</span>
+                    <span class="input-group-addon" id="basic-addon2">Zones:</span>
                     @Html.DropDownListFor(m => m.SelectedAgentId, Model.agentList, "ALL", new { @class = "form-control", required = true })
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     @Html.DropDownListFor(m => m.SelectedRevenueCode, Model.revenueList, "ALL", new { @class = "form-control", required = true })
                 </div>
             </div>
-            
+
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon2"><i class="fa fa-refresh"></i></span>
@@ -64,7 +64,7 @@
 </div><!-- /main-header -->
 
 <div class="panel panel-default table-responsive">
-    <div class="panel-heading">        
+    <div class="panel-heading">
         <span class="label label-info pull-right">
 
         </span>
@@ -75,7 +75,10 @@
                 <tr>
                     <td colspan="10" class="text-center">
                         <h4>
-                            <span class="pull-left">@Model.Report.Count().ToString("#,0") transactions between @Model.StartDate.ToString("dd/MM/yyyy") and @Model.EndDate.ToString("dd/MM/yyyy")</span>
+                            @if (Model.Report != null)
+                            {
+                                <span class="pull-left">Model.Report.Count().ToString("#,0") transactions between Model.StartDate.ToString("dd/MM/yyyy") and Model.EndDate.ToString("dd/MM/yyyy")</span>
+                            }
                             <span class="pull-right"> Total:: ₦ @Model.TotalTransactionValue.ToString("#,0.00")</span>
                         </h4>
                     </td>
@@ -83,7 +86,7 @@
                 <tr>
                     <th>ID</th>
                     <th>TransactionCode</th>
-                    <th>Agent</th>
+                    <th>Zone</th>
                     <th>Revenue</th>
                     <th>Revenue Head</th>
                     <th>Ministry</th>
@@ -94,73 +97,78 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Report)
+                @if (Model.Report != null)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.TransactionId)</td>
-                        <td>@Html.DisplayFor(modelItem => item.TransactionCode)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Agent)</td>
-                        <td>@Html.DisplayFor(modelItem => item.RevenueName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.RevenueHead)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Ministry)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ResidentId)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-                        <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
-                        <td>@Html.ActionLink("Details", "TransactionReceipt", "Transaction", new { id = item.TransactionId }, new { role = "button", @class = "btn btn-primary" })</td>
+                    foreach (var item in Model.Report)
+                {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.TransactionId)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TransactionCode)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Agent)</td>
+                            <td>@Html.DisplayFor(modelItem => item.RevenueName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.RevenueHead)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Ministry)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ResidentId)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
+                            <td>@Html.ActionLink("Details", "TransactionReceipt", "Transaction", new { id = item.TransactionId }, new { role = "button", @class = "btn btn-primary" })</td>
 
-                    </tr>
+                        </tr>
+                    }
                 }
             </tbody>
-        </table>    </div><!-- /.padding-md -->
+        </table>
+    </div><!-- /.padding-md -->
 </div><!-- /panel -->
 <!-- Modal -->
 @section JavaScript
 {
-<script type="text/javascript">
-    function bindJQueryEvents() {
-        $("#StartDate").datepicker({
-            minDate: new Date(2015, 1 - 1, 1),
-            maxDate: new Date()
-        });
+    <script type="text/javascript">
+        function bindJQueryEvents() {
+            $("#StartDate").datepicker({
+                minDate: new Date(2015, 1 - 1, 1),
+                maxDate: new Date()
+            });
 
-        $("#EndDate").datepicker({
-            minDate: new Date(2015, 1 - 1, 1),
-            maxDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
-        });
+            $("#EndDate").datepicker({
+                minDate: new Date(2015, 1 - 1, 1),
+                maxDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+            });
 
-        //Load the details page
-        $(".viewButton").click(function () {
-            $("#edit_modal_body").load("/Transaction/TransactionDetails/" + $(this).data("view-id"));
-        });
+            //Load the details page
+            $(".viewButton").click(function () {
+                $("#edit_modal_body").load("/Transaction/TransactionDetails/" + $(this).data("view-id"));
+            });
 
-        $('#dataTable1').dataTable({
-            "bJQueryUI": true, "order": [[0, "desc"]],
-            "sPaginationType": "full_numbers",
-            "oLanguage": {
-                "sEmptyTable": "No Level exist."
-            },
-            dom: 'T<"clear">lfrtip',
-            tableTools: {
-                "sSwfPath": "~/swf/copy_csv_xls_pdf.swf",
-                "sRowSelect": "os",
-                "aButtons": [
-                "select_all", "select_none",
-            "copy",
-            "csv",
-            "xls",
-            {
-                "sExtends": "pdf",
-                "sPdfOrientation": "landscape",
-                "sPdfMessage": ""
-            },
-            "print"
-                ]
-            }
-        });
-    }
+            //dataTable 
+            $('#dataTable1').dataTable({
+                "bJQueryUI": true, "order": [[0, "desc"]],
+                "sPaginationType": "full_numbers",
+                "oLanguage": {
+                    "sEmptyTable": "No Level exist."
+                },
+                dom: 'T<"clear">lfrtip',
+                tableTools: {
+                    "sSwfPath": "~/swf/copy_csv_xls_pdf.swf",
+                    "sRowSelect": "os",
+                    "aButtons": [
+                    "select_all", "select_none",
+                "copy",
+                "csv",
+                "xls",
+                {
+                    "sExtends": "pdf",
+                    "sPdfOrientation": "landscape",
+                    "sPdfMessage": ""
+                },
+                "print"
+                    ]
+                }
+            });
+        }
 
-    $(function () {
-        bindJQueryEvents();
+        $(function () {
+            bindJQueryEvents();
             $("#btnRefresh").click(function () {
                 var filter = {
                     startDate: $("#StartDate").val(),
@@ -170,11 +178,11 @@
                     terminalId: $("#SelectedTerminalId").val(),
                     ministry: $("#SelectedMinistry").val(),
                     RevenueCode: $("#SelectedRevenueCode").val()
-                }; 
+                };
 
                 $.ajax({
                     type: 'POST',
-                    data: filter, 
+                    data: filter,
                     url: '/Report/TransactionSummary/'
                 }).done(function (data) {
                     $("#reportData").empty();
@@ -183,5 +191,5 @@
                 });
             });
         });
-</script>
+    </script>
 }

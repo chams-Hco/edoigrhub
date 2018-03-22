@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 using System.IO;
 using Newtonsoft.Json;
 using CICSWebPortal.ViewModels;
+using System.Globalization;
 
 namespace CICSWebPortal.Controllers
 {
@@ -207,8 +208,22 @@ namespace CICSWebPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetEndOfDayReport(ReportFilter filter)
+        public ActionResult GetEndOfDayReport(EodFilter modelfilter)
         {
+            ReportFilter filter = new ReportFilter
+            {
+                agentId = modelfilter.agentId,
+                clientId = modelfilter.clientId,
+                endDate = Convert.ToDateTime(DateTime.ParseExact(modelfilter.endDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)),
+                ministry = modelfilter.ministry,
+                RevenueCode = modelfilter.RevenueCode,
+                startDate = Convert.ToDateTime(DateTime.ParseExact(modelfilter.startDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)),
+                Status = modelfilter.Status,
+                Terminal = modelfilter.Terminal,
+                terminalId = modelfilter.terminalId,
+                TerminalIds = modelfilter.TerminalIds
+            };
+
             int RoleId = Convert.ToInt32(Session["RoleId"]);
             int UserTypeParentId = Convert.ToInt32(Session["UserTypeParentId"]);
 

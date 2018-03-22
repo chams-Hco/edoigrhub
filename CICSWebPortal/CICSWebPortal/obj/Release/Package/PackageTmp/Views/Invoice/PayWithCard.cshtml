@@ -1,0 +1,102 @@
+﻿@model CICSWebPortal.Models.Invoice
+
+@{
+    ViewBag.Title = "PayWithCard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    @using (Html.BeginForm("PayWithCard", "Invoice", FormMethod.Post, new
+    {
+        @class = "form-horizontal",
+        role = "form",
+        @id = "paymentForm",
+
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="breadcrumb">
+            <ul class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="/edoigr/Home/"> Home</a></li>
+                <li><a href="/edoigr/Invoice/"> Invoice</a></li>
+                <li class="active">Pay with Card</li>
+            </ul>
+        </div><!-- /breadcrumb-->
+
+        <a class="btn btn-default" href="/edoigr/Invoice/" style="margin:10px 10px 10px 20px;">Back</a>
+        <h4 style="margin: 20px;display: inline;margin-left:10px">Pay With Card</h4>
+        <div>
+            
+            <div class="col-md-7 well" style="margin-left: 20px;">
+                @{ string status = string.Empty; if (Convert.ToInt32(Session["amountLeft"]) == 0) { status = "Status: Paid"; } else { status = ""; } }
+                <div>
+                    <h5><b>Invoice Info</b></h5>
+                    Invoice Number: @Html.DisplayFor(modelItem => Model.InvoiceNo) <br />
+                    Description: @Html.DisplayFor(modelItem => Model.Description) <br />
+                    Amount: ₦ @Html.DisplayFor(modelItem => Model.Amount) <br />
+                    @status
+
+               </div>
+
+               <br /><br />
+                @{ string displayStyle = string.Empty; if (Convert.ToInt32(Session["amountLeft"]) == 0) { displayStyle = "display: none"; } }
+                <div style="@displayStyle">
+                    <div class="form-group">
+                        <label for="payment" class="col-sm-4 control-label">Enter Amount to Pay (₦) </label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("paymentamount", "", new { @class = "form-control _numberInput", @style = "text-align: center", @required = "required" })
+                        </div>
+                        <div class="col-sm-3">
+
+                            <!-- Button -->
+                            @*<button type="submit" class="btn btn-blue">Complete Payment</button>&nbsp;*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"></label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("cardnumber", "", new { @class = "form-control _numberInput", @style = "text-align: center", @placeholder = "Card Number", @required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"></label>
+                        <div class="col-sm-2">
+                            @Html.TextBox("civv", "", new { @class = "form-control _numberInput", @style = "text-align: center", @placeholder = "CVV", @required = "required" })
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.TextBox("expdate", "", new { @class = "form-control", @style = "text-align: center", @placeholder = "Exp. Date", @required = "required" })
+                            <!-- Button -->
+                            @*<button type="submit" class="btn btn-blue">Complete Payment</button>&nbsp;*@
+                        </div>
+                        <div class="col-sm-3">
+                            <!-- Button -->
+                            <button type="submit" class="btn btn-blue">Complete Payment</button>&nbsp;
+                        </div>
+                    </div>
+
+                    
+</div>
+                <div style="text-align: center"> @ViewBag.displayMessage </div>
+
+            </div>
+            <div class="col-md-4" style="margin-left: 20px;">
+                <div class="well" style="margin-left: 20px;">
+                    <h5><b>Transaction Details</b></h5>
+                    Amount Paid :   @ViewBag.AmountPaid <br />
+                    Amount Left :   @ViewBag.AmountLeft <br />
+                    
+                </div>
+                <br />
+                <div class="well" style="margin-left: 20px; @displayStyle">
+                    <h5><b>Test Card</b></h5>
+                    Card Number : 11112222333344445555 <br />
+                    CIVN : 000 <br />
+                    Exp. Date : 12/20 <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

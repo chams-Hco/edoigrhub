@@ -200,6 +200,7 @@
     <Compile Include="Models\EndOfDay.cs" />
     <Compile Include="Models\EndOfDayServiceResponse.cs" />
     <Compile Include="Models\EndofDayViewModel.cs" />
+    <Compile Include="Models\EodFilter.cs" />
     <Compile Include="Models\ErrorTransactionFilter.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Location.cs" />
