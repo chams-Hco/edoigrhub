@@ -557,107 +557,107 @@ namespace ChamsICSWebService
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        public string ValidateTransaction(CustomStreamContent streamContent)
-        {
-            var stream = streamContent.ReadAsStreamAsync().Result;
-            //conversion
-            StreamReader reader = new StreamReader(stream);
-            string text = reader.ReadToEnd();
-            text.FromXml(typeof(ValidationRequest));
-            var req = new ValidationRequest() ;
+        //public string ValidateTransaction(CustomStreamContent streamContent)
+        //{
+        //    var stream = streamContent.ReadAsStreamAsync().Result;
+        //    //conversion
+        //    StreamReader reader = new StreamReader(stream);
+        //    string text = reader.ReadToEnd();
+        //    text.FromXml(typeof(ValidationRequest));
+        //    var req = new ValidationRequest() ;
 
-            var res = new ValidationResponse();
-            //var paramList = new List<Param>();
-            string errorCode = "";
-            if (req == null)
-            {
-                throw new ArgumentNullException("Invalid Status Query Request");
-            }
-            string msg = string.Empty;
-            string terminalCode = string.Empty;
+        //    var res = new ValidationResponse();
+        //    //var paramList = new List<Param>();
+        //    string errorCode = "";
+        //    if (req == null)
+        //    {
+        //        throw new ArgumentNullException("Invalid Status Query Request");
+        //    }
+        //    string msg = string.Empty;
+        //    string terminalCode = string.Empty;
 
-            //Extract params key value pairs
-            //var req = request.ExtractNotificationRequest();
-            //var reqObject = request.FromXml(new ValidationRequest().GetType());
-            //var req = reqObject as ValidationRequest;
+        //    //Extract params key value pairs
+        //    //var req = request.ExtractNotificationRequest();
+        //    //var reqObject = request.FromXml(new ValidationRequest().GetType());
+        //    //var req = reqObject as ValidationRequest;
 
-            try
-            {
-                var isValid = ServiceHelper.ValidateEODTransaction(req, out msg, out List<Param> param, out errorCode);
-                res.Param = param;
-                if (isValid)
-                {
-                    res.ResponseCode = NIBSSResponseHelper.ApprovedOrCompleted;
-                    res.NextStep = 0;
-                    res.BillerID = req.BillerID;
-                }
-                else
-                {
-                    //Log Failed Upload Request(req);
-                    string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(req);
+        //    try
+        //    {
+        //        var isValid = ServiceHelper.ValidateEODTransaction(req, out msg, out List<Param> param, out errorCode);
+        //        res.Param = param;
+        //        if (isValid)
+        //        {
+        //            res.ResponseCode = NIBSSResponseHelper.ApprovedOrCompleted;
+        //            res.NextStep = 0;
+        //            res.BillerID = req.BillerID;
+        //        }
+        //        else
+        //        {
+        //            //Log Failed Upload Request(req);
+        //            string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(req);
 
-                    //====Log Failed status queries to File===
-                    Logger.logToFile(msgLog, DebugLogPath + "\\Failed_EOD_Validation\\", true, terminalCode, "xml", true);
+        //            //====Log Failed status queries to File===
+        //            Logger.logToFile(msgLog, DebugLogPath + "\\Failed_EOD_Validation\\", true, terminalCode, "xml", true);
 
-                    //====Log Failed Upload to Database====
-                    //ServiceHelper.UploadExceptionToDb(msg, req);
+        //            //====Log Failed Upload to Database====
+        //            //ServiceHelper.UploadExceptionToDb(msg, req);
 
-                    res.ResponseCode = errorCode;
-                }
-            }
-            catch (Exception e)
-            {
-                Logger.logToFile(e, ErrorLogPath);
-                res.ResponseCode = NIBSSResponseHelper.SystemMalfunction;
-            }
-            res.ResponseMessage = NIBSSResponseHelper.getResponseMessage(res.ResponseCode);
-            return res.SerializeNIBSSResponse();
-        }
+        //            res.ResponseCode = errorCode;
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Logger.logToFile(e, ErrorLogPath);
+        //        res.ResponseCode = NIBSSResponseHelper.SystemMalfunction;
+        //    }
+        //    res.ResponseMessage = NIBSSResponseHelper.getResponseMessage(res.ResponseCode);
+        //    return res.SerializeNIBSSResponse();
+        //}
 
         
 
-        public string SendNotification(NotificationRequest req)
-        {
-            var res = new NotificationResponse();
-            string errorCode = "";
-            if (req == null)
-            {
-                throw new ArgumentNullException("Invalid Status Query Request");
-            }
-            string msg = string.Empty;
-            string terminalCode = string.Empty;
-            //Extract params key value pairs
-            //var req = request.ExtractNotificationRequest();
-            //var reqObject = request.FromXml(new NotificationRequest().GetType());
-            //var req = reqObject as NotificationRequest;
-            try
-            {
-                var isValid = ServiceHelper.SendEODNotification(req, out msg, out List<Param> param, out errorCode);
-                res.Param = param;
-                if (isValid)
-                {
-                    res.ResponseCode = NIBSSResponseHelper.ApprovedOrCompleted;
-                    res.BillerID = req.BillerID;
-                    res.SessionID = req.SessionID;
-                }
-                else
-                {
-                    //Log Failed Upload Request(req);
-                    string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(req);
+        //public string SendNotification(NotificationRequest req)
+        //{
+        //    var res = new NotificationResponse();
+        //    string errorCode = "";
+        //    if (req == null)
+        //    {
+        //        throw new ArgumentNullException("Invalid Status Query Request");
+        //    }
+        //    string msg = string.Empty;
+        //    string terminalCode = string.Empty;
+        //    //Extract params key value pairs
+        //    //var req = request.ExtractNotificationRequest();
+        //    //var reqObject = request.FromXml(new NotificationRequest().GetType());
+        //    //var req = reqObject as NotificationRequest;
+        //    try
+        //    {
+        //        var isValid = ServiceHelper.SendEODNotification(req, out msg, out List<Param> param, out errorCode);
+        //        res.Param = param;
+        //        if (isValid)
+        //        {
+        //            res.ResponseCode = NIBSSResponseHelper.ApprovedOrCompleted;
+        //            res.BillerID = req.BillerID;
+        //            res.SessionID = req.SessionID;
+        //        }
+        //        else
+        //        {
+        //            //Log Failed Upload Request(req);
+        //            string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(req);
 
-                    //====Log Failed status queries to File===
-                    Logger.logToFile(msgLog, DebugLogPath + "\\Wrong_EOD_Notification\\", true, terminalCode, "xml", true);
-                    res.ResponseCode = errorCode;
-                }
-            }
-            catch (Exception e)
-            {
-                Logger.logToFile(e, ErrorLogPath);
-                res.ResponseCode = NIBSSResponseHelper.SystemMalfunction;
-            }
-            res.ResponseMessage = NIBSSResponseHelper.getResponseMessage(res.ResponseCode);
+        //            //====Log Failed status queries to File===
+        //            Logger.logToFile(msgLog, DebugLogPath + "\\Wrong_EOD_Notification\\", true, terminalCode, "xml", true);
+        //            res.ResponseCode = errorCode;
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Logger.logToFile(e, ErrorLogPath);
+        //        res.ResponseCode = NIBSSResponseHelper.SystemMalfunction;
+        //    }
+        //    res.ResponseMessage = NIBSSResponseHelper.getResponseMessage(res.ResponseCode);
 
-            return res.SerializeNIBSSResponse();
-        }
+        //    return res.SerializeNIBSSResponse();
+        //}
     }
 }

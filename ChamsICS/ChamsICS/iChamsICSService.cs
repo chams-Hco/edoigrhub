@@ -106,15 +106,15 @@ namespace ChamsICSWebService
         [Description("Call this service to check the payment status of an EndOfDay transaction. For Technical support, contact itsupport@chams.com ")]
         QueryEndOfDayStatusRes QueryEODStatus(QueryEndOfDayStatusReq TransactionRef);
 
-        [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "/EOD/ValidateTransaction", BodyStyle = WebMessageBodyStyle.Bare)]
-        [Description("Call this service to validate an EndOfDay transaction. For Technical support, contact itsupport@chams.com ")]
-        string ValidateTransaction(CustomStreamContent req);
+        //[OperationContract]
+        //[WebInvoke(Method = "POST", UriTemplate = "/EOD/ValidateTransaction", BodyStyle = WebMessageBodyStyle.Bare)]
+        //[Description("Call this service to validate an EndOfDay transaction. For Technical support, contact itsupport@chams.com ")]
+        //string ValidateTransaction(CustomStreamContent req);
 
-        [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "/EOD/SendNotification", BodyStyle = WebMessageBodyStyle.Bare)]
-        [Description("Call this service to validate an EndOfDay transaction. For Technical support, contact itsupport@chams.com ")]
-        string SendNotification(NotificationRequest req);
+        //[OperationContract]
+        //[WebInvoke(Method = "POST", UriTemplate = "/EOD/SendNotification", BodyStyle = WebMessageBodyStyle.Bare)]
+        //[Description("Call this service to validate an EndOfDay transaction. For Technical support, contact itsupport@chams.com ")]
+        //string SendNotification(NotificationRequest req);
         #endregion
     }
 

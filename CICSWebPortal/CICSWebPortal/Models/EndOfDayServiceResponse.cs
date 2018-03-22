@@ -14,6 +14,7 @@ namespace CICSWebPortal.Models
         public string TERMINALCODE { get; set; }
         public string AGENTEMAIL { get; set; }
         public string AGENTFULLNAME { get; set; }
+        public string REMITTANCECODE { get; set; }
 
     }
 

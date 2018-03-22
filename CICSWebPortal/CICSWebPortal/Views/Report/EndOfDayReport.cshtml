@@ -1,6 +1,7 @@
-﻿@model CICSWebPortal.Models.EndofDayViewModel
+﻿@model CICSWebPortal.ViewModels.EndofDayViewModel
 
 @{
+    String displayStyle = String.Empty;
     ViewBag.Title = "EndOfDayReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,25 +9,57 @@
 <div class="clearfix">
     <h3 class="text-center">End Of Day Report</h3><hr />
 </div><!-- /main-header -->
-
 <div class="clearfix padding-md ">
     <div class="form-group">
-        <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
+        <div class="row padding-xs">
+            <div class="col-sm-4">
                 <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2"> SELECT TERMINAL ID </span>
-                    <select id="terminalcodes" class="form-control">
-                        <option value="-1" selected>-----ALL-----</option>
-                        @{
-                            foreach (var terminal in Model.Terminals)
-                            {
-                                <option value=@terminal.Code>@terminal.Code</option>
-                            }
-                        }
-                    </select>
-                    <span class="input-group-btn">
-                        <button class="btn btn-success" id="btngenerateEndOfDayService" type="button">FETCH</button>
-                    </span>
+                    <span class="input-group-addon" id="basic-addon2"> Start Date </span>
+                    <input type="text" class="form-control" id="StartDate" value="@Model.StartDate.ToString("dd/MM/yyyy")" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2"> End Date </span>
+                    <input type="text" class="form-control" id="EndDate" value="@Model.EndDate.ToString("dd/MM/yyyy")" />
+                </div>
+            </div>
+        </div>
+        <div class="row padding-xs">
+            @*@{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleID"]) == 1 || Convert.ToInt32(Session["RoleID"]) == 2)) { displayStyle = "display: none"; } }
+                <div class="col-sm-4" id="clientPanel" style="@displayStyle">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">Client:</span>
+                        @Html.DropDownListFor(m => m.SelectedClientId, Model.clientList, "ALL", new { @class = "form-control", required = true })
+                    </div>
+                </div>*@
+            @{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleID"]) < 5)) { displayStyle = "display: none"; } }
+            <div class="col-sm-4" id="agentPanel" style="@displayStyle">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Zones:</span>
+                    @Html.DropDownListFor(m => m.SelectedAgentId, Model.agentList, "ALL", new { @class = "form-control", required = true })
+                </div>
+            </div>
+            <div class="col-sm-4" id="terminalPanel">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Terminals:</span>
+                    @Html.DropDownListFor(m => m.SelectedTerminalId, Model.terminalList, "ALL", new { @class = "form-control", required = true })
+                </div>
+            </div>
+        </div>
+
+        <div class="row padding-xs">
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Status:</span>
+                    @Html.DropDownListFor(m => m.SelectedStatus, Model.statusList, "ALL", new { @class = "form-control", required = true })
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2"><i class="fa fa-refresh"></i></span>
+                    <button class="btn btn-primary form-control" id="btnRefresh">Refresh</button>
                 </div>
             </div>
         </div>
@@ -34,62 +67,141 @@
 </div><!-- /main-header -->
 
 <div class="panel panel-default table-responsive">
+    <div class="panel-heading">
+        <span class="label label-info pull-right">
+
+        </span>
+    </div>
     <div class="padding-md clearfix" id="reportData">
+        <table class="table table-striped" id="dataTable1">
+            <thead>
+                <tr>
+                    <td colspan="10" class="text-center">
+                        <h4>
+                            @if (Model != null && Model.EODReport != null)
+                            {
+                                <span class="pull-left">@Model.EODReport.Count().ToString("#,0") transactions between @Model.StartDate.ToString("dd/MM/yyyy") and @Model.EndDate.ToString("dd/MM/yyyy")</span>
+                            }
+                            <span class="pull-right"> Total:: ₦ @Model.TotalTransactionValue.ToString("#,0.00")</span>
+                        </h4>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span>TERMINAL CODE</span></th>
+                    <th><span>REMITTANCE CODE</span></th>
+                    <th><span>NAME </span></th>
+                    <th><span>EMAIL </span></th>
+                    <th><span>COUNT </span></th>
+                    <th><span>STATUS </span></th>
+                    <th><span>DATE </span></th>
+                    <th><span>TOTAL </span></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.EODReport != null)
+                {
+                    foreach (var item in Model.EODReport)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.TerminalCode)</td>
+                            <td>@Html.DisplayFor(modelItem => item.RemittanceCode)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AgentName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AgentEmail)</td>
+                            <td>@Html.DisplayFor(modelItem => item.EODCount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.EODStatus)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
 
-
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
     </div><!-- /.padding-md -->
 </div><!-- /panel -->
-
+<!-- Modal -->
 @section JavaScript
 {
     <script type="text/javascript">
+        function bindJQueryEvents() {
+            $("#StartDate").datepicker({
+                minDate: new Date(2015, 1 - 1, 1),
+                maxDate: new Date()
+            });
+
+            $("#EndDate").datepicker({
+                minDate: new Date(2015, 1 - 1, 1),
+                maxDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+            });
+
+            //Load the details page
+            //$(".viewButton").click(function () {
+            //    $("#edit_modal_body").load("/Transaction/TransactionDetails/" + $(this).data("view-id"));
+            //});
+
+            //dataTable
+            $('#dataTable1').dataTable({
+                "bJQueryUI": true, "order": [[0, "desc"]],
+                "sPaginationType": "full_numbers",
+                "oLanguage": {
+                    "sEmptyTable": "No Level exist."
+                },
+                dom: 'T<"clear">lfrtip',
+                tableTools: {
+                    "sSwfPath": "~/swf/copy_csv_xls_pdf.swf",
+                    "sRowSelect": "os",
+                    "aButtons": [
+                        "select_all", "select_none",
+                        "copy",
+                        "csv",
+                        "xls",
+                        {
+                            "sExtends": "pdf",
+                            "sPdfOrientation": "landscape",
+                            "sPdfMessage": ""
+                        },
+                        "print"
+                    ]
+                }
+            });
+        }
 
         $(function () {
-            $("#btngenerateEndOfDayService").click(function () {
+            bindJQueryEvents();
+            $("#btnRefresh").click(function () {
+                var eodFilter = {
+                    startDate: $("#StartDate").val(),
+                    endDate: $("#EndDate").val(),
+                    agentId: $("#SelectedAgentId").val(),
+                    TerminalId: $("#SelectedTerminalId").val(),
+                    Status: $("#SelectedStatus").val(),
+                    TerminalIds :[]
+                };
 
-                var id = $("#terminalcodes").val();
-                var userId = @Model.userID;
 
-                var request = { id: id, userId: userId };
+                @*var userId = @Model.userID;*@
+
+                //var request = { id: id, userId: userId };
                 $.ajax({
                     type: 'POST',
-                    data: { id: id, userId: userId },
+                    data: eodFilter,
                     url: '@Url.Action("GetEndOfDayReport","Report")',
-                   
                 }).done(function (response) {
                     $("#reportData").empty();
                     $("#reportData").html(response);
+                    bindJQueryEvents();
                 });
-            });
 
-            $('#dataTable1').dataTable({
-                "bJQueryUI": true,
-                "order": [[0, "desc"]],
-                "sPaginationType": "full_numbers",
-                "oLanguage": {"sEmptyTable": "No Level exist."},
-                dom: 'T<"clear">lfrtip',
-                tableTools: {
-                    "sSwfPath": "/swf/copy_csv_xls_pdf.swf",
-                    "sRowSelect": "os",
-                    "aButtons": [
-                    "select_all", "select_none",
-                "copy",
-                "csv",
-                "xls",
-                {
-                    "sExtends": "pdf",
-                    "sPdfOrientation": "landscape",
-                    "sPdfMessage": ""
-                },
-                "print"
-                    ]
-                }
-
+                //$.ajax({
+                //    type: 'POST',
+                //    data: filter,
+                //    url: '/Report//'
+                //}).done(function (data) {
+                //    $("#reportData").empty();
+                //    $("#reportData").html(data);
+                //    bindJQueryEvents();
+                //});
             });
         });
     </script>
 }
-
-
-
-

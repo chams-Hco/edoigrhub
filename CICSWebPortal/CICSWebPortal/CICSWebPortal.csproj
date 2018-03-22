@@ -197,6 +197,7 @@
     <Compile Include="Models\AgentSummary.cs" />
     <Compile Include="Models\AssessmentReq.cs" />
     <Compile Include="Models\Biodata.cs" />
+    <Compile Include="Models\EndOfDay.cs" />
     <Compile Include="Models\EndOfDayServiceResponse.cs" />
     <Compile Include="Models\EndofDayViewModel.cs" />
     <Compile Include="Models\ErrorTransactionFilter.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="Services\MockDataService.cs" />
     <Compile Include="Services\Security.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\EndofDayViewModel.cs" />
     <Compile Include="ViewModels\TaxpayerViewModel.cs" />
     <Compile Include="ViewModels\AgentViewModel.cs" />
     <Compile Include="ViewModels\IdentityViewModel.cs" />

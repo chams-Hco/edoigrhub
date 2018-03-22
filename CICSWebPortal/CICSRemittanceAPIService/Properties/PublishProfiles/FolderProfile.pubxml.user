@@ -88,16 +88,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/20/2018 13:02:33</publishTime>
     </File>
     <File Include="bin/ChamsICSLib.dll.config">
-      <publishTime>02/14/2018 17:05:10</publishTime>
+      <publishTime>03/20/2018 13:23:45</publishTime>
     </File>
     <File Include="bin/ChamsICSLib.pdb">
       <publishTime>03/20/2018 13:02:33</publishTime>
     </File>
     <File Include="bin/CICSRemittanceAPIService.dll">
-      <publishTime>03/20/2018 13:02:40</publishTime>
+      <publishTime>03/20/2018 13:53:51</publishTime>
     </File>
     <File Include="bin/CICSRemittanceAPIService.pdb">
-      <publishTime>03/20/2018 13:02:40</publishTime>
+      <publishTime>03/20/2018 13:53:51</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>09/11/2013 09:10:04</publishTime>
@@ -379,7 +379,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/01/2018 10:49:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/01/2018 19:46:48</publishTime>
+      <publishTime>03/20/2018 13:53:52</publishTime>
     </File>
   </ItemGroup>
 </Project>

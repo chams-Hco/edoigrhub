@@ -10,6 +10,7 @@ namespace CICSWebPortal.Services
 {
     public interface IDataService
     {
+        
         #region Clients
         IList<Client> GetAllClients();
         Client FindClientById(int id);
@@ -115,6 +116,7 @@ namespace CICSWebPortal.Services
         IList<Models.AgentSummary> GetAgentReportSummary(int clientId);
         IList<Models.ClientSummary> GetClientReportSummary();
         ReportViewModel GetTransactionReportSummary(ReportFilter request);
+        ViewModels.EndofDayViewModel GetEODReport(ReportFilter request);
         #endregion
 
         #region Location
@@ -150,6 +152,7 @@ namespace CICSWebPortal.Services
         #endregion
 
         List<Models.Notification> GetAllNotifications();
-        List<Models.AuditTrail> GetAllAuditTrail();        
+        List<Models.AuditTrail> GetAllAuditTrail();
+
     }
 }

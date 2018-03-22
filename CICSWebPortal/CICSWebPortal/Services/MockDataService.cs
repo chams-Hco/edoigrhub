@@ -9,7 +9,7 @@ using System.Web.Helpers;
 
 namespace CICSWebPortal.Services
 {
-    public class MockDataService:IDataService
+    public class MockDataService : IDataService
     {
         List<Client> Clients = null;
         List<Agent> Agents = null;
@@ -94,7 +94,8 @@ namespace CICSWebPortal.Services
             ;
 
 
-            Transactions = new List<Transaction> { 
+            Transactions = new List<Transaction>
+            {
             };
 
 
@@ -122,7 +123,7 @@ namespace CICSWebPortal.Services
         }
 
 
-        public   Client FindClientById(int id)
+        public Client FindClientById(int id)
         {
             Client client = Clients.First(e => e.ClientId == id);
             return client;
@@ -135,7 +136,7 @@ namespace CICSWebPortal.Services
             { throw new Exception("Client is null"); }
 
             Clients.Add(client);
-         
+
         }
 
 
@@ -146,7 +147,7 @@ namespace CICSWebPortal.Services
             Client currentclient = Clients.First(e => e.ClientId == client.ClientId);
             int clientIndex = Clients.FindIndex(e => e.ClientId == client.ClientId);
             Clients.Remove(currentclient);
-            Clients.Insert(clientIndex, client);                  
+            Clients.Insert(clientIndex, client);
         }
 
 
@@ -154,8 +155,8 @@ namespace CICSWebPortal.Services
         {
             Client client = Clients.First(e => e.ClientId == id);
             Clients.Remove(client);
-            
-           
+
+
         }
 
         #endregion
@@ -178,7 +179,7 @@ namespace CICSWebPortal.Services
             { throw new Exception("Agent is null"); }
 
             Agents.Add(agent);
-          
+
         }
 
         public void UpdateAgent(Agent agent)
@@ -189,14 +190,14 @@ namespace CICSWebPortal.Services
             int agentIndex = Agents.FindIndex(e => e.AgentId == agent.AgentId);
             Agents.Remove(currentagent);
             Agents.Insert(agentIndex, agent);
-            
+
         }
 
         public void DeleteAgent(int id)
         {
             Agent agent = Agents.First(e => e.Code == id.ToString());
             Agents.Remove(agent);
-            
+
         }
 
         public IList<Agent> GetAllAgentsByClientId(int id)
@@ -247,12 +248,12 @@ namespace CICSWebPortal.Services
 
         public IList<Transaction> GetAllTransactionByTerminalId(int id)
         {
-            return Transactions.Where(e=>e.TerminalId==id).ToList();
+            return Transactions.Where(e => e.TerminalId == id).ToList();
         }
 
         public Transaction FindTransactionById(int id)
         {
-            return Transactions.FirstOrDefault(e=>e.TransactionId==id);
+            return Transactions.FirstOrDefault(e => e.TransactionId == id);
         }
 
         public Transaction FindTransactionByCode(string code)
@@ -272,18 +273,25 @@ namespace CICSWebPortal.Services
         {
             var revenue = Revenues.FirstOrDefault(e => e.RevenueId == id);
 
-            return new Revenue {RevenueId=revenue.RevenueId,Code=revenue.Code,
-            MDA=revenue.MDA,Name=revenue.Name,Amount=revenue.Amount,ClientId=revenue.ClientId,
-            Status=revenue.Status};
+            return new Revenue
+            {
+                RevenueId = revenue.RevenueId,
+                Code = revenue.Code,
+                MDA = revenue.MDA,
+                Name = revenue.Name,
+                Amount = revenue.Amount,
+                ClientId = revenue.ClientId,
+                Status = revenue.Status
+            };
         }
 
         public void AddRevenue(Revenue revenue)
         {
-           if(revenue==null)
-           {
-               throw new Exception("Revenue is null or empty");
-           }
-           Revenues.Add(revenue);
+            if (revenue == null)
+            {
+                throw new Exception("Revenue is null or empty");
+            }
+            Revenues.Add(revenue);
         }
 
         public void UpdateRevenue(Revenue revenue)
@@ -300,9 +308,9 @@ namespace CICSWebPortal.Services
 
         public void DeleteRevenue(int id)
         {
-            
-          Revenue revenue = Revenues.First(e => e.RevenueId == id);
-          Revenues.Remove(revenue);
+
+            Revenue revenue = Revenues.First(e => e.RevenueId == id);
+            Revenues.Remove(revenue);
         }
         #endregion
 
@@ -339,7 +347,7 @@ namespace CICSWebPortal.Services
         {
             if (email == "anambra_admin@igrhub.com" && password == "password")
             {
-                return new UserDashBoardViewModel { UserId = 1, RoleId = 5, ClientId=1, UserTypeParentId=7, Email = "anambra_admin@igrhub.com" };
+                return new UserDashBoardViewModel { UserId = 1, RoleId = 5, ClientId = 1, UserTypeParentId = 7, Email = "anambra_admin@igrhub.com" };
             }
 
             return new UserDashBoardViewModel { };
@@ -599,6 +607,11 @@ namespace CICSWebPortal.Services
             throw new NotImplementedException();
         }
 
+        public ViewModels.EndofDayViewModel GetEODReport(ReportFilter request)
+        {
+            throw new NotImplementedException();
+        }
+
         #region Location
         public IList<Location> GetAllLocations()
         {
@@ -732,7 +745,7 @@ namespace CICSWebPortal.Services
         {
             throw new NotImplementedException();
         }
-        
+
         Dashboard IDataService.GetTaxpayerDashboardSummary(int roleId, int userId, string userEmail)
         {
             throw new NotImplementedException();

@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "End of Day Report";
     Layout = null;
-
+    ViewBag.Title = "Reports";
 }
 
 <table class="table table-striped" id="dataTable1">
@@ -30,6 +30,9 @@
                     <span>TERMINAL NO </span>
                 </th>
                 <th>
+                    <span>REMITTANCE CODE</span>
+                </th>
+                <th>
                     <span>NAME </span>
                 </th>
                 <th>
@@ -52,6 +55,7 @@
                     <tr>
                         <td>@response.DATETRANSACTION.ToString("dd/MM/yyyy HH:mm:ss")</td>
                         <td>@response.TERMINALCODE</td>
+                        <td>@response.REMITTANCECODE</td>
                         <td>@response.AGENTFULLNAME</td>
                         <td>@response.AGENTEMAIL</td>
                         <td>@response.TOTAL</td>

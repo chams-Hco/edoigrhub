@@ -16,6 +16,9 @@ namespace CICSWebPortal.Helpers
 {
     public static class Utility
     {
+       
+
+
         /// <summary>
         /// Extension method to convert IEnumerable to dataset
         /// </summary>
@@ -109,12 +112,12 @@ namespace CICSWebPortal.Helpers
         {
             if (RoleId > 2)
             {
-                var types = DataContext.GetAllClients().Where(x=> x.ClientId==ClientId).Select(x =>
-                                    new System.Web.Mvc.SelectListItem
-                                    {
-                                        Value = x.ClientId.ToString(),
-                                        Text = x.ClientName
-                                    });
+                var types = DataContext.GetAllClients().Where(x => x.ClientId == ClientId).Select(x =>
+                                       new System.Web.Mvc.SelectListItem
+                                       {
+                                           Value = x.ClientId.ToString(),
+                                           Text = x.ClientName
+                                       });
 
                 return new SelectList(types, "Value", "Text");
             }
@@ -188,7 +191,8 @@ namespace CICSWebPortal.Helpers
 
                 return new SelectList(types, "Value", "Text");
             }
-            else if(RoleId <=4){
+            else if (RoleId <= 4)
+            {
                 var types = DataContext.GetAllAgentsByClientId(UserTypeParentId).Select(x =>
                                     new System.Web.Mvc.SelectListItem
                                     {
@@ -198,13 +202,14 @@ namespace CICSWebPortal.Helpers
 
                 return new SelectList(types, "Value", "Text");
             }
-            else {
-                var types = DataContext.GetAllAgentsByClientId(UserTypeParentId).Where(x=> x.AgentId==UserTypeParentId).Select(x =>
-                                    new System.Web.Mvc.SelectListItem
-                                    {
-                                        Value = x.AgentId.ToString(),
-                                        Text = x.Name
-                                    });
+            else
+            {
+                var types = DataContext.GetAllAgentsByClientId(UserTypeParentId).Where(x => x.AgentId == UserTypeParentId).Select(x =>
+                                       new System.Web.Mvc.SelectListItem
+                                       {
+                                           Value = x.AgentId.ToString(),
+                                           Text = x.Name
+                                       });
 
                 return new SelectList(types, "Value", "Text");
             }
@@ -235,7 +240,8 @@ namespace CICSWebPortal.Helpers
                 return new SelectList(types, "Value", "Text");
             }
 
-            else {
+            else
+            {
                 var types = DataContext.GetAllTerminalsByAgentId(UserTypeParentId).Select(x =>
                     new System.Web.Mvc.SelectListItem
                     {
@@ -245,6 +251,70 @@ namespace CICSWebPortal.Helpers
 
                 return new SelectList(types, "Value", "Text");
             }
+        }
+
+        /// <summary>
+        /// Returns a SelectListItem of terminals selected by roles whose respective item name and value is the terminal code.
+        /// this method was created due to my discovery that some terminals do not have names
+        /// yet they are being displayed in the view by their names this is quite wierd
+        /// </summary>
+        /// <param name="DataContext"></param>
+        /// <param name="RoleId"></param>
+        /// <param name="UserTypeParentId"></param>
+        /// <returns></returns>
+        public static IEnumerable<System.Web.Mvc.SelectListItem> GetTerminalsByCode(IDataService DataContext, int RoleId, int UserTypeParentId)
+        {
+            if (RoleId <= 2)
+            {
+                var types = DataContext.GetAllTerminals().Select(x =>
+                                    new System.Web.Mvc.SelectListItem
+                                    {
+                                        Value = x.TerminalId.ToString(),
+                                        Text = x.Code
+
+                                    });
+
+                return new SelectList(types, "Value", "Text");
+            }
+            else if (RoleId <= 4)
+            {
+                var types = DataContext.GetAllTerminalsByClientId(UserTypeParentId).Select(x =>
+                    new System.Web.Mvc.SelectListItem
+                    {
+                        Value = x.TerminalId.ToString(),
+                        Text = x.Code
+                    });
+
+                return new SelectList(types, "Value", "Text");
+            }
+            else
+            {
+                var types = DataContext.GetAllTerminalsByAgentId(UserTypeParentId).Select(x =>
+                    new System.Web.Mvc.SelectListItem
+                    {
+                        Value = x.TerminalId.ToString(),
+                        Text = x.Code
+                    });
+
+                return new SelectList(types, "Value", "Text");
+            }
+        }
+
+        public static IEnumerable<System.Web.Mvc.SelectListItem> GetStatusList()
+        {
+            List<System.Web.Mvc.SelectListItem> statusListItems = new List<System.Web.Mvc.SelectListItem>();
+            statusListItems.Add(new System.Web.Mvc.SelectListItem
+            {
+                Text = "PAID",
+                Value = Boolean.TrueString
+            });
+            statusListItems.Add(new System.Web.Mvc.SelectListItem
+            {
+                Text = "UNPAID",
+                Value = Boolean.FalseString
+            });
+
+            return statusListItems;
         }
 
         public static IEnumerable<System.Web.Mvc.SelectListItem> GetRevenues(IDataService DataContext, int RoleId, int ClientId)
@@ -304,5 +374,8 @@ namespace CICSWebPortal.Helpers
 
             return -1;
         }
+
+
+
     }
 }

@@ -1006,6 +1006,7 @@ namespace ChamsICSWebService
             //authenticate request sender
             if (AuthenticateRequestSender(req.Username, req.Password) == false)
             {
+                msg += "Cannot Authorise User, Please supply valid Authentication credentials";
                 endOfDayRes.ResponseCode = NIBSSResponseHelper.InvalidSender;
                 return endOfDayRes;
             }

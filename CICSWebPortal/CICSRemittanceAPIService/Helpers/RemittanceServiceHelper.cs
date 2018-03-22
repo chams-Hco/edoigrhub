@@ -190,7 +190,10 @@ namespace CICSRemittanceAPIService
                 db.Entry(eod).State = System.Data.Entity.EntityState.Modified;
             }
             //insert into EOD payment log
-            db.EODPaymentNotificationLogs.Add(new EODPaymentNotificationLog
+            DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            DateTime transactionApprovalDate = start.AddMilliseconds(req.TransactionApprovalDate).ToLocalTime();
+            DateTime transactionInitiatedDate = start.AddMilliseconds(req.TransactionInitiatedDate).ToLocalTime();
+            var eodNotificationLog = new EODPaymentNotificationLog
             {
                 BillerId = req.BillerID,
                 BillerName = req.BillerName,
@@ -207,10 +210,11 @@ namespace CICSRemittanceAPIService
                 SourceBankCode = req.SourceBankCode,
                 SplitType = req.SplitType,
                 TotalAmount = req.TotalAmount,
-                TransactionApprovalDate = new DateTime(req.TransactionApprovalDate),
+                TransactionApprovalDate = transactionApprovalDate,
                 TransactionFeeBearer = req.TransactionFeeBearer,
-                TransactionInitiatedDate = new DateTime(req.TransactionInitiatedDate)
-            });
+                TransactionInitiatedDate = transactionInitiatedDate
+            };
+            db.EODPaymentNotificationLogs.Add(eodNotificationLog);
             //set isValid depending on whether EOD status and payment log is saved
             isValid = db.SaveChanges() > 0 ? true : false;
             if (isValid == false)

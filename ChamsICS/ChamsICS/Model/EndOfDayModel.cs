@@ -13,6 +13,7 @@ namespace ChamsICSWebService.Model
         public int TerminalId { get; set; }
         public int? AgentId { get; set; }
         public string TerminalCode { get; set; }
+        public string RemittanceCode { get; set; }
         public string HandlerName { get; set; }
         public string HandlerEmail { get; set; }
         public string HandlerPhone { get; set; }
