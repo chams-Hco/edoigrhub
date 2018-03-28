@@ -273,4 +273,15 @@ namespace ChamsICSWebService.Model
         {
         }
     }
+
+    public class EodRequest
+    {
+        public string DATETRANSACTION { get; set; }
+        public decimal TOTAL { get; set; }
+        public int EODCOUNT { get; set; }
+        public string EODSTATUS { get; set; }
+        public string TERMINALCODE { get; set; }
+        public string AGENTEMAIL { get; set; }
+        public string AGENTFULLNAME { get; set; }
+    }
 }

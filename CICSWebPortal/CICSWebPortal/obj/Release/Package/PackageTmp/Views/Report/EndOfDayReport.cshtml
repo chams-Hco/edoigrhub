@@ -4,6 +4,8 @@
     String displayStyle = String.Empty;
     ViewBag.Title = "EndOfDayReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string startdate = Model.StartDate.ToString("dd/MM/yyyy");
+    string enddate = Model.EndDate.ToString("dd/MM/yyyy");
 }
 
 <div class="clearfix">
@@ -15,13 +17,13 @@
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon2"> Start Date </span>
-                    <input type="text" class="form-control" id="StartDate" value="@Model.StartDate.ToString("dd/MM/yyyy")" />
+                    <input type="text" class="form-control" id="StartDate" value='@startdate' />
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon2"> End Date </span>
-                    <input type="text" class="form-control" id="EndDate" value="@Model.EndDate.ToString("dd/MM/yyyy")" />
+                    <input type="text" class="form-control" id="EndDate" value='@enddate' />
                 </div>
             </div>
         </div>
@@ -126,12 +128,14 @@
         function bindJQueryEvents() {
             $("#StartDate").datepicker({
                 minDate: new Date(2015, 1 - 1, 1),
-                maxDate: new Date()
+                maxDate: new Date(),
+                dateFormat: 'dd/mm/yy'
             });
 
             $("#EndDate").datepicker({
                 minDate: new Date(2015, 1 - 1, 1),
-                maxDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+                maxDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+                dateFormat: 'dd/mm/yy'
             });
 
             //Load the details page
@@ -171,7 +175,7 @@
             $("#btnRefresh").click(function () {
                 var eodFilter = {
                     startDate: $("#StartDate").val(),
-                    endDate: $("#EndDate").val(),
+                    endDate:$("#EndDate").val(),
                     agentId: $("#SelectedAgentId").val(),
                     TerminalId: $("#SelectedTerminalId").val(),
                     Status: $("#SelectedStatus").val(),

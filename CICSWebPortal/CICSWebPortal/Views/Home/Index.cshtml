@@ -19,8 +19,9 @@
 <div class="main-header clearfix">
     @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
     <div class="page-title" style="@displayStyle">
-        <h3 class="no-margin">Dashboard 
-        <a href="/Report/ExecutiveDashboard/" class="btn btn-primary">View Executive Dashboard</a>
+        <h3 class="no-margin">
+            Dashboard
+            <a href="/Report/ExecutiveDashboard/" class="btn btn-primary">View Executive Dashboard</a>
             <a href="/Report/PeriodicDashBoard/" class="btn bg-danger">View Zone Positions</a>
         </h3>
     </div><!-- /page-title -->
@@ -49,8 +50,7 @@
         </span>
         <span class="text">AuditTrails</span>
     </a>
-</div
-><!-- /grey-container -->
+</div><!-- /grey-container -->
 
 <div class="padding-md">
 
@@ -71,7 +71,7 @@
             </div>
         </a>
     </div>
-    @{displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; } }
+    @{displayStyle = string.Empty; if (roleId > 3) { displayStyle = "display: none"; } }
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none"><span id="serverloadCount">[ @Model.TotalAgent ]</span></h4>
         <h5>Zones</h5>
@@ -105,7 +105,19 @@
 
     @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
-        <h4 class="m-top-none" id="visitorCount">[ @Model.TotalTransaction ]</h4>
+        @*<h4 class="m-top-none" id="visitorCount">[ @Model.TotalTransaction ]</h4>*@
+        <h4 class="m-top-none" id="visitorCount">
+            [
+            @if (Model.TotalTransaction > 0)
+            {
+                <text>@Model.TotalTransaction.ToString() </text>
+            }
+            else
+            {
+                <text>0</text>
+            }
+            ]
+        </h4>
         <h5>Transactions</h5>
 
         <div class="stat-icon">
@@ -121,8 +133,75 @@
 
     @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
-        <h4 class="m-top-none" id="orderCount">[ ₦@Model.TransctionValue.ToString("#,0.00") ]</h4>
+        @*<h4 class="m-top-none" id="orderCount">[ ₦@Model.TransctionValue.ToString("#,0.00") ]</h4>*@
+        <h4 class="m-top-none" id="orderCount">
+            [
+            @if (Model.TransctionValue > 0)
+            {
+                <text>₦@String.Format("{0:n}", Model.TransctionValue)</text>
+            }
+            else
+            {
+                <text>0</text>
+            }
+            ]
+        </h4>
         <h5>Transaction Value</h5>
+
+        <div class="stat-icon">
+            <i class="fa fa-bar-chart-o fa-3x"></i>
+        </div>
+        <div class="refresh-button">
+            <i class="fa fa-refresh"></i>
+        </div>
+        <div class="loading-overlay">
+            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+        </div>
+    </div>
+
+    @{displayStyle = string.Empty; }
+    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+        <h4 class="m-top-none" id="visitorCount">
+            [
+            @if (Model.TotalAmountPaid > 0)
+            {
+                <text>₦@String.Format("{0:n}", Model.TotalAmountPaid) </text>
+            }
+            else
+            {
+                <text>0</text>
+            }
+
+            ]
+        </h4>
+        <h5>Amount Paid</h5>
+
+        <div class="stat-icon">
+            <i class="fa fa-bar-chart-o fa-3x"></i>
+        </div>
+        <div class="refresh-button">
+            <i class="fa fa-refresh"></i>
+        </div>
+        <div class="loading-overlay">
+            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+        </div>
+    </div>
+
+    @{displayStyle = string.Empty; }
+    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+        <h4 class="m-top-none" id="visitorCount">
+            [
+            @if (Model.TotalAmountUnpaid > 0)
+            {
+                <text>₦@String.Format("{0:n}", Model.TotalAmountUnpaid) </text>
+            }
+            else
+            {
+                <text>0</text>
+            }
+            ]
+        </h4>
+        <h5>Amount Unpaid</h5>
 
         <div class="stat-icon">
             <i class="fa fa-bar-chart-o fa-3x"></i>
@@ -152,7 +231,7 @@
     </div>
 
     @{displayStyle = string.Empty; string walletValue = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
-        if (Model.Wallet.HasValue) { walletValue = Model.Wallet.Value.ToString("#,0.00"); }}
+        if (Model.Wallet.HasValue) { walletValue = String.Format("{0:n}", Model.Wallet); }}
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="visitorCount">[ ₦ @walletValue  ]</h4>
         <h5>Wallet</h5>

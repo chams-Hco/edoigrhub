@@ -1,6 +1,5 @@
 ﻿
-
-@model IEnumerable<CICSWebPortal.Models.EndOfDayServiceResponse>
+@model CICSWebPortal.ViewModels.EndofDayViewModel
 @{
     ViewBag.Title = "End of Day Report";
     Layout = null;
@@ -9,7 +8,7 @@
 
 <table class="table table-striped" id="dataTable1">
 
-    @if (Model == null || Model.Count() < 1)
+    @if (Model == null || Model.EODReport.Count() < 1)
     {
         <thead>
             <tr>
@@ -50,17 +49,17 @@
             </tr>
         </thead>
         <tbody>
-            @{ foreach (var response in Model)
+            @{ foreach (var response in Model.EODReport)
                 {
                     <tr>
-                        <td>@response.DATETRANSACTION.ToString("dd/MM/yyyy HH:mm:ss")</td>
-                        <td>@response.TERMINALCODE</td>
-                        <td>@response.REMITTANCECODE</td>
-                        <td>@response.AGENTFULLNAME</td>
-                        <td>@response.AGENTEMAIL</td>
-                        <td>@response.TOTAL</td>
-                        <td>@response.EODCOUNT</td>
-                        <td>@response.EODSTATuS</td>
+                        <td>@response.TransactionDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        <td>@response.TerminalCode</td>
+                        <td>@response.RemittanceCode  </td>
+                        <td>@response.AgentName</td>
+                        <td>@response.AgentEmail</td>
+                        <td>@response.Amount</td>
+                        <td>@response.EODCount</td>
+                        <td>@response.EODStatus</td>
                     </tr>
                 }
             }

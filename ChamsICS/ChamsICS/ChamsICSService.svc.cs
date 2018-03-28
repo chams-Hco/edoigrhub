@@ -27,6 +27,7 @@ namespace ChamsICSWebService
 
         static string DebugLogPath = ConfigurationManager.AppSettings["DebugLoggingPath"];
         static string ErrorLogPath = ConfigurationManager.AppSettings["ErrorLoggingPath"];
+        static string AllowBulkEodPush = ConfigurationManager.AppSettings["AllowBulkEODPush"];
 
         public AuthoriseTerminalRes AuthoriseTerminal(AuthoriseTerminalReq req)
         {
@@ -614,7 +615,7 @@ namespace ChamsICSWebService
         //    return res.SerializeNIBSSResponse();
         //}
 
-        
+
 
         //public string SendNotification(NotificationRequest req)
         //{
@@ -659,5 +660,75 @@ namespace ChamsICSWebService
 
         //    return res.SerializeNIBSSResponse();
         //}
+
+        /// <summary>
+        /// method called by itex vendors to push all exiting EOD in a single push
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public List<CreateEndOfDayRes> BulkPushEodTransactions(List<EodRequest> request)
+        {
+            var result = new List<CreateEndOfDayRes>();
+            if (int.TryParse(AllowBulkEodPush, out int x))
+            {
+                if (x != 1)
+                {
+                    result.Add(new CreateEndOfDayRes { ResponseCode = ResponseHelper.APPLICATION_ERROR, ResponseDescription = $"Application Error...Service Disabled" });
+                    return result;
+                }
+            }
+            else
+            {
+                result.Add(new CreateEndOfDayRes { ResponseCode = ResponseHelper.APPLICATION_ERROR, ResponseDescription = $"Application Error...Service Disabled : Bad format contact administrators.. *conf*" });
+                return result;
+            }
+            if (request == null)
+            {
+                throw new ArgumentNullException("Invalid CreateEODTransaction Request");
+            }
+            string msg = string.Empty;
+            string terminalCode = string.Empty;
+            foreach (var requestmodel in request)
+            {
+               
+                var res = new CreateEndOfDayRes();
+                try
+                {
+
+                   
+                    var req = new CreateEndOfDayReq { Amount = requestmodel.TOTAL, EODCount = requestmodel.EODCOUNT, Username = "test_user", Password = "_ch@m5123", TerminalCode = requestmodel.TERMINALCODE }; 
+                    res = ServiceHelper.CreateEODTransaction(req, out msg, out bool isCreated);
+                    if (isCreated == false)
+                    {
+                        //Log Failed Upload Request
+                        string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(req);
+
+                        //====Log Failed Upload to File===
+                        Logger.logToFile(msgLog, DebugLogPath + "\\Failed_EOD_Transactions\\", true, terminalCode, "xml", true);
+
+                        
+                        res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                        res.ResponseDescription = msg;
+                    }
+                    else
+                    {
+                        res.ResponseCode = ResponseHelper.SUCCESS;
+                        res.ResponseDescription = "Successful";
+                    }
+                    
+
+
+
+                 }
+                catch (Exception e)
+                {
+                    Logger.logToFile(e, ErrorLogPath);
+                    res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                    res.ResponseDescription = $"Application Error...\n{msg}...\n{e.Message}";
+                }
+                result.Add(res);
+            }
+            return result;
+        }
     }
 }

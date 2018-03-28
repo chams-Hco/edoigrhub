@@ -88,7 +88,7 @@ function checkTime(i) {
 
                             <div class="panel-stat3 bg-primary col-lg-3" style="margin:0 10px 10px 0;">
                                 <h4>Transaction Value</h4><br />
-                                <h4 class="m-top-none">₦@Model.TotalTransctionValue.ToString("#,0.00")</h4>
+                                <h4 class="m-top-none">₦@String.Format("{0:n}", Model.TotalTransctionValue)</h4>
                                     <div class="stat-icon">
                                         <i class="fa fa-money fa-3x"></i>
                                     </div>
@@ -96,7 +96,7 @@ function checkTime(i) {
                             <div class="panel-stat3 bg-danger col-lg-3" style="margin:0 10px 10px 0;">
                                 <h4>Leading Zone</h4>
                                 @Model.AgentLeaderStats.LeadingAgent
-                                <h4 class="m-top-none">₦@Model.AgentLeaderStats.LeadingAgentVal.Value.ToString("#,0.00")</h4>
+                                <h4 class="m-top-none">₦@String.Format("{0:n}", Model.AgentLeaderStats.LeadingAgentVal.Value)</h4>
                                 <div class="stat-icon">
                                     <i class="fa fa-thumbs-o-up fa-3x"></i>
                                 </div>
@@ -104,7 +104,7 @@ function checkTime(i) {
                             <div class="panel-stat3 bg-dark col-lg-3" style="margin:0 10px 10px 0;">
                                 <h4>Trailing Zone</h4>
                                 @Model.AgentLeaderStats.TrailingAgent
-                                <h4 class="m-top-none">₦@Model.AgentLeaderStats.TrailingAgentVal.Value.ToString("#,0.00")</h4>
+                                <h4 class="m-top-none">₦@String.Format("{0:n}", Model.AgentLeaderStats.TrailingAgentVal.Value)</h4>
                                 <div class="stat-icon">
                                     <i class="fa fa-thumbs-o-down fa-3x"></i>
                                 </div>
@@ -112,7 +112,7 @@ function checkTime(i) {
                             <div class="panel-stat3 bg-danger col-lg-3" style="margin:0 10px 10px 0;">
                                 <h4>Leading Revenue</h4>
                                 @Model.RevenueLeaderStats.LeadingRevenue
-                                <h4 class="m-top-none">₦@Model.RevenueLeaderStats.LeadingRevenueVal.Value.ToString("#,0.00")</h4>
+                                <h4 class="m-top-none">₦@String.Format("{0:n}", Model.RevenueLeaderStats.LeadingRevenueVal.Value)</h4>
                                 <div class="stat-icon">
                                     <i class="fa fa-long-arrow-up fa-3x"></i>
                                 </div>
@@ -120,7 +120,7 @@ function checkTime(i) {
                             <div class="panel-stat3 bg-dark col-lg-3" style="margin:0 10px 10px 0;">
                                 <h4>Trailing Revenue</h4>
                                 @Model.RevenueLeaderStats.TrailingRevenue
-                                <h4 class="m-top-none">₦@Model.RevenueLeaderStats.TrailingRevenueVal.Value.ToString("#,0.00")</h4>
+                                <h4 class="m-top-none">₦@String.Format("{0:n}", Model.RevenueLeaderStats.TrailingRevenueVal.Value)</h4>
                                 <div class="stat-icon">
                                     <i class="fa fa-long-arrow-down fa-3x"></i>
                                 </div>
@@ -147,7 +147,7 @@ function checkTime(i) {
                                         <tr>
                                             <th>@agentStats.AgentName</th>
                                             <td style="text-align:center">@agentStats.TerminalStats.TotalTransactions</td>
-                                            <td style="text-align:right">₦@agentStats.TerminalStats.TotalTransactionVal.ToString("#,0.00")</td>
+                                            <td style="text-align:right">₦@String.Format("{0:n}", agentStats.TerminalStats.TotalTransactionVal)</td>
                                         </tr>
                                     }
                                 }
@@ -203,12 +203,12 @@ function checkTime(i) {
                                 </tr>
                                 <tr>
                                     <th>Transaction Value</th>
-                                    <td>₦ @agentStats.TerminalStats.TotalTodayTransactionVal.ToString("#,0.00")</td>
-                                    <td>₦ @agentStats.TerminalStats.Total7DaysTransactionVal.ToString("#,0.00")</td>
-                                    <td>₦ @agentStats.TerminalStats.Total30DaysTransactionVal.ToString("#,0.00")</td>
-                                    <td>₦ @agentStats.TerminalStats.Total3MonthsTransactionVal.ToString("#,0.00")</td>
-                                    <td>₦ @agentStats.TerminalStats.Total6MonthsTransactionVal.ToString("#,0.00")</td>
-                                    <td>₦ @agentStats.TerminalStats.TotalTransactionVal.ToString("#,0.00")</td>
+                                    <td>₦ @String.Format("{0:n}", agentStats.TerminalStats.TotalTodayTransactionVal)</td>
+                                    <td>₦ @String.Format("{0:n}", agentStats.TerminalStats.Total7DaysTransactionVal)</td>
+                                    <td>₦ @String.Format("{0:n}", agentStats.TerminalStats.Total30DaysTransactionVal)</td>
+                                    <td>₦ @String.Format("{0:n}", agentStats.TerminalStats.Total3MonthsTransactionVal)</td>
+                                    <td>₦ @String.Format("{0:n}", agentStats.TerminalStats.Total6MonthsTransactionVal)</td>
+                                    <td>₦ @String.Format("{0:n}", agentStats.TerminalStats.TotalTransactionVal)</td>
                                 </tr>
                                 <tr>
                                     <th>Active Terminals</th>

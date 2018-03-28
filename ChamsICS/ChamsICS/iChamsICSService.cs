@@ -115,6 +115,12 @@ namespace ChamsICSWebService
         //[WebInvoke(Method = "POST", UriTemplate = "/EOD/SendNotification", BodyStyle = WebMessageBodyStyle.Bare)]
         //[Description("Call this service to validate an EndOfDay transaction. For Technical support, contact itsupport@chams.com ")]
         //string SendNotification(NotificationRequest req);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/EOD/BulkPushEodTransactions", BodyStyle = WebMessageBodyStyle.Bare)]
+        //[WebInvoke(Method = "POST", UriTemplate = "/EOD/QueryEODStatus", BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Call this service to push Bulk EOD Transaction. For Technical support, contact itsupport@chams.com ")]
+        List<CreateEndOfDayRes> BulkPushEodTransactions(List<EodRequest> request);
         #endregion
     }
 
