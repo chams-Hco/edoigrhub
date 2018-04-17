@@ -276,7 +276,8 @@ namespace CICSWebPortal.Controllers
         {
             var roleId = Session["RoleId"];
             var userId = Session["UserId"];
-            var executiveDashboard = DataContext.GetExecutiveDashBoardSummary(Convert.ToInt32(roleId), Convert.ToInt32(userId));
+            var currentUser = (UserDashBoardViewModel)Session["LoggedInUser"];
+            var executiveDashboard = DataContext.GetExecutiveDashBoardSummary(Convert.ToInt32(roleId), Convert.ToInt32(userId), currentUser.RoleCode);
             if (executiveDashboard.AgentLeaderStats != null && executiveDashboard.RevenueLeaderStats != null)
                 return View(executiveDashboard);
             return RedirectToAction("Index", "Home");
@@ -286,20 +287,22 @@ namespace CICSWebPortal.Controllers
         {
             var roleId = Session["RoleId"];
             var userId = Session["UserId"];
+            var currentUser = (UserDashBoardViewModel)Session["LoggedInUser"];
 
             ExecutiveDashboard result = new ExecutiveDashboard();
-            result = DataContext.GetPeriodicDashboardSummary(Convert.ToInt32(roleId), Convert.ToInt32(userId), DateTime.Now.AddDays(-7), DateTime.Now);
+            result = DataContext.GetPeriodicDashboardSummary(Convert.ToInt32(roleId), Convert.ToInt32(userId), currentUser.RoleCode, DateTime.Now.AddDays(-7), DateTime.Now);
             return View(result);
         }
         public ActionResult PeriodicDashBoardData(PeriodicDashboardFilter filter)
         {
             var roleId = Session["RoleId"];
             var userId = Session["UserId"];
+            var currentUser = (UserDashBoardViewModel)Session["LoggedInUser"];
             filter.roleId = Convert.ToInt32(roleId);
             filter.userId = Convert.ToInt32(userId);
 
             ExecutiveDashboard result = new ExecutiveDashboard();
-            result = DataContext.GetPeriodicDashboardSummary(filter.roleId.Value, filter.userId.Value, filter.startDate, filter.endDate);
+            result = DataContext.GetPeriodicDashboardSummary(filter.roleId.Value, filter.userId.Value, currentUser.RoleCode, filter.startDate, filter.endDate);
             return View(result);
         }
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChamsICSWebService", "ChamsICS\ChamsICSWebService.csproj", "{E14605C2-ABE7-46DE-83FD-D144722EF760}"
 EndProject
@@ -43,25 +43,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://otunfikayo.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ChamsICS\\ChamsICSWebService.csproj
-		SccProjectName1 = ChamsICS
-		SccLocalPath1 = ChamsICS
-		SccProjectUniqueName2 = ChamsICSLib\\ChamsICSLib.csproj
-		SccProjectName2 = ChamsICSLib
-		SccLocalPath2 = ChamsICSLib
-		SccProjectUniqueName3 = CICSTest\\CICSTest.csproj
-		SccProjectName3 = CICSTest
-		SccLocalPath3 = CICSTest
-		SccProjectUniqueName4 = ICSWinService\\ICSWinService.csproj
-		SccProjectName4 = ICSWinService
-		SccLocalPath4 = ICSWinService
-		SccProjectUniqueName5 = ..\\CICSWebPortal\\CICSWebPortal\\CICSWebPortal.csproj
-		SccProjectName5 = ../CICSWebPortal
-		SccLocalPath5 = ..\\CICSWebPortal\\CICSWebPortal
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD54B77D-5E1D-4199-AE8D-ADB6113977FD}
 	EndGlobalSection
 EndGlobal

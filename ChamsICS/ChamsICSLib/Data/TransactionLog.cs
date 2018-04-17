@@ -36,6 +36,15 @@ namespace ChamsICSLib.Data
         public Nullable<int> Status { get; set; }
         public Nullable<int> LocationId { get; set; }
         public string LocationCode { get; set; }
+        public Nullable<decimal> Income { get; set; }
+        public Nullable<decimal> Percentage { get; set; }
+        public Nullable<decimal> FoodAmount { get; set; }
+        public Nullable<decimal> DrinkAmount { get; set; }
+        public Nullable<decimal> RentalAmount { get; set; }
+        public Nullable<decimal> OtherAmount { get; set; }
+        public Nullable<System.DateTime> FromDate { get; set; }
+        public Nullable<System.DateTime> ToDate { get; set; }
+        public string Name { get; set; }
     
         public virtual Agent Agent { get; set; }
         public virtual Client Client { get; set; }

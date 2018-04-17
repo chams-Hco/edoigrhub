@@ -77,3 +77,14 @@ C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrh
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csproj.CoreCompileInputs.cache
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.config
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.pdb
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csproj.CoreCompileInputs.cache
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csproj.CopyComplete
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb

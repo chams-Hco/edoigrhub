@@ -29,3 +29,15 @@ C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrh
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.csproj.CoreCompileInputs.cache
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.dll
 C:\Users\GABRIEL\Documents\Projects\Office_Projects\Web\IGRHub\edoigrhub\edoigrhub\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.pdb
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.dll.config
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Release\ChamsICSLib.pdb
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.csprojResolveAssemblyReference.cache
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.csproj.CoreCompileInputs.cache
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.csproj.CopyComplete
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Release\ChamsICSLib.pdb

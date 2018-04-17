@@ -21,6 +21,11 @@ namespace ChamsICSWebService
         AuthoriseTerminalRes AuthoriseTerminal(AuthoriseTerminalReq req);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/AuthoriseWebUser", BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Call this service to retreive TerminalCode when setting up a terminal for the first time. For Technical support, contact itsupport@chams.com ")]
+        AuthoriseTerminalRes AuthoriseWebUser(AuthoriseWebUserReq req);
+
+        [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/VerifyResidentId", BodyStyle = WebMessageBodyStyle.Bare)]
         [Description("Call this service to verify the identity of a resident. For Technical support, contact itsupport@chams.com ")]
         VerifyResidentIdRes VerifyResidentId(VerifyResidentIdReq req);

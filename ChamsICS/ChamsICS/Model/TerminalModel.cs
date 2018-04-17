@@ -25,8 +25,49 @@ namespace ChamsICSWebService.Model
         public string Password { get; set; }
     }
 
+    public class AuthoriseWebUserReq : User
+    {
+        [DataMember]
+        public string AgentCode { get; set; }
+
+        [DataMember]
+        public string TerminalName { get; set; }
+
+        [DataMember]
+        public string TerminalSerialNumber { get; set; } = new Guid().ToString();
+        [DataMember]
+        public string AgentUserName { get; set; }
+        [DataMember]
+        public string AgentPassword { get; set; }
+        [DataMember]
+        public string Channel { get; set; } = "WEB";
+
+
+
+
+    }
+    public enum Gender
+    {
+        Male, Female
+    }
+
+    public class UserDetailReq
+    {
+        public string Firstname { get; set; }
+        public string Middlename { get; set; }
+        public string Lastname { get; set; }
+        public string Name { get; set; }
+        public Gender Sex { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Website { get; set; }
+        public int TerminalId { get; set; }
+    }
+
+
     [DataContract]
-    public class AuthoriseTerminalRes: Response
+    public class AuthoriseTerminalRes : Response
     {
         [DataMember]
         public string TerminalCode { get; set; }
@@ -54,7 +95,7 @@ namespace ChamsICSWebService.Model
     public class GetAllTerminalRes : Response
     {
         public IEnumerable<Terminal> Terminals { get; set; }
-        
+
     }
 
     public class GetTerminalsReq

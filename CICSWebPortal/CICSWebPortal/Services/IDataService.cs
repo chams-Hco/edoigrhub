@@ -13,7 +13,10 @@ namespace CICSWebPortal.Services
         
         #region Clients
         IList<Client> GetAllClients();
+        IList<Client> GetAllClientWithZones();
         Client FindClientById(int id);
+        Task<Models.Client> FindClientByIdAsync(int id);
+        Client FindClientWithZone(int id);
         void AddClient(Client client);
         void UpdateClient(Client client);
         void DeleteClient(int id);
@@ -38,7 +41,9 @@ namespace CICSWebPortal.Services
         #endregion
 
         #region Transaction
+        WebTransactionResponse ProcessWebTrancation(WebPayment webPayment);
         IList<Models.Transaction> GetAllTransactions(Models.GetTransactionRequest req);
+        IList<Models.Transaction> GetLast10TransactionsByTerminalId(int TerminalId);
         Transaction FindTransactionById(int id);
 
         Transaction FindTransactionByCode(string code);
@@ -92,15 +97,16 @@ namespace CICSWebPortal.Services
         #endregion
 
         #region Dashboard
-        Dashboard GetDashBoardSummary(int roleId, int userId);
+        Dashboard GetDashBoardSummary(int roleId, int userId, string roleCode);
         Dashboard GetTaxpayerDashboardSummary(int roleId, int userId, string userEmail);
-        ExecutiveDashboard GetExecutiveDashBoardSummary(int roleId, int userId);
-        ExecutiveDashboard GetPeriodicDashboardSummary(int roleId, int userId, DateTime StartDate, DateTime EndDate);
+        ExecutiveDashboard GetExecutiveDashBoardSummary(int roleId, int userId, string roleCode);
+        ExecutiveDashboard GetPeriodicDashboardSummary(int roleId, int userId, string roleCode, DateTime StartDate, DateTime EndDate);
         #endregion
 
         #region User
 
         IList<User> GetAllUsers();
+        IList<User> GetAllUsersByClientId(int id);
         IList<User> GetUserAssesibleUsers(int roleId, int clientId);
         User FindUserById(int id);
         User FindUserByEmail(string email);
@@ -110,6 +116,9 @@ namespace CICSWebPortal.Services
         void ResetUserPassword(ResetPasswordModel user);
         void ChangeUserPassword(ChangeUserPasswordModel user);
         void UpdateUserStatus(Models.User user);
+        WebUser AddWebUser(WebUserViewModel user);
+        Role FindRole(int ID);
+        Role FindRoleByCode(string code);
         #endregion
 
         #region Report        

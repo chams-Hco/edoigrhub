@@ -25,6 +25,7 @@
     <MetadataFile FileName="ChamsICSService.xsd" MetadataType="Schema" ID="c77bca01-6cd5-4cc5-9761-9c1921cf2a5a" SourceId="1" SourceUrl="http://localhost:39562/ChamsICSService.svc?xsd=xsd3" />
     <MetadataFile FileName="ChamsICSService1.wsdl" MetadataType="Wsdl" ID="5b7fccdf-3c19-441c-bc44-f1302d5b75a6" SourceId="1" SourceUrl="http://localhost:39562/ChamsICSService.svc?wsdl=wsdl0" />
     <MetadataFile FileName="ChamsICSService11.wsdl" MetadataType="Wsdl" ID="8e95ac99-062c-4777-aa81-cae3f2ac8e60" SourceId="1" SourceUrl="http://localhost:39562/ChamsICSService.svc?wsdl=wsdl1" />
+    <MetadataFile FileName="ChamsICSService4.xsd" MetadataType="Schema" ID="134aa0e3-f4e0-4fbd-9eaf-207b88c38ce7" SourceId="1" SourceUrl="http://localhost:39562/ChamsICSService.svc?xsd=xsd4" />
     <MetadataFile FileName="ChamsICSService1.xsd" MetadataType="Schema" ID="4c4cdbdb-177a-494b-a680-4f8b3878613e" SourceId="1" SourceUrl="http://localhost:39562/ChamsICSService.svc?xsd=xsd2" />
     <MetadataFile FileName="ChamsICSService2.xsd" MetadataType="Schema" ID="7a51412b-8408-48b7-a6f8-85962caab695" SourceId="1" SourceUrl="http://localhost:39562/ChamsICSService.svc?xsd=xsd1" />
     <MetadataFile FileName="ChamsICSService12.wsdl" MetadataType="Wsdl" ID="b7bfeb42-95b4-4228-9333-7bcad5bd3c8f" SourceId="1" SourceUrl="http://localhost:39562/ChamsICSService.svc?wsdl" />

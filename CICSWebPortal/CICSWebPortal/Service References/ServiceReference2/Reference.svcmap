@@ -19,16 +19,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/edoigr_ws/ChamsICSService.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ChamsICSService.xsd" MetadataType="Schema" ID="d6e2fb7f-edc7-48a4-9887-40a08d0133d1" SourceId="1" SourceUrl="http://localhost/edoigr_ws/ChamsICSService.svc?xsd=xsd0" />
-    <MetadataFile FileName="ChamsICSService1.xsd" MetadataType="Schema" ID="cd87b853-e810-4cd7-9878-8d286ade2344" SourceId="1" SourceUrl="http://localhost/edoigr_ws/ChamsICSService.svc?xsd=xsd2" />
-    <MetadataFile FileName="ChamsICSService2.xsd" MetadataType="Schema" ID="6173f6c8-4d28-4261-87cc-ad2099492496" SourceId="1" SourceUrl="http://localhost/edoigr_ws/ChamsICSService.svc?xsd=xsd1" />
-    <MetadataFile FileName="ChamsICSService.wsdl" MetadataType="Wsdl" ID="d2d2a86a-237c-4cc4-a96c-f579e01751bb" SourceId="1" SourceUrl="http://localhost/edoigr_ws/ChamsICSService.svc?wsdl" />
-    <MetadataFile FileName="ChamsICSService1.wsdl" MetadataType="Wsdl" ID="cf0961eb-f532-4526-8b72-6a01f5d740cd" SourceId="1" SourceUrl="http://localhost/edoigr_ws/ChamsICSService.svc?wsdl=wsdl1" />
-    <MetadataFile FileName="ChamsICSService2.wsdl" MetadataType="Wsdl" ID="477ed906-2a21-496d-bc77-a08e9bad6512" SourceId="1" SourceUrl="http://localhost/edoigr_ws/ChamsICSService.svc?wsdl=wsdl0" />
-    <MetadataFile FileName="ChamsICSService3.xsd" MetadataType="Schema" ID="3fa50ec2-24b4-4345-aaa2-84a23d8941d2" SourceId="1" SourceUrl="http://localhost/edoigr_ws/ChamsICSService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ChamsICSService3.wsdl" MetadataType="Wsdl" ID="62aa8200-beec-40f9-a3b4-aef59370670d" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl" />
+    <MetadataFile FileName="ChamsICSService4.xsd" MetadataType="Schema" ID="c3aaced2-e1c3-4a4a-b752-4338a87707c9" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ChamsICSService41.xsd" MetadataType="Schema" ID="bd7f4f8b-e738-47b9-bfed-32e834c65c75" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ChamsICSService42.xsd" MetadataType="Schema" ID="c3381e19-1b3e-4b31-bc90-eb19633e374b" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ChamsICSService31.wsdl" MetadataType="Wsdl" ID="a5ddbcb0-7ef2-45d3-896b-c20fd28206aa" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="ChamsICSService32.wsdl" MetadataType="Wsdl" ID="9460cef7-ab56-43ef-a3bc-4030803944bb" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl=wsdl1" />
+    <MetadataFile FileName="ChamsICSService43.xsd" MetadataType="Schema" ID="968822df-599b-48b3-8762-ff91ae025fe6" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd4" />
+    <MetadataFile FileName="ChamsICSService44.xsd" MetadataType="Schema" ID="9a365dcf-e9ea-4d20-bd6c-accc74fcff27" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

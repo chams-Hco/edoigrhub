@@ -1,0 +1,369 @@
+﻿@model  CICSWebPortal.Models.WebPayment
+@{
+    ViewBag.Title = "RemittanceForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string displayStyle = string.Empty;
+    int roleId = Convert.ToInt32(Session["RoleId"]);
+    string roleCode = (string)Session["RoleCode"];
+    bool cancreatewebUsers = (bool)Session["CanCreateWebUsers"];
+    var user = (CICSWebPortal.ViewModels.UserDashBoardViewModel)Session["LoggedInUser"];
+    var percentage = (ViewBag.PercentageDeduction != null) ? (decimal)ViewBag.PercentageDeduction : 0;
+}
+@{
+    string[] clientmenu = new string[] { "TP" };
+    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+    //displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
+}
+<div style="@displayStyle; padding-left: 20px">
+    <h4>Welcome, @ViewBag.TaxpayerName</h4>
+</div>
+
+<div id="breadcrumb">
+    <ul class="breadcrumb">
+        <li><i class="fa fa-home"></i><a href="#"> Home</a></li>
+        <li class="active">RemittanceForm</li>
+    </ul>
+</div><!-- /breadcrumb-->
+<div class="main-header clearfix">
+    @{
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
+    }
+    <div class="page-title" style="@displayStyle">
+        <div class="alert alert-warning">
+            <span>You Cannot View This Page.</span>
+        </div>
+    </div><!-- /page-title -->
+
+    @{
+        clientmenu = new string[] { "WA" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+    }
+
+    @{
+        if (ViewBag.Status != null)
+        {
+            bool status = (bool)ViewBag.Status;
+            if (status == true)
+            {
+                <div class="title">
+                    <div class="alert alert-success">
+                        @Html.Raw(ViewBag.Message)
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="title">
+                    <div class="alert alert-danger">
+                        @ViewBag.Message
+                    </div>
+                </div>
+            }
+        }
+    }
+
+    <div style="@displayStyle" class="title">
+        <div class="row">
+            <div class="row col-lg-6">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <i class="fa fa-money"></i>
+
+                        <h3 class="box-title">Collection Form</h3>
+                        <!-- tools box -->
+                        <div class="pull-right box-tools">
+
+                        </div>
+                        <!-- /. tools -->
+                    </div>
+                    @using (Html.BeginForm("RemittanceForm", "Payments", FormMethod.Post))
+                    {
+                        <div class="box-body">
+
+
+                            @Html.AntiForgeryToken()
+
+
+                            <div class="form-group">
+                                <label>Date range / Period:</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.EditorFor(model => model.DatePeriod, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control pull-right", type = "text", id = "period", required = true, name = "period", placeholder = "Period" } })
+                                    @*<input type="text" class="form-control pull-right" id="period">*@
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DrinkAmount">Food Amount</label>
+                                @Html.EditorFor(model => model.FoodAmount, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "FoodAmount", required = true, name = "FoodAmount", placeholder = "Food Amount" } })
+                                <input type="text" class="form-control" id="FoodAmountDeduction" name="FoodAmountDeduction" readonly tabIndex="-1">
+                            </div>
+                            <div class="form-group">
+                                <label for="DrinkAmount">Drink Amount</label>
+                                @Html.EditorFor(model => model.DrinkAmount, new { htmlAttributes = new { @class = "form-control col-lg-6 col-md-6 col-sm-8 col-xs-4", type = "number", id = "DrinkAmount", required = true, name = "DrinkAmount", placeholder = "Drink Amount" } })
+                                <input type="text" class="form-control" id="DrinkAmountDeduction" name="DrinkAmountDeduction" readonly tabIndex="-1">
+                            </div>
+                            <div class="form-group">
+                                <label for="RentalAmount">Rental Amount</label>
+                                @Html.EditorFor(model => model.RentalAmount, new { htmlAttributes = new { @class = "form-control col-lg-6 col-md-6 col-sm-8 col-xs-4", type = "number", id = "RentalAmount", required = true, name = "RentalAmount", placeholder = "Rental Amount" } })
+                                <input type="text" class="form-control" id="RentalAmountDeduction" name="RentalAmountDeduction" readonly tabIndex="-1">
+                            </div>
+                            <div class="form-group">
+                                <label for="OtherAmount">Other Amount</label>
+                                @Html.EditorFor(model => model.OtherAmount, new { htmlAttributes = new { @class = "form-control col-lg-6 col-md-6 col-sm-8 col-xs-4", type = "number", id = "OtherAmount", required = true, name = "OtherAmount", placeholder = "Other Amount" } })
+                                <input type="text" class="form-control" id="OtherAmountDeduction" name="OtherAmountDeduction" readonly tabIndex="-1">
+                            </div>
+                            <div class="form-group">
+                                <label for="TotalAmount">Total Amount</label>
+                                <input type="text" class="form-control" id="TotalAmount" name="OtherAmountDeduction" readonly tabIndex="-1">
+                            </div>
+                        </div>
+                        <div class="box-footer clearfix">
+                            <button type="submit" class="pull-right btn btn-default" id="Pay">
+                                Pay
+                                <i class="fa fa-arrow-circle-right"></i>
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="row col-lg-6">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <i class="fa fa-money"></i>
+
+                        <h3 class="box-title">Last 10 Payments</h3>
+                        <!-- tools box -->
+                        <div class="pull-right box-tools">
+
+                        </div>
+
+                        <!-- /. tools -->
+                    </div>
+                    <div class="box-body">
+                        @{
+                            if (ViewBag.TerminalTransaction != null)
+                            {
+                                var transactions = (List<CICSWebPortal.Models.Transaction>)ViewBag.TerminalTransaction;
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th style="width: 15%">Date</th>
+                                        <th>Amount</th>
+                                        <th style="width:32%">Remittance Code</th>
+                                        <th style="width: 32%">Transaction Code</th>
+                                        <th style="width: 10%"></th>
+                                    </tr>
+                                    @{
+                                        foreach (var tran in transactions)
+                                        {
+
+                                            <tr>
+                                                <td>@tran.TransactionDate</td>
+                                                <td>@tran.Amount</td>
+                                                <td><span class="badge bg-yellow">@tran.PaymentReference</span></td>
+                                                <td><span class="badge bg-green">@tran.TransactionCode</span></td>
+                                                <td><img  id="printbutton" transactionCode='@tran.TransactionCode' src="~/Content/images/download.png" style="width:25px; height:25px" /></td>
+                                            </tr>
+
+                                        }
+                                    }
+
+                                </table>
+                            }
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- /.col
+            -->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div><!-- /page-title -->
+
+
+<div style="display:none" id="printdiv">
+    <div class="header">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <img src="" />
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <span class="h3"> INVOICE </span><hr />
+                <span class="h3" id="printbusinessname"></span> <hr />
+                <span class="h4" id="printRemittanceCode"></span><hr />
+                <span class="h4" id="printTransactionCode"></span><hr />
+                <span class="h5" id="printDate"></span><hr />
+                <span class="h5" id="printperiod"></span>
+            </div>
+            
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th style="width: 15%">Item</th>
+                <th style="width: 15%">Amount (₦)</th>
+                <th style="width: 15%">percentage (%)</th>
+                <th style="width: 15%">Payment Due (₦)</th>
+            </tr>
+            <tr>
+                <td>Food</td>
+                <td><span id="printFoodAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printFoodAmountPayable"></span></td>
+            </tr>
+            <tr>
+                <td>Drink</td>
+                <td><span id="printDrinkAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printDrinkAmountPayable"></span></td>
+            </tr>
+            <tr>
+                <td>Rental</td>
+                <td><span id="printRentalAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printRentalAmountPayable"></span></td>
+            </tr>
+            <tr>
+                <td>Others</td>
+                <td><span id="printOtherAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printOtherAmountPayable"></span></td>
+            </tr>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <th><span id="printTotalAmount"></span></th>
+                    <th><span class="perentagededuction"></span></th>
+                    <th><span id="printTotalAmountPayable"></span></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+
+
+@section JavaScript
+{
+    <script type="text/javascript">
+
+
+        var percentage = @percentage;
+        var percentagevalue = percentage * 100;
+        var foodamt = 0;
+        var drinkamt = 0;
+        var rentalamt = 0;
+        var otheramt = 0;
+        var totalamt = 0;
+        $('#FoodAmount').on('input keyup blur change keypress', function () {
+            var earning = $(this).val();
+            foodamt = earning * percentage;
+
+            $('#FoodAmountDeduction').val( percentagevalue+'% =  '+ foodamt);
+            calculateTotal();
+        });
+        $('#DrinkAmount').on('input keyup blur change keypress', function () {
+            var earning = $(this).val();
+            drinkamt = earning * percentage;
+            $('#DrinkAmountDeduction').val(percentagevalue+'% =  ' +drinkamt);
+            calculateTotal();
+        });
+        $('#RentalAmount').on('input keyup blur change keypress', function () {
+            var earning = $(this).val();
+            rentalamt = earning * percentage;
+            $('#RentalAmountDeduction').val(percentagevalue + '% =  ' +rentalamt);
+            calculateTotal();
+        });
+        $('#OtherAmount').on('input keyup blur change keypress', function () {
+            var earning = $(this).val();
+            otheramt = earning * percentage;
+            $('#OtherAmountDeduction').val(percentagevalue + '% =  ' +otheramt);
+            calculateTotal();
+        });
+
+        var calculateTotal = function () {
+            totalamt = foodamt + drinkamt + rentalamt + otheramt;
+            $('#TotalAmount').val('TOTAL: '+ (totalamt / percentage ) +'  '+percentagevalue+'% =  ₦' +totalamt);
+        }
+
+        $(function () {
+            $('#period').daterangepicker({ format: 'DD/MM/YYYY' });
+        });
+
+
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+
+        $('#printbutton').click(function () {
+            var transactioncode = $(this).attr("transactionCode");
+            loadInvoice(transactioncode);
+            //printinvoice();
+          
+        });
+
+        $('#downloadinvoice').click(function () {
+            var transactioncode = $(this).attr("transactionCode");
+            loadInvoice(transactioncode);
+            //printinvoice();
+
+        });
+
+        var loadInvoice = function (transactioncode) {
+            $.get("@Url.Action("FindTransaction")/" + transactioncode, function (data, status) {
+                if (status == "success") {
+
+                    var percentage = data.Transaction.Percentage / 100;
+                    $('#printTransactionCode').text('Transaction Code: #' + data.Transaction.TransactionCode);
+                    $('#printbusinessname').text('Business Name: ' + data.Transaction.Name);
+                    $('#printRemittanceCode').text('Remittance Code: #' +data.Transaction.PaymentReference);
+                    $('.perentagededuction').text(data.Transaction.Percentage);
+                    $('#printDate').text('Date : ' + data.TransactionDate);
+                    $('#printperiod').text('Period : ' + data.Period);
+                    
+
+                    $('#printFoodAmount').text(data.Transaction.FoodAmount);
+                    $('#printFoodAmountPayable').text(data.Transaction.FoodAmount * percentage);
+
+                    $('#printDrinkAmount').text(data.Transaction.DrinkAmount);
+                    $('#printDrinkAmountPayable').text(data.Transaction.DrinkAmount * percentage);
+
+                    $('#printRentalAmount').text(data.Transaction.RentalAmount);
+                    $('#printRentalAmountPayable').text(data.Transaction.RentalAmount * percentage);
+
+                    $('#printOtherAmount').text(data.Transaction.OtherAmount);
+                    $('#printOtherAmountPayable').text(data.Transaction.OtherAmount * percentage);
+
+                    $('#printTotalAmount').text(data.Transaction.Amount / percentage);
+                    $('#printTotalAmountPayable').text(data.Transaction.Amount );
+
+
+                }
+                printinvoice();
+            });
+        }
+        var printinvoice = function () {
+            doc.fromHTML($('#printdiv').html(), 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            doc.save('invoice.pdf');
+        }
+
+       
+    </script>
+}
+

@@ -63,7 +63,7 @@ function checkTime(i) {
                         <div class="panel-heading text-center"><h4 class="center">Summary</h4></div>
                         <div class="panel panel-body affix text-center center-block padding-md center" style="margin-left:50px; margin-right:10px;">
                             <div class="panel-stat3 bg-success col-lg-3" style="margin:0 10px 10px 0;">
-                                <h4>Zones</h4><br />
+                                <h4>L.G.As</h4><br />
                                 <h4 class="m-top-none">@Model.TotalAgent</h4>
                                 <div class="stat-icon">
                                     <i class="fa fa-users fa-3x"></i>
@@ -94,7 +94,7 @@ function checkTime(i) {
                                     </div>
                             </div>
                             <div class="panel-stat3 bg-danger col-lg-3" style="margin:0 10px 10px 0;">
-                                <h4>Leading Zone</h4>
+                                <h4>Leading L.G.A</h4>
                                 @Model.AgentLeaderStats.LeadingAgent
                                 <h4 class="m-top-none">₦@String.Format("{0:n}", Model.AgentLeaderStats.LeadingAgentVal.Value)</h4>
                                 <div class="stat-icon">
@@ -102,7 +102,7 @@ function checkTime(i) {
                                 </div>
                             </div>
                             <div class="panel-stat3 bg-dark col-lg-3" style="margin:0 10px 10px 0;">
-                                <h4>Trailing Zone</h4>
+                                <h4>Trailing L.G.A</h4>
                                 @Model.AgentLeaderStats.TrailingAgent
                                 <h4 class="m-top-none">₦@String.Format("{0:n}", Model.AgentLeaderStats.TrailingAgentVal.Value)</h4>
                                 <div class="stat-icon">
@@ -137,10 +137,10 @@ function checkTime(i) {
                 </div>
                 <div class="item">
                     <div class="panel panel-success">
-                        <div class="panel-heading text-center"><h4 class="center">Transaction Summary - [ @Model.AgentStats.Count() Zones ]</h4></div>
+                        <div class="panel-heading text-center"><h4 class="center">Transaction Summary - [ @Model.AgentStats.Count() L.G.As ]</h4></div>
                         <div class="panel panel-body">
                             <table class="table table-striped text font-15" border="1">
-                                <tr><th>Zone</th><th style="text-align:center">Transaction Volume</th><th style="text-align:right">Transaction Value</th></tr>
+                                <tr><th>L.G.A</th><th style="text-align:center">Transaction Volume</th><th style="text-align:right">Transaction Value</th></tr>
 
                                 @{ foreach (var agentStats in @Model.AgentStats)
                                     {
@@ -164,7 +164,7 @@ function checkTime(i) {
                         <div class="panel panel-body">
                             <table class="table table-striped text font-15" border="1">
                                 <tr>
-                                <th style="text-align:left">Zone</th>
+                                <th style="text-align:left">L.G.A</th>
                                 <th style="text-align:center;">Active Terminals</th>
                                 <th style="text-align:center;">In-Active Terminals</th>
                                 <th style="text-align:center;">Total Terminals</th></tr>

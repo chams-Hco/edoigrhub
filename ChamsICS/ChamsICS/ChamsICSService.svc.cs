@@ -220,6 +220,64 @@ namespace ChamsICSWebService
             }
         }
 
+        public WebTransactionRes ProcessWebTrancation(WebTransactionReq webTransactionReq)
+        {
+            WebTransactionRes res = new WebTransactionRes();
+            if (webTransactionReq == null)
+            {
+                throw new ArgumentNullException("Invalid UploadTransaction Request");
+            }
+
+            string msg = string.Empty;
+            string tempResId = string.Empty;
+
+            //Validate Upload Data
+            try
+            {
+                bool ValidateRes = ServiceHelper.ValidateAndSaveWebTransaction(webTransactionReq, out msg, out tempResId, out string transactioncode, out string remittanceCode, out ChamsICSLib.Data.Terminal terminal);
+                if (!ValidateRes)
+                {
+                    //Log Failed Upload Request
+                    string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(webTransactionReq);
+
+                    //====Log Failed Upload to File===
+                    Logger.logToFile(msgLog, DebugLogPath + "\\Failed_Upload\\", true, transactioncode, "xml", true);
+
+                    //====Log Failed Upload to Database====
+                    UploadTransactionReq req = new UploadTransactionReq
+                    {
+                        TransactionCode = transactioncode,
+                        Amount = webTransactionReq.Amount.ToString(),
+                        TerminalCode = terminal.Code,
+                        FirstName = (terminal.UserDetails != null) ? terminal.UserDetails.ElementAt(0).Name : "",
+                        PaymentReference = remittanceCode,
+                        TransactionDate = DateTime.Now.ToString()
+                    };
+                    ServiceHelper.UploadExceptionToDb(msg, req);
+
+                    res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                    res.ResponseDescription = msg;
+                    return res;
+                }
+                else
+                {
+                    res.ResponseCode = ResponseHelper.SUCCESS;
+                    res.ResponseDescription = "Successful";
+                    res.RemittanceCode = remittanceCode;
+                    res.TransactionCode = transactioncode;
+                    res.TerminalCode = terminal.Code;
+                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Logger.logToFile(ex, ErrorLogPath);
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = "Application Error";
+                return res;
+            }
+        }
+
         public QueryTransactionRes QueryUploadTransaction(QueryTransactionReq req)
         {
             string msg = string.Empty;
@@ -690,13 +748,13 @@ namespace ChamsICSWebService
             string terminalCode = string.Empty;
             foreach (var requestmodel in request)
             {
-               
+
                 var res = new CreateEndOfDayRes();
                 try
                 {
 
-                   
-                    var req = new CreateEndOfDayReq { Amount = requestmodel.TOTAL, EODCount = requestmodel.EODCOUNT, Username = "test_user", Password = "_ch@m5123", TerminalCode = requestmodel.TERMINALCODE }; 
+
+                    var req = new CreateEndOfDayReq { Amount = requestmodel.TOTAL, EODCount = requestmodel.EODCOUNT, Username = "test_user", Password = "_ch@m5123", TerminalCode = requestmodel.TERMINALCODE };
                     res = ServiceHelper.CreateEODTransaction(req, out msg, out bool isCreated);
                     if (isCreated == false)
                     {
@@ -706,7 +764,7 @@ namespace ChamsICSWebService
                         //====Log Failed Upload to File===
                         Logger.logToFile(msgLog, DebugLogPath + "\\Failed_EOD_Transactions\\", true, terminalCode, "xml", true);
 
-                        
+
                         res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
                         res.ResponseDescription = msg;
                     }
@@ -715,11 +773,11 @@ namespace ChamsICSWebService
                         res.ResponseCode = ResponseHelper.SUCCESS;
                         res.ResponseDescription = "Successful";
                     }
-                    
 
 
 
-                 }
+
+                }
                 catch (Exception e)
                 {
                     Logger.logToFile(e, ErrorLogPath);
@@ -730,5 +788,162 @@ namespace ChamsICSWebService
             }
             return result;
         }
+
+        public AuthoriseTerminalRes AuthoriseWebUser(AuthoriseWebUserReq req)
+        {
+            AuthoriseTerminalRes res = new AuthoriseTerminalRes();
+
+            //GetAgentLocations the terminal request part of the request
+            AuthoriseTerminalReq terminalReq = new AuthoriseTerminalReq
+            {
+                AgentCode = req.AgentCode,
+                Password = req.Password,
+                TerminalName = req.TerminalName,
+                UserName = req.AgentUserName,
+                TerminalSerialNumber = req.TerminalSerialNumber
+                
+            };
+            //Get UserRequest section of the request
+            Model.User userReq = new Model.User
+            {
+                ClientId = req.ClientId,
+                Email = req.Email,
+                Mobile = req.Mobile,
+                Password = req.Password,
+                RoleId = req.RoleId,
+                RoleCode = req.RoleCode,
+                PasswordStatus = req.PasswordStatus,
+                Status = req.Status,
+                UserId = req.UserId,
+                UserTypeParentId = req.UserTypeParentId,
+                AuditTrailData = req.AuditTrailData,
+                userDetail = new UserDetailModel
+                {
+                    Address = req.userDetail.Address,
+                    Name = req.userDetail.Name,
+                    Email = req.userDetail.Email,
+                    Firstname = req.userDetail.Firstname,
+                    Lastname = req.userDetail.Lastname,
+                    Sex = req.userDetail.Sex,
+                    Middlename = req.userDetail.Middlename,
+                    Website = req.userDetail.Website,
+                    Zoneid = req.userDetail.Zoneid,
+                    RegistrationNumber = req.userDetail.RegistrationNumber
+                }
+            };
+            //Model.UserDetailReq userdetailReq = req.UserDetail;
+
+            if (req == null || req.AgentCode == null)
+            {
+                throw new ArgumentNullException("Invalid AuthoriseTerminal Request");
+            }
+
+            if (res == null)
+            {
+                res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                res.ResponseDescription = "Invalid Request";
+
+                return res;
+            }
+            if (!Utils.IsValidEmail(req.Email))
+            {
+                res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                res.ResponseDescription = "Invalid Email";
+                return res;
+
+            }
+            if (req.Mobile.Trim().Length < 11)
+            {
+                res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                res.ResponseDescription = "Invalid Mobile";
+                return res;
+
+            }
+            if (ServiceHelper.EmailExists(req.Email))
+            {
+                res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                res.ResponseDescription = "Email Already Exists";
+                return res;
+            }
+
+            if (ServiceHelper.MobileExists(req.Mobile))
+            {
+                res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                res.ResponseDescription = "Mobile Already Exists";
+                return res;
+            }
+
+
+
+            try
+            {
+                //Authorise Agent Trying toCreateWeb USer
+                Response response;
+                var authorise = ServiceHelper.AuthoriseRequestForWebUSers(req.AgentCode, req.AgentUserName, out response);
+                if (!authorise)
+                {
+                    res.ResponseCode = response.ResponseCode;
+                    res.ResponseDescription = response.ResponseDescription;
+                    return res;
+                }
+
+                //Validate Terminal
+                string msg = string.Empty;
+                bool ValidateRes = ServiceHelper.ValidateAuthoriseTerminal(terminalReq, out msg);
+                if (!ValidateRes)
+                {
+                    string err = msg;
+                    res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                    res.ResponseDescription = err;
+                    return res;
+                }
+
+
+                int? userId = null;
+                bool result = ServiceHelper.CreateWebUser(userReq, userReq.userDetail, terminalReq, out userId, out string TerminalCode);
+
+                if (result == true)
+                {
+                    // String TerminalCode = ServiceHelper.GetNewTerminalCode(terminalReq);
+                    if (TerminalCode == null || TerminalCode == String.Empty)
+                    {
+                        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                        res.ResponseDescription = "Unable To Authorise Terminal";
+                        return res;
+                    }
+                    else
+                    {
+                        res.ResponseCode = ResponseHelper.SUCCESS;
+                        res.ResponseDescription = "Successful";
+                        res.TerminalCode = TerminalCode;
+                        res.TerminalSerialNumber = req.TerminalSerialNumber;
+                        return res;
+                    }
+                }
+                else
+                {
+
+                    res.ResponseCode = ResponseHelper.FAILED;
+                    res.ResponseDescription = "System cannot create User";
+                    return res;
+                }
+
+                // res.ResponseCode = ResponseHelper.SUCCESS;
+                //res.ResponseDescription = "User Created Succesfully";
+                //Generate New TerminalCode
+
+            }
+            catch (Exception ex)
+            {
+                Logger.logToFile(ex, ErrorLogPath);
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = "Application Error";
+                return res;
+            }
+        }
+
+       
+
+       
     }
 }

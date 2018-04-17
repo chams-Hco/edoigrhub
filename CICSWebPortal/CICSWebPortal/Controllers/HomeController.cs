@@ -30,9 +30,10 @@ namespace CICSWebPortal.Controllers
             var roleId = Session["RoleId"];
             var userId = Session["UserId"];
             var userEmail = Session["User"];
+            var user = (ViewModels.UserDashBoardViewModel)Session["LoggedInUser"];
 
             //get taxpayer info
-            if(Convert.ToInt32(roleId) == 7)
+            if (user.RoleCode == "TP")
             {
                 var taxpayerinfo = _dataContext.GetTaxpayerById(Convert.ToInt32(userId));
                 ViewBag.TaxpayerName = taxpayerinfo.Firstname + " " + taxpayerinfo.Surname;
@@ -41,11 +42,21 @@ namespace CICSWebPortal.Controllers
                 //ViewBag.InvoiceCount = taxpayerDashboard.Invoices;
                 //ViewBag.WalletBal = taxpayerDashboard.Wallet;
                 //ViewBag.NotificationCount = taxpayerDashboard.Notification;
-                
+
                 return View(taxpayerDashboard);
             }
+            else if (user.RoleCode == "WA")
+            {
+                if (user != null && user.TerminalId != null)
+                {
+                    var top10Transaction = _dataContext.GetLast10TransactionsByTerminalId(user.TerminalId.Value);
+                    var lastpayment = (top10Transaction.FirstOrDefault() != null) ? top10Transaction.First().Amount : 0;
+                    ViewBag.LastPayment = lastpayment;
+                }
+            }
 
-            var dashboard = _dataContext.GetDashBoardSummary(Convert.ToInt32(roleId), Convert.ToInt32(userId));
+            var dashboard = _dataContext.GetDashBoardSummary(Convert.ToInt32(roleId), Convert.ToInt32(userId), user.RoleCode);
+
 
             return View(dashboard);
         }

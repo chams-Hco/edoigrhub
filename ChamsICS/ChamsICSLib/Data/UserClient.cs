@@ -17,8 +17,9 @@ namespace ChamsICSLib.Data
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ClientId { get; set; }
+        public bool CanCreateWebUsers { get; set; }
     
-        public virtual Client Client { get; set; }
         public virtual User User { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

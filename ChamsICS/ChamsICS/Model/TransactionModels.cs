@@ -10,7 +10,7 @@ namespace ChamsICSWebService.Model
     public class Transaction
     {
         public int Id { get; set; }
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
         public int AgentId { get; set; }
         public string AgentName { get; set; }
         public string LocationName { get; set; }
@@ -36,6 +36,18 @@ namespace ChamsICSWebService.Model
         public DateTime UploadDate { get; set; }
         public int status { get; set; }
         public int? LocationId { get; internal set; }
+        public decimal? Income { get; set; }
+        public decimal? Percentage { get; set; }
+        public decimal? FoodAmount { get; set; }
+        public decimal? DrinkAmount { get; set; }
+        public decimal? RentalAmount { get; set; }
+        public decimal? OtherAmount { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public string Name { get; set; }
+
+
+
     }
 
     public class FindTransactionRes : Response
@@ -95,6 +107,50 @@ namespace ChamsICSWebService.Model
         [DataMember]
         public string TempResidentId { get; set; }
     }
+
+    [DataContract]
+    public class WebTransactionReq
+    {
+        [DataMember]
+        public int TerminalId { get; set; }
+        [DataMember]
+        public int RevenueItemId { get; set; }
+        [DataMember]
+        public DateTime FromDate { get; set; }
+        [DataMember]
+        public DateTime ToDate { get; set; }
+        [DataMember]
+        public decimal PercentageDeduction { get; set; } = 0;
+        [DataMember]
+        public decimal Income { get; set; }
+        [DataMember]
+        public decimal Amount { get; set; }
+        [DataMember]
+        public decimal FoodAmount { get; set; }
+        [DataMember]
+        public decimal DrinkAmount { get; set; }
+        [DataMember]
+        public decimal RentalAmount { get; set; }
+        [DataMember]
+        public decimal OtherAmount { get; set; }
+        [DataMember]
+        public string Name { get; set; }
+    }
+
+    [DataContract]
+    public class WebTransactionRes : Response
+    {
+        [DataMember]
+        public string RemittanceCode { get; set; }
+        [DataMember]
+        public string TransactionCode { get; set; }
+        [DataMember]
+        public string TerminalCode { get; set; }
+    }
+
+
+
+   
 
     public class QueryTransactionReq
     {

@@ -23,7 +23,11 @@ namespace ChamsICSWebService
         [OperationContract]
         FindClientRes FindClient(int clientId);
         [OperationContract]
+        FindClientWithZoneRes FindClientWithZones(int clientId);
+        [OperationContract]
         GetAllClientsRes GetAllClient();
+        [OperationContract]
+        GetAllClientsWithZoneRes GetAllClientWithZones();
         [OperationContract]
         CreateAgentRes CreateAgent(Model.Agent req);
         [OperationContract]
@@ -34,6 +38,7 @@ namespace ChamsICSWebService
         GetAllAgentRes GetAllAgents();
         [OperationContract]
         GetAllAgentRes GetAllAgentsByClientId(int clientId);
+        
         #endregion
 
         #region Terminals
@@ -75,7 +80,18 @@ namespace ChamsICSWebService
         [OperationContract]
         GetAllTransactionRes GetLast1000TransactionByTerminalId(int terminalId);
         [OperationContract]
+        GetAllTransactionRes GetLast10TransactionByTerminalId(int terminalId);
+        [OperationContract]
         GetAllTransactionRes GetAllTransactionByResidentId(string residentId);
+        #endregion
+
+        #region webUsers
+        [OperationContract]
+        WebTransactionRes ProcessWebTrancation(WebTransactionReq webTransactionReq);
+
+        
+
+
         #endregion
 
         #region Error Upload Transactions
@@ -158,9 +174,16 @@ namespace ChamsICSWebService
 
         [OperationContract]
         RoleRes GetAllRoles();
+        [OperationContract]
+        FindRoleRes FindRole(int ID);
+        [OperationContract]
+        FindRoleRes FindRoleByCode(string code);
 
         [OperationContract]
         GetAllUserRes GetAllUsers();
+
+        [OperationContract]
+        GetAllUserRes GetAllUsersByClientId(int id);
 
         [OperationContract]
         GetAllUserRes GetUserAssesibleUsers(GetAllUserReq req);
@@ -173,6 +196,8 @@ namespace ChamsICSWebService
 
         [OperationContract]
         FindUserRes FindUserByEmail(string email);
+
+        
         #endregion
 
         #region Dashboard & Reports

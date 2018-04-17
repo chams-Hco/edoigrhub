@@ -15,7 +15,15 @@ namespace CICSWebPortal.Models
         public string Email { get; set; }
         public string PhoneNo1 { get; set; }
         public string PhoneNo2 { get; set; }
-
+        public bool HasWebUsers { get; set; }
         public bool Status { get; set; }
+        public IEnumerable<Agent> Agents { get; set; }
+        public ClientSetting ClientSetting { get; set; }
+    }
+
+    public class ClientSetting
+    {
+        public decimal? PercentageDeduction { get; set; }
+        public int? DefaultRevenueItemId { get; set; }
     }
 }

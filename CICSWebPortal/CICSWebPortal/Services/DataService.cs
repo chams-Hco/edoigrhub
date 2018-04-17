@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using CICSWebPortal.ServiceReference2;
+using CICSWebPortal.ServiceReference;   //chenge to 2 on deployment
 using CICSWebPortal.ViewModels;
 using System.Web.Helpers;
 using CICSWebPortal.Helpers;
@@ -17,10 +17,13 @@ namespace CICSWebPortal.Services
     {
         //private static IEnumerable<Models.Report> _reportToExport = null;
         iChamsICSPortalServiceClient _client = null;
+        iChamsICSServiceClient _client2 = null;
 
         public DataService()
         {
-            _client = new iChamsICSPortalServiceClient("BasicHttpBinding_iChamsICSPortalService");
+            _client = new iChamsICSPortalServiceClient("BasicHttpBinding_iChamsICSPortalService1");
+            _client2 = new iChamsICSServiceClient("BasicHttpBinding_iChamsICSService1");
+                                                   
 
         }
 
@@ -36,7 +39,40 @@ namespace CICSWebPortal.Services
                 Address = e.Addres,
                 ClientCode = e.Code,
                 PhoneNo2 = e.Phone2,
-                Status = e.status == 1 ? true : false
+                Status = e.status == 1 ? true : false,
+                HasWebUsers = e.HasWebUsers
+                
+            }).ToList();
+        }
+
+        public IList<Models.Client> GetAllClientWithZones()
+        {
+            return _client.GetAllClientWithZones().Clients.Select(e => new Models.Client
+            {
+                ClientId = Convert.ToInt32(e.ClientId),
+                ClientName = e.Name,
+                Email = e.Email,
+                PhoneNo1 = e.Phone1,
+                Address = e.Addres,
+                ClientCode = e.Code,
+                PhoneNo2 = e.Phone2,
+                Status = e.status == 1 ? true : false,
+                HasWebUsers = e.HasWebUsers,
+                Agents = e.Agents.Select(p => new Models.Agent
+                {
+                    Address = p.Address,
+                    ClientId = p.ClientId,
+                    Code = p.Code,
+                    Company = p.Company,
+                    Email = p.Email,
+                    AgentId = p.Id,
+                    Name = p.Name,
+                    PhoneNo1 = p.Phone1,
+                    PhoneNo2 = p.Phone2,
+                    Status = p.status == 1 ? true : false
+
+                })
+
             }).ToList();
         }
 
@@ -53,13 +89,80 @@ namespace CICSWebPortal.Services
                 Email = client.Email,
                 PhoneNo1 = client.Phone1,
                 PhoneNo2 = client.Phone2,
-                Status = client.status == 1 ? true : false
+                Status = client.status == 1 ? true : false,
+                HasWebUsers = client.HasWebUsers,
+                ClientSetting = new Models.ClientSetting
+                {
+                    PercentageDeduction = client.ClientSetting!= null ?client.ClientSetting.percentageDeduction : 0,
+                    DefaultRevenueItemId = client.ClientSetting != null ? client.ClientSetting.DefaultRevenueItemId.Value : 0,
+                }
             };
         }
 
+        public async Task<Models.Client> FindClientByIdAsync(int id)
+        {
+            var client = await _client.FindClientAsync(id);
+
+            return new Models.Client
+            {
+                ClientId = Convert.ToInt32(client.ClientId),
+                Address = client.Addres,
+                ClientName = client.Name,
+                ClientCode = client.Code,
+                Email = client.Email,
+                PhoneNo1 = client.Phone1,
+                PhoneNo2 = client.Phone2,
+                Status = client.status == 1 ? true : false,
+                HasWebUsers = client.HasWebUsers,
+                ClientSetting = new Models.ClientSetting
+                {
+                    PercentageDeduction = client.ClientSetting != null ? client.ClientSetting.percentageDeduction : 0,
+                    DefaultRevenueItemId = client.ClientSetting != null ? client.ClientSetting.DefaultRevenueItemId.Value : 0,
+                }
+            };
+        }
+
+        public Models.Client FindClientWithZone(int id)
+        {
+            var client = _client.FindClientWithZones(id);
+
+            return new Models.Client
+            {
+                ClientId = Convert.ToInt32(client.ClientId),
+                Address = client.Addres,
+                ClientName = client.Name,
+                ClientCode = client.Code,
+                Email = client.Email,
+                PhoneNo1 = client.Phone1,
+                PhoneNo2 = client.Phone2,
+                Status = client.status == 1 ? true : false,
+                HasWebUsers = client.HasWebUsers,
+                ClientSetting = new Models.ClientSetting
+                {
+                    PercentageDeduction = client.ClientSetting != null ? client.ClientSetting.percentageDeduction : 0,
+                    DefaultRevenueItemId = client.ClientSetting != null ? client.ClientSetting.DefaultRevenueItemId.Value : 0,
+                },
+                Agents = client.Agents.Select(p => new Models.Agent
+                {
+                    Address = p.Address,
+                    ClientId = p.ClientId,
+                    Code = p.Code,
+                    Company = p.Company,
+                    Email = p.Email,
+                    AgentId = p.Id,
+                    Name = p.Name,
+                    PhoneNo1 = p.Phone1,
+                    PhoneNo2 = p.Phone2,
+                    Status = p.status == 1 ? true : false
+
+                }) 
+            };
+        }
+        
+
         public void AddClient(Models.Client client)
         {
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = client.userId,
                 clientId = client.clientId
@@ -84,7 +187,7 @@ namespace CICSWebPortal.Services
 
         public void UpdateClient(Models.Client client)
         {
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = client.userId,
                 clientId = client.clientId
@@ -170,12 +273,12 @@ namespace CICSWebPortal.Services
 
         public void AddAgent(Models.Agent agent)
         {
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = agent.userId,
                 clientId = agent.clientId
             };
-            ServiceReference2.Agent agentReq = new ServiceReference2.Agent();
+            ServiceReference.Agent agentReq = new ServiceReference.Agent();
             agentReq.ClientId = agent.ClientId;
             agentReq.Name = agent.Name;
             agentReq.Company = agent.Company;
@@ -196,12 +299,12 @@ namespace CICSWebPortal.Services
 
         public void UpdateAgent(Models.Agent agent)
         {
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = agent.userId,
                 clientId = agent.clientId
             };
-            ServiceReference2.Agent agentReq = new ServiceReference2.Agent();
+            ServiceReference.Agent agentReq = new ServiceReference.Agent();
             agentReq.Id = agent.AgentId;
             agentReq.ClientId = agent.ClientId;
             agentReq.Name = agent.Name;
@@ -286,6 +389,33 @@ namespace CICSWebPortal.Services
         #endregion
 
         #region Transactions
+
+        public WebTransactionResponse ProcessWebTrancation(WebPayment webPayment)
+        {
+            var result = _client.ProcessWebTrancation(new WebTransactionReq
+            {
+                Amount = webPayment.Amount,
+                DrinkAmount = webPayment.DrinkAmount,
+                FoodAmount = webPayment.FoodAmount,
+                FromDate = webPayment.FromDate,
+                OtherAmount = webPayment.OtherAmount,
+                PercentageDeduction = webPayment.PercentageDeduction,
+                RentalAmount = webPayment.RentalAmount,
+                RevenueItemId = webPayment.RevenueItemId,
+                TerminalId = webPayment.TerminalId,
+                Income = webPayment.GrossIncome,
+                ToDate = webPayment.ToDate,
+                Name = webPayment.Name
+            });
+
+            if( result.ResponseCode =="0000")
+            {
+                return new WebTransactionResponse { RemittanceCode = result.RemittanceCode, ResponseCode = result.ResponseCode, ResponseDescription = result.ResponseDescription, TerminalCode = result.TerminalCode, TransactionCode = result.TransactionCode };
+
+            }
+            return null;
+        }
+
         public Models.Transaction FindTransactionById(int id)
         {
             var e = _client.FindTransaction(id).Transaction;
@@ -315,7 +445,16 @@ namespace CICSWebPortal.Services
                 AgentId = Convert.ToInt32(e.AgentId),
                 AgentName = e.AgentName,
                 ClientId = Convert.ToInt32(e.ClientId),
-                TerminalId = Convert.ToInt32(e.TerminalId)
+                TerminalId = Convert.ToInt32(e.TerminalId),
+                DrinkAmount = e.DrinkAmount,
+                FoodAmount = e.FoodAmount,
+                FromDate = e.FromDate,
+                Income = e.Income,
+                OtherAmount = e.OtherAmount,
+                Percentage = e.Percentage,
+                RentalAmount = e.RentalAmount,
+                ToDate = e.ToDate,
+                Name = e.Name
             };
         }
 
@@ -350,7 +489,16 @@ namespace CICSWebPortal.Services
                     AgentId = Convert.ToInt32(e.AgentId),
                     AgentName = e.AgentName,
                     ClientId = Convert.ToInt32(e.ClientId),
-                    TerminalId = Convert.ToInt32(e.TerminalId)
+                    TerminalId = Convert.ToInt32(e.TerminalId),
+                    DrinkAmount = e.DrinkAmount,
+                    FoodAmount = e.FoodAmount,
+                    FromDate = e.FromDate,
+                    Income = e.Income,
+                    OtherAmount = e.OtherAmount,
+                    Percentage = e.Percentage,
+                    RentalAmount = e.RentalAmount,
+                    ToDate = e.ToDate,
+                    Name = e.Name
                 };
             }
             else { return new Models.Transaction() { }; }
@@ -384,13 +532,23 @@ namespace CICSWebPortal.Services
                 AgentId = Convert.ToInt32(e.AgentId),
                 AgentName = e.AgentName,
                 ClientId = Convert.ToInt32(e.ClientId),
-                TerminalId = Convert.ToInt32(e.TerminalId)
+                TerminalId = Convert.ToInt32(e.TerminalId),
+                DrinkAmount = e.DrinkAmount,
+                FoodAmount = e.FoodAmount,
+                FromDate = e.FromDate,
+                Income = e.Income,
+                OtherAmount = e.OtherAmount,
+                Percentage = e.Percentage,
+                RentalAmount = e.RentalAmount,
+                ToDate = e.ToDate,
+                Name = e.Name
             }).ToList();
         }
 
+
         public IList<Models.Transaction> GetAllTransactions(Models.GetTransactionRequest req)
         {
-            var result = _client.GetTransactions(new ServiceReference2.GetTransactionRequest
+            var result = _client.GetTransactions(new ServiceReference.GetTransactionRequest
             {
                 UserType = req.UserType,
                 UserTypeId = req.UserTypeId,
@@ -428,8 +586,64 @@ namespace CICSWebPortal.Services
                 AgentName = e.AgentName,
                 LocationName = e.LocationName,
                 ClientId = Convert.ToInt32(e.ClientId),
-                TerminalId = Convert.ToInt32(e.TerminalId)
+                TerminalId = Convert.ToInt32(e.TerminalId),
+                DrinkAmount = e.DrinkAmount,
+                FoodAmount = e.FoodAmount,
+                FromDate = e.FromDate,
+                Income = e.Income,
+                OtherAmount = e.OtherAmount,
+                Percentage = e.Percentage,
+                RentalAmount = e.RentalAmount,
+                ToDate = e.ToDate,
+                Name = e.Name
             }).OrderByDescending(x => x.TransactionDate).ToList();
+        }
+
+        public IList<Models.Transaction> GetLast10TransactionsByTerminalId(int terminalId)
+        {
+            var result = _client.GetLast10TransactionByTerminalId(terminalId);
+
+            if(result.Transactions!= null)
+            return result.Transactions.Select(e => new Models.Transaction
+            {
+                ResidentId = e.ResidentId,
+                FirstName = e.FirstName,
+                LastName = e.LastName,
+                MiddleName = e.MiddleName,
+                Email = e.Email,
+                Gender = e.Gender,
+                DateOfBirth = e.DateOfBirth,
+                PhoneNumber = e.PhoneNumber,
+                Status = e.status,
+                TerminalCode = e.TerminalCode,
+                Amount = Convert.ToDecimal(e.Amount),
+                Address = e.Address,
+                UploadDate = e.UploadDate,
+                PaymentReference = e.PaymentReference,
+                TransactionDate = e.TransactionDate,
+                TransactionCode = e.TransactionCode,
+                RevenueCode = e.RevenueCode,
+                RevenueName = e.RevenueName,
+                Ministry = e.Ministry,
+                RevenueHead = e.RevenueHead,
+                TransactionId = Convert.ToInt32(e.Id),
+                AgentId = Convert.ToInt32(e.AgentId),
+                AgentName = e.AgentName,
+                LocationName = e.LocationName,
+                ClientId = Convert.ToInt32(e.ClientId),
+                TerminalId = Convert.ToInt32(e.TerminalId),
+                DrinkAmount = e.DrinkAmount,
+                FoodAmount = e.FoodAmount,
+                FromDate = e.FromDate,
+                Income = e.Income,
+                OtherAmount = e.OtherAmount,
+                Percentage = e.Percentage,
+                RentalAmount = e.RentalAmount,
+                ToDate = e.ToDate,
+                Name = e.Name
+            }).OrderByDescending(x => x.TransactionDate).ToList();
+
+            return new List<Models.Transaction>();
         }
         #endregion
 
@@ -534,7 +748,7 @@ namespace CICSWebPortal.Services
         {
             try
             {
-                var result = _client.GetErrorTransaction(new ServiceReference2.GetTransactionRequest
+                var result = _client.GetErrorTransaction(new ServiceReference.GetTransactionRequest
                 {
                     UserType = req.UserType,
                     UserTypeId = req.UserTypeId,
@@ -660,7 +874,7 @@ namespace CICSWebPortal.Services
 
         public void AddRevenue(CICSWebPortal.Models.Revenue revenue)
         {
-            ServiceReference2.Revenue revenueReq = new ServiceReference2.Revenue()
+            ServiceReference.Revenue revenueReq = new ServiceReference.Revenue()
             {
                 RevenueId = revenue.RevenueId,
                 ClientId = revenue.ClientId,
@@ -681,7 +895,7 @@ namespace CICSWebPortal.Services
 
         public void UpdateRevenue(CICSWebPortal.Models.Revenue revenue)
         {
-            ServiceReference2.Revenue revenueReq = new ServiceReference2.Revenue()
+            ServiceReference.Revenue revenueReq = new ServiceReference.Revenue()
             {
                 RevenueId = revenue.RevenueId,
                 ClientId = revenue.ClientId,
@@ -914,13 +1128,13 @@ namespace CICSWebPortal.Services
 
         public void AddIdentity(CICSWebPortal.Models.Identity identity)
         {
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = identity.userId,
                 clientId = identity.clientId
             };
 
-            ServiceReference2.Identity req = new ServiceReference2.Identity()
+            ServiceReference.Identity req = new ServiceReference.Identity()
             {
                 URL = identity.URL,
                 ClientId = identity.ClientId,
@@ -940,13 +1154,13 @@ namespace CICSWebPortal.Services
 
         public void UpdateIdentity(CICSWebPortal.Models.Identity identity)
         {
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = identity.userId,
                 clientId = identity.clientId
             };
 
-            ServiceReference2.Identity req = new ServiceReference2.Identity()
+            ServiceReference.Identity req = new ServiceReference.Identity()
             {
                 IdentityId = identity.IdentityId,
                 URL = identity.URL,
@@ -984,13 +1198,23 @@ namespace CICSWebPortal.Services
                 user.RoleId = result.RoleId;
                 user.UserId = result.UserId;
                 user.Mobile = result.Mobile;
-
+                user.RoleCode = result.RoleCode;
+                user.CanCreateWebUsers = result.CanCreateWebUsers;
                 user.ClientId = result.UserDashBoardData.ClientId;
                 user.RoleName = result.UserDashBoardData.RoleName;
                 user.ClientName = result.UserDashBoardData.ClientName;
                 user.ClientLogoUrl = result.UserDashBoardData.ClientLogoUrl;
                 user.UserTypeParentId = result.UserDashBoardData.UserTypeParentId;
-
+                if(result.User!=null && result.User.userDetail!= null)
+                {
+                    user.TerminalCode = result.User.userDetail.TerinalCode;
+                    user.TerminalId = result.User.userDetail.TerminalId;
+                    user.ZoneID = result.User.userDetail.Zoneid;
+                    user.ZoneName = result.User.userDetail.ZoneCode;
+                    user.Address = result.User.userDetail.Address;
+                    user.Name = result.User.userDetail.Name;
+                }
+                
 
             }
             return user;
@@ -1006,9 +1230,9 @@ namespace CICSWebPortal.Services
         #endregion
 
         #region Dashboard
-        public Dashboard GetDashBoardSummary(int roleId, int userId)
+        public Dashboard GetDashBoardSummary(int roleId, int userId, string roleCode)
         {
-            var e = _client.GetDashboardSummary(new DashboardReq() { RoleId = roleId, UserId = userId });
+            var e = _client.GetDashboardSummary(new DashboardReq() { RoleId = roleId, UserId = userId, RoleCode = roleCode });
             var dashboard = new Dashboard
             {
                 TotalClient = e.TotalClient,
@@ -1038,9 +1262,9 @@ namespace CICSWebPortal.Services
             };
         }
 
-        public ExecutiveDashboard GetExecutiveDashBoardSummary(int roleId, int userId)
+        public ExecutiveDashboard GetExecutiveDashBoardSummary(int roleId, int userId, string roleCode)
         {
-            var e = _client.GetExecutiveDashboardData(new ExecutiveDashboardReq() { RoleId = roleId, UserId = userId });
+            var e = _client.GetExecutiveDashboardData(new ExecutiveDashboardReq() { RoleId = roleId, UserId = userId, RoleCode = roleCode });
             ExecutiveDashboard ed = new ExecutiveDashboard();
 
             ed.TotalAgent = e.TotalAgent;
@@ -1121,9 +1345,9 @@ namespace CICSWebPortal.Services
             return ed;
         }
 
-        public ExecutiveDashboard GetPeriodicDashboardSummary(int roleId, int userId, DateTime StartDate, DateTime EndDate)
+        public ExecutiveDashboard GetPeriodicDashboardSummary(int roleId, int userId, string roleCode, DateTime StartDate, DateTime EndDate)
         {
-            var e = _client.GetPeriodicDashboardData(new ExecutiveDashboardReq() { RoleId = roleId, UserId = userId, StartDate = StartDate, EndDate = EndDate });
+            var e = _client.GetPeriodicDashboardData(new ExecutiveDashboardReq() { RoleId = roleId, UserId = userId, RoleCode = roleCode, StartDate = StartDate, EndDate = EndDate });
             ExecutiveDashboard ed = new ExecutiveDashboard();
 
             ed.StartDate = StartDate;
@@ -1223,10 +1447,32 @@ namespace CICSWebPortal.Services
                 Password = e.Password,
                 PasswordStatus = e.PasswordStatus.Value,
                 RoleId = e.RoleId.Value,
-                Status = e.Status == 1 ? true : false
+                Status = e.Status == 1 ? true : false,
+                RoleCode = e.RoleCode
 
             }).ToList();
         }
+        public IList<Models.User> GetAllUsersByClientId(int id)
+        {
+            return _client.GetAllUsersByClientId(id).Users.Select(e => new Models.User
+            {
+                UserId = e.UserId,
+                Email = e.Email,
+                Password = e.Password,
+                PasswordStatus = e.PasswordStatus.Value,
+                RoleId = e.RoleId.Value,
+                Status = e.Status == 1 ? true : false,
+                RoleCode = e.RoleCode,
+                TerminalCode = e.userDetail?.TerinalCode,
+                TerminalID = e.userDetail?.TerminalId,
+                Address = e.userDetail?.Address,
+                Name = e.userDetail?.Name,
+                Mobile = e.Mobile,
+                
+
+            }).ToList();
+        }
+       
 
         public IList<Models.User> GetUserAssesibleUsers(int roleId, int clientId)
         {
@@ -1281,13 +1527,13 @@ namespace CICSWebPortal.Services
                 throw new Exception("User is null or empty");
             }
 
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = user.userId,
                 clientId = user.clientId
             };
 
-            ServiceReference2.User userReq = new ServiceReference2.User()
+            ServiceReference.User userReq = new ServiceReference.User()
             {
                 UserId = user.UserId,
                 UserTypeParentId = user.UserTypeParentId,
@@ -1316,12 +1562,12 @@ namespace CICSWebPortal.Services
             {
                 throw new Exception("User is null or empty");
             }
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = user.userId,
                 clientId = user.clientId
             };
-            ServiceReference2.User userReq = new ServiceReference2.User()
+            ServiceReference.User userReq = new ServiceReference.User()
             {
                 UserId = user.UserId,
                 UserTypeParentId = user.UserTypeParentId,
@@ -1337,7 +1583,7 @@ namespace CICSWebPortal.Services
 
         public void ResetUserPassword(ResetPasswordModel user)
         {
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = user.userId,
                 clientId = user.clientId
@@ -1352,7 +1598,7 @@ namespace CICSWebPortal.Services
 
         public void ChangeUserPassword(ChangeUserPasswordModel user)
         {
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = user.userId,
                 clientId = user.clientId
@@ -1374,7 +1620,7 @@ namespace CICSWebPortal.Services
                 throw new Exception("User is null or empty");
             }
 
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = user.userId,
                 clientId = user.clientId
@@ -1633,13 +1879,13 @@ namespace CICSWebPortal.Services
 
         public string AddLocation(Models.Location location)
         {
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = location.userId,
                 clientId = location.clientId
             };
 
-            ServiceReference2.Location loc = new ServiceReference2.Location
+            ServiceReference.Location loc = new ServiceReference.Location
             {
                 AgentId = location.AgentId,
                 ClientId = location.ClientId,
@@ -1654,13 +1900,13 @@ namespace CICSWebPortal.Services
 
         public string UpdateLocation(Models.Location location)
         {
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
             {
                 userId = location.userId,
                 clientId = location.clientId
             };
 
-            ServiceReference2.Location loc = new ServiceReference2.Location
+            ServiceReference.Location loc = new ServiceReference.Location
             {
                 Id = location.Id,
                 AgentId = location.AgentId,
@@ -1705,12 +1951,12 @@ namespace CICSWebPortal.Services
                 throw new Exception("paymet is null or empty");
             }
 
-            ServiceReference2.AuditTrailData _AuditTrailData = new ServiceReference2.AuditTrailData()
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData()
             {
                 userId = payment.UserId
             };
 
-            ServiceReference2.Payment paymentReq = new ServiceReference2.Payment()
+            ServiceReference.Payment paymentReq = new ServiceReference.Payment()
             {
                 WalletId = payment.WalletId,
                 TransactionId = payment.TransactionId,
@@ -1772,7 +2018,7 @@ namespace CICSWebPortal.Services
 
         public List<Models.Payment> GetTransactionDetails(int id, string email)
         {
-            ServiceReference2.PaymentReq _paymentReq = new ServiceReference2.PaymentReq
+            ServiceReference.PaymentReq _paymentReq = new ServiceReference.PaymentReq
             {
                 InvoiceId = id,
                 Email = email
@@ -1789,7 +2035,7 @@ namespace CICSWebPortal.Services
 
         public List<Models.Payment> GetAllTransactionDetailsByUser(int id, string email)
         {
-            ServiceReference2.PaymentReq _paymentReq = new ServiceReference2.PaymentReq
+            ServiceReference.PaymentReq _paymentReq = new ServiceReference.PaymentReq
             {
                 InvoiceId = id,
                 Email = email
@@ -1808,7 +2054,7 @@ namespace CICSWebPortal.Services
 
         public Boolean MakePayment(Models.PaymentReq payment)
         {
-            ServiceReference2.PaymentReq _paymentReq = new ServiceReference2.PaymentReq
+            ServiceReference.PaymentReq _paymentReq = new ServiceReference.PaymentReq
             {
                 Amount = payment.Amount,
                 Email = payment.Email,
@@ -1848,7 +2094,7 @@ namespace CICSWebPortal.Services
 
         public Boolean AddTaxpayer(Models.Taxpayer taxpayer)
         {
-            //ServiceReference2.Taxpayer _taxpayerReq = new ServiceReference2.Taxpayer
+            //ServiceReference.Taxpayer _taxpayerReq = new ServiceReference.Taxpayer
             //{
             //    Email = taxpayer.Email,
             //    Firstname = taxpayer.Firstname,
@@ -1865,7 +2111,8 @@ namespace CICSWebPortal.Services
             //    return true;
             //}
             //return false;
-            throw new NotImplementedException();
+            return true;
+
         }
 
         public Models.Taxpayer GetTaxpayerById(int id)
@@ -1887,7 +2134,7 @@ namespace CICSWebPortal.Services
 
         public List<Models.RevenueItem> GetAssessmentByRole(Models.AssessmentReq assessmentReq)
         {
-            //ServiceReference2.AssessmentReq _assessmentRequest = new ServiceReference2.AssessmentReq
+            //ServiceReference.AssessmentReq _assessmentRequest = new ServiceReference.AssessmentReq
             //{
             //    roleid = assessmentReq.roleid,
             //    email = assessmentReq.email,
@@ -1906,7 +2153,7 @@ namespace CICSWebPortal.Services
 
         public Boolean GenerateInvoice(Models.GenerateInvoice generateInvoice)
         {
-            //ServiceReference2.GenerateInvoice _generateInvoice = new ServiceReference2.GenerateInvoice
+            //ServiceReference.GenerateInvoice _generateInvoice = new ServiceReference.GenerateInvoice
             //{
             //    RevenueCode = generateInvoice.RevenueCode,
             //    TaxpayerId = generateInvoice.TaxpayerId,
@@ -1920,6 +2167,112 @@ namespace CICSWebPortal.Services
             //return false;
             throw new NotImplementedException();
         }
+
+        public WebUser AddWebUser(WebUserViewModel user)
+        {
+            if (user == null)
+            {
+                throw new Exception("User is null or empty");
+            }
+
+            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            {
+                userId = user.createdby,
+                clientId = user.SelectedClientId
+            };
+
+            ServiceReference.AuthoriseWebUserReq userReq = new ServiceReference.AuthoriseWebUserReq()
+            {
+                UserId = user.createdby,
+                UserTypeParentId = user.SelectedClientId,
+                ClientId = user.SelectedClientId,
+                Email = user.Email,
+                PasswordStatus = 0,
+                Password = user.Password,
+                Mobile = user.Phone,
+                RoleId = user.RoleId,
+                Status = user.Status == true ? 1 : 0,
+                AuditTrailData = _AuditTrailData,
+                Channel = "WEB",
+                AgentUserName = user.AgentUsername,
+                AgentCode = user.AgentCode,
+                TerminalSerialNumber = Guid.NewGuid().ToString(),
+                TerminalName = user.Name ,
+                userDetail= new UserDetailModel
+                {
+                   Address = user.Address,
+                   Email = user.Email,
+                   Firstname = "",// implement later,
+                   Name = user.Name,
+                   
+                }
+                
+                
+            };
+
+            var result = _client2.AuthoriseWebUser(userReq);
+
+            if (result.ResponseCode != "0000")
+            {
+                return null;
+            }
+            else
+            {
+                return new WebUser
+                {
+                    Address = user.Address,
+                    ClientId = user.SelectedClientId,
+                    Email = user.Email,
+                    Mobile = user.Phone,
+                    clientId = user.SelectedClientId,
+                    Name = user.Name,
+                    Password = user.Password,
+                    PasswordStatus = 0,
+                    RoleId = user.RoleId,
+                    Status = true,
+                    TerminalCode = result.TerminalCode,
+                    
+
+
+                };
+
+            }
+        }
+
+        public Models.Role FindRole(int ID)
+        {
+            var resp = _client.FindRole(ID);
+            if(resp !=null && resp.ResponseCode =="0000")
+            {
+                return new Models.Role
+                {
+                    RoleId = resp.RoleId,
+                    RoleName = resp.ResponseDescription,
+                    RoleCode = resp.RoleCode
+                };
+            }
+            return null;
+        }
+
+        public Models.Role FindRoleByCode(string code)
+        {
+            var resp = _client.FindRoleByCode(code);
+            if (resp != null && resp.ResponseCode == "0000")
+            {
+                return new Models.Role
+                {
+                    RoleId = resp.RoleId,
+                    RoleName = resp.Description,
+                    RoleCode = resp.RoleCode
+                };
+            }
+            return null;
+        }
+
+        
+
+
+
         #endregion
     }
 }

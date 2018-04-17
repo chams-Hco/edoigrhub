@@ -3647,7 +3647,7 @@ input[type="text"].dial {
 .login-wrapper {
   position: absolute;
   top: 50px;
-  width: 100%;
+  /*width: 100%;*/
   margin-left: 0;
   animation: bounceInDownSmall 1s ease;
   -webkit-animation: bounceInDownSmall 1s ease;
@@ -3665,7 +3665,7 @@ input[type="text"].dial {
 }
 .login-wrapper .login-widget {
   margin: 0 auto;
-  width: 400px;
+  width: 100%;
   margin-top: 20px;
 }
 @media (max-width: 480px) {

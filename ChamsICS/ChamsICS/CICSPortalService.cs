@@ -98,6 +98,24 @@ namespace ChamsICSWebService
             }
         }
 
+        public FindClientWithZoneRes FindClientWithZones(int clientId)
+        {
+            FindClientWithZoneRes res = new FindClientWithZoneRes();
+            try
+            {
+                res = ServiceHelper.FindClientWithZone(clientId);
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
+
         public GetAllClientsRes GetAllClient()
         {
             GetAllClientsRes res = new GetAllClientsRes();
@@ -105,6 +123,29 @@ namespace ChamsICSWebService
             {
 
                 res = ServiceHelper.GetAllClients();
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+
+
+        }
+
+        public GetAllClientsWithZoneRes GetAllClientWithZones()
+        {
+            GetAllClientsWithZoneRes res = new GetAllClientsWithZoneRes();
+            try
+            {
+
+                res = ServiceHelper.GetAllClientsWithZones();
                 res.ResponseCode = ResponseHelper.SUCCESS;
                 res.ResponseDescription = "Successful";
 
@@ -430,195 +471,218 @@ namespace ChamsICSWebService
 
         #region ===Depricated.. Now Replaced by GetAllTransactionRes GetTransactions(GetTransactionRequest req)
         public GetAllTransactionRes GetAllTransaction()
-                {
-                    GetAllTransactionRes res = new GetAllTransactionRes();
-                    try
-                    {
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
 
-                        res = ServiceHelper.GetAllTransactions();
-                        res.ResponseCode = ResponseHelper.SUCCESS;
-                        res.ResponseDescription = "Successful";
+                res = ServiceHelper.GetAllTransactions();
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
 
-                        return res;
-                    }
-                    catch (Exception ex)
-                    {
-                        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                        res.ResponseDescription = ex.Message;
-                        Logger.logToFile(ex, ErrorLogPath);
-                        return res;
-                    }
-                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
 
-                public GetAllTransactionRes GetAllTransactionByClientId(int clientId)
-                {
-                    GetAllTransactionRes res = new GetAllTransactionRes();
-                    try
-                    {
+        public GetAllTransactionRes GetAllTransactionByClientId(int clientId)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
 
-                        res = ServiceHelper.GetAllTransactionsByClientId(clientId);
-                        res.ResponseCode = ResponseHelper.SUCCESS;
-                        res.ResponseDescription = "Successful";
+                res = ServiceHelper.GetAllTransactionsByClientId(clientId);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
 
-                        return res;
-                    }
-                    catch (Exception ex)
-                    {
-                        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                        res.ResponseDescription = ex.Message;
-                        Logger.logToFile(ex, ErrorLogPath);
-                        return res;
-                    }
-                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
 
-                public GetAllTransactionRes GetAllTransactionByAgentId(int agentId)
-                {
-                    GetAllTransactionRes res = new GetAllTransactionRes();
-                    try
-                    {
+        public GetAllTransactionRes GetAllTransactionByAgentId(int agentId)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
 
-                        res = ServiceHelper.GetAllTransactionsByAgentId(agentId);
-                        res.ResponseCode = ResponseHelper.SUCCESS;
-                        res.ResponseDescription = "Successful";
+                res = ServiceHelper.GetAllTransactionsByAgentId(agentId);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
 
-                        return res;
-                    }
-                    catch (Exception ex)
-                    {
-                        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                        res.ResponseDescription = ex.Message;
-                        Logger.logToFile(ex, ErrorLogPath);
-                        return res;
-                    }
-                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
 
-                public GetAllTransactionRes GetAllTransactionByTerminalId(int terminalId)
-                {
-                    GetAllTransactionRes res = new GetAllTransactionRes();
-                    try
-                    {
+        public GetAllTransactionRes GetAllTransactionByTerminalId(int terminalId)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
 
-                        res = ServiceHelper.GetAllTransactionsByTerminalId(terminalId);
-                        res.ResponseCode = ResponseHelper.SUCCESS;
-                        res.ResponseDescription = "Successful";
+                res = ServiceHelper.GetAllTransactionsByTerminalId(terminalId);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
 
-                        return res;
-                    }
-                    catch (Exception ex)
-                    {
-                        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                        res.ResponseDescription = ex.Message;
-                        Logger.logToFile(ex, ErrorLogPath);
-                        return res;
-                    }
-                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
 
-                public GetAllTransactionRes GetAllTransactionByResidentId(string residentId)
-                {
-                    GetAllTransactionRes res = new GetAllTransactionRes();
-                    try
-                    {
+        public GetAllTransactionRes GetAllTransactionByResidentId(string residentId)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
 
-                        res = ServiceHelper.GetAllTransactionsByResidentId(residentId);
-                        res.ResponseCode = ResponseHelper.SUCCESS;
-                        res.ResponseDescription = "Successful";
+                res = ServiceHelper.GetAllTransactionsByResidentId(residentId);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
 
-                        return res;
-                    }
-                    catch (Exception ex)
-                    {
-                        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                        res.ResponseDescription = ex.Message;
-                        Logger.logToFile(ex, ErrorLogPath);
-                        return res;
-                    }
-                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
 
-                public GetAllTransactionRes GetLast1000Transaction()
-                {
-                    GetAllTransactionRes res = new GetAllTransactionRes();
-                    try
-                    {
+        public GetAllTransactionRes GetLast10TransactionByTerminalId(int terminalId)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
 
-                        res = ServiceHelper.GetLast1000Transactions();
-                        res.ResponseCode = ResponseHelper.SUCCESS;
-                        res.ResponseDescription = "Successful";
+                res = ServiceHelper.GetLast10TransactionsByTerminalId(terminalId);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
 
-                        return res;
-                    }
-                    catch (Exception ex)
-                    {
-                        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                        res.ResponseDescription = ex.Message;
-                        Logger.logToFile(ex, ErrorLogPath);
-                        return res;
-                    }
-                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
 
-                public GetAllTransactionRes GetLast1000TransactionByClientId(int clientId)
-                {
-                    GetAllTransactionRes res = new GetAllTransactionRes();
-                    try
-                    {
+        public GetAllTransactionRes GetLast1000Transaction()
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
 
-                        res = ServiceHelper.GetLast1000TransactionsByClientId(clientId);
-                        res.ResponseCode = ResponseHelper.SUCCESS;
-                        res.ResponseDescription = "Successful";
+                res = ServiceHelper.GetLast1000Transactions();
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
 
-                        return res;
-                    }
-                    catch (Exception ex)
-                    {
-                        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                        res.ResponseDescription = ex.Message;
-                        Logger.logToFile(ex, ErrorLogPath);
-                        return res;
-                    }
-                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
 
-                public GetAllTransactionRes GetLast1000TransactionByAgentId(int agentId)
-                {
-                    GetAllTransactionRes res = new GetAllTransactionRes();
-                    try
-                    {
+        public GetAllTransactionRes GetLast1000TransactionByClientId(int clientId)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
 
-                        res = ServiceHelper.GetLast1000TransactionsByAgentId(agentId);
-                        res.ResponseCode = ResponseHelper.SUCCESS;
-                        res.ResponseDescription = "Successful";
+                res = ServiceHelper.GetLast1000TransactionsByClientId(clientId);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
 
-                        return res;
-                    }
-                    catch (Exception ex)
-                    {
-                        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                        res.ResponseDescription = ex.Message;
-                        Logger.logToFile(ex, ErrorLogPath);
-                        return res;
-                    }
-                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
 
-                public GetAllTransactionRes GetLast1000TransactionByTerminalId(int terminalId)
-                {
-                    GetAllTransactionRes res = new GetAllTransactionRes();
-                    try
-                    {
+        public GetAllTransactionRes GetLast1000TransactionByAgentId(int agentId)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
 
-                        res = ServiceHelper.GetLast1000TransactionsByTerminalId(terminalId);
-                        res.ResponseCode = ResponseHelper.SUCCESS;
-                        res.ResponseDescription = "Successful";
+                res = ServiceHelper.GetLast1000TransactionsByAgentId(agentId);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
 
-                        return res;
-                    }
-                    catch (Exception ex)
-                    {
-                        res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
-                        res.ResponseDescription = ex.Message;
-                        Logger.logToFile(ex, ErrorLogPath);
-                        return res;
-                    }
-                }
-            #endregion
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
+
+        public GetAllTransactionRes GetLast1000TransactionByTerminalId(int terminalId)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
+
+                res = ServiceHelper.GetLast1000TransactionsByTerminalId(terminalId);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
+
         
+        #endregion
+
         #endregion
 
         #region Upload Error
@@ -1188,7 +1252,63 @@ namespace ChamsICSWebService
             }
         }
 
-    
+        public FindRoleRes FindRole(int ID)
+        {
+            FindRoleRes res = new FindRoleRes();
+            try
+            {
+                res = ServiceHelper.FindRole(ID);
+                if (res.RoleId >= 0)
+                {
+                    res.ResponseCode = ResponseHelper.SUCCESS;
+                    res.ResponseDescription = "Successful";
+                }
+                else
+                {
+                    res.ResponseCode = ResponseHelper.FAILED;
+                    res.ResponseDescription = "Role not found";
+                }
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
+
+        public FindRoleRes FindRoleByCode(string code)
+        {
+            FindRoleRes res = new FindRoleRes();
+            try
+            {
+                res = ServiceHelper.FindRole(code);
+                if (res.RoleId >= 0)
+                {
+                    res.ResponseCode = ResponseHelper.SUCCESS;
+                    res.ResponseDescription = "Successful";
+                }
+                else
+                {
+                    res.ResponseCode = ResponseHelper.FAILED;
+                    res.ResponseDescription = "Role not found";
+                }
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
+
+
         public CreateUserRes CreateUser(Model.User req)
         {
             CreateUserRes res = new CreateUserRes();
@@ -1362,6 +1482,26 @@ namespace ChamsICSWebService
             }
         }
 
+        public GetAllUserRes GetAllUsersByClientId(int id)
+        {
+            GetAllUserRes res = new GetAllUserRes();
+            try
+            {
+                res = ServiceHelper.GetAllUsersByClientId(id);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
+
         public GetAllUserRes GetUserAssesibleUsers(GetAllUserReq req)
         {
             GetAllUserRes res = new GetAllUserRes();
@@ -1383,7 +1523,7 @@ namespace ChamsICSWebService
         }
 
         public GetAllUserRes GetAllUsersByTypeId(GetAllUserReq req)
-        { 
+        {
             GetAllUserRes res = new GetAllUserRes();
             try
             {
@@ -1417,7 +1557,7 @@ namespace ChamsICSWebService
             }
         }
 
-       public FindUserRes FindUserByEmail(string email)
+        public FindUserRes FindUserByEmail(string email)
         {
             FindUserRes res = new FindUserRes();
             try
@@ -1434,7 +1574,7 @@ namespace ChamsICSWebService
                 return res;
             }
         }
-       
+
         #endregion
 
         #region Dashboard
@@ -1445,7 +1585,7 @@ namespace ChamsICSWebService
             try
             {
                 res = ServiceHelper.GetDashBoardData(req);
-                
+
                 if (res != null)
                 {
                     res.ResponseCode = ResponseHelper.SUCCESS;
@@ -1492,7 +1632,7 @@ namespace ChamsICSWebService
             {
                 res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
                 res.ResponseDescription = ex.Message;
-                
+
 
                 return res;
             }
@@ -1506,7 +1646,7 @@ namespace ChamsICSWebService
                 res = ServiceHelper.GetExecutiveDashboardData(req);
                 if (res != null)
                 {
-                    
+
                     res.ResponseCode = ResponseHelper.SUCCESS;
                     res.ResponseDescription = "Success";
                     return res;
@@ -1593,7 +1733,7 @@ namespace ChamsICSWebService
             ClientSummaryRes res = new ClientSummaryRes();
             try
             {
-                List<ClientSummary>  sSum = ServiceHelper.GetClientSummary();
+                List<ClientSummary> sSum = ServiceHelper.GetClientSummary();
                 if (sSum != null)
                 {
                     res.ClientSummaries = sSum;
@@ -1671,7 +1811,7 @@ namespace ChamsICSWebService
                     return res;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
                 res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
@@ -1745,7 +1885,8 @@ namespace ChamsICSWebService
         #endregion
 
         #region Location
-        public CreateLocationRes CreateLocation(Location req) {
+        public CreateLocationRes CreateLocation(Location req)
+        {
             CreateLocationRes res = new CreateLocationRes();
             try
             {
@@ -1773,7 +1914,8 @@ namespace ChamsICSWebService
             }
         }
 
-        public Response UpdateLocation(Location req) {
+        public Response UpdateLocation(Location req)
+        {
             Response res = new Response();
             try
             {
@@ -1783,7 +1925,8 @@ namespace ChamsICSWebService
                 {
                     res.ResponseCode = ResponseHelper.SUCCESS;
                     res.ResponseDescription = "Successful";
-                }else
+                }
+                else
                 {
                     res.ResponseCode = ResponseHelper.FAILED;
                     res.ResponseDescription = "Failed";
@@ -1800,7 +1943,8 @@ namespace ChamsICSWebService
             }
         }
 
-        public FindLocationRes FindLocation(int Id) {
+        public FindLocationRes FindLocation(int Id)
+        {
             FindLocationRes res = new FindLocationRes();
             try
             {
@@ -1819,7 +1963,8 @@ namespace ChamsICSWebService
             }
         }
 
-        public GetAllLocationRes GetAllLocations() {
+        public GetAllLocationRes GetAllLocations()
+        {
             GetAllLocationRes res = new GetAllLocationRes();
             try
             {
@@ -1838,7 +1983,8 @@ namespace ChamsICSWebService
             }
         }
 
-        public GetAllLocationRes GetAllLocationsByClientId(int clientId) {
+        public GetAllLocationRes GetAllLocationsByClientId(int clientId)
+        {
             GetAllLocationRes res = new GetAllLocationRes();
             try
             {
@@ -1858,7 +2004,8 @@ namespace ChamsICSWebService
 
         }
 
-        public GetAllLocationRes GetAllLocationsByAgentId(int agentId) {
+        public GetAllLocationRes GetAllLocationsByAgentId(int agentId)
+        {
             GetAllLocationRes res = new GetAllLocationRes();
             try
             {
@@ -2056,7 +2203,7 @@ namespace ChamsICSWebService
                 res.ResponseDescription = ex.Message;
                 Logger.logToFile(ex, ErrorLogPath);
                 return res;
-            }           
+            }
         }
         #endregion
 

@@ -54,6 +54,16 @@
     <Property Name="Phone1" Type="nvarchar" MaxLength="15" />
     <Property Name="Phone2" Type="nvarchar" MaxLength="15" />
     <Property Name="Status" Type="int" />
+    <Property Name="HasWebUsers" Type="bit" />
+  </EntityType>
+  <EntityType Name="ClientSettings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
+    <Property Name="PercentageDeduction" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DefaultRevenueItemId" Type="int" />
   </EntityType>
   <EntityType Name="EOD">
     <Key>
@@ -211,7 +221,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
     <Property Name="TerminalId" Type="int" Nullable="false" />
     <Property Name="Field" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="OldValues" Type="varchar" MaxLength="50" />
@@ -244,6 +254,15 @@
     <Property Name="Status" Type="int" />
     <Property Name="LocationId" Type="int" />
     <Property Name="LocationCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="200" />
+    <Property Name="Income" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Percentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FoodAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DrinkAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RentalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OtherAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FromDate" Type="date" />
+    <Property Name="ToDate" Type="date" />
   </EntityType>
   <EntityType Name="TransactionLogException">
     <Key>
@@ -340,6 +359,25 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="ClientId" Type="int" Nullable="false" />
+    <Property Name="CanCreateWebUsers" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userID" Type="int" Nullable="false" />
+    <Property Name="Firstname" Type="varchar" MaxLength="50" />
+    <Property Name="Middlename" Type="varchar" MaxLength="50" />
+    <Property Name="Lastname" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Sex" Type="int" />
+    <Property Name="Address" Type="varchar" MaxLength="250" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="Website" Type="varchar" MaxLength="50" />
+    <Property Name="TerminalId" Type="int" />
+    <Property Name="RegistrationNumber" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="UserRole">
     <Key>
@@ -347,6 +385,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="varchar" MaxLength="3" />
   </EntityType>
   <Association Name="FK_Agent_Client">
     <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
@@ -356,6 +395,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Agent">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_Settings_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="ClientSettings" Type="Self.ClientSettings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientSettings">
         <PropertyRef Name="ClientId" />
       </Dependent>
     </ReferentialConstraint>
@@ -558,11 +609,36 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserDetail_Terminal">
+    <End Role="Terminal" Type="Self.Terminal" Multiplicity="0..1" />
+    <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Terminal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDetail">
+        <PropertyRef Name="TerminalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetail_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDetail">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="CICSModelStoreContainer">
     <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AgentManager" EntityType="Self.AgentManager" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AuditTrail" EntityType="Self.AuditTrail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClientSettings" EntityType="Self.ClientSettings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EOD" EntityType="Self.EOD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EODPaymentNotificationLog" EntityType="Self.EODPaymentNotificationLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IdentityService" EntityType="Self.IdentityService" Schema="dbo" store:Type="Tables" />
@@ -583,10 +659,15 @@
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAgent" EntityType="Self.UserAgent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserClient" EntityType="Self.UserClient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Agent_Client" Association="Self.FK_Agent_Client">
       <End Role="Client" EntitySet="Client" />
       <End Role="Agent" EntitySet="Agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_Settings_Client" Association="Self.FK_Client_Settings_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="ClientSettings" EntitySet="ClientSettings" />
     </AssociationSet>
     <AssociationSet Name="FK_EOD_Terminal" Association="Self.FK_EOD_Terminal">
       <End Role="Terminal" EntitySet="Terminal" />
@@ -651,6 +732,14 @@
     <AssociationSet Name="FK_UserClients_User" Association="Self.FK_UserClients_User">
       <End Role="User" EntitySet="User" />
       <End Role="UserClient" EntitySet="UserClient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetail_Terminal" Association="Self.FK_UserDetail_Terminal">
+      <End Role="Terminal" EntitySet="Terminal" />
+      <End Role="UserDetail" EntitySet="UserDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetail_User" Association="Self.FK_UserDetail_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserDetail" EntitySet="UserDetail" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

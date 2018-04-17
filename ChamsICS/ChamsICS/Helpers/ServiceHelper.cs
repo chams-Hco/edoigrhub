@@ -75,6 +75,81 @@ namespace ChamsICSWebService
             return true;
         }
 
+        internal bool AuthoriseRequestForWebUSers(String AgentCode, string Username, out Response res)
+        {
+            UserLoginRes loginRes = new UserLoginRes();
+            res = new Response();
+
+            //var result = UserLogin(new UserLoginReq
+            //{
+            //    Email = Username,
+            //    UserPassword = Password
+            //}, out loginRes);
+
+            var user = db.Users.Include("UserClients").SingleOrDefault(a => a.Email == Username);
+
+            bool result = false;
+
+            if (user.UserClients != null && user.UserClients.Count > 0 && user.UserClients.First().Client.Agents.Select(a=>a.Code).Contains(AgentCode))
+            {
+
+                result = true;
+            }
+
+
+
+
+           // var result = user != null ? true : false;
+
+            if (!result)
+            {
+                res.ResponseCode = loginRes.ResponseCode;
+                res.ResponseDescription = loginRes.ResponseDescription;
+                return false;
+            }
+
+            if (result)
+            {
+                loginRes = new UserLoginRes
+                {
+                    AccountStatus = user.Status.Value,
+                    CanCreateWebUsers = user.UserClients.First().CanCreateWebUsers,
+                    Email = user.Email,
+                    Mobile = user.Mobile,
+                    PasswordStatus =1,
+                    RoleCode = user.UserRole.Code,
+                    RoleId = user.UserRole.id,
+                    UserId = user.Id
+                };
+            }
+
+
+
+            if (loginRes.PasswordStatus == 0)
+            {
+                res.ResponseCode = ResponseHelper.FAILED;
+                res.ResponseDescription = "Account is not activated";
+                return false;
+            }
+            if (loginRes.AccountStatus == 0)
+            {
+                res.ResponseCode = ResponseHelper.FAILED;
+                res.ResponseDescription = "Account is disabled";
+                return false;
+            }
+            //Validate that the request is comming in with the right AgentCode
+            //var agentId = loginRes.UserDashBoardData.UserTypeParentId;
+            //var userAgent = db.Agents.FirstOrDefault(x => x.Id == agentId && x.Code == AgentCode);
+
+            //if (userAgent == null)
+            //{
+            //    res.ResponseCode = ResponseHelper.FAILED;
+            //    res.ResponseDescription = "Unauthorised Login Credentials";
+            //    return false;
+            //}
+            return true;
+        }
+
         public String GetNewTerminalCode(AuthoriseTerminalReq req)
         {
             string result = string.Empty;
@@ -113,6 +188,8 @@ namespace ChamsICSWebService
 
             return result;
         }
+
+
 
         public string GetNextTerminalCode(string lastTerminalCode)
         {
@@ -271,6 +348,125 @@ namespace ChamsICSWebService
                 return false;
             }
 
+            return result;
+        }
+
+        internal bool ValidateAndSaveWebTransaction(WebTransactionReq req, out string msg, out string tempResId, out string transactioncode, out string remittanceCode, out ChamsICSLib.Data.Terminal terminalret)
+        {
+            bool result = true;
+            msg = string.Empty;
+            tempResId = string.Empty;
+            transactioncode = string.Empty;
+            remittanceCode = string.Empty;
+            string outMsg = String.Empty;
+            terminalret = null;
+            var terminal = db.Terminals.SingleOrDefault(a => a.Id == req.TerminalId);
+
+            if (terminal == null)
+                return false;
+
+            terminalret = terminal;
+            string TerminalCode = terminal.Code;
+            string AgentCode = terminal.Agent!=null ? terminal.Agent.Code:"";
+            transactioncode = AgentCode + terminal.Id + DateTime.Now.ToString("ddMMyyHHmmssfff");
+            remittanceCode = GenerateEODReference(terminal.Id);
+
+            if(TerminalCode == "" || transactioncode == "")
+            {
+                msg = "Could not load terminal Code or Agent Code";
+                return false;
+            }
+
+            //Validate TransactionCode EXIST
+            if (!ValidateTransactionCodeExist(transactioncode, out msg))
+            {
+                return false;
+            }
+
+           
+
+            
+            if(!ValidateRevenueId(req.RevenueItemId, out msg))
+            {
+                return false;
+            }
+            string revenueCode = msg;
+           
+
+            if (terminal.UserDetails == null || String.IsNullOrEmpty(terminal.UserDetails.ElementAt(0).Name) || String.IsNullOrWhiteSpace(terminal.UserDetails.ElementAt(0).Name))
+            {
+                msg ="Terminal is either not linked to a user or the user doesnt have a name";
+                return false;
+            }
+
+
+            try
+            {
+                TransactionLog transaction = new TransactionLog
+                {
+                    AgentId = terminal.AgentId,
+                    Amount = req.Amount,
+                    ClientId = terminal.Agent.ClientId,
+                    RevenueCode = revenueCode,
+                    DateOfBirth = DateTime.Today,
+                    Code = transactioncode,
+                    DrinkAmount = req.DrinkAmount,
+                    FoodAmount = req.FoodAmount,
+                    FromDate = req.FromDate,
+                    Income = req.Income,
+                    OtherAmount = req.OtherAmount,
+                    RentalAmount = req.RentalAmount,
+                    PaymentReference = remittanceCode,
+                    Percentage = req.PercentageDeduction,
+                    Status = 1,
+                    TransactionDate = DateTime.Now,
+                    TerminalId = req.TerminalId,
+                    ToDate = req.ToDate,
+                    UploadDate = DateTime.Now,
+                    Name =req.Name
+                    
+
+
+                };
+                EOD EOD = new EOD
+                {
+                    Amount = transaction.Amount.Value,
+                    Date = transaction.TransactionDate.Value,
+                    TransactionReference = remittanceCode,
+                    Count = 1,
+                    Status = false,
+                    TerminalId = terminal.Id
+                    
+
+                };
+                db.TransactionLogs.Add(transaction);
+                db.EODs.Add(EOD);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+                return false;
+            }
+
+           
+
+            return result;
+        }
+
+        private bool ValidateRevenueId(int revenueItemId, out string msg)
+        {
+            bool result = true;
+            msg = string.Empty;
+
+            //Validate Revenue Code Exists
+            var revenue = db.RevenueItems.SingleOrDefault(x => x.Id == revenueItemId);
+            if (revenue == null)
+            {
+                msg = "Invalid Revenue";
+                return false;
+            }
+            msg = revenue.Code;
             return result;
         }
 
@@ -836,6 +1032,8 @@ namespace ChamsICSWebService
             db.SaveChanges();
         }
 
+        
+
         private void LogTransactionNotification(TransactionLog tLog)
         {
             //Log Notification
@@ -1022,7 +1220,7 @@ namespace ChamsICSWebService
                     Status = false,
                     Count = req.EODCount,
                     Date = DateTime.Now,
-                    TransactionReference = GenerateEODReference()
+                    TransactionReference = GenerateEODReference(terminal.Id)
                 };
                 db.EODs.Add(eod);
                 var affectedRows = db.SaveChanges();
@@ -1062,7 +1260,7 @@ namespace ChamsICSWebService
         //        default:
         //            break;
         //    }
-            
+
         //    return msg;
         //}
         /// <summary>
@@ -1070,7 +1268,8 @@ namespace ChamsICSWebService
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        private string GenerateEODReference() => DateTime.Now.Ticks.ToString();
+        private string GenerateEODReference(int id) => id.ToString().PadLeft(4, '0') + "" + DateTime.Now.ToString("ddMMyyyyHHmmssfff");
+        //(int id ) =>   DateTime.Now.Ticks.ToString();
         /// <summary>
         /// 
         /// </summary>
@@ -1164,7 +1363,7 @@ namespace ChamsICSWebService
             {
                 remittanceCode = data[4]; amount = data[0]; phoneNumber = data[1]; email = data[2]; name = data[3];
             }
-           
+
             //convert amount string to decimal
             msg = Decimal.TryParse(amount, out decimal decimalAmount) ? "" : "Failed to convert string amount to decimal";
             // exit if there is an error msg in converting from string to decimal

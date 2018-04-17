@@ -38,7 +38,7 @@
             @{displayStyle = string.Empty; if (!(Convert.ToInt32(Session["RoleID"]) < 5)) { displayStyle = "display: none"; } }
             <div class="col-sm-4" id="agentPanel" style="@displayStyle">
                 <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2">Zones:</span>
+                    <span class="input-group-addon" id="basic-addon2">L.G.As:</span>
                     @Html.DropDownListFor(m => m.SelectedAgentId, Model.agentList, "ALL", new { @class = "form-control", required = true })
                 </div>
             </div>

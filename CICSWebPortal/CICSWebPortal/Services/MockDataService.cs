@@ -755,6 +755,71 @@ namespace CICSWebPortal.Services
         {
             throw new NotImplementedException();
         }
+
+        public IList<Client> GetAllClientWithZones()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Client FindClientWithZone(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<User> GetAllUsersByClientId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddWebUser(WebUserViewModel user)
+        {
+            throw new NotImplementedException();
+        }
+
+        WebUser IDataService.AddWebUser(WebUserViewModel user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Role FindRole(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Role FindRoleByCode(string code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Client> FindClientByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public WebTransactionResponse ProcessWebTrancation(WebPayment webPayment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Transaction> GetLast10TransactionsByTerminalId(int TerminalId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ExecutiveDashboard GetExecutiveDashBoardSummary(int roleId, int userId, string roleCode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ExecutiveDashboard GetPeriodicDashboardSummary(int roleId, int userId, string roleCode, DateTime StartDate, DateTime EndDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dashboard GetDashBoardSummary(int roleId, int userId, string roleCode)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

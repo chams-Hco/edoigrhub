@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="CICSModel.Agent" Width="1.5" PointX="3" PointY="9.875" />
         <EntityTypeShape EntityType="CICSModel.AgentManager" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="CICSModel.AuditTrail" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="CICSModel.Client" Width="1.5" PointX="0.75" PointY="13.25" />
         <EntityTypeShape EntityType="CICSModel.IdentityService" Width="1.5" PointX="3" PointY="23.125" />
         <EntityTypeShape EntityType="CICSModel.Ministry" Width="1.5" PointX="4.75" PointY="4.75" />
         <EntityTypeShape EntityType="CICSModel.Notification" Width="1.5" PointX="3" PointY="1" />
@@ -20,34 +19,40 @@
         <EntityTypeShape EntityType="CICSModel.Terminal" Width="1.5" PointX="5.25" PointY="12.75" />
         <EntityTypeShape EntityType="CICSModel.TerminalLocation" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="CICSModel.TerminalUpdateLog" Width="1.5" PointX="7.5" PointY="11.625" />
-        <EntityTypeShape EntityType="CICSModel.TransactionLog" Width="1.5" PointX="10.5" PointY="10.5" />
         <EntityTypeShape EntityType="CICSModel.TransactionLogException" Width="1.5" PointX="9.75" PointY="0.75" />
         <EntityTypeShape EntityType="CICSModel.TransactionStatu" Width="1.5" PointX="9.75" PointY="7.75" />
         <EntityTypeShape EntityType="CICSModel.TransactionUploadError" Width="1.5" PointX="11.75" PointY="0.75" />
         <EntityTypeShape EntityType="CICSModel.User" Width="1.5" PointX="3" PointY="15.25" />
         <EntityTypeShape EntityType="CICSModel.UserAgent" Width="1.5" PointX="5.25" PointY="9.875" />
-        <EntityTypeShape EntityType="CICSModel.UserClient" Width="1.5" PointX="5.25" PointY="18" />
-        <EntityTypeShape EntityType="CICSModel.UserRole" Width="1.5" PointX="0.75" PointY="18.25" />
-        <AssociationConnector Association="CICSModel.FK_Agent_Client" />
         <AssociationConnector Association="CICSModel.FK_Terminal_Agent" />
-        <AssociationConnector Association="CICSModel.FK_TransactionLog_Agent" />
         <AssociationConnector Association="CICSModel.FK_UserAgents_Agent" />
-        <AssociationConnector Association="CICSModel.FK_IdentityService_Client" />
-        <AssociationConnector Association="CICSModel.FK_Revenue_Client" />
-        <AssociationConnector Association="CICSModel.FK_TransactionLog_Client" />
-        <AssociationConnector Association="CICSModel.FK_User_Client" />
-        <AssociationConnector Association="CICSModel.FK_UserClients_Client" />
         <AssociationConnector Association="CICSModel.FK_Notification_NotificationType" />
         <AssociationConnector Association="CICSModel.FK_TerminalUpdateLog_Terminal" />
-        <AssociationConnector Association="CICSModel.FK_TransactionLog_Terminal" />
-        <AssociationConnector Association="CICSModel.FK_User_UserRole" />
         <AssociationConnector Association="CICSModel.FK_UserAgents_User" />
-        <AssociationConnector Association="CICSModel.FK_UserClients_User" />
         <EntityTypeShape EntityType="CICSModel.EOD" Width="1.5" PointX="7.5" PointY="15.25" />
         <AssociationConnector Association="CICSModel.FK_EOD_Terminal" />
         <EntityTypeShape EntityType="CICSModel.EODPaymentNotificationLog" Width="1.5" PointX="9.75" PointY="17.25" />
         <AssociationConnector Association="CICSModel.FK_EODPaymentNotificationLog_EOD" />
-      </Diagram>
+        <EntityTypeShape EntityType="CICSModel.UserRole" Width="1.5" PointX="13.375" PointY="7.875" />
+        <AssociationConnector Association="CICSModel.FK_User_UserRole" />
+        <EntityTypeShape EntityType="CICSModel.UserClient" Width="1.5" PointX="5.25" PointY="18" />
+        <AssociationConnector Association="CICSModel.FK_UserClients_User" />
+        <EntityTypeShape EntityType="CICSModel.Client" Width="1.5" PointX="0.75" PointY="15.75" />
+        <AssociationConnector Association="CICSModel.FK_Agent_Client" />
+        <AssociationConnector Association="CICSModel.FK_IdentityService_Client" />
+        <AssociationConnector Association="CICSModel.FK_Revenue_Client" />
+        <AssociationConnector Association="CICSModel.FK_User_Client" />
+        <AssociationConnector Association="CICSModel.FK_UserClients_Client" />
+        <EntityTypeShape EntityType="CICSModel.UserDetail" Width="1.5" PointX="7.5" PointY="19.875" />
+        <AssociationConnector Association="CICSModel.FK_UserDetail_Terminal" />
+        <AssociationConnector Association="CICSModel.FK_UserDetail_User" />
+        <EntityTypeShape EntityType="CICSModel.TransactionLog" Width="1.5" PointX="12.5" PointY="11.125" />
+        <AssociationConnector Association="CICSModel.FK_TransactionLog_Agent" />
+        <AssociationConnector Association="CICSModel.FK_TransactionLog_Client" />
+        <AssociationConnector Association="CICSModel.FK_TransactionLog_Terminal" />
+        <EntityTypeShape EntityType="CICSModel.ClientSetting" Width="1.5" PointX="3" PointY="26.875" />
+        <AssociationConnector Association="CICSModel.FK_Client_Settings_Client" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

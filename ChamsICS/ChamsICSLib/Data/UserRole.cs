@@ -22,6 +22,7 @@ namespace ChamsICSLib.Data
     
         public int id { get; set; }
         public string Description { get; set; }
+        public string Code { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }

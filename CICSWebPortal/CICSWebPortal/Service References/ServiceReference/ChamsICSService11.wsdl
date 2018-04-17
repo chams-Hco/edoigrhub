@@ -6,8 +6,57 @@
       <xsd:import schemaLocation="http://localhost:39562/ChamsICSService.svc?xsd=xsd0" namespace="http://3rdpartyservices.cics.chams.com" />
       <xsd:import schemaLocation="http://localhost:39562/ChamsICSService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:39562/ChamsICSService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" />
+      <xsd:import schemaLocation="http://localhost:39562/ChamsICSService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="iChamsICSPortalService_FindLocation_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindLocation" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindLocation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllLocations_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllLocations" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllLocations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllLocationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllLocationsByClientId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllLocationsByClientId" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllLocationsByClientId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllLocationsByClientIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllLocationsByAgentId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllLocationsByAgentId" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllLocationsByAgentId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllLocationsByAgentIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetWallet_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWallet" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetWallet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWalletResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FundWallet_InputMessage">
+    <wsdl:part name="parameters" element="tns:FundWallet" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FundWallet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FundWalletResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetUserInvoices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInvoices" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetUserInvoices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInvoicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllInvoices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllInvoices" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllInvoices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllInvoicesResponse" />
+  </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_GetInvoiceById_InputMessage">
     <wsdl:part name="parameters" element="tns:GetInvoiceById" />
   </wsdl:message>
@@ -32,36 +81,6 @@
   <wsdl:message name="iChamsICSPortalService_MakePayment_OutputMessage">
     <wsdl:part name="parameters" element="tns:MakePaymentResponse" />
   </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllTaxpayers_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllTaxpayers" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllTaxpayers_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllTaxpayersResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_AddTaxpayer_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddTaxpayer" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_AddTaxpayer_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddTaxpayerResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetTaxpayerById_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetTaxpayerById" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetTaxpayerById_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetTaxpayerByIdResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAssessmentByRole_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAssessmentByRole" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAssessmentByRole_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAssessmentByRoleResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GenerateInvoice_InputMessage">
-    <wsdl:part name="parameters" element="tns:GenerateInvoice" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GenerateInvoice_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GenerateInvoiceResponse" />
-  </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_CreateClient_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateClient" />
   </wsdl:message>
@@ -80,11 +99,23 @@
   <wsdl:message name="iChamsICSPortalService_FindClient_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindClientResponse" />
   </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindClientWithZones_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindClientWithZones" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindClientWithZones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindClientWithZonesResponse" />
+  </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_GetAllClient_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllClient" />
   </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_GetAllClient_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllClientWithZones_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllClientWithZones" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllClientWithZones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllClientWithZonesResponse" />
   </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_CreateAgent_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateAgent" />
@@ -218,11 +249,23 @@
   <wsdl:message name="iChamsICSPortalService_GetLast1000TransactionByTerminalId_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLast1000TransactionByTerminalIdResponse" />
   </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetLast10TransactionByTerminalId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLast10TransactionByTerminalId" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetLast10TransactionByTerminalId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLast10TransactionByTerminalIdResponse" />
+  </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_GetAllTransactionByResidentId_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllTransactionByResidentId" />
   </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_GetAllTransactionByResidentId_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllTransactionByResidentIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_ProcessWebTrancation_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessWebTrancation" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_ProcessWebTrancation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessWebTrancationResponse" />
   </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_FindErrorTransaction_InputMessage">
     <wsdl:part name="parameters" element="tns:FindErrorTransaction" />
@@ -428,11 +471,29 @@
   <wsdl:message name="iChamsICSPortalService_GetAllRoles_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllRolesResponse" />
   </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindRole" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindRoleByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindRoleByCode" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindRoleByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindRoleByCodeResponse" />
+  </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_GetAllUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllUsers" />
   </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_GetAllUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllUsersByClientId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsersByClientId" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllUsersByClientId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsersByClientIdResponse" />
   </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_GetUserAssesibleUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUserAssesibleUsers" />
@@ -512,6 +573,12 @@
   <wsdl:message name="iChamsICSPortalService_GetAllAuditTrails_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllAuditTrailsResponse" />
   </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetEODReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEODReport" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetEODReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEODReportResponse" />
+  </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_CreateLocation_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateLocation" />
   </wsdl:message>
@@ -524,55 +591,39 @@
   <wsdl:message name="iChamsICSPortalService_UpdateLocation_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateLocationResponse" />
   </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_FindLocation_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindLocation" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_FindLocation_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindLocationResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllLocations_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllLocations" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllLocations_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllLocationsResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllLocationsByClientId_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllLocationsByClientId" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllLocationsByClientId_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllLocationsByClientIdResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllLocationsByAgentId_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllLocationsByAgentId" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllLocationsByAgentId_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllLocationsByAgentIdResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetWallet_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetWallet" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetWallet_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetWalletResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_FundWallet_InputMessage">
-    <wsdl:part name="parameters" element="tns:FundWallet" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_FundWallet_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FundWalletResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetUserInvoices_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetUserInvoices" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetUserInvoices_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetUserInvoicesResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllInvoices_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllInvoices" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllInvoices_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllInvoicesResponse" />
-  </wsdl:message>
   <wsdl:portType name="iChamsICSPortalService">
+    <wsdl:operation name="FindLocation">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindLocation" message="tns:iChamsICSPortalService_FindLocation_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindLocationResponse" message="tns:iChamsICSPortalService_FindLocation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLocations">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocations" message="tns:iChamsICSPortalService_GetAllLocations_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsResponse" message="tns:iChamsICSPortalService_GetAllLocations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLocationsByClientId">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsByClientId" message="tns:iChamsICSPortalService_GetAllLocationsByClientId_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsByClientIdResponse" message="tns:iChamsICSPortalService_GetAllLocationsByClientId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLocationsByAgentId">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsByAgentId" message="tns:iChamsICSPortalService_GetAllLocationsByAgentId_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsByAgentIdResponse" message="tns:iChamsICSPortalService_GetAllLocationsByAgentId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWallet">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetWallet" message="tns:iChamsICSPortalService_GetWallet_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetWalletResponse" message="tns:iChamsICSPortalService_GetWallet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FundWallet">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FundWallet" message="tns:iChamsICSPortalService_FundWallet_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FundWalletResponse" message="tns:iChamsICSPortalService_FundWallet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInvoices">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetUserInvoices" message="tns:iChamsICSPortalService_GetUserInvoices_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetUserInvoicesResponse" message="tns:iChamsICSPortalService_GetUserInvoices_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllInvoices">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllInvoices" message="tns:iChamsICSPortalService_GetAllInvoices_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllInvoicesResponse" message="tns:iChamsICSPortalService_GetAllInvoices_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetInvoiceById">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetInvoiceById" message="tns:iChamsICSPortalService_GetInvoiceById_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetInvoiceByIdResponse" message="tns:iChamsICSPortalService_GetInvoiceById_OutputMessage" />
@@ -589,26 +640,6 @@
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/MakePayment" message="tns:iChamsICSPortalService_MakePayment_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/MakePaymentResponse" message="tns:iChamsICSPortalService_MakePayment_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetAllTaxpayers">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTaxpayers" message="tns:iChamsICSPortalService_GetAllTaxpayers_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTaxpayersResponse" message="tns:iChamsICSPortalService_GetAllTaxpayers_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="AddTaxpayer">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/AddTaxpayer" message="tns:iChamsICSPortalService_AddTaxpayer_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/AddTaxpayerResponse" message="tns:iChamsICSPortalService_AddTaxpayer_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetTaxpayerById">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetTaxpayerById" message="tns:iChamsICSPortalService_GetTaxpayerById_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetTaxpayerByIdResponse" message="tns:iChamsICSPortalService_GetTaxpayerById_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAssessmentByRole">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAssessmentByRole" message="tns:iChamsICSPortalService_GetAssessmentByRole_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAssessmentByRoleResponse" message="tns:iChamsICSPortalService_GetAssessmentByRole_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GenerateInvoice">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GenerateInvoice" message="tns:iChamsICSPortalService_GenerateInvoice_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GenerateInvoiceResponse" message="tns:iChamsICSPortalService_GenerateInvoice_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="CreateClient">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateClient" message="tns:iChamsICSPortalService_CreateClient_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateClientResponse" message="tns:iChamsICSPortalService_CreateClient_OutputMessage" />
@@ -621,9 +652,17 @@
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClient" message="tns:iChamsICSPortalService_FindClient_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClientResponse" message="tns:iChamsICSPortalService_FindClient_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="FindClientWithZones">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClientWithZones" message="tns:iChamsICSPortalService_FindClientWithZones_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClientWithZonesResponse" message="tns:iChamsICSPortalService_FindClientWithZones_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetAllClient">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClient" message="tns:iChamsICSPortalService_GetAllClient_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClientResponse" message="tns:iChamsICSPortalService_GetAllClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClientWithZones">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClientWithZones" message="tns:iChamsICSPortalService_GetAllClientWithZones_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClientWithZonesResponse" message="tns:iChamsICSPortalService_GetAllClientWithZones_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateAgent">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateAgent" message="tns:iChamsICSPortalService_CreateAgent_InputMessage" />
@@ -713,9 +752,17 @@
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetLast1000TransactionByTerminalId" message="tns:iChamsICSPortalService_GetLast1000TransactionByTerminalId_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetLast1000TransactionByTerminalIdResponse" message="tns:iChamsICSPortalService_GetLast1000TransactionByTerminalId_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetLast10TransactionByTerminalId">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetLast10TransactionByTerminalId" message="tns:iChamsICSPortalService_GetLast10TransactionByTerminalId_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetLast10TransactionByTerminalIdResponse" message="tns:iChamsICSPortalService_GetLast10TransactionByTerminalId_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetAllTransactionByResidentId">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByResidentId" message="tns:iChamsICSPortalService_GetAllTransactionByResidentId_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByResidentIdResponse" message="tns:iChamsICSPortalService_GetAllTransactionByResidentId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessWebTrancation">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebTrancation" message="tns:iChamsICSPortalService_ProcessWebTrancation_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebTrancationResponse" message="tns:iChamsICSPortalService_ProcessWebTrancation_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="FindErrorTransaction">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindErrorTransaction" message="tns:iChamsICSPortalService_FindErrorTransaction_InputMessage" />
@@ -853,9 +900,21 @@
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRoles" message="tns:iChamsICSPortalService_GetAllRoles_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRolesResponse" message="tns:iChamsICSPortalService_GetAllRoles_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="FindRole">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindRole" message="tns:iChamsICSPortalService_FindRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindRoleResponse" message="tns:iChamsICSPortalService_FindRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindRoleByCode">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindRoleByCode" message="tns:iChamsICSPortalService_FindRoleByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindRoleByCodeResponse" message="tns:iChamsICSPortalService_FindRoleByCode_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetAllUsers">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllUsers" message="tns:iChamsICSPortalService_GetAllUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllUsersResponse" message="tns:iChamsICSPortalService_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsersByClientId">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllUsersByClientId" message="tns:iChamsICSPortalService_GetAllUsersByClientId_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllUsersByClientIdResponse" message="tns:iChamsICSPortalService_GetAllUsersByClientId_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUserAssesibleUsers">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetUserAssesibleUsers" message="tns:iChamsICSPortalService_GetUserAssesibleUsers_InputMessage" />
@@ -909,6 +968,10 @@
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails" message="tns:iChamsICSPortalService_GetAllAuditTrails_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrailsResponse" message="tns:iChamsICSPortalService_GetAllAuditTrails_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetEODReport">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" message="tns:iChamsICSPortalService_GetEODReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReportResponse" message="tns:iChamsICSPortalService_GetEODReport_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateLocation">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateLocation" message="tns:iChamsICSPortalService_CreateLocation_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateLocationResponse" message="tns:iChamsICSPortalService_CreateLocation_OutputMessage" />
@@ -916,38 +979,6 @@
     <wsdl:operation name="UpdateLocation">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateLocation" message="tns:iChamsICSPortalService_UpdateLocation_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateLocationResponse" message="tns:iChamsICSPortalService_UpdateLocation_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="FindLocation">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindLocation" message="tns:iChamsICSPortalService_FindLocation_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindLocationResponse" message="tns:iChamsICSPortalService_FindLocation_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllLocations">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocations" message="tns:iChamsICSPortalService_GetAllLocations_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsResponse" message="tns:iChamsICSPortalService_GetAllLocations_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllLocationsByClientId">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsByClientId" message="tns:iChamsICSPortalService_GetAllLocationsByClientId_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsByClientIdResponse" message="tns:iChamsICSPortalService_GetAllLocationsByClientId_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllLocationsByAgentId">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsByAgentId" message="tns:iChamsICSPortalService_GetAllLocationsByAgentId_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsByAgentIdResponse" message="tns:iChamsICSPortalService_GetAllLocationsByAgentId_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetWallet">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetWallet" message="tns:iChamsICSPortalService_GetWallet_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetWalletResponse" message="tns:iChamsICSPortalService_GetWallet_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="FundWallet">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FundWallet" message="tns:iChamsICSPortalService_FundWallet_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FundWalletResponse" message="tns:iChamsICSPortalService_FundWallet_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetUserInvoices">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetUserInvoices" message="tns:iChamsICSPortalService_GetUserInvoices_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetUserInvoicesResponse" message="tns:iChamsICSPortalService_GetUserInvoices_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllInvoices">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllInvoices" message="tns:iChamsICSPortalService_GetAllInvoices_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllInvoicesResponse" message="tns:iChamsICSPortalService_GetAllInvoices_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

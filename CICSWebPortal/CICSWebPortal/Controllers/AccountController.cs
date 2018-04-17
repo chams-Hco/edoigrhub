@@ -81,11 +81,16 @@ namespace CICSWebPortal.Controllers
             {
                 Session.Add("User", result.Email);
                 Session.Add("RoleId", result.RoleId);
+                Session.Add("RoleCode", result.RoleCode);
+                Session.Add("CanCreateWebUsers", result.CanCreateWebUsers);
                 Session.Add("UserId", result.UserId);
                 Session.Add("ClientName", result.ClientName);
                 Session.Add("UserTypeParentId", result.UserTypeParentId);
                 Session.Add("ClientId", result.ClientId);
                 Session.Add("RoleName", result.RoleName);
+                Session["LoggedInUser"] = result;
+
+                getClientSettings(result.ClientId);
 
                 return RedirectToLocal(returnUrl);
             }
@@ -93,6 +98,21 @@ namespace CICSWebPortal.Controllers
             {
                 ModelState.AddModelError("", "Invalid login attempt.");
                 return View(model);
+            }
+        }
+
+        private void getClientSettings(int clientId)
+        {
+            try
+            {
+                var result = DataContext.FindClientById(clientId);
+                if (result != null)
+                {
+                    Session.Add("CurrentClient", result);
+                }
+            }
+            catch (Exception)
+            {             
             }
         }
 

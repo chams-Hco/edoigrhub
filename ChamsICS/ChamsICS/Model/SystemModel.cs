@@ -35,6 +35,7 @@ namespace ChamsICSWebService.Model
     public class DashboardReq
     {
         public int RoleId { get; set; }
+        public string RoleCode { get; set; }
         public int UserId { get; set; }
         public string Email { get; set; }
     }

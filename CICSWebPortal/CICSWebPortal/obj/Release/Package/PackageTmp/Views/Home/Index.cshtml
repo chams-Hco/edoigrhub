@@ -2,10 +2,16 @@
 @{
     ViewBag.Title = "Home Page";
     string displayStyle = string.Empty;
-    int roleId = Convert.ToInt32(Session["RoleID"]);
+    int roleId = Convert.ToInt32(Session["RoleId"]);
+    string roleCode = (string)Session["RoleCode"];
+    bool cancreatewebUsers = (bool)Session["CanCreateWebUsers"];
 }
 
-@{displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; } }
+@{
+    string[] clientmenu = new string[] { "TP" };
+    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+    //displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
+}
 <div style="@displayStyle; padding-left: 20px">
     <h4>Welcome, @ViewBag.TaxpayerName</h4>
 </div>
@@ -17,17 +23,25 @@
     </ul>
 </div><!-- /breadcrumb-->
 <div class="main-header clearfix">
-    @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
+    @{
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
+    }
     <div class="page-title" style="@displayStyle">
         <h3 class="no-margin">
             Dashboard
             <a href="/Report/ExecutiveDashboard/" class="btn btn-primary">View Executive Dashboard</a>
-            <a href="/Report/PeriodicDashBoard/" class="btn bg-danger">View Zone Positions</a>
+            <a href="/Report/PeriodicDashBoard/" class="btn bg-danger">View L.G.A Positions</a>
         </h3>
     </div><!-- /page-title -->
 </div><!-- /main-header -->
 
-@{displayStyle = string.Empty; if (roleId == 2 || roleId == 4 || roleId == 6 || roleId == 7) { displayStyle = "display: none"; } }
+@{
+    clientmenu = new string[] { "SA", "CA", "AA" };
+    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+    // displayStyle = string.Empty; if (roleId == 2 || roleId == 4 || roleId == 6 || roleId == 7) { displayStyle = "display: none"; }
+}
 <div class="grey-container main-header clearfix" style="margin:0 10px 10px 0; @displayStyle">
 
     <a href="/User/" class="shortcut-link">
@@ -36,14 +50,22 @@
         </span>
         <span class="text">Users</span>
     </a>
-    @{ displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
+    @{
+        clientmenu = new string[] { "SA", "SU"};
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; }
+    }
     <a style="@displayStyle" href="/Notification/" class="shortcut-link">
         <span class="shortcut-icon">
             <i class="fa fa-user"></i>
         </span>
         <span class="text">Notifications</span>
     </a>
-    @{ displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
+    @{
+        clientmenu = new string[] { "SA", "SU"};
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //    displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; }
+    }
     <a style="@displayStyle" href="/AuditTrail/" class="shortcut-link">
         <span class="shortcut-icon">
             <i class="fa fa-search"></i>
@@ -54,8 +76,12 @@
 
 <div class="padding-md">
 
-    @{displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
-    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+    @{
+        clientmenu = new string[] { "SA", "SU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; }
+    }
+    <div class="panel-stat3 bg-success col-md-3"  style="background-color:slategray; margin:0 10px 10px 0; @displayStyle ;">
         <a href="/Client/">
             <h4 class="m-top-none" id="userCount">[ @Model.TotalClient ]</h4>
             <h5>Clients</h5>
@@ -71,10 +97,14 @@
             </div>
         </a>
     </div>
-    @{displayStyle = string.Empty; if (roleId > 3) { displayStyle = "display: none"; } }
-    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+    @{
+        clientmenu = new string[] { "SA", "SU", "CA" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId > 3) { displayStyle = "display: none"; }
+    }
+    <div class="panel-stat3 bg-success col-md-3" style="background-color:darkcyan;  margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none"><span id="serverloadCount">[ @Model.TotalAgent ]</span></h4>
-        <h5>Zones</h5>
+        <h5>L.G.As</h5>
 
         <div class="stat-icon">
             <i class="fa fa-bar-chart-o fa-3x"></i>
@@ -87,8 +117,12 @@
         </div>
     </div>
 
-    @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
-    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+    @{
+        clientmenu = new string[] { "SA", "SU", "CA", "CU","AA","AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
+    }
+    <div class="panel-stat3 bg-success col-md-3" style="background-color:darkorange; margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="orderCount">[ @Model.TotalTerminal ]</h4>
         <h5>Terminals</h5>
 
@@ -103,8 +137,12 @@
         </div>
     </div>
 
-    @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
-    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+    @{
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
+    }
+    <div class="panel-stat3 bg-success col-md-3" style="background-color:yelloworange; margin:0 10px 10px 0; @displayStyle">
         @*<h4 class="m-top-none" id="visitorCount">[ @Model.TotalTransaction ]</h4>*@
         <h4 class="m-top-none" id="visitorCount">
             [
@@ -131,8 +169,12 @@
         </div>
     </div>
 
-    @{displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; } }
-    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+    @{
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
+    }
+    <div class="panel-stat3 bg-success col-md-3" style="background-color:purple; margin:0 10px 10px 0; @displayStyle">
         @*<h4 class="m-top-none" id="orderCount">[ ₦@Model.TransctionValue.ToString("#,0.00") ]</h4>*@
         <h4 class="m-top-none" id="orderCount">
             [
@@ -159,8 +201,13 @@
         </div>
     </div>
 
-    @{displayStyle = string.Empty; }
-    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+    @{
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty;
+    }
+
+    <div class="panel-stat3 bg-success col-md-3" style="background-color:green; margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="visitorCount">
             [
             @if (Model.TotalAmountPaid > 0)
@@ -187,8 +234,12 @@
         </div>
     </div>
 
-    @{displayStyle = string.Empty; }
-    <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
+    @{
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty;
+    }
+    <div class="panel-stat3 bg-success col-md-3" style="background-color:red; margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="visitorCount">
             [
             @if (Model.TotalAmountUnpaid > 0)
@@ -214,7 +265,11 @@
         </div>
     </div>
 
-    @{displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
+    @{
+        clientmenu = new string[] { "SA", "SU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; }
+    }
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="visitorCount">[ @Model.TotalNotifications ]</h4>
         <h5>Notifications</h5>
@@ -230,7 +285,11 @@
         </div>
     </div>
 
-    @{displayStyle = string.Empty; string walletValue = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
+    @{
+        clientmenu = new string[] { "TP" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        string walletValue = string.Empty;
+        //  displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
         if (Model.Wallet.HasValue) { walletValue = String.Format("{0:n}", Model.Wallet); }}
     <div class="panel-stat3 bg-success col-md-3" style="margin:0 10px 10px 0; @displayStyle">
         <h4 class="m-top-none" id="visitorCount">[ ₦ @walletValue  ]</h4>

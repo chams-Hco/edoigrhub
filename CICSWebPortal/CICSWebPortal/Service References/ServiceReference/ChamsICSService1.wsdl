@@ -13,6 +13,12 @@
   <wsdl:message name="iChamsICSService_AuthoriseTerminal_OutputMessage">
     <wsdl:part name="parameters" element="tns:AuthoriseTerminalResponse" />
   </wsdl:message>
+  <wsdl:message name="iChamsICSService_AuthoriseWebUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthoriseWebUser" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_AuthoriseWebUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthoriseWebUserResponse" />
+  </wsdl:message>
   <wsdl:message name="iChamsICSService_VerifyResidentId_InputMessage">
     <wsdl:part name="parameters" element="tns:VerifyResidentId" />
   </wsdl:message>
@@ -79,10 +85,32 @@
   <wsdl:message name="iChamsICSService_GetAgentLocations_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAgentLocationsResponse" />
   </wsdl:message>
+  <wsdl:message name="iChamsICSService_CreateEODTransaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEODTransaction" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_CreateEODTransaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEODTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_QueryEODStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryEODStatus" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_QueryEODStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryEODStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_BulkPushEodTransactions_InputMessage">
+    <wsdl:part name="parameters" element="tns:BulkPushEodTransactions" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_BulkPushEodTransactions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BulkPushEodTransactionsResponse" />
+  </wsdl:message>
   <wsdl:portType name="iChamsICSService">
     <wsdl:operation name="AuthoriseTerminal">
       <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/AuthoriseTerminal" message="tns:iChamsICSService_AuthoriseTerminal_InputMessage" />
       <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/AuthoriseTerminalResponse" message="tns:iChamsICSService_AuthoriseTerminal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthoriseWebUser">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/AuthoriseWebUser" message="tns:iChamsICSService_AuthoriseWebUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/AuthoriseWebUserResponse" message="tns:iChamsICSService_AuthoriseWebUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="VerifyResidentId">
       <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyResidentId" message="tns:iChamsICSService_VerifyResidentId_InputMessage" />
@@ -127,6 +155,18 @@
     <wsdl:operation name="GetAgentLocations">
       <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetAgentLocations" message="tns:iChamsICSService_GetAgentLocations_InputMessage" />
       <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetAgentLocationsResponse" message="tns:iChamsICSService_GetAgentLocations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateEODTransaction">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/CreateEODTransaction" message="tns:iChamsICSService_CreateEODTransaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/CreateEODTransactionResponse" message="tns:iChamsICSService_CreateEODTransaction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryEODStatus">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/QueryEODStatus" message="tns:iChamsICSService_QueryEODStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/QueryEODStatusResponse" message="tns:iChamsICSService_QueryEODStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BulkPushEodTransactions">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/BulkPushEodTransactions" message="tns:iChamsICSService_BulkPushEodTransactions_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/BulkPushEodTransactionsResponse" message="tns:iChamsICSService_BulkPushEodTransactions_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

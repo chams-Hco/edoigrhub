@@ -1,23 +1,23 @@
 ﻿@model IEnumerable<CICSWebPortal.Models.Agent>
 @{
-    ViewBag.Title = "Zones";
+    ViewBag.Title = "L.G.A / D.As";
 }
 
 <div id="breadcrumb">
     <ul class="breadcrumb">
         <li><i class="fa fa-home"></i><a href="#"> Home</a></li>
-        <li class="active">Zones</li>
+        <li class="active">L.G.A / D.As</li>
     </ul>
 </div><!-- /breadcrumb-->
 <div class="main-header clearfix">
 
-    <h3 class="text-center">Zones</h3>
+    <h3 class="text-center">L.G.A / D.As</h3>
 </div><!-- /main-header -->
 
 <div class="panel panel-default table-responsive">
     <div class="panel-heading">
         @{string displayStyle = string.Empty; if (Convert.ToInt32(Session["RoleID"]) == 2 || Convert.ToInt32(Session["RoleID"]) == 4 || Convert.ToInt32(Session["RoleID"]) == 6) { displayStyle = "display: none"; } }
-        <a style=" @displayStyle" data-target='#add_modal' role="button" class="btn btn-primary  btn_add" data-toggle="modal">Add Zones</a>
+        <a style=" @displayStyle" data-target='#add_modal' role="button" class="btn btn-primary  btn_add" data-toggle="modal">Add L.G.A / D.As</a>
         <span class="label label-info pull-right">
             @{
                 if (Model.Any())

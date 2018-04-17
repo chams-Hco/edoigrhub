@@ -59,6 +59,16 @@
           <Property Name="Phone1" Type="nvarchar" MaxLength="15" />
           <Property Name="Phone2" Type="nvarchar" MaxLength="15" />
           <Property Name="Status" Type="int" />
+          <Property Name="HasWebUsers" Type="bit" />
+        </EntityType>
+        <EntityType Name="ClientSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="PercentageDeduction" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DefaultRevenueItemId" Type="int" />
         </EntityType>
         <EntityType Name="EOD">
           <Key>
@@ -216,7 +226,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="TerminalId" Type="int" Nullable="false" />
           <Property Name="Field" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="OldValues" Type="varchar" MaxLength="50" />
@@ -249,6 +259,15 @@
           <Property Name="Status" Type="int" />
           <Property Name="LocationId" Type="int" />
           <Property Name="LocationCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="Income" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Percentage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FoodAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DrinkAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RentalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OtherAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FromDate" Type="date" />
+          <Property Name="ToDate" Type="date" />
         </EntityType>
         <EntityType Name="TransactionLogException">
           <Key>
@@ -345,6 +364,25 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="CanCreateWebUsers" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="50" />
+          <Property Name="Middlename" Type="varchar" MaxLength="50" />
+          <Property Name="Lastname" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Sex" Type="int" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Website" Type="varchar" MaxLength="50" />
+          <Property Name="TerminalId" Type="int" />
+          <Property Name="RegistrationNumber" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -352,6 +390,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Code" Type="varchar" MaxLength="3" />
         </EntityType>
         <Association Name="FK_Agent_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
@@ -361,6 +400,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Agent">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Settings_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ClientSettings" Type="Self.ClientSettings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientSettings">
               <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
@@ -563,11 +614,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserDetail_Terminal">
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="0..1" />
+          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetail">
+              <PropertyRef Name="TerminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDetail_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetail">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CICSModelStoreContainer">
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AgentManager" EntityType="Self.AgentManager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditTrail" EntityType="Self.AuditTrail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientSettings" EntityType="Self.ClientSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EOD" EntityType="Self.EOD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EODPaymentNotificationLog" EntityType="Self.EODPaymentNotificationLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IdentityService" EntityType="Self.IdentityService" Schema="dbo" store:Type="Tables" />
@@ -588,10 +664,15 @@
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAgent" EntityType="Self.UserAgent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserClient" EntityType="Self.UserClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Agent_Client" Association="Self.FK_Agent_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Settings_Client" Association="Self.FK_Client_Settings_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientSettings" EntitySet="ClientSettings" />
           </AssociationSet>
           <AssociationSet Name="FK_EOD_Terminal" Association="Self.FK_EOD_Terminal">
             <End Role="Terminal" EntitySet="Terminal" />
@@ -657,6 +738,14 @@
             <End Role="User" EntitySet="User" />
             <End Role="UserClient" EntitySet="UserClient" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserDetail_Terminal" Association="Self.FK_UserDetail_Terminal">
+            <End Role="Terminal" EntitySet="Terminal" />
+            <End Role="UserDetail" EntitySet="UserDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetail_User" Association="Self.FK_UserDetail_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserDetail" EntitySet="UserDetail" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -666,7 +755,6 @@
           <EntitySet Name="Agents" EntityType="CICSModel.Agent" />
           <EntitySet Name="AgentManagers" EntityType="CICSModel.AgentManager" />
           <EntitySet Name="AuditTrails" EntityType="CICSModel.AuditTrail" />
-          <EntitySet Name="Clients" EntityType="CICSModel.Client" />
           <EntitySet Name="IdentityServices" EntityType="CICSModel.IdentityService" />
           <EntitySet Name="Ministries" EntityType="CICSModel.Ministry" />
           <EntitySet Name="Notifications" EntityType="CICSModel.Notification" />
@@ -678,49 +766,18 @@
           <EntitySet Name="Terminals" EntityType="CICSModel.Terminal" />
           <EntitySet Name="TerminalLocations" EntityType="CICSModel.TerminalLocation" />
           <EntitySet Name="TerminalUpdateLogs" EntityType="CICSModel.TerminalUpdateLog" />
-          <EntitySet Name="TransactionLogs" EntityType="CICSModel.TransactionLog" />
           <EntitySet Name="TransactionLogExceptions" EntityType="CICSModel.TransactionLogException" />
           <EntitySet Name="TransactionStatus" EntityType="CICSModel.TransactionStatu" />
           <EntitySet Name="TransactionUploadErrors" EntityType="CICSModel.TransactionUploadError" />
           <EntitySet Name="Users" EntityType="CICSModel.User" />
           <EntitySet Name="UserAgents" EntityType="CICSModel.UserAgent" />
-          <EntitySet Name="UserClients" EntityType="CICSModel.UserClient" />
-          <EntitySet Name="UserRoles" EntityType="CICSModel.UserRole" />
-          <AssociationSet Name="FK_Agent_Client" Association="CICSModel.FK_Agent_Client">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="Agent" EntitySet="Agents" />
-          </AssociationSet>
           <AssociationSet Name="FK_Terminal_Agent" Association="CICSModel.FK_Terminal_Agent">
             <End Role="Agent" EntitySet="Agents" />
             <End Role="Terminal" EntitySet="Terminals" />
           </AssociationSet>
-          <AssociationSet Name="FK_TransactionLog_Agent" Association="CICSModel.FK_TransactionLog_Agent">
-            <End Role="Agent" EntitySet="Agents" />
-            <End Role="TransactionLog" EntitySet="TransactionLogs" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserAgents_Agent" Association="CICSModel.FK_UserAgents_Agent">
             <End Role="Agent" EntitySet="Agents" />
             <End Role="UserAgent" EntitySet="UserAgents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IdentityService_Client" Association="CICSModel.FK_IdentityService_Client">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="IdentityService" EntitySet="IdentityServices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Revenue_Client" Association="CICSModel.FK_Revenue_Client">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="Revenue" EntitySet="Revenues" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TransactionLog_Client" Association="CICSModel.FK_TransactionLog_Client">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="TransactionLog" EntitySet="TransactionLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Client" Association="CICSModel.FK_User_Client">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserClients_Client" Association="CICSModel.FK_UserClients_Client">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="UserClient" EntitySet="UserClients" />
           </AssociationSet>
           <AssociationSet Name="FK_Notification_NotificationType" Association="CICSModel.FK_Notification_NotificationType">
             <End Role="NotificationType" EntitySet="NotificationTypes" />
@@ -730,21 +787,9 @@
             <End Role="Terminal" EntitySet="Terminals" />
             <End Role="TerminalUpdateLog" EntitySet="TerminalUpdateLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK_TransactionLog_Terminal" Association="CICSModel.FK_TransactionLog_Terminal">
-            <End Role="Terminal" EntitySet="Terminals" />
-            <End Role="TransactionLog" EntitySet="TransactionLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserRole" Association="CICSModel.FK_User_UserRole">
-            <End Role="UserRole" EntitySet="UserRoles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserAgents_User" Association="CICSModel.FK_UserAgents_User">
             <End Role="User" EntitySet="Users" />
             <End Role="UserAgent" EntitySet="UserAgents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserClients_User" Association="CICSModel.FK_UserClients_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserClient" EntitySet="UserClients" />
           </AssociationSet>
           <EntitySet Name="EODs" EntityType="CICSModel.EOD" />
           <AssociationSet Name="FK_EOD_Terminal" Association="CICSModel.FK_EOD_Terminal">
@@ -756,7 +801,65 @@
             <End Role="EOD" EntitySet="EODs" />
             <End Role="EODPaymentNotificationLog" EntitySet="EODPaymentNotificationLogs" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="UserRoles" EntityType="CICSModel.UserRole" />
+          <AssociationSet Name="FK_User_UserRole" Association="CICSModel.FK_User_UserRole">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="UserClients" EntityType="CICSModel.UserClient" />
+          <AssociationSet Name="FK_UserClients_User" Association="CICSModel.FK_UserClients_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserClient" EntitySet="UserClients" />
+          </AssociationSet>
+          <EntitySet Name="Clients" EntityType="CICSModel.Client" />
+          <AssociationSet Name="FK_Agent_Client" Association="CICSModel.FK_Agent_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Agent" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdentityService_Client" Association="CICSModel.FK_IdentityService_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="IdentityService" EntitySet="IdentityServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Revenue_Client" Association="CICSModel.FK_Revenue_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Revenue" EntitySet="Revenues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Client" Association="CICSModel.FK_User_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClients_Client" Association="CICSModel.FK_UserClients_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="UserClient" EntitySet="UserClients" />
+          </AssociationSet>
+          <EntitySet Name="UserDetails" EntityType="CICSModel.UserDetail" />
+          <AssociationSet Name="FK_UserDetail_Terminal" Association="CICSModel.FK_UserDetail_Terminal">
+            <End Role="Terminal" EntitySet="Terminals" />
+            <End Role="UserDetail" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetail_User" Association="CICSModel.FK_UserDetail_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserDetail" EntitySet="UserDetails" />
+          </AssociationSet>
+          <EntitySet Name="TransactionLogs" EntityType="CICSModel.TransactionLog" />
+          <AssociationSet Name="FK_TransactionLog_Agent" Association="CICSModel.FK_TransactionLog_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionLog_Client" Association="CICSModel.FK_TransactionLog_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionLog_Terminal" Association="CICSModel.FK_TransactionLog_Terminal">
+            <End Role="Terminal" EntitySet="Terminals" />
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+          <EntitySet Name="ClientSettings" EntityType="CICSModel.ClientSetting" />
+          <AssociationSet Name="FK_Client_Settings_Client" Association="CICSModel.FK_Client_Settings_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ClientSetting" EntitySet="ClientSettings" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Agent">
           <Key>
             <PropertyRef Name="Id" />
@@ -772,10 +875,10 @@
           <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="AgentManagerCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Client" Relationship="CICSModel.FK_Agent_Client" FromRole="Agent" ToRole="Client" />
           <NavigationProperty Name="Terminals" Relationship="CICSModel.FK_Terminal_Agent" FromRole="Agent" ToRole="Terminal" />
-          <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Agent" FromRole="Agent" ToRole="TransactionLog" />
           <NavigationProperty Name="UserAgents" Relationship="CICSModel.FK_UserAgents_Agent" FromRole="Agent" ToRole="UserAgent" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_Agent_Client" FromRole="Agent" ToRole="Client" />
+          <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Agent" FromRole="Agent" ToRole="TransactionLog" />
         </EntityType>
         <EntityType Name="AgentManager">
           <Key>
@@ -802,25 +905,6 @@
           <Property Name="AuditLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UndoCommand" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LogDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="Client">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <NavigationProperty Name="Agents" Relationship="CICSModel.FK_Agent_Client" FromRole="Client" ToRole="Agent" />
-          <NavigationProperty Name="IdentityServices" Relationship="CICSModel.FK_IdentityService_Client" FromRole="Client" ToRole="IdentityService" />
-          <NavigationProperty Name="Revenues" Relationship="CICSModel.FK_Revenue_Client" FromRole="Client" ToRole="Revenue" />
-          <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Client" FromRole="Client" ToRole="TransactionLog" />
-          <NavigationProperty Name="Users" Relationship="CICSModel.FK_User_Client" FromRole="Client" ToRole="User" />
-          <NavigationProperty Name="UserClients" Relationship="CICSModel.FK_UserClients_Client" FromRole="Client" ToRole="UserClient" />
         </EntityType>
         <EntityType Name="IdentityService">
           <Key>
@@ -931,8 +1015,9 @@
           <Property Name="HandlerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Agent" Relationship="CICSModel.FK_Terminal_Agent" FromRole="Terminal" ToRole="Agent" />
           <NavigationProperty Name="TerminalUpdateLogs" Relationship="CICSModel.FK_TerminalUpdateLog_Terminal" FromRole="Terminal" ToRole="TerminalUpdateLog" />
-          <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Terminal" FromRole="Terminal" ToRole="TransactionLog" />
           <NavigationProperty Name="EODs" Relationship="CICSModel.FK_EOD_Terminal" FromRole="Terminal" ToRole="EOD" />
+          <NavigationProperty Name="UserDetails" Relationship="CICSModel.FK_UserDetail_Terminal" FromRole="Terminal" ToRole="UserDetail" />
+          <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Terminal" FromRole="Terminal" ToRole="TransactionLog" />
         </EntityType>
         <EntityType Name="TerminalLocation">
           <Key>
@@ -949,43 +1034,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="TerminalId" Type="Int32" Nullable="false" />
           <Property Name="Field" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="OldValues" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NewValues" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Detail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_TerminalUpdateLog_Terminal" FromRole="TerminalUpdateLog" ToRole="Terminal" />
-        </EntityType>
-        <EntityType Name="TransactionLog">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" />
-          <Property Name="AgentId" Type="Int32" />
-          <Property Name="TerminalId" Type="Int32" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResidentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="RevenueCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PaymentReference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
-          <Property Name="UploadDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="LocationId" Type="Int32" />
-          <Property Name="LocationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Agent" Relationship="CICSModel.FK_TransactionLog_Agent" FromRole="TransactionLog" ToRole="Agent" />
-          <NavigationProperty Name="Client" Relationship="CICSModel.FK_TransactionLog_Client" FromRole="TransactionLog" ToRole="Client" />
-          <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_TransactionLog_Terminal" FromRole="TransactionLog" ToRole="Terminal" />
         </EntityType>
         <EntityType Name="TransactionLogException">
           <Key>
@@ -1066,10 +1121,11 @@
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PasswordStatus" Type="Int32" />
           <Property Name="Status" Type="Int32" />
-          <NavigationProperty Name="Client" Relationship="CICSModel.FK_User_Client" FromRole="User" ToRole="Client" />
-          <NavigationProperty Name="UserRole" Relationship="CICSModel.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
           <NavigationProperty Name="UserAgents" Relationship="CICSModel.FK_UserAgents_User" FromRole="User" ToRole="UserAgent" />
+          <NavigationProperty Name="UserRole" Relationship="CICSModel.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
           <NavigationProperty Name="UserClients" Relationship="CICSModel.FK_UserClients_User" FromRole="User" ToRole="UserClient" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_User_Client" FromRole="User" ToRole="Client" />
+          <NavigationProperty Name="UserDetails" Relationship="CICSModel.FK_UserDetail_User" FromRole="User" ToRole="UserDetail" />
         </EntityType>
         <EntityType Name="UserAgent">
           <Key>
@@ -1081,36 +1137,6 @@
           <NavigationProperty Name="Agent" Relationship="CICSModel.FK_UserAgents_Agent" FromRole="UserAgent" ToRole="Agent" />
           <NavigationProperty Name="User" Relationship="CICSModel.FK_UserAgents_User" FromRole="UserAgent" ToRole="User" />
         </EntityType>
-        <EntityType Name="UserClient">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="CICSModel.FK_UserClients_Client" FromRole="UserClient" ToRole="Client" />
-          <NavigationProperty Name="User" Relationship="CICSModel.FK_UserClients_User" FromRole="UserClient" ToRole="User" />
-        </EntityType>
-        <EntityType Name="UserRole">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Users" Relationship="CICSModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
-        </EntityType>
-        <Association Name="FK_Agent_Client">
-          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
-          <End Type="CICSModel.Agent" Role="Agent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Agent">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Terminal_Agent">
           <End Type="CICSModel.Agent" Role="Agent" Multiplicity="0..1" />
           <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="*" />
@@ -1119,18 +1145,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Terminal">
-              <PropertyRef Name="AgentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransactionLog_Agent">
-          <End Type="CICSModel.Agent" Role="Agent" Multiplicity="0..1" />
-          <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Agent">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TransactionLog">
               <PropertyRef Name="AgentId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1144,66 +1158,6 @@
             </Principal>
             <Dependent Role="UserAgent">
               <PropertyRef Name="AgentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_IdentityService_Client">
-          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
-          <End Type="CICSModel.IdentityService" Role="IdentityService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="IdentityService">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Revenue_Client">
-          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
-          <End Type="CICSModel.Revenue" Role="Revenue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Revenue">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransactionLog_Client">
-          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
-          <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TransactionLog">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_Client">
-          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
-          <End Type="CICSModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserClients_Client">
-          <End Type="CICSModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="CICSModel.UserClient" Role="UserClient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserClient">
-              <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1231,32 +1185,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TransactionLog_Terminal">
-          <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="0..1" />
-          <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Terminal">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TransactionLog">
-              <PropertyRef Name="TerminalId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_UserRole">
-          <End Type="CICSModel.UserRole" Role="UserRole" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="CICSModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRole">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserAgents_User">
           <End Type="CICSModel.User" Role="User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1267,20 +1195,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserAgent">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserClients_User">
-          <End Type="CICSModel.User" Role="User" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="CICSModel.UserClient" Role="UserClient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserClient">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1349,6 +1263,276 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="CICSModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_User_UserRole">
+          <End Type="CICSModel.UserRole" Role="UserRole" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CICSModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="CanCreateWebUsers" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="CICSModel.FK_UserClients_User" FromRole="UserClient" ToRole="User" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_UserClients_Client" FromRole="UserClient" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK_UserClients_User">
+          <End Type="CICSModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CICSModel.UserClient" Role="UserClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserClient">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="HasWebUsers" Type="Boolean" />
+          <NavigationProperty Name="Agents" Relationship="CICSModel.FK_Agent_Client" FromRole="Client" ToRole="Agent" />
+          <NavigationProperty Name="IdentityServices" Relationship="CICSModel.FK_IdentityService_Client" FromRole="Client" ToRole="IdentityService" />
+          <NavigationProperty Name="Revenues" Relationship="CICSModel.FK_Revenue_Client" FromRole="Client" ToRole="Revenue" />
+          <NavigationProperty Name="Users" Relationship="CICSModel.FK_User_Client" FromRole="Client" ToRole="User" />
+          <NavigationProperty Name="UserClients" Relationship="CICSModel.FK_UserClients_Client" FromRole="Client" ToRole="UserClient" />
+          <NavigationProperty Name="TransactionLogs" Relationship="CICSModel.FK_TransactionLog_Client" FromRole="Client" ToRole="TransactionLog" />
+          <NavigationProperty Name="ClientSettings" Relationship="CICSModel.FK_Client_Settings_Client" FromRole="Client" ToRole="ClientSetting" />
+          </EntityType>
+        <Association Name="FK_Agent_Client">
+          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="CICSModel.Agent" Role="Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdentityService_Client">
+          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="CICSModel.IdentityService" Role="IdentityService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IdentityService">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Revenue_Client">
+          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="CICSModel.Revenue" Role="Revenue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Revenue">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Client">
+          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="CICSModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClients_Client">
+          <End Type="CICSModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="CICSModel.UserClient" Role="UserClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserClient">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TerminalId" Type="Int32" />
+          <Property Name="RegistrationNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_UserDetail_Terminal" FromRole="UserDetail" ToRole="Terminal" />
+          <NavigationProperty Name="User" Relationship="CICSModel.FK_UserDetail_User" FromRole="UserDetail" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_UserDetail_Terminal">
+          <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="0..1" />
+          <End Type="CICSModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetail">
+              <PropertyRef Name="TerminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDetail_User">
+          <End Type="CICSModel.User" Role="User" Multiplicity="1" />
+          <End Type="CICSModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetail">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TransactionLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="AgentId" Type="Int32" />
+          <Property Name="TerminalId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RevenueCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentReference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="UploadDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="LocationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Income" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Percentage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FoodAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DrinkAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RentalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OtherAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Agent" Relationship="CICSModel.FK_TransactionLog_Agent" FromRole="TransactionLog" ToRole="Agent" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_TransactionLog_Client" FromRole="TransactionLog" ToRole="Client" />
+          <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_TransactionLog_Terminal" FromRole="TransactionLog" ToRole="Terminal" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_TransactionLog_Agent">
+          <End Type="CICSModel.Agent" Role="Agent" Multiplicity="0..1" />
+          <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionLog_Client">
+          <End Type="CICSModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionLog_Terminal">
+          <End Type="CICSModel.Terminal" Role="Terminal" Multiplicity="0..1" />
+          <End Type="CICSModel.TransactionLog" Role="TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="TerminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClientSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="PercentageDeduction" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Client" Relationship="CICSModel.FK_Client_Settings_Client" FromRole="ClientSetting" ToRole="Client" />
+          <Property Name="DefaultRevenueItemId" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Client_Settings_Client">
+          <End Type="CICSModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="CICSModel.ClientSetting" Role="ClientSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientSetting">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1396,20 +1580,6 @@
                 <ScalarProperty Name="LogType" ColumnName="LogType" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="CICSModel.Client">
-              <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1551,34 +1721,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TransactionLogs">
-            <EntityTypeMapping TypeName="CICSModel.TransactionLog">
-              <MappingFragment StoreEntitySet="TransactionLog">
-                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
-                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-                <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="RevenueCode" ColumnName="RevenueCode" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
-                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TransactionLogExceptions">
             <EntityTypeMapping TypeName="CICSModel.TransactionLogException">
               <MappingFragment StoreEntitySet="TransactionLogException">
@@ -1672,23 +1814,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserClients">
-            <EntityTypeMapping TypeName="CICSModel.UserClient">
-              <MappingFragment StoreEntitySet="UserClient">
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="CICSModel.UserRole">
-              <MappingFragment StoreEntitySet="UserRole">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EODs">
             <EntityTypeMapping TypeName="CICSModel.EOD">
               <MappingFragment StoreEntitySet="EOD">
@@ -1724,6 +1849,106 @@
                 <ScalarProperty Name="SourceBankCode" ColumnName="SourceBankCode" />
                 <ScalarProperty Name="SessionId" ColumnName="SessionId" />
                 <ScalarProperty Name="EODId" ColumnName="EODId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="CICSModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserClients">
+            <EntityTypeMapping TypeName="CICSModel.UserClient">
+              <MappingFragment StoreEntitySet="UserClient">
+                <ScalarProperty Name="CanCreateWebUsers" ColumnName="CanCreateWebUsers" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="CICSModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="HasWebUsers" ColumnName="HasWebUsers" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="CICSModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetail">
+                <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
+                <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionLogs">
+            <EntityTypeMapping TypeName="CICSModel.TransactionLog">
+              <MappingFragment StoreEntitySet="TransactionLog">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="OtherAmount" ColumnName="OtherAmount" />
+                <ScalarProperty Name="RentalAmount" ColumnName="RentalAmount" />
+                <ScalarProperty Name="DrinkAmount" ColumnName="DrinkAmount" />
+                <ScalarProperty Name="FoodAmount" ColumnName="FoodAmount" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="RevenueCode" ColumnName="RevenueCode" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientSettings">
+            <EntityTypeMapping TypeName="CICSModel.ClientSetting">
+              <MappingFragment StoreEntitySet="ClientSettings">
+                <ScalarProperty Name="DefaultRevenueItemId" ColumnName="DefaultRevenueItemId" />
+                <ScalarProperty Name="PercentageDeduction" ColumnName="PercentageDeduction" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
