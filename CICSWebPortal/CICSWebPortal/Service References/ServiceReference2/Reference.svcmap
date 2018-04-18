@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="02dee8e8-490d-49e9-8397-69a31cb8cb1c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="aad904b9-865a-4ee1-9f94-efd3c7c4bf96" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,14 +22,14 @@
     <MetadataSource Address="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ChamsICSService3.wsdl" MetadataType="Wsdl" ID="62aa8200-beec-40f9-a3b4-aef59370670d" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl" />
-    <MetadataFile FileName="ChamsICSService4.xsd" MetadataType="Schema" ID="c3aaced2-e1c3-4a4a-b752-4338a87707c9" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd2" />
-    <MetadataFile FileName="ChamsICSService41.xsd" MetadataType="Schema" ID="bd7f4f8b-e738-47b9-bfed-32e834c65c75" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd0" />
-    <MetadataFile FileName="ChamsICSService42.xsd" MetadataType="Schema" ID="c3381e19-1b3e-4b31-bc90-eb19633e374b" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd3" />
-    <MetadataFile FileName="ChamsICSService31.wsdl" MetadataType="Wsdl" ID="a5ddbcb0-7ef2-45d3-896b-c20fd28206aa" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl=wsdl0" />
-    <MetadataFile FileName="ChamsICSService32.wsdl" MetadataType="Wsdl" ID="9460cef7-ab56-43ef-a3bc-4030803944bb" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl=wsdl1" />
-    <MetadataFile FileName="ChamsICSService43.xsd" MetadataType="Schema" ID="968822df-599b-48b3-8762-ff91ae025fe6" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd4" />
-    <MetadataFile FileName="ChamsICSService44.xsd" MetadataType="Schema" ID="9a365dcf-e9ea-4d20-bd6c-accc74fcff27" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ChamsICSService.wsdl" MetadataType="Wsdl" ID="8728ed40-aef5-42eb-9a46-7101c4996bbd" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl" />
+    <MetadataFile FileName="ChamsICSService.xsd" MetadataType="Schema" ID="4680fc20-c39e-46fb-ba6b-480e808ea56a" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ChamsICSService1.xsd" MetadataType="Schema" ID="ab47051c-167b-44d6-9a2d-87e6f008e7ea" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ChamsICSService2.xsd" MetadataType="Schema" ID="52857af4-a815-4c7c-8da8-f3190284df89" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ChamsICSService1.wsdl" MetadataType="Wsdl" ID="cc7a76e2-5062-420b-a899-2f292a777e5c" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="ChamsICSService2.wsdl" MetadataType="Wsdl" ID="fae2db87-db7b-491d-8e8e-1013165a2ce7" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?wsdl=wsdl1" />
+    <MetadataFile FileName="ChamsICSService3.xsd" MetadataType="Schema" ID="09340a73-75dd-4ed6-ba6f-f732d560a688" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd4" />
+    <MetadataFile FileName="ChamsICSService4.xsd" MetadataType="Schema" ID="cb60d5f1-8497-4610-965d-35fbf6df5a63" SourceId="1" SourceUrl="http://localhost/CICSWEBSERVICE/ChamsICSService.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

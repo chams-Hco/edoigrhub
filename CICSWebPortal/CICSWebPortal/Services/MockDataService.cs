@@ -820,6 +820,11 @@ namespace CICSWebPortal.Services
         {
             throw new NotImplementedException();
         }
+
+        public Terminal FindTerminalByCode(string code)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

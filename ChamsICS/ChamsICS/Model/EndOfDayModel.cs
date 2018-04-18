@@ -221,6 +221,19 @@ namespace ChamsICSWebService.Model
     }
 
     [DataContract]
+    public class PeriodicTransactionRequest
+    {
+        [DataMember]
+        public int TerminalId { get; set; }
+        [DataMember]
+        public int AgentId { get; set; }
+        [DataMember]
+        public DateTime FromDate { get; set; }
+        [DataMember]
+        public DateTime ToDate { get; set; }
+    }
+
+    [DataContract]
     public class NotificationRequest : NIBSSEODServiceBaseReq
     {
         [DataMember]

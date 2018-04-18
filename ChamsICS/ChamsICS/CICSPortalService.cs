@@ -306,6 +306,23 @@ namespace ChamsICSWebService
                 return res;
             }
         }
+        public FindTerminalRes FindTerminalByCode(string code)
+        {
+            FindTerminalRes res = new FindTerminalRes();
+            try
+            {
+                res = ServiceHelper.FindTerminal(code);
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
 
         public GetAllTerminalRes GetAllTerminals()
         {
@@ -680,7 +697,49 @@ namespace ChamsICSWebService
             }
         }
 
-        
+        public GetAllTransactionRes GetAllTransactionByTerminalPerPeriod(PeriodicTransactionRequest periodicTransactionRequest)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
+
+                res = ServiceHelper.GetAllTransactionByTerminalPerPeriod(periodicTransactionRequest.TerminalId, periodicTransactionRequest.FromDate, periodicTransactionRequest.ToDate);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
+
+        public GetAllTransactionRes GetAllTransactionByAgentPerPeriod(PeriodicTransactionRequest periodicTransactionRequest)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            try
+            {
+
+                res = ServiceHelper.GetAllTransactionByAgentPerPeriod(periodicTransactionRequest.AgentId, periodicTransactionRequest.FromDate, periodicTransactionRequest.ToDate);
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = ex.Message;
+                Logger.logToFile(ex, ErrorLogPath);
+                return res;
+            }
+        }
+
+
         #endregion
 
         #endregion

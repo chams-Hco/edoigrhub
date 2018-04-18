@@ -1,54 +1,1055 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://portalservices.cics.chams.com" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://portalservices.cics.chams.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsdl:types>
-    <xsd:schema targetNamespace="http://portalservices.cics.chams.com/Imports">
-      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd4" namespace="http://portalservices.cics.chams.com" />
-      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd0" namespace="http://3rdpartyservices.cics.chams.com" />
-      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model" />
-      <xsd:import schemaLocation="http://developer-hp:8020/WebService/ChamsICSService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ChamsICSLib.Data" />
-    </xsd:schema>
-  </wsdl:types>
-  <wsdl:message name="iChamsICSPortalService_UserLogin_InputMessage">
-    <wsdl:part name="parameters" element="tns:UserLogin" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_UserLogin_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UserLoginResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_CreateClient_InputMessage">
-    <wsdl:part name="parameters" element="tns:CreateClient" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_CreateClient_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CreateClientResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_FindClient_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindClient" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_FindClient_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindClientResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllClient_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllClient" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllClient_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllClientResponse" />
-  </wsdl:message>
-  <wsdl:portType name="iChamsICSPortalService">
-    <wsdl:operation name="UserLogin">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/UserLogin" message="tns:iChamsICSPortalService_UserLogin_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/UserLoginResponse" message="tns:iChamsICSPortalService_UserLogin_OutputMessage" />
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://3rdpartyservices.cics.chams.com" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:i1="http://portalservices.cics.chams.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ChamsICSService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://3rdpartyservices.cics.chams.com" location="http://localhost:39562/ChamsICSService.svc?wsdl=wsdl0" />
+  <wsdl:import namespace="http://portalservices.cics.chams.com" location="http://localhost:39562/ChamsICSService.svc?wsdl=wsdl1" />
+  <wsdl:types />
+  <wsdl:binding name="BasicHttpBinding_iChamsICSService" type="i0:iChamsICSService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AuthoriseTerminal">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/AuthoriseTerminal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthoriseWebUser">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/AuthoriseWebUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyResidentId">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyResidentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadTransaction">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/UploadTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUploadTransaction">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/QueryUploadTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTerminalDetails">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetTerminalDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTerminal">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetTerminal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTerminals">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetTerminals" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindTerminal">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/FindTerminal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRevenue">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetRevenue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindRevenue">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/FindRevenue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLattestRevenue">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetLattestRevenue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentLocations">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/GetAgentLocations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEODTransaction">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/CreateEODTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryEODStatus">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/QueryEODStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BulkPushEodTransactions">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/BulkPushEodTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_iChamsICSPortalService" type="i1:iChamsICSPortalService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateLocation">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLocation">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindLocation">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLocations">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLocationsByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLocationsByAgentId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllLocationsByAgentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWallet">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetWallet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FundWallet">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FundWallet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInvoices">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetUserInvoices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllInvoices">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllInvoices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceById">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetInvoiceById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionDetails">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetTransactionDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionDetailsByUser">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionDetailsByUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MakePayment">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/MakePayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateClient">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateClient" message="tns:iChamsICSPortalService_CreateClient_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateClientResponse" message="tns:iChamsICSPortalService_CreateClient_OutputMessage" />
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClient">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="FindClient">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClient" message="tns:iChamsICSPortalService_FindClient_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClientResponse" message="tns:iChamsICSPortalService_FindClient_OutputMessage" />
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindClientWithZones">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindClientWithZones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetAllClient">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClient" message="tns:iChamsICSPortalService_GetAllClient_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClientResponse" message="tns:iChamsICSPortalService_GetAllClient_OutputMessage" />
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
-  </wsdl:portType>
+    <wsdl:operation name="GetAllClientWithZones">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllClientWithZones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAgent">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateAgent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAgent">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateAgent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAgent">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindAgent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAgents">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAgents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAgentsByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAgentsByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTerminalStatus">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateTerminalStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindTerminal">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindTerminal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTerminals">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTerminals" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTerminalsByAgentId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTerminalsByAgentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTerminalsByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTerminalsByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindTransaction">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindTransactionByCode">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindTransactionByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactions">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransaction">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionByAgentId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByAgentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionByTerminalId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByTerminalId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionByTerminalPerPeriod">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByTerminalPerPeriod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionByAgentPerPeriod">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByAgentPerPeriod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionByLocationId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByLocationId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLast1000Transaction">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetLast1000Transaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLast1000TransactionByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetLast1000TransactionByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLast1000TransactionByAgentId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetLast1000TransactionByAgentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLast1000TransactionByTerminalId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetLast1000TransactionByTerminalId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLast10TransactionByTerminalId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetLast10TransactionByTerminalId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionByResidentId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByResidentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessWebTrancation">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebTrancation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindErrorTransaction">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindErrorTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindErrorTransactionByCode">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindErrorTransactionByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetErrorTransaction">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetErrorTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllErrorTransaction">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllErrorTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllErrorTransactionByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllErrorTransactionByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllErrorTransactionByAgentId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllErrorTransactionByAgentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllErrorTransactionByTerminalId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllErrorTransactionByTerminalId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRevenue">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateRevenue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRevenue">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateRevenue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindRevenue">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindRevenue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenues">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllMinistry">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllMinistry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenueHead">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenueHead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllMinistryByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllMinistryByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenueHeadByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenueHeadByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenueHeadByMinistryId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenueHeadByMinistryId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenueCategoryByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenueCategoryByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenueCategoryByRevenueHeadId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenueCategoryByRevenueHeadId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenueItemByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenueItemByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenueItemByMinistryId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenueItemByMinistryId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenueItemByCategoryId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenueItemByCategoryId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenueItemByRevenueHeadId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenueItemByRevenueHeadId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRevenuesByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRevenuesByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateIdentity">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateIdentity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateIdentity">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateIdentity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindIdentity">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindIdentity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIdentity">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllIdentity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIdentityByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllIdentityByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UserLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/ResetUserPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserStatus">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateUserStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/ChangeUserPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoles">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindRole">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindRoleByCode">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindRoleByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsersByClientId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllUsersByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAssesibleUsers">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetUserAssesibleUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsersByTypeId">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllUsersByTypeId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUser">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUserByEmail">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindUserByEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDashboardSummary">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetDashboardSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaxpayerDashboardSummary">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetTaxpayerDashboardSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExecutiveDashboardData">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetExecutiveDashboardData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPeriodicDashboardData">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetPeriodicDashboardData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentsSummary">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAgentsSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientsSummary">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetClientsSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportSummary">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetReportSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNotifications">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotifications" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAuditTrails">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEODReport">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ChamsICSService">
+    <wsdl:port name="BasicHttpBinding_iChamsICSService" binding="tns:BasicHttpBinding_iChamsICSService">
+      <soap:address location="http://localhost:39562/ChamsICSService.svc/SOAP" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_iChamsICSPortalService" binding="tns:BasicHttpBinding_iChamsICSPortalService">
+      <soap:address location="http://localhost:39562/ChamsICSService.svc/SOAPAPI" />
+    </wsdl:port>
+  </wsdl:service>
 </wsdl:definitions>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="0N+LKm4vVvdQsa9k2tgG+xSh+uA=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="GvecMvbeCka7sHtDVdzVQRLkrbU=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_iChamsICSService">
+    <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_iChamsICSService2">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_iChamsICSService</serializedValue>
+          <serializedValue>BasicHttpBinding_iChamsICSService2</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -110,10 +110,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_iChamsICSPortalService">
+    <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_iChamsICSPortalService2">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_iChamsICSPortalService</serializedValue>
+          <serializedValue>BasicHttpBinding_iChamsICSPortalService2</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -221,10 +221,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_iChamsICSService" contract="ServiceReference1.iChamsICSService" bindingType="basicHttpBinding" address="http://developer-hp:8020/WebService/ChamsICSService.svc/SOAP" bindingConfiguration="BasicHttpBinding_iChamsICSService">
+    <endpoint name="BasicHttpBinding_iChamsICSService2" contract="ServiceReference1.iChamsICSService" bindingType="basicHttpBinding" address="http://localhost:39562/ChamsICSService.svc/SOAP" bindingConfiguration="BasicHttpBinding_iChamsICSService2">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://developer-hp:8020/WebService/ChamsICSService.svc/SOAP</serializedValue>
+          <serializedValue>http://localhost:39562/ChamsICSService.svc/SOAP</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -233,7 +233,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_iChamsICSService</serializedValue>
+          <serializedValue>BasicHttpBinding_iChamsICSService2</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServiceReference1.iChamsICSService</serializedValue>
@@ -296,7 +296,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_iChamsICSService</serializedValue>
+          <serializedValue>BasicHttpBinding_iChamsICSService2</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -306,10 +306,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="BasicHttpBinding_iChamsICSPortalService" contract="ServiceReference1.iChamsICSPortalService" bindingType="basicHttpBinding" address="http://developer-hp:8020/WebService/ChamsICSService.svc/SOAPAPI" bindingConfiguration="BasicHttpBinding_iChamsICSPortalService">
+    <endpoint name="BasicHttpBinding_iChamsICSPortalService2" contract="ServiceReference1.iChamsICSPortalService" bindingType="basicHttpBinding" address="http://localhost:39562/ChamsICSService.svc/SOAPAPI" bindingConfiguration="BasicHttpBinding_iChamsICSPortalService2">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://developer-hp:8020/WebService/ChamsICSService.svc/SOAPAPI</serializedValue>
+          <serializedValue>http://localhost:39562/ChamsICSService.svc/SOAPAPI</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -318,7 +318,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_iChamsICSPortalService</serializedValue>
+          <serializedValue>BasicHttpBinding_iChamsICSPortalService2</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServiceReference1.iChamsICSPortalService</serializedValue>
@@ -381,7 +381,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_iChamsICSPortalService</serializedValue>
+          <serializedValue>BasicHttpBinding_iChamsICSPortalService2</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -36,6 +36,7 @@ namespace CICSWebPortal.Services
         #region Terminals
         IList<Terminal> GetAllTerminals();
         Terminal FindTerminalById(int id);
+        Terminal FindTerminalByCode(string code);
         IList<Terminal> GetAllTerminalsByAgentId(int id);
         IList<Terminal> GetAllTerminalsByClientId(int id);
         #endregion

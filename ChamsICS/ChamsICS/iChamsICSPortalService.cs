@@ -38,7 +38,7 @@ namespace ChamsICSWebService
         GetAllAgentRes GetAllAgents();
         [OperationContract]
         GetAllAgentRes GetAllAgentsByClientId(int clientId);
-        
+
         #endregion
 
         #region Terminals
@@ -46,6 +46,8 @@ namespace ChamsICSWebService
         Response UpdateTerminalStatus(TerminalStatus req);
         [OperationContract]
         FindTerminalRes FindTerminal(int Id);
+        [OperationContract]
+        FindTerminalRes FindTerminalByCode(string code);
         [OperationContract]
         GetAllTerminalRes GetAllTerminals();
         [OperationContract]
@@ -70,6 +72,10 @@ namespace ChamsICSWebService
         [OperationContract]
         GetAllTransactionRes GetAllTransactionByTerminalId(int terminalId);
         [OperationContract]
+        GetAllTransactionRes GetAllTransactionByTerminalPerPeriod(PeriodicTransactionRequest periodicTransactionRequest);
+        [OperationContract]
+        GetAllTransactionRes GetAllTransactionByAgentPerPeriod(PeriodicTransactionRequest periodicTransactionRequest);
+        [OperationContract]
         GetAllTransactionRes GetAllTransactionByLocationId(int locationId);
         [OperationContract]
         GetAllTransactionRes GetLast1000Transaction();
@@ -88,9 +94,6 @@ namespace ChamsICSWebService
         #region webUsers
         [OperationContract]
         WebTransactionRes ProcessWebTrancation(WebTransactionReq webTransactionReq);
-
-        
-
 
         #endregion
 
@@ -168,7 +171,7 @@ namespace ChamsICSWebService
         [OperationContract]
         Response ResetUserPassword(ResetUserPasswordReq req);
         [OperationContract]
-        Response UpdateUserStatus(UserStatus request);    
+        Response UpdateUserStatus(UserStatus request);
         [OperationContract]
         Response ChangeUserPassword(ChangeUserPassword request);
 
@@ -197,7 +200,7 @@ namespace ChamsICSWebService
         [OperationContract]
         FindUserRes FindUserByEmail(string email);
 
-        
+
         #endregion
 
         #region Dashboard & Reports

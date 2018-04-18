@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                     <th>Client Name</th>
-                    <th>Total L.G.As</th>
+                    <th>Total L.G.A / D.As</th>
                     <th>Total Terminals</th>
                     <th>Total Transactions</th>
                     <th>(₦) Transactions Value</th>
@@ -40,7 +40,7 @@
                         <td>@Html.DisplayFor(modelItem => item.TotalTerminal)</td>
                         <td>@Html.DisplayFor(modelItem => item.TotalTransactionCount)</td>
                         <td>@Html.DisplayFor(modelItem => item.TotalTransactionValue)</td>
-                        <td>@Html.ActionLink("View L.G.As", "AgentByClient", "Agent", new { id = item.ClientId }, new { role = "button", @class = "btn btn-primary" })</td>
+                        <td>@Html.ActionLink("View L.G.A / D.As", "AgentByClient", "Agent", new { id = item.ClientId }, new { role = "button", @class = "btn btn-primary" })</td>
                         <td>@Html.ActionLink("View Transactions", "TransactionByClient", "Transaction", new { id = item.ClientId }, new { role = "button", @class = "btn btn-primary" })</td>                       
                     </tr>
                 }

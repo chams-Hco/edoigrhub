@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using CICSWebPortal.ServiceReference;   //chenge to 2 on deployment
+using CICSWebPortal.ServiceReference;   //chenge to 1 on deployment and change line 24 and 25
 using CICSWebPortal.ViewModels;
 using System.Web.Helpers;
 using CICSWebPortal.Helpers;
@@ -348,6 +348,19 @@ namespace CICSWebPortal.Services
         public Models.Terminal FindTerminalById(int id)
         {
             var terminal = _client.FindTerminal(id);
+            return new Models.Terminal
+            {
+                TerminalId = terminal.Terminal.TerminalId,
+                AgentName = terminal.Terminal.AgentName,
+                Code = terminal.Terminal.Code,
+                SerialNumber = terminal.Terminal.SerialNumber,
+                status = terminal.Terminal.status == 1 ? true : false
+            };
+        }
+
+        public Models.Terminal FindTerminalByCode(string code)
+        {
+            var terminal = _client.FindTerminalByCode(code);
             return new Models.Terminal
             {
                 TerminalId = terminal.Terminal.TerminalId,
@@ -1715,7 +1728,14 @@ namespace CICSWebPortal.Services
                     Terminal = x.Terminal,
                     TransactionCode = x.TransactionCode,
                     TransactionDate = x.TransactionDate,
-                    TransactionId = x.TransactionId
+                    TransactionId = x.TransactionId,
+                    Name = x.Name,
+                    DrinkAmount = x.DrinkAmount,
+                    FoodAmount = x.FoodAmount,
+                    OtherAmount = x.OtherAmount,
+                    RemittanceCode = x.PaymentReference,
+                    RentalAmount = x.RentalAmount
+                    
                 }).ToList();
                 return rvm;
             }

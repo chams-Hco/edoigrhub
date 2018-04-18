@@ -36,17 +36,18 @@ namespace CICSWebPortal.Controllers
             int RoleId = Convert.ToInt32(Session["RoleId"]);
             int ClientId = Convert.ToInt32(Session["ClientId"]);
             int UserTypeParentId = Convert.ToInt32(Session["UserTypeParentId"]);
+            var user = (UserDashBoardViewModel)Session["LoggedInUser"];
 
             ReportFilter filter = new ReportFilter();
             filter.startDate = DateTime.Now.AddDays(-1);
             filter.endDate = DateTime.Now.AddDays(1);
 
 
-            if (RoleId == 3 || RoleId == 4)
+            if (user.RoleCode == "CA" || user.RoleCode == "CU")
             {
                 filter.clientId = ClientId;
             }
-            if (RoleId == 4 || RoleId == 5)
+            if (user.RoleCode == "CU" || user.RoleCode == "AA")
             {
                 filter.clientId = ClientId;
                 filter.agentId = UserTypeParentId;
@@ -63,11 +64,11 @@ namespace CICSWebPortal.Controllers
             RVM.ministryList = Utility.GetMDAs(DataContext, RoleId, ClientId).ToList();
             RVM.revenueList = Utility.GetRevenues(DataContext, RoleId, ClientId).ToList();
 
-            if (RoleId == 3 || RoleId == 4)
+            if (user.RoleCode == "CA" || user.RoleCode == "CU")
             {
                 RVM.SelectedClientId = ClientId;
             }
-            else if (RoleId == 5 || RoleId == 6)
+            if (user.RoleCode == "AA" || user.RoleCode == "AU")
             {
                 RVM.SelectedAgentId = UserTypeParentId;
                 RVM.SelectedClientId = ClientId;
@@ -306,10 +307,123 @@ namespace CICSWebPortal.Controllers
             return View(result);
         }
 
+
+        public ActionResult CollectionAgentsTransactions()
+        {
+            var roleId = Session["RoleId"];
+            var userId = Session["UserId"];
+            var currentUser = (UserDashBoardViewModel)Session["LoggedInUser"];
+
+            var roles = new string[] { "SA", "SU", "CA", "CU", "WA" };
+            if (currentUser == null || !roles.Contains(currentUser.RoleCode))
+            {
+
+                Response.Redirect("~/Account/login");
+            }
+
+
+            if (currentUser.RoleCode == "SA" || currentUser.RoleCode == "SU")
+            {
+                ReportViewModel model = new ReportViewModel
+                {
+                    StartDate = DateTime.Today.AddDays(-7),
+                    EndDate = DateTime.Today.AddDays(1),
+                    clientList = DataContext.GetAllClients().Where(a => a.HasWebUsers == true).Select(a => new SelectListItem { Text = a.ClientName, Value = a.clientId.ToString() }),
+                    agentList = DataContext.GetAllAgents().Select(a => new SelectListItem { Text = a.Name, Value = a.AgentId.ToString() }),
+
+                };
+                return View(model);
+            }
+            else if (currentUser.RoleCode == "CA" || currentUser.RoleCode == "CU")
+            {
+                ReportViewModel model = new ReportViewModel
+                {
+                    StartDate = DateTime.Today.AddDays(-7),
+                    EndDate = DateTime.Today.AddDays(1),
+                    agentList = DataContext.GetAllAgentsByClientId(currentUser.ClientId).Select(a => new SelectListItem { Text = a.Name, Value = a.AgentId.ToString() }),
+
+                };
+                return View(model);
+            }
+            else if (currentUser.RoleCode == "WA")
+            {
+                ReportViewModel model = new ReportViewModel
+                {
+                    StartDate = DateTime.Today.AddDays(-7),
+                    EndDate = DateTime.Today.AddDays(1),
+                };
+
+                return View(model);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetCollectionAgentTransactions(ReportFilter filter)
+        {
+            int RoleId = Convert.ToInt32(Session["RoleId"]);
+            int ClientId = Convert.ToInt32(Session["ClientId"]);
+            int UserTypeParentId = Convert.ToInt32(Session["UserTypeParentId"]);
+            var currentUser = (UserDashBoardViewModel)Session["LoggedInUser"];
+            ReportViewModel RVM = null;
+            var roles = new string[] { "SA", "SU", "CA", "CU", "WA" };
+            if (currentUser == null || !roles.Contains(currentUser.RoleCode))
+            {
+            }
+
+            if(filter.Terminal != null && filter.Terminal != string.Empty && filter.Terminal!= "")
+            {
+                var terminal = DataContext.FindTerminalByCode(filter.Terminal);
+                filter.terminalId = terminal != null ? terminal.TerminalId : 0;
+            }
+            
+            if (currentUser.RoleCode == "CA" || currentUser.RoleCode =="CU")
+            {
+                filter.clientId = ClientId;
+            }
+            if (currentUser.RoleCode == "CU" || currentUser.RoleCode == "AA")
+            {
+                filter.clientId = ClientId;
+                filter.agentId = UserTypeParentId;
+            }
+
+            RVM = DataContext.GetTransactionReportSummary(filter);
+
+            RVM = (RVM != null) ? RVM : new ReportViewModel();
+
+            RVM.clientList = Utility.GetClients(DataContext, RoleId, ClientId).ToList();
+            RVM.agentList = Utility.GetAgents(DataContext, RoleId, UserTypeParentId).ToList();
+            RVM.terminalList = Utility.GetTerminals(DataContext, RoleId, UserTypeParentId).ToList();
+            RVM.ministryList = Utility.GetMDAs(DataContext, RoleId, ClientId).ToList();
+            RVM.revenueList = Utility.GetRevenues(DataContext, RoleId, ClientId).ToList();
+
+            
+
+            RVM.TotalTransactionValue = RVM.Report != null ? RVM.Report.Sum(x => x.Amount) : 0M;
+            RVM.StartDate = filter.startDate;
+            RVM.EndDate = filter.endDate;
+
+            TempData["myReport"] = RVM.Report;
+
+            return View(RVM);
+        }
+
+
+
         public class EOD
         {
             public int userId { get; set; }
             public string id { get; set; }
+        }
+
+        public class CollectionReportFilter
+        {
+            public int? lgaId { get; set; }
+            public int? clientid { get; set; }
+            public string terminalCode { get; set; }
+            public string startdate { get; set; }
+            public string enddate { get; set; }
+
         }
     }
 }

@@ -650,6 +650,8 @@ namespace ChamsICSWebService
             }
         }
 
+        
+
         internal GetServiceRevenueRes GetServiceRevenue(string agentCode)
         {
             GetServiceRevenueRes res = new GetServiceRevenueRes();
@@ -1268,7 +1270,7 @@ namespace ChamsICSWebService
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        private string GenerateEODReference(int id) => id.ToString().PadLeft(4, '0') + "" + DateTime.Now.ToString("ddMMyyyyHHmmssfff");
+        private string GenerateEODReference(int id) => Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10).ToUpper();//  id.ToString().PadLeft(4, '0') + "" + DateTime.Now.ToString("ddMMyyyyHHmmssfff");
         //(int id ) =>   DateTime.Now.Ticks.ToString();
         /// <summary>
         /// 

@@ -5,6 +5,7 @@
     int roleId = Convert.ToInt32(Session["RoleId"]);
     string roleCode = (string)Session["RoleCode"];
     bool cancreatewebUsers = (bool)Session["CanCreateWebUsers"];
+    var user = (CICSWebPortal.ViewModels.UserDashBoardViewModel)Session["LoggedInUser"];
 }
 
 @{
@@ -32,9 +33,116 @@
         <h3 class="no-margin">
             Dashboard
             <a href="/Report/ExecutiveDashboard/" class="btn btn-primary">View Executive Dashboard</a>
-            <a href="/Report/PeriodicDashBoard/" class="btn bg-danger">View L.G.A Positions</a>
+            <a href="/Report/PeriodicDashBoard/" class="btn bg-danger">View L.G.A / D.A Positions</a>
         </h3>
     </div><!-- /page-title -->
+
+    @{
+        clientmenu = new string[] { "WA" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+    }
+
+    <div style="@displayStyle">
+        <div class="row">
+            <div class="row col-lg-8">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-home"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Zone</span>
+                            <span class="info-box-number">@user.ZoneName</>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-red"><i class="fa fa-cubes"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">User ID</span>
+                            <span class="info-box-number">@user.TerminalCode</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <!-- fix for small devices only -->
+                <div class="clearfix visible-sm-block"></div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-green"><i class="fa  fa-th-large"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Address</span>
+                            <span class="info-box-number">@user.Address</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-yellow"><i class="fa fa-money"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Last Payment</span>
+
+                            <span class="info-box-number"><small>₦</small>@ViewBag.LastPayment</span>
+
+                        </div>  <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+
+            <div class="row col-lg-4">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <i class="fa fa-money"></i>
+
+                        <h3 class="box-title">Quick Payment</h3>
+                        <!-- tools box -->
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                                    title="Remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                        <!-- /. tools -->
+                    </div>
+                    <div class="box-body">
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="earnings" name="earnings" placeholder="Gross Earnings :">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="amountdue" name="amountdue" placeholder="Amount Due" readonly>
+                            </div>
+                            @*<div>
+                                    <textarea class="textarea" placeholder="Message"
+                                              style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                </div>*@
+                        </form>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <button type="button" class="pull-right btn btn-default" id="Pay">
+                            Send
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /.col
+            -->
+        </div>
+    </div><!-- /page-title -->
+
 </div><!-- /main-header -->
 
 @{
@@ -51,7 +159,7 @@
         <span class="text">Users</span>
     </a>
     @{
-        clientmenu = new string[] { "SA", "SU"};
+        clientmenu = new string[] { "SA", "SU" };
         displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
         // displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; }
     }
@@ -62,7 +170,7 @@
         <span class="text">Notifications</span>
     </a>
     @{
-        clientmenu = new string[] { "SA", "SU"};
+        clientmenu = new string[] { "SA", "SU" };
         displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
         //    displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; }
     }
@@ -81,7 +189,7 @@
         displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
         // displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; }
     }
-    <div class="panel-stat3 bg-success col-md-3"  style="background-color:slategray; margin:0 10px 10px 0; @displayStyle ;">
+    <div class="panel-stat3 bg-success col-md-3" style="background-color:slategray; margin:0 10px 10px 0; @displayStyle ;">
         <a href="/Client/">
             <h4 class="m-top-none" id="userCount">[ @Model.TotalClient ]</h4>
             <h5>Clients</h5>
@@ -103,38 +211,42 @@
         //displayStyle = string.Empty; if (roleId > 3) { displayStyle = "display: none"; }
     }
     <div class="panel-stat3 bg-success col-md-3" style="background-color:darkcyan;  margin:0 10px 10px 0; @displayStyle">
-        <h4 class="m-top-none"><span id="serverloadCount">[ @Model.TotalAgent ]</span></h4>
-        <h5>L.G.As</h5>
+        <a href="/Agent/Index" style="color:white">
+            <h4 class="m-top-none"><span id="serverloadCount">[ @Model.TotalAgent ]</span></h4>
+            <h5>L.G.A / D.As</h5>
 
-        <div class="stat-icon">
-            <i class="fa fa-bar-chart-o fa-3x"></i>
-        </div>
-        <div class="refresh-button">
-            <i class="fa fa-refresh"></i>
-        </div>
-        <div class="loading-overlay">
-            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
-        </div>
+            <div class="stat-icon">
+                <i class="fa fa-bar-chart-o fa-3x"></i>
+            </div>
+            <div class="refresh-button">
+                <i class="fa fa-refresh"></i>
+            </div>
+            <div class="loading-overlay">
+                <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+            </div>
+        </a>
     </div>
 
     @{
-        clientmenu = new string[] { "SA", "SU", "CA", "CU","AA","AU" };
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
         displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
         // displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
     }
     <div class="panel-stat3 bg-success col-md-3" style="background-color:darkorange; margin:0 10px 10px 0; @displayStyle">
-        <h4 class="m-top-none" id="orderCount">[ @Model.TotalTerminal ]</h4>
-        <h5>Terminals</h5>
+        <a href="/Terminal/Index" style="color:white">
+            <h4 class="m-top-none" id="orderCount">[ @Model.TotalTerminal ]</h4>
+            <h5>Terminals</h5>
 
-        <div class="stat-icon">
-            <i class="fa fa-bar-chart-o fa-3x"></i>
-        </div>
-        <div class="refresh-button">
-            <i class="fa fa-refresh"></i>
-        </div>
-        <div class="loading-overlay">
-            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
-        </div>
+            <div class="stat-icon">
+                <i class="fa fa-bar-chart-o fa-3x"></i>
+            </div>
+            <div class="refresh-button">
+                <i class="fa fa-refresh"></i>
+            </div>
+            <div class="loading-overlay">
+                <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+            </div>
+        </a>
     </div>
 
     @{
@@ -144,29 +256,31 @@
     }
     <div class="panel-stat3 bg-success col-md-3" style="background-color:yelloworange; margin:0 10px 10px 0; @displayStyle">
         @*<h4 class="m-top-none" id="visitorCount">[ @Model.TotalTransaction ]</h4>*@
-        <h4 class="m-top-none" id="visitorCount">
-            [
-            @if (Model.TotalTransaction > 0)
-            {
-                <text>@Model.TotalTransaction.ToString() </text>
-            }
-            else
-            {
-                <text>0</text>
-            }
-            ]
-        </h4>
-        <h5>Transactions</h5>
+        <a href="/Transaction/Index" style="color:white">
+            <h4 class="m-top-none" id="visitorCount">
+                [
+                @if (Model.TotalTransaction > 0)
+                {
+                    <text>@Model.TotalTransaction.ToString() </text>
+                }
+                else
+                {
+                    <text>0</text>
+                }
+                ]
+            </h4>
+            <h5>Transactions</h5>
 
-        <div class="stat-icon">
-            <i class="fa fa-bar-chart-o fa-3x"></i>
-        </div>
-        <div class="refresh-button">
-            <i class="fa fa-refresh"></i>
-        </div>
-        <div class="loading-overlay">
-            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
-        </div>
+            <div class="stat-icon">
+                <i class="fa fa-bar-chart-o fa-3x"></i>
+            </div>
+            <div class="refresh-button">
+                <i class="fa fa-refresh"></i>
+            </div>
+            <div class="loading-overlay">
+                <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+            </div>
+        </a>
     </div>
 
     @{
@@ -175,30 +289,32 @@
         //displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
     }
     <div class="panel-stat3 bg-success col-md-3" style="background-color:purple; margin:0 10px 10px 0; @displayStyle">
-        @*<h4 class="m-top-none" id="orderCount">[ ₦@Model.TransctionValue.ToString("#,0.00") ]</h4>*@
-        <h4 class="m-top-none" id="orderCount">
-            [
-            @if (Model.TransctionValue > 0)
-            {
-                <text>₦@String.Format("{0:n}", Model.TransctionValue)</text>
-            }
-            else
-            {
-                <text>0</text>
-            }
-            ]
-        </h4>
-        <h5>Transaction Value</h5>
+        <a href="/Transaction/" style="color:white">
+            @*<h4 class="m-top-none" id="orderCount">[ ₦@Model.TransctionValue.ToString("#,0.00") ]</h4>*@
+            <h4 class="m-top-none" id="orderCount">
+                [
+                @if (Model.TransctionValue > 0)
+                {
+                    <text>₦@String.Format("{0:n}", Model.TransctionValue)</text>
+                }
+                else
+                {
+                    <text>0</text>
+                }
+                ]
+            </h4>
+            <h5>Transaction Value</h5>
 
-        <div class="stat-icon">
-            <i class="fa fa-bar-chart-o fa-3x"></i>
-        </div>
-        <div class="refresh-button">
-            <i class="fa fa-refresh"></i>
-        </div>
-        <div class="loading-overlay">
-            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
-        </div>
+            <div class="stat-icon">
+                <i class="fa fa-bar-chart-o fa-3x"></i>
+            </div>
+            <div class="refresh-button">
+                <i class="fa fa-refresh"></i>
+            </div>
+            <div class="loading-overlay">
+                <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+            </div>
+        </a>
     </div>
 
     @{
@@ -208,30 +324,32 @@
     }
 
     <div class="panel-stat3 bg-success col-md-3" style="background-color:green; margin:0 10px 10px 0; @displayStyle">
-        <h4 class="m-top-none" id="visitorCount">
-            [
-            @if (Model.TotalAmountPaid > 0)
-            {
-                <text>₦@String.Format("{0:n}", Model.TotalAmountPaid) </text>
-            }
-            else
-            {
-                <text>0</text>
-            }
+        <a href="/Report/EndOfDayReport" style="color:white">
+            <h4 class="m-top-none" id="visitorCount">
+                [
+                @if (Model.TotalAmountPaid > 0)
+                {
+                    <text>₦@String.Format("{0:n}", Model.TotalAmountPaid) </text>
+                }
+                else
+                {
+                    <text>0</text>
+                }
 
-            ]
-        </h4>
-        <h5>Amount Paid</h5>
+                ]
+            </h4>
+            <h5>Amount Paid</h5>
 
-        <div class="stat-icon">
-            <i class="fa fa-bar-chart-o fa-3x"></i>
-        </div>
-        <div class="refresh-button">
-            <i class="fa fa-refresh"></i>
-        </div>
-        <div class="loading-overlay">
-            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
-        </div>
+            <div class="stat-icon">
+                <i class="fa fa-bar-chart-o fa-3x"></i>
+            </div>
+            <div class="refresh-button">
+                <i class="fa fa-refresh"></i>
+            </div>
+            <div class="loading-overlay">
+                <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+            </div>
+        </a>
     </div>
 
     @{
@@ -240,29 +358,31 @@
         //displayStyle = string.Empty;
     }
     <div class="panel-stat3 bg-success col-md-3" style="background-color:red; margin:0 10px 10px 0; @displayStyle">
-        <h4 class="m-top-none" id="visitorCount">
-            [
-            @if (Model.TotalAmountUnpaid > 0)
-            {
-                <text>₦@String.Format("{0:n}", Model.TotalAmountUnpaid) </text>
-            }
-            else
-            {
-                <text>0</text>
-            }
-            ]
-        </h4>
-        <h5>Amount Unpaid</h5>
+        <a href="/Report/EndOfDayReport" style="color:white">
+            <h4 class="m-top-none" id="visitorCount">
+                [
+                @if (Model.TotalAmountUnpaid > 0)
+                {
+                    <text>₦@String.Format("{0:n}", Model.TotalAmountUnpaid) </text>
+                }
+                else
+                {
+                    <text>0</text>
+                }
+                ]
+            </h4>
+            <h5>Amount Unpaid</h5>
 
-        <div class="stat-icon">
-            <i class="fa fa-bar-chart-o fa-3x"></i>
-        </div>
-        <div class="refresh-button">
-            <i class="fa fa-refresh"></i>
-        </div>
-        <div class="loading-overlay">
-            <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
-        </div>
+            <div class="stat-icon">
+                <i class="fa fa-bar-chart-o fa-3x"></i>
+            </div>
+            <div class="refresh-button">
+                <i class="fa fa-refresh"></i>
+            </div>
+            <div class="loading-overlay">
+                <i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+            </div>
+        </a>
     </div>
 
     @{
@@ -335,3 +455,13 @@
         </div>
     </div>
 </div>
+
+@section JavaScript
+{
+    <script type="text/javascript">
+        $('#earnings').on('input keyup blur change keypress',function () {
+            var earning = $(this).val();
+            $('#amountdue').val(earning * 0.05);
+        });
+    </script>
+}

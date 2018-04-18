@@ -3,6 +3,7 @@
     int roleId = Convert.ToInt32(Session["RoleId"]);
     string roleCode = (string)Session["RoleCode"];
     bool cancreatewebUsers = (bool)Session["CanCreateWebUsers"];
+    
 }
 <!DOCTYPE html>
 <html>
@@ -429,34 +430,44 @@
                                 <li style="@displayStyle">
                                     <a href="/Report/AgentSummary/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                        <span class="text"> Zone Summary</span>
+                                        <span class="text"> L.G.A / D.A Summary</span>
                                     </a>
                                 </li>
                                 <li style="@displayStyle">
                                     <a href="/Report/PeriodicDashBoard/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                        <span class="text"> Zone Positions</span>
+                                        <span class="text"> L.G.A / D.A Positions</span>
                                     </a>
                                 </li>
+                                @{ if (cancreatewebUsers == true || roleCode == "SA" || roleCode == "SU" || roleCode == "WA")
+                                    {
+                                        <li>
+                                            <a href="/Report/CollectionAgentsTransactions">
+                                                <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                                                <span class="text"> Collection Agent Transactions</span>
+                                            </a>
+                                        </li>
+                                    }
+                                }
                                 <li style="@displayStyle">
                                     <a href="/Report/LocationSummary/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
                                         <span class="text"> Location Summary</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li style="@displayStyle" >
                                     <a href="/Report/TransactionReceipt/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
                                         <span class="text">Transaction Receipt</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li style="@displayStyle">
                                     <a href="/Report/TransactionStatement/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
                                         <span class="text">Transaction Statement</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li style="@displayStyle">
                                     <a href="/Report/EndOfDayReport/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
                                         <span class="text">End Of Day Report</span>
@@ -491,7 +502,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                @{ if (cancreatewebUsers == true)
+                                @{ 
+                                    if (cancreatewebUsers == true)
                                     {
                                         <li>
                                             <a href="/User/WebUser">
@@ -551,13 +563,13 @@
                                     <li style="@displayStyle">
                                         <a href="/Report/AgentSummary/">
                                             <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                            <span class="text"> Zone Summary</span>
+                                            <span class="text"> L.G.A / D.A Summary</span>
                                         </a>
                                     </li>
                                     <li style="@displayStyle">
                                         <a href="/Report/PeriodicDashBoard/">
                                             <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                            <span class="text"> Zone Positions</span>
+                                            <span class="text"> L.G.A / D.A Positions</span>
                                         </a>
                                     </li>
                                     <li style="@displayStyle">
@@ -667,7 +679,11 @@
 
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
         {
+            try
+            {
             @Html.AntiForgeryToken()
+            }
+            catch(Exception e) { }
 
             <div class="padding-md">
                 <h4 class="m-top-none"> Do you want to logout?</h4>

@@ -152,6 +152,33 @@
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_iChamsICSPortalService" type="i1:iChamsICSPortalService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEODReport">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLocation">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLocation">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="FindLocation">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindLocation" style="document" />
       <wsdl:input>
@@ -377,6 +404,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FindTerminalByCode">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindTerminalByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAllTerminals">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTerminals" style="document" />
       <wsdl:input>
@@ -460,6 +496,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllTransactionByTerminalId">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByTerminalId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionByTerminalPerPeriod">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByTerminalPerPeriod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionByAgentPerPeriod">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTransactionByAgentPerPeriod" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -991,33 +1045,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllAuditTrails">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetEODReport">
-      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="CreateLocation">
-      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateLocation" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UpdateLocation">
-      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/UpdateLocation" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -22,6 +22,9 @@ namespace CICSWebPortal.Models
         [Display(Name = "Terminal")]
         public int? SelectedTerminalId { get; set; }
 
+        [Display(Name = "Terminal Code")]
+        public string TerminalCode { get; set; }
+
         [Display(Name = "Ministry")]
         public string SelectedMinistry { get; set; }
 

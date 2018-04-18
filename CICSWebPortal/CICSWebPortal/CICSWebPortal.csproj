@@ -244,6 +244,16 @@
     <Compile Include="Models\WebPayment.cs" />
     <Compile Include="Models\WebTransactionResponse.cs" />
     <Compile Include="Models\WebUser.cs" />
+    <Compile Include="Service References\ServiceReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceReference2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\WebUserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -253,11 +263,6 @@
     </Compile>
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
-    <Compile Include="Service References\ServiceReference2\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Service References\ServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -7299,6 +7304,223 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Service References\ServiceReference1\ChamsICSService.wsdl" />
+    <None Include="Service References\ServiceReference1\ChamsICSService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\ChamsICSService1.wsdl" />
+    <None Include="Service References\ServiceReference1\ChamsICSService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\ChamsICSService2.wsdl" />
+    <None Include="Service References\ServiceReference1\ChamsICSService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\ChamsICSService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\ChamsICSService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.AgentSummaryRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.AuthoriseTerminalRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.ClientSummaryRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.CreateAgentRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.CreateClientRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.CreateEndOfDayRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.CreateIdentityRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.CreateLocationRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.CreateRevenueRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.CreateUserRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.DashboardRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.ExecutiveDashboardRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FetchEndOfDayRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindAgentRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindClientRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindClientWithZoneRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindErrorTransactionRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindIdentityRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindLocationRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindRevenueRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindRoleRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindTerminalRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindTransactionRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindUserRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.FindWalletRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAgentLocationsRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAllAgentRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAllClientsRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAllClientsWithZoneRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAllErrorTransactionRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAllIdentityRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAllLocationRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAllRevenueRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAllTerminalRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAllTransactionRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAllUserRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetAuditTrailsRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetInvoicePaymentRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetNotificationsRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetServiceRevenueRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetTerminalDetailsRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetTerminalsRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.GetUserInvoicesRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.Invoice.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.Ministry.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.QueryEndOfDayStatusRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.QueryTransactionRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.RevenueCategory.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.RevenueHead.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.RevenueItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.RoleRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.TaxpayerDashboardRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.TransactionSummaryRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.UploadTransactionRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.UserLoginRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.VerifyResidentIdRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.WebTransactionRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ServiceReference2\ChamsICSService.wsdl" />
+    <None Include="Service References\ServiceReference2\ChamsICSService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference2\ChamsICSService1.wsdl" />
+    <None Include="Service References\ServiceReference2\ChamsICSService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference2\ChamsICSService2.wsdl" />
+    <None Include="Service References\ServiceReference2\ChamsICSService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference2\ChamsICSService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference2\ChamsICSService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\ChamsICSService.disco" />
+    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.AgentSummaryRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -7312,6 +7534,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.CreateClientRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.CreateEndOfDayRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.CreateIdentityRes.datasource">
@@ -7332,10 +7557,16 @@
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.ExecutiveDashboardRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FetchEndOfDayRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FindAgentRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FindClientRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FindClientWithZoneRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FindErrorTransactionRes.datasource">
@@ -7348,6 +7579,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FindRevenueRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FindRoleRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FindTerminalRes.datasource">
@@ -7369,6 +7603,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.GetAllClientsRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.GetAllClientsWithZoneRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.GetAllErrorTransactionRes.datasource">
@@ -7419,6 +7656,9 @@
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.Ministry.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.QueryEndOfDayStatusRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.QueryTransactionRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -7450,42 +7690,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.VerifyResidentIdRes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Service References\ServiceReference2\ChamsICSService3.wsdl" />
-    <None Include="Service References\ServiceReference2\ChamsICSService31.wsdl" />
-    <None Include="Service References\ServiceReference2\ChamsICSService32.wsdl" />
-    <None Include="Service References\ServiceReference2\ChamsICSService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference2\ChamsICSService41.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference2\ChamsICSService42.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference2\ChamsICSService43.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference2\ChamsICSService44.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.CreateEndOfDayRes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FetchEndOfDayRes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.QueryEndOfDayStatusRes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FindClientWithZoneRes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.GetAllClientsWithZoneRes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.FindRoleRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\ServiceReference\ChamsICSService.xsd">
@@ -7707,6 +7911,8 @@
     <Content Include="Views\User\WebUser.cshtml" />
     <Content Include="Views\User\CreateWebUser.cshtml" />
     <Content Include="Views\Payments\RemittanceForm.cshtml" />
+    <Content Include="Views\Report\CollectionAgentsTransactions.cshtml" />
+    <Content Include="Views\Report\GetCollectionAgentTransactions.cshtml" />
     <None Include="Web References\EmailSv\WebService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -7834,6 +8040,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
     <WCFMetadataStorage Include="Service References\ServiceReference2\" />
     <WCFMetadataStorage Include="Service References\ServiceReference\" />
   </ItemGroup>

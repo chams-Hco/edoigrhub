@@ -200,27 +200,32 @@ namespace ChamsICSWebService
         internal GetAllClientsRes GetAllClients()
         {
             GetAllClientsRes res = new GetAllClientsRes();
-
-            var clients = db.Clients.Include(x => x.ClientSettings).Select(x => new Model.Client
+            var AllClients = new List<Model.Client>();
+            var clients = db.Clients.Include(x => x.ClientSettings).ToList();
+            foreach (var x in clients)
             {
-                ClientId = x.Id.ToString(),
-                Code = x.Code,
-                Name = x.Name,
-                Addres = x.Address,
-                Email = x.Email,
-                Phone1 = x.Phone1,
-                Phone2 = x.Phone2,
-                status = x.Status.Value,
-                HasWebUsers = x.HasWebUsers ?? false,
-                ClientSetting = new Model.ClientSetting
+                AllClients.Add(new Model.Client
                 {
-                    percentageDeduction = x.ClientSettings != null && x.ClientSettings.Count > 0 ? x.ClientSettings.ElementAt(0).PercentageDeduction : 0,
-                    DefaultRevenueItemId = x.ClientSettings != null && x.ClientSettings.Count > 0 ? x.ClientSettings.ElementAt(0).DefaultRevenueItemId : 0,
+                    ClientId = x.Id.ToString(),
+                    Code = x.Code,
+                    Name = x.Name,
+                    Addres = x.Address,
+                    Email = x.Email,
+                    Phone1 = x.Phone1,
+                    Phone2 = x.Phone2,
+                    status = x.Status.Value,
+                    HasWebUsers = x.HasWebUsers ?? false,
+                    ClientSetting = new Model.ClientSetting
+                    {
+                        percentageDeduction = x.ClientSettings.Count > 0 ? x.ClientSettings.ElementAtOrDefault(0).PercentageDeduction : 0,
+                        DefaultRevenueItemId = x.ClientSettings.Count > 0 ? x.ClientSettings.ElementAtOrDefault(0).DefaultRevenueItemId : 0,
+                    }
                 }
-            });
+                );
 
+            }
 
-            res.Clients = clients;
+            res.Clients = AllClients;
 
             return res;
         }
@@ -291,6 +296,45 @@ namespace ChamsICSWebService
         {
             FindTerminalRes res = new FindTerminalRes();
             var terminal = db.Terminals.FirstOrDefault(x => x.Id == id);
+
+            var terminalObj = new Model.Terminal
+            {
+                TerminalId = terminal.Id,
+                AgentName = db.Agents.FirstOrDefault(y => y.Id == terminal.AgentId).Name,
+                AgentId = terminal.AgentId.Value,
+                Code = terminal.Code,
+                Name = terminal.Name,
+                SerialNumber = terminal.SerialNumber,
+                status = terminal.Status.Value
+
+            };
+
+            if (terminalObj == null)
+            {
+                res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                res.ResponseDescription = "Invalid Id";
+            }
+            else
+            {
+                res.ResponseCode = ResponseHelper.SUCCESS;
+                res.ResponseDescription = "Successful";
+                res.Terminal = (Model.Terminal)terminalObj;
+
+            }
+            return res;
+        }
+
+        internal FindTerminalRes FindTerminal(string code)
+        {
+            FindTerminalRes res = new FindTerminalRes();
+            var terminal = db.Terminals.FirstOrDefault(x => x.Code == code);
+
+            if(terminal == null)
+            {
+                res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                res.ResponseDescription = "Invalid Id";
+                return res;
+            }
 
             var terminalObj = new Model.Terminal
             {
@@ -1336,6 +1380,117 @@ namespace ChamsICSWebService
                         join ministry in db.Ministries on y.MinistryId equals ministry.Id
 
                         where x.ResidentId == residentId
+                        select new Transaction
+                        {
+                            Id = x.Id,
+                            AgentId = x.AgentId.Value,
+                            AgentName = z.Name,
+                            TerminalId = x.TerminalId.Value,
+                            TransactionCode = x.Code,
+                            ResidentId = x.ResidentId,
+                            FirstName = x.FirstName,
+                            MiddleName = x.MiddleName,
+                            LastName = x.Lastname,
+                            Address = x.Address,
+                            Email = x.Email,
+                            PhoneNumber = x.PhoneNumber,
+                            DateOfBirth = x.DateOfBirth.Value,
+                            Gender = x.Gender,
+                            RevenueCode = x.RevenueCode,
+                            RevenueName = y.Name,
+                            Ministry = ministry != null ? ministry.Name : "",
+                            RevenueHead = revenueHead != null ? revenueHead.Name : "",
+                            Amount = x.Amount.Value,
+                            PaymentReference = x.PaymentReference,
+                            TransactionDate = x.TransactionDate.Value,
+                            UploadDate = x.UploadDate.Value,
+                            status = x.Status.Value,
+                            DrinkAmount = x.DrinkAmount,
+                            FoodAmount = x.FoodAmount,
+                            FromDate = x.FromDate,
+                            ClientId = x.ClientId,
+                            LocationId = x.LocationId,
+                            Income = x.Income,
+                            LocationName = x.LocationCode,
+                            OtherAmount = x.OtherAmount,
+                            RentalAmount = x.RentalAmount,
+                            Percentage = x.Percentage,
+                            TerminalCode = x.Terminal != null ? x.Terminal.Code : "",
+                            ToDate = x.ToDate,
+                            Name = (x.TerminalId != null && x.Terminal.UserDetails.Any()) ? x.Terminal.UserDetails.FirstOrDefault().Name : ""
+                        };
+
+            var test = tLogs.ToList().OrderByDescending(x => x.Id); ;
+            res.Transactions = tLogs;
+
+            return res;
+        }
+
+        internal GetAllTransactionRes GetAllTransactionByAgentPerPeriod(int agentId, DateTime fromdate, DateTime todate)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            var tLogs = from x in db.TransactionLogs
+                        join z in db.Agents on x.AgentId equals z.Id
+                        join y in db.RevenueItems on x.RevenueCode equals y.Code
+                        join revenueHead in db.RevenueHeads on y.RevenueHeadId equals revenueHead.Id
+                        join ministry in db.Ministries on y.MinistryId equals ministry.Id
+
+                        where x.AgentId == agentId && x.TransactionDate.Value >= fromdate && x.TransactionDate.Value <= todate
+                        select new Transaction
+                        {
+                            Id = x.Id,
+                            AgentId = x.AgentId.Value,
+                            AgentName = z.Name,
+                            TerminalId = x.TerminalId.Value,
+                            TransactionCode = x.Code,
+                            ResidentId = x.ResidentId,
+                            FirstName = x.FirstName,
+                            MiddleName = x.MiddleName,
+                            LastName = x.Lastname,
+                            Address = x.Address,
+                            Email = x.Email,
+                            PhoneNumber = x.PhoneNumber,
+                            DateOfBirth = x.DateOfBirth.Value,
+                            Gender = x.Gender,
+                            RevenueCode = x.RevenueCode,
+                            RevenueName = y.Name,
+                            Ministry = ministry != null ? ministry.Name : "",
+                            RevenueHead = revenueHead != null ? revenueHead.Name : "",
+                            Amount = x.Amount.Value,
+                            PaymentReference = x.PaymentReference,
+                            TransactionDate = x.TransactionDate.Value,
+                            UploadDate = x.UploadDate.Value,
+                            status = x.Status.Value,
+                            DrinkAmount = x.DrinkAmount,
+                            FoodAmount = x.FoodAmount,
+                            FromDate = x.FromDate,
+                            ClientId = x.ClientId,
+                            LocationId = x.LocationId,
+                            Income = x.Income,
+                            LocationName = x.LocationCode,
+                            OtherAmount = x.OtherAmount,
+                            RentalAmount = x.RentalAmount,
+                            Percentage = x.Percentage,
+                            TerminalCode = x.Terminal != null ? x.Terminal.Code : "",
+                            ToDate = x.ToDate,
+                            Name = (x.TerminalId != null && x.Terminal.UserDetails.Any()) ? x.Terminal.UserDetails.FirstOrDefault().Name : ""
+                        };
+
+            res.Transactions = tLogs.ToList().OrderByDescending(x => x.Id); ;
+
+            return res;
+        }
+
+        internal GetAllTransactionRes GetAllTransactionByTerminalPerPeriod(int terminalId, DateTime fromdate, DateTime todate)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            var tLogs = from x in db.TransactionLogs
+                        join z in db.Agents on x.AgentId equals z.Id
+                        join y in db.RevenueItems on x.RevenueCode equals y.Code
+                        join revenueHead in db.RevenueHeads on y.RevenueHeadId equals revenueHead.Id
+                        join ministry in db.Ministries on y.MinistryId equals ministry.Id
+
+                        where x.TerminalId == terminalId && x.TransactionDate >= fromdate && x.TransactionDate <= todate
                         select new Transaction
                         {
                             Id = x.Id,
@@ -3063,7 +3218,7 @@ on x.MinistryId equals y.Id
             var user = db.Users.SingleOrDefault(a => a.Id == req.UserId);
             var client = user.Client != null ? user.Client : (user.UserClients != null && user.UserClients.Count > 0) ? user.UserClients.ElementAt(0).Client : null;
             if (req.RoleCode == "SA" || req.RoleCode == "SU")
-            {                              
+            {
                 //This is Sytem User.. 
                 res.TotalClient = db.Clients.Count();
                 res.TotalAgent = db.Agents.Count();
@@ -3073,9 +3228,9 @@ on x.MinistryId equals y.Id
                 res.TotalNotifications = db.Notifications.Count();
 
                 //for EOD report summary in dashboard
-               // res.TotalEODAmount = db.EODs.Where(a=>a.Terminal.Agent.ClientId ==(client!= null ?client.Id :0)).Sum(x => x.Amount);
+                // res.TotalEODAmount = db.EODs.Where(a=>a.Terminal.Agent.ClientId ==(client!= null ?client.Id :0)).Sum(x => x.Amount);
                 res.TotalEODAmount = db.EODs.Sum(x => x.Amount);
-                res.TotalAmountPaid = db.EODs.Where(a => a.Status == true ).ToList().Sum(x => x.Amount);
+                res.TotalAmountPaid = db.EODs.Where(a => a.Status == true).ToList().Sum(x => x.Amount);
                 res.TotalAmountUnpaid = db.EODs.Where(a => a.Status == false).ToList().Sum(x => x.Amount);
 
                 res.TotalEODCount = db.EODs.ToList().Sum(x => x.Count);
@@ -3091,17 +3246,17 @@ on x.MinistryId equals y.Id
                 IList<int> ClientAgents = db.Agents.Where(x => x.ClientId == UserClientId).Select(x => x.Id).ToList();
                 res.TotalTerminal = db.Terminals.Where(x => x.Status == 1).Where(x => ClientAgents.Contains(x.AgentId.Value)).Count();
 
-                res.TotalTransaction = db.TransactionLogs.Where(x => x.ClientId == UserClientId ).Count();
+                res.TotalTransaction = db.TransactionLogs.Where(x => x.ClientId == UserClientId).Count();
                 res.TransctionValue = Convert.ToDecimal(db.TransactionLogs.Where(x => x.ClientId == UserClientId).Sum(x => x.Amount));
 
                 //for EOD report summary in dashboard
-                res.TotalEODAmount =db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).Sum(x => x.Amount);
+                res.TotalEODAmount = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).Sum(x => x.Amount);
 
                 var totalamountPaid = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId && x.Status == true).Select(x => x.Amount);
-                res.TotalAmountPaid = totalamountPaid.Count() >0 ? totalamountPaid.Sum() : 0;
+                res.TotalAmountPaid = totalamountPaid.Count() > 0 ? totalamountPaid.Sum() : 0;
                 var totalamountUnPaid = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId && x.Status == false).Select(x => x.Amount);
                 res.TotalAmountUnpaid = totalamountUnPaid.Count() > 0 ? totalamountUnPaid.Sum() : 0;
-               // res.TotalAmountUnpaid =db.EODs.Where(x => x.Status == false && x.Terminal != null && x.Terminal.Agent != null && x.Terminal.Agent.Client.Id == UserClientId).Sum(x => x.Amount);
+                // res.TotalAmountUnpaid =db.EODs.Where(x => x.Status == false && x.Terminal != null && x.Terminal.Agent != null && x.Terminal.Agent.Client.Id == UserClientId).Sum(x => x.Amount);
                 res.TotalEODCount = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).Sum(x => x.Count);
                 return res;
             }
@@ -3139,6 +3294,10 @@ on x.MinistryId equals y.Id
                 //res.TotalEODCount = db.EODs.Where(x => x.Terminal.Agent.Client == req.Email).Sum(x => x.Count);
 
                 return res;
+            }
+            else if (req.RoleCode == "WA")
+            {
+                return new DashboardRes();
             }
 
             return null;
@@ -3244,22 +3403,64 @@ on x.MinistryId equals y.Id
 
         private IEnumerable<AgentStats> GetAgentTerminalStatsGrouped(List<ChamsICSLib.Data.Agent> agents)
         {
-            AgentTerminalStats stats = new AgentTerminalStats();
+            
             var agentIDs = agents.Select(a => a.Id);
             var AgentTerminalsAll = db.Terminals.Where(x => agentIDs.Contains(x.AgentId.Value) && x.Status == 1).ToList();
             DateTime DateThreemonths = DateTime.Now.AddDays(-180);
             var AgentTransactionsAll = db.TransactionLogs.Where(x => agentIDs.Contains(x.AgentId.Value) && x.TransactionDate > DateThreemonths).ToList();
 
+            //var AgentTransactionModelAll = from transactions in db.TransactionLogs
+            //                               join revItem in db.RevenueItems on transactions.RevenueCode equals revItem.Code
+            //                               join revHead in db.RevenueHeads on revItem.RevenueHeadId equals revHead.Id
+            //                               where agentIDs.Contains(transactions.AgentId.Value)
+            //                               select new AgentTransactionsModel
+            //                               {
+            //                                   AgentId = transactions.AgentId,
+            //                                   TerminalId = transactions.TerminalId,
+            //                                   RevenueCode = transactions.RevenueCode,
+            //                                   Amount = transactions.Amount,
+            //                                   Date = transactions.TransactionDate,
+            //                                   RevenueItemName = revItem.Name,
+            //                                   RevenueHeadName = revHead.Name
+            //                               };
+
             List<AgentStats> AllAgentStats = new List<AgentStats>();
-            foreach(var agent in agents)
+            foreach (var agent in agents)
             {
                 AgentStats agentStat = new AgentStats();
+                AgentTerminalStats stats = new AgentTerminalStats();
                 agentStat.AgentId = agent.Id;
                 agentStat.AgentCode = agent.Code;
                 agentStat.AgentName = agent.Name;
 
                 var AgentTerminals = AgentTerminalsAll.Where(a => a.AgentId == agent.Id).ToList();
                 var AgentTransactions = AgentTransactionsAll.Where(a => a.AgentId == agent.Id).ToList();
+                //var AgentTransactionModel = AgentTransactionModelAll.Where(a => a.AgentId == agent.Id).ToList();
+
+
+                //var distintrevCode = AgentTransactionModel.Select(a => a.RevenueCode);
+                //var RevenueStats = new List<RevenueStats>();
+                //var periodicStats = new List<RevenueStats>();
+                //foreach (var s in distintrevCode)
+                //{
+                //    RevenueStats.Add(new Model.RevenueStats
+                //    {
+                //        RevenueName = s + ": " + AgentTransactionModel.FirstOrDefault().RevenueItemName + " / " + AgentTransactionModel.FirstOrDefault().RevenueHeadName,
+                //        TotalTransactionVal = AgentTransactionModel.Where(a => a.RevenueCode == s).Sum(x => x.Amount).Value,
+                //        TotalTransactionVol = AgentTransactionModel.Where(a => a.RevenueCode == s).Count()
+                //    });
+
+                //    periodicStats.Add(new Model.RevenueStats
+                //    {
+                //        RevenueName = s + ": " + AgentTransactionModel.FirstOrDefault().RevenueItemName + " / " + AgentTransactionModel.FirstOrDefault().RevenueHeadName,
+                //        TotalTransactionVal = AgentTransactionModel.Where(a => a.RevenueCode == s).Sum(x => x.Amount).Value,
+                //        TotalTransactionVol = AgentTransactionModel.Where(a => a.RevenueCode == s).Count()
+                //    });
+
+                //}
+
+                //agentStat.RevenueStats = RevenueStats;
+                //agentStat.PeriodicRevenueStats = periodicStats;
 
                 DateTime Today = DateTime.Today;
                 DateTime SevenDaysAgo = DateTime.Now.AddDays(-7);
@@ -3302,7 +3503,7 @@ on x.MinistryId equals y.Id
             }
 
 
-            
+
 
             return AllAgentStats;
         }
@@ -3310,21 +3511,64 @@ on x.MinistryId equals y.Id
 
         private IEnumerable<AgentStats> GetAgentTerminalStatsGrouped(List<ChamsICSLib.Data.Agent> agents, DateTime StartDate, DateTime EndDate)
         {
-            AgentTerminalStats stats = new AgentTerminalStats();
+            
             var agentIDs = agents.Select(a => a.Id);
             var AgentTerminalsAll = db.Terminals.Where(x => agentIDs.Contains(x.AgentId.Value) && x.Status == 1).ToList();
-            var AgentTransactionsAll = db.TransactionLogs.Where(x => agentIDs.Contains(x.AgentId.Value)  && x.TransactionDate >= StartDate && x.TransactionDate <= EndDate).ToList();
+            var AgentTransactionsAll = db.TransactionLogs.Where(x => agentIDs.Contains(x.AgentId.Value) && x.TransactionDate >= StartDate && x.TransactionDate <= EndDate).ToList();
+
+            var AgentTransactionModelAll = from transactions in db.TransactionLogs
+                                           join revItem in db.RevenueItems on transactions.RevenueCode equals revItem.Code
+                                           join revHead in db.RevenueHeads on revItem.RevenueHeadId equals revHead.Id
+                                           where agentIDs.Contains(transactions.AgentId.Value) && transactions.TransactionDate >= StartDate && transactions.TransactionDate <= EndDate
+                                           select new AgentTransactionsModel
+                                           {
+                                               AgentId = transactions.AgentId,
+                                               TerminalId = transactions.TerminalId,
+                                               RevenueCode = transactions.RevenueCode,
+                                               Amount = transactions.Amount,
+                                               Date = transactions.TransactionDate,
+                                               RevenueItemName = revItem.Name,
+                                               RevenueHeadName = revHead.Name
+                                           };
 
             List<AgentStats> AllAgentStats = new List<AgentStats>();
             foreach (var agent in agents)
             {
+                AgentTerminalStats stats = new AgentTerminalStats();
                 AgentStats agentStat = new AgentStats();
                 agentStat.AgentId = agent.Id;
                 agentStat.AgentCode = agent.Code;
                 agentStat.AgentName = agent.Name;
 
+
                 var AgentTerminals = AgentTerminalsAll.Where(a => a.AgentId == agent.Id).ToList();
                 var AgentTransactions = AgentTransactionsAll.Where(a => a.AgentId == agent.Id).ToList();
+                var AgentTransactionModel = AgentTransactionModelAll.Where(a => a.AgentId == agent.Id).ToList();
+
+
+                var distintrevCode = AgentTransactionModel.Select(a => a.RevenueCode).Distinct();
+                var RevenueStats = new List<RevenueStats>();
+                var periodicStats = new List<RevenueStats>();
+                foreach (var s in distintrevCode)
+                {
+                    RevenueStats.Add(new Model.RevenueStats
+                    {
+                        RevenueName = s + ": " + AgentTransactionModel.FirstOrDefault().RevenueItemName + " / " + AgentTransactionModel.FirstOrDefault().RevenueHeadName,
+                        TotalTransactionVal = AgentTransactionModel.Where(a => a.RevenueCode == s).Sum(x => x.Amount).Value,
+                        TotalTransactionVol = AgentTransactionModel.Where(a => a.RevenueCode == s).Count()
+                    });
+
+                    periodicStats.Add(new Model.RevenueStats
+                    {
+                        RevenueName = s + ": " + AgentTransactionModel.FirstOrDefault().RevenueItemName + " / " + AgentTransactionModel.FirstOrDefault().RevenueHeadName,
+                        TotalTransactionVal = AgentTransactionModel.Where(a => a.Date >= StartDate && a.Date <= EndDate && a.RevenueCode == s).Sum(x => x.Amount).Value,
+                        TotalTransactionVol = AgentTransactionModel.Where(a => a.Date >= StartDate && a.Date <= EndDate && a.RevenueCode == s).Count()
+                    });
+
+                }
+                
+                agentStat.RevenueStats = RevenueStats;
+                agentStat.PeriodicRevenueStats = periodicStats;
 
                 DateTime Today = DateTime.Today;
                 DateTime SevenDaysAgo = DateTime.Now.AddDays(-7);
@@ -3422,19 +3666,19 @@ on x.MinistryId equals y.Id
         {
             RevenueLeaderStats stats = new RevenueLeaderStats();
             var revenueRecordsList1nitial = from renenueTransactions in db.TransactionLogs
-                                      where renenueTransactions.ClientId == userClientId
-                                      group renenueTransactions by renenueTransactions.RevenueCode into result
-                                      select new
-                                      {
-                                          code = result.Key,
-                                          Amount = result.Sum(a => a.Amount)
-                                      };
+                                            where renenueTransactions.ClientId == userClientId
+                                            group renenueTransactions by renenueTransactions.RevenueCode into result
+                                            select new
+                                            {
+                                                code = result.Key,
+                                                Amount = result.Sum(a => a.Amount)
+                                            };
             var revenueRecordsList = from result in revenueRecordsList1nitial
                                      join revenues in db.RevenueItems
                                        on result.code equals revenues.Code
                                      join revenueHeads in db.RevenueHeads
                                      on revenues.RevenueHeadId equals revenueHeads.Id
-                                      orderby result.Amount
+                                     orderby result.Amount
                                      select new
                                      {
                                          ID = result.code,
@@ -3468,13 +3712,13 @@ on x.MinistryId equals y.Id
             var agentRecords1 = from agentTransactions in db.TransactionLogs
                                 where agentTransactions.ClientId == userClientId
                                 group agentTransactions by agentTransactions.AgentId into result
-                                select new { agentID = result.Key, Total = result.Sum(a=>a.Amount) };
+                                select new { agentID = result.Key, Total = result.Sum(a => a.Amount) };
 
             var agentRecords = from result in agentRecords1
-                        join agent in db.Agents on result.agentID equals agent.Id
+                               join agent in db.Agents on result.agentID equals agent.Id
                                select new
                                {
-                                   ID = result.agentID  ,
+                                   ID = result.agentID,
                                    SUM = result.Total,
                                    NAME = agent.Name
                                };
@@ -3742,7 +3986,7 @@ on x.MinistryId equals y.Id
 
         private AgentLeaderStats GetLeadingAgentStats(int userClientId, DateTime StartDate, DateTime EndDate)
         {
-          
+
             AgentLeaderStats stats = new AgentLeaderStats();
 
             var agentRecords1 = from agentTransactions in db.TransactionLogs
@@ -3867,7 +4111,17 @@ on x.MinistryId equals y.Id
                                       Amount = tLogs.Amount.Value,
                                       ResidentId = tLogs.ResidentId,
                                       TransactionCode = tLogs.Code,
-                                      TransactionDate = tLogs.TransactionDate.Value
+                                      TransactionDate = tLogs.TransactionDate.Value,
+                                      DrinkAmount = tLogs.DrinkAmount,
+                                      FoodAmount = tLogs.FoodAmount,
+                                      FromDate = tLogs.FromDate,
+                                      Income = tLogs.Income,
+                                      Name = tLogs.Name,
+                                      OtherAmount = tLogs.OtherAmount,
+                                      PaymentReference = tLogs.PaymentReference,
+                                      Percentage = tLogs.Percentage,
+                                      RentalAmount = tLogs.RentalAmount,
+                                      ToDate = tLogs.ToDate
                                   };
                 res.AddRange(transaction.ToList().Distinct());
             }
@@ -3895,7 +4149,17 @@ on x.MinistryId equals y.Id
                                       Amount = tLogs.Amount.Value,
                                       ResidentId = tLogs.ResidentId,
                                       TransactionCode = tLogs.Code,
-                                      TransactionDate = tLogs.TransactionDate.Value
+                                      TransactionDate = tLogs.TransactionDate.Value,
+                                      DrinkAmount = tLogs.DrinkAmount,
+                                      FoodAmount = tLogs.FoodAmount,
+                                      FromDate = tLogs.FromDate,
+                                      Income = tLogs.Income,
+                                      Name = tLogs.Name,
+                                      OtherAmount = tLogs.OtherAmount,
+                                      PaymentReference = tLogs.PaymentReference,
+                                      Percentage = tLogs.Percentage,
+                                      RentalAmount = tLogs.RentalAmount,
+                                      ToDate = tLogs.ToDate
                                   };
                 res.AddRange(transaction.ToList());
             }
@@ -3925,7 +4189,17 @@ on x.MinistryId equals y.Id
                                       Amount = tLogs.Amount.Value,
                                       ResidentId = tLogs.ResidentId,
                                       TransactionCode = tLogs.Code,
-                                      TransactionDate = tLogs.TransactionDate.Value
+                                      TransactionDate = tLogs.TransactionDate.Value,
+                                      DrinkAmount = tLogs.DrinkAmount,
+                                      FoodAmount = tLogs.FoodAmount,
+                                      FromDate = tLogs.FromDate,
+                                      Income = tLogs.Income,
+                                      Name = tLogs.Name,
+                                      OtherAmount = tLogs.OtherAmount,
+                                      PaymentReference = tLogs.PaymentReference,
+                                      Percentage = tLogs.Percentage,
+                                      RentalAmount = tLogs.RentalAmount,
+                                      ToDate = tLogs.ToDate
                                   };
                 res.AddRange(transaction.ToList());
             }
@@ -3955,7 +4229,17 @@ on x.MinistryId equals y.Id
                                       Amount = tLogs.Amount.Value,
                                       ResidentId = tLogs.ResidentId,
                                       TransactionCode = tLogs.Code,
-                                      TransactionDate = tLogs.TransactionDate.Value
+                                      TransactionDate = tLogs.TransactionDate.Value,
+                                      DrinkAmount = tLogs.DrinkAmount,
+                                      FoodAmount = tLogs.FoodAmount,
+                                      FromDate = tLogs.FromDate,
+                                      Income = tLogs.Income,
+                                      Name = tLogs.Name,
+                                      OtherAmount = tLogs.OtherAmount,
+                                      PaymentReference = tLogs.PaymentReference,
+                                      Percentage = tLogs.Percentage,
+                                      RentalAmount = tLogs.RentalAmount,
+                                      ToDate = tLogs.ToDate
                                   };
                 res.AddRange(transaction.ToList());
             }
@@ -3986,7 +4270,17 @@ on x.MinistryId equals y.Id
                                       Amount = tLogs.Amount.Value,
                                       ResidentId = tLogs.ResidentId,
                                       TransactionCode = tLogs.Code,
-                                      TransactionDate = tLogs.TransactionDate.Value
+                                      TransactionDate = tLogs.TransactionDate.Value,
+                                      DrinkAmount = tLogs.DrinkAmount,
+                                      FoodAmount = tLogs.FoodAmount,
+                                      FromDate = tLogs.FromDate,
+                                      Income = tLogs.Income,
+                                      Name = tLogs.Name,
+                                      OtherAmount = tLogs.OtherAmount,
+                                      PaymentReference = tLogs.PaymentReference,
+                                      Percentage = tLogs.Percentage,
+                                      RentalAmount = tLogs.RentalAmount,
+                                      ToDate = tLogs.ToDate
                                   };
                 res.AddRange(transaction.ToList());
             }
