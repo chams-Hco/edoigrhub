@@ -9,6 +9,12 @@
       <xsd:import schemaLocation="http://localhost:39562/ChamsICSService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="iChamsICSPortalService_GetEODReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEODReport" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetEODReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEODReportResponse" />
+  </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_CreateLocation_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateLocation" />
   </wsdl:message>
@@ -170,6 +176,12 @@
   </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_FindTerminal_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindTerminalResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindTerminalByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindTerminalByCode" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_FindTerminalByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindTerminalByCodeResponse" />
   </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_GetAllTerminals_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllTerminals" />
@@ -597,13 +609,11 @@
   <wsdl:message name="iChamsICSPortalService_GetAllAuditTrails_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllAuditTrailsResponse" />
   </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetEODReport_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetEODReport" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetEODReport_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetEODReportResponse" />
-  </wsdl:message>
   <wsdl:portType name="iChamsICSPortalService">
+    <wsdl:operation name="GetEODReport">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" message="tns:iChamsICSPortalService_GetEODReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReportResponse" message="tns:iChamsICSPortalService_GetEODReport_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateLocation">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateLocation" message="tns:iChamsICSPortalService_CreateLocation_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateLocationResponse" message="tns:iChamsICSPortalService_CreateLocation_OutputMessage" />
@@ -711,6 +721,10 @@
     <wsdl:operation name="FindTerminal">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindTerminal" message="tns:iChamsICSPortalService_FindTerminal_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindTerminalResponse" message="tns:iChamsICSPortalService_FindTerminal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindTerminalByCode">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindTerminalByCode" message="tns:iChamsICSPortalService_FindTerminalByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindTerminalByCodeResponse" message="tns:iChamsICSPortalService_FindTerminalByCode_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllTerminals">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllTerminals" message="tns:iChamsICSPortalService_GetAllTerminals_InputMessage" />
@@ -995,10 +1009,6 @@
     <wsdl:operation name="GetAllAuditTrails">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails" message="tns:iChamsICSPortalService_GetAllAuditTrails_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrailsResponse" message="tns:iChamsICSPortalService_GetAllAuditTrails_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetEODReport">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" message="tns:iChamsICSPortalService_GetEODReport_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReportResponse" message="tns:iChamsICSPortalService_GetEODReport_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

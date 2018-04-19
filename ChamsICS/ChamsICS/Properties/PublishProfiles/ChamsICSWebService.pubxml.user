@@ -22,10 +22,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2018 08:43:50</publishTime>
     </File>
     <File Include="bin/ChamsICSWebService.dll">
-      <publishTime>04/18/2018 20:09:09</publishTime>
+      <publishTime>04/19/2018 08:58:16</publishTime>
     </File>
     <File Include="bin/ChamsICSWebService.pdb">
-      <publishTime>04/18/2018 20:09:09</publishTime>
+      <publishTime>04/19/2018 08:58:16</publishTime>
     </File>
     <File Include="bin/CustomTextMessageEncoder.dll">
       <publishTime>02/26/2018 16:24:52</publishTime>

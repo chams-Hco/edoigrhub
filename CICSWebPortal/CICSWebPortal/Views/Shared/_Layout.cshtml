@@ -3,7 +3,7 @@
     int roleId = Convert.ToInt32(Session["RoleId"]);
     string roleCode = (string)Session["RoleCode"];
     bool cancreatewebUsers = (bool)Session["CanCreateWebUsers"];
-    
+
 }
 <!DOCTYPE html>
 <html>
@@ -339,9 +339,9 @@
                             displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
                             // displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; }
                         }
-                        <li style="@displayStyle" class="parent">
+                        <li style="@displayStyle" class="parent" data-toggle="collapse" data-target="#revenue-sub-menu">
                             <a href="#">
-                                <span data-toggle="collapse" data-target="#revenue-sub-menu">
+                                <span class="menu-icon">
                                     <i class="fa fa-tag fa-lg"></i>
                                 </span>
                                 <span class="text">
@@ -389,16 +389,18 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="parent">
+                        <li class="parent" data-toggle="collapse" data-target="#report-sub-menu">
                             <a href="#">
-                                <span data-toggle="collapse" data-target="#report-sub-menu">
+                                <span class="menu-icon">
                                     <i class="fa fa-tasks fa-lg"></i>
                                 </span>
-                                <span>
+                                <span class="text">
                                     Reports
                                 </span>
+                                <span class="menu-hover">
+                                </span>
                             </a>
-                            <ul class="nav-child collapse large" id="report-sub-menu">
+                            <ul class="nav-child collapse large" id="report-sub-menu" style="padding-left:10px">
                                 @{
                                     clientmenu = new string[] { "SA", "SU", "CA", "CU", "TP" };
                                     displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
@@ -455,7 +457,7 @@
                                         <span class="text"> Location Summary</span>
                                     </a>
                                 </li>
-                                <li style="@displayStyle" >
+                                <li style="@displayStyle">
                                     <a href="/Report/TransactionReceipt/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
                                         <span class="text">Transaction Receipt</span>
@@ -483,11 +485,11 @@
                         }
                         <li style="@displayStyle" class="parent" data-toggle="collapse" data-target="#user-sub-menu">
                             <a href="#">
-                                <span>
-                                    <i class="fa fa-user fa-lg"></i>
+                                <span class="menu-icon">
+                                    <i class="fa fa-user fa-cogs"></i>
                                 </span>
                                 <span class="text">
-                                    User Management
+                                    Settings
                                 </span>
                                 <span class="menu-hover">
                                 </span>
@@ -502,13 +504,13 @@
                                         </span>
                                     </a>
                                 </li>
-                                @{ 
+                                @{
                                     if (cancreatewebUsers == true)
                                     {
                                         <li>
                                             <a href="/User/WebUser">
                                                 <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                                <span class="text"> Web Users</span>
+                                                <span class="text"> Collection Agents</span>
 
                                                 <span class="menu-hover">
                                                 </span>
@@ -681,9 +683,9 @@
         {
             try
             {
-            @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
             }
-            catch(Exception e) { }
+            catch (Exception e) { }
 
             <div class="padding-md">
                 <h4 class="m-top-none"> Do you want to logout?</h4>

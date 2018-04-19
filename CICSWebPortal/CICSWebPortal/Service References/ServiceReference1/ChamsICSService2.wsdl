@@ -152,6 +152,15 @@
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_iChamsICSPortalService" type="i1:iChamsICSPortalService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEODReport">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateLocation">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/CreateLocation" style="document" />
       <wsdl:input>
@@ -388,6 +397,15 @@
     </wsdl:operation>
     <wsdl:operation name="FindTerminal">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindTerminal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindTerminalByCode">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindTerminalByCode" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1027,15 +1045,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllAuditTrails">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetEODReport">
-      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

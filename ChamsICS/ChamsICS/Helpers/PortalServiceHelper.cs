@@ -2547,7 +2547,7 @@ on x.MinistryId equals y.Id
                 System.Security.Cryptography.MD5 md5Hash = System.Security.Cryptography.MD5.Create();
                 Random r = new CryptoRandom();
                 string passcode = req.Email.Split(new char[] { '@' })[0] + DateTime.Now.Year.ToString();
-                string password = Utils.GetMd5Hash(md5Hash, passcode);
+                string password = Utils.GetMd5Hash(md5Hash, req.Password);
 
                 if (req.ClientId == 0)
                 {
@@ -2592,11 +2592,11 @@ on x.MinistryId equals y.Id
                 if (req.RoleId > 4)
                 {
                     var agent = db.Agents.FirstOrDefault(x => x.Id == req.UserTypeParentId);
-                    Message = String.Format("LoginID: {0} || Password: {1} ||Agent Code: {2}", user.Email, passcode, agent != null ? agent.Code : "");
+                    Message = String.Format("LoginID: {0} || Password: {1} ||Agent Code: {2}", user.Email, req.Password, agent != null ? agent.Code : "");
                 }
                 else
                 {
-                    Message = String.Format("LoginID: {0} || Password: {1}", user.Email, passcode);
+                    Message = String.Format("LoginID: {0} || Password: {1}", user.Email, req.Password);
 
                 }
 

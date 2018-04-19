@@ -1,6 +1,8 @@
 ﻿@model CICSWebPortal.Models.Transaction
 @{
     ViewBag.Title = "Transaction Receipt";
+    string roleCode = (string)Session["RoleCode"];
+    bool cancreatewebUsers = (bool)Session["CanCreateWebUsers"];
 }
 <div id=" = receipt_main">
     <div class="main-header clearfix">
@@ -24,13 +26,33 @@
                     <tr><th>Ministry</th> <td>@Model.Ministry</td></tr>
                     <tr><th>Payment Reference</th> <td>@Model.PaymentReference</td></tr>
                     <tr><th>Amount</th> <td>@Model.Amount</td> </tr>
-                    <tr><th>First Name</th> <td>@Model.FirstName</td></tr>
-                    <tr><th>Middle Name</th> <td>@Model.MiddleName</td></tr>
-                    <tr><th>Surname</th> <td>@Model.LastName</td></tr>
-                    <tr><th>Email</th> <td>@Model.Email</td></tr>
-                    <tr><th>Phone</th> <td>@Model.PhoneNumber</td> </tr>
+                    @{
+                        var roles = new string[] { "SA", "SU", "CA", "CU" };
+                        var roles2 = new string[] { "SA", "SU", "WA" };
+                        if (roles.Contains(roleCode))
+                        {
+                            <tr><th>First Name</th> <td>@Model.FirstName</td></tr>
+                            <tr><th>Middle Name</th> <td>@Model.MiddleName</td></tr>
+                            <tr><th>Surname</th> <td>@Model.LastName</td></tr>
+                            <tr><th>Email</th> <td>@Model.Email</td></tr>
+                            <tr><th>Phone</th> <td>@Model.PhoneNumber</td> </tr>
+
+                        }
+                        else if (roles2.Contains(roleCode) || cancreatewebUsers == true)
+                        {
+                            <tr><th>Name</th> <td>@Model.Name</td></tr>
+                            <tr><th>Food Amount</th> <td>@Model.FoodAmount</td></tr>
+                            <tr><th>Drink Amount</th> <td>@Model.DrinkAmount</td></tr>
+                            <tr><th>Rental Amount</th> <td>@Model.Amount  </td></tr>
+                            <tr><th>Other Amount</th> <td>@Model.OtherAmount</td></tr>
+                            <tr><th>Income</th> <td>@Model.Income</td></tr>
+                            <tr><th>PErcentage Deduction</th> <td>@Model.Percentage %</td></tr>
+                        }
+
+                    }
                     <tr><th>Address</th> <td>@Model.Address</td></tr>
                     <tr><th>Transaction Date</th> <td>@Model.TransactionDate</td> </tr>
+
                 </tbody>
             </table>
         </div><!-- /.padding-md -->

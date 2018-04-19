@@ -396,6 +396,50 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCreateEndOfDayRes" nillable="true" type="tns:ArrayOfCreateEndOfDayRes" />
+  <xs:complexType name="FetchEndOfDayReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AgentId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TerminalIds" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="status" nillable="true" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FetchEndOfDayReq" nillable="true" type="tns:FetchEndOfDayReq" />
+  <xs:complexType name="FetchEndOfDayRes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EndOfDayReport" nillable="true" type="tns:ArrayOfEndOfDayModel" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FetchEndOfDayRes" nillable="true" type="tns:FetchEndOfDayRes" />
+  <xs:complexType name="ArrayOfEndOfDayModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EndOfDayModel" nillable="true" type="tns:EndOfDayModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEndOfDayModel" nillable="true" type="tns:ArrayOfEndOfDayModel" />
+  <xs:complexType name="EndOfDayModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AgentId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EODCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="HandlerEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HandlerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HandlerPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="RemittanceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TerminalCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TerminalId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EndOfDayModel" nillable="true" type="tns:EndOfDayModel" />
   <xs:complexType name="Location">
     <xs:sequence>
       <xs:element minOccurs="0" name="AgentId" nillable="true" type="xs:int" />
@@ -1530,12 +1574,22 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Agent" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="DrinkAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="FoodAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="FromDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Income" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Ministry" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OtherAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PaymentReference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Percentage" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RentalAmount" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="ResidentId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RevenueCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RevenueHead" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RevenueName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Terminal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ToDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="TransactionCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TransactionDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="TransactionId" type="xs:int" />
@@ -1598,48 +1652,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AuditTrail" nillable="true" type="tns:AuditTrail" />
-  <xs:complexType name="FetchEndOfDayReq">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AgentId" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string" />
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TerminalIds" nillable="true" type="q1:ArrayOfstring" />
-      <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="status" nillable="true" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="FetchEndOfDayReq" nillable="true" type="tns:FetchEndOfDayReq" />
-  <xs:complexType name="FetchEndOfDayRes">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:Response">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="EndOfDayReport" nillable="true" type="tns:ArrayOfEndOfDayModel" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="FetchEndOfDayRes" nillable="true" type="tns:FetchEndOfDayRes" />
-  <xs:complexType name="ArrayOfEndOfDayModel">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="EndOfDayModel" nillable="true" type="tns:EndOfDayModel" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfEndOfDayModel" nillable="true" type="tns:ArrayOfEndOfDayModel" />
-  <xs:complexType name="EndOfDayModel">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AgentId" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="EODCount" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="HandlerEmail" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="HandlerName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="HandlerPhone" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="RemittanceCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Status" type="xs:boolean" />
-      <xs:element minOccurs="0" name="TerminalCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TerminalId" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="EndOfDayModel" nillable="true" type="tns:EndOfDayModel" />
 </xs:schema>
