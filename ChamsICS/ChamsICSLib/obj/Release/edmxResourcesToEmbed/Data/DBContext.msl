@@ -46,6 +46,73 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="CICSModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="HasWebUsers" ColumnName="HasWebUsers" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+          <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientSettings">
+      <EntityTypeMapping TypeName="CICSModel.ClientSetting">
+        <MappingFragment StoreEntitySet="ClientSettings">
+          <ScalarProperty Name="ConsumptionTaxRevenueId" ColumnName="ConsumptionTaxRevenueId" />
+          <ScalarProperty Name="WithholdingTaxRevenueItem" ColumnName="WithholdingTaxRevenueItem" />
+          <ScalarProperty Name="ShowAmountUnpaid" ColumnName="ShowAmountUnpaid" />
+          <ScalarProperty Name="DefaultRevenueItemId" ColumnName="DefaultRevenueItemId" />
+          <ScalarProperty Name="PercentageDeduction" ColumnName="PercentageDeduction" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EODs">
+      <EntityTypeMapping TypeName="CICSModel.EOD">
+        <MappingFragment StoreEntitySet="EOD">
+          <ScalarProperty Name="TransactionReference" ColumnName="TransactionReference" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EODPaymentNotificationLogs">
+      <EntityTypeMapping TypeName="CICSModel.EODPaymentNotificationLog">
+        <MappingFragment StoreEntitySet="EODPaymentNotificationLog">
+          <ScalarProperty Name="TransactionApprovalDate" ColumnName="TransactionApprovalDate" />
+          <ScalarProperty Name="TransactionInitiatedDate" ColumnName="TransactionInitiatedDate" />
+          <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="DestinationBankCode" ColumnName="DestinationBankCode" />
+          <ScalarProperty Name="SplitType" ColumnName="SplitType" />
+          <ScalarProperty Name="TransactionFeeBearer" ColumnName="TransactionFeeBearer" />
+          <ScalarProperty Name="Fee" ColumnName="Fee" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="BillerName" ColumnName="BillerName" />
+          <ScalarProperty Name="BillerId" ColumnName="BillerId" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="ChannelCode" ColumnName="ChannelCode" />
+          <ScalarProperty Name="SourceBankCode" ColumnName="SourceBankCode" />
+          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+          <ScalarProperty Name="EODId" ColumnName="EODId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="IdentityServices">
       <EntityTypeMapping TypeName="CICSModel.IdentityService">
         <MappingFragment StoreEntitySet="IdentityService">
@@ -183,6 +250,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TransactionLogs">
+      <EntityTypeMapping TypeName="CICSModel.TransactionLog">
+        <MappingFragment StoreEntitySet="TransactionLog">
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="OtherAmount" ColumnName="OtherAmount" />
+          <ScalarProperty Name="RentalAmount" ColumnName="RentalAmount" />
+          <ScalarProperty Name="DrinkAmount" ColumnName="DrinkAmount" />
+          <ScalarProperty Name="FoodAmount" ColumnName="FoodAmount" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="Income" ColumnName="Income" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+          <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="RevenueCode" ColumnName="RevenueCode" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TransactionLogExceptions">
       <EntityTypeMapping TypeName="CICSModel.TransactionLogException">
         <MappingFragment StoreEntitySet="TransactionLogException">
@@ -276,75 +380,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="EODs">
-      <EntityTypeMapping TypeName="CICSModel.EOD">
-        <MappingFragment StoreEntitySet="EOD">
-          <ScalarProperty Name="TransactionReference" ColumnName="TransactionReference" />
-          <ScalarProperty Name="Count" ColumnName="Count" />
-          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EODPaymentNotificationLogs">
-      <EntityTypeMapping TypeName="CICSModel.EODPaymentNotificationLog">
-        <MappingFragment StoreEntitySet="EODPaymentNotificationLog">
-          <ScalarProperty Name="TransactionApprovalDate" ColumnName="TransactionApprovalDate" />
-          <ScalarProperty Name="TransactionInitiatedDate" ColumnName="TransactionInitiatedDate" />
-          <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
-          <ScalarProperty Name="Narration" ColumnName="Narration" />
-          <ScalarProperty Name="DestinationBankCode" ColumnName="DestinationBankCode" />
-          <ScalarProperty Name="SplitType" ColumnName="SplitType" />
-          <ScalarProperty Name="TransactionFeeBearer" ColumnName="TransactionFeeBearer" />
-          <ScalarProperty Name="Fee" ColumnName="Fee" />
-          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="BillerName" ColumnName="BillerName" />
-          <ScalarProperty Name="BillerId" ColumnName="BillerId" />
-          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-          <ScalarProperty Name="ChannelCode" ColumnName="ChannelCode" />
-          <ScalarProperty Name="SourceBankCode" ColumnName="SourceBankCode" />
-          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
-          <ScalarProperty Name="EODId" ColumnName="EODId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserRoles">
-      <EntityTypeMapping TypeName="CICSModel.UserRole">
-        <MappingFragment StoreEntitySet="UserRole">
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UserClients">
       <EntityTypeMapping TypeName="CICSModel.UserClient">
         <MappingFragment StoreEntitySet="UserClient">
           <ScalarProperty Name="CanCreateWebUsers" ColumnName="CanCreateWebUsers" />
           <ScalarProperty Name="ClientId" ColumnName="ClientId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Clients">
-      <EntityTypeMapping TypeName="CICSModel.Client">
-        <MappingFragment StoreEntitySet="Client">
-          <ScalarProperty Name="HasWebUsers" ColumnName="HasWebUsers" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-          <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -368,50 +409,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TransactionLogs">
-      <EntityTypeMapping TypeName="CICSModel.TransactionLog">
-        <MappingFragment StoreEntitySet="TransactionLog">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-          <ScalarProperty Name="OtherAmount" ColumnName="OtherAmount" />
-          <ScalarProperty Name="RentalAmount" ColumnName="RentalAmount" />
-          <ScalarProperty Name="DrinkAmount" ColumnName="DrinkAmount" />
-          <ScalarProperty Name="FoodAmount" ColumnName="FoodAmount" />
-          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-          <ScalarProperty Name="Income" ColumnName="Income" />
-          <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
-          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-          <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="RevenueCode" ColumnName="RevenueCode" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="CICSModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRole">
           <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="TerminalId" ColumnName="TerminalId" />
-          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
-          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClientSettings">
-      <EntityTypeMapping TypeName="CICSModel.ClientSetting">
-        <MappingFragment StoreEntitySet="ClientSettings">
-          <ScalarProperty Name="DefaultRevenueItemId" ColumnName="DefaultRevenueItemId" />
-          <ScalarProperty Name="PercentageDeduction" ColumnName="PercentageDeduction" />
-          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

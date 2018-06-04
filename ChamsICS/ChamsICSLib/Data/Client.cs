@@ -18,12 +18,12 @@ namespace ChamsICSLib.Data
         public Client()
         {
             this.Agents = new HashSet<Agent>();
+            this.ClientSettings = new HashSet<ClientSetting>();
             this.IdentityServices = new HashSet<IdentityService>();
             this.Revenues = new HashSet<Revenue>();
+            this.TransactionLogs = new HashSet<TransactionLog>();
             this.Users = new HashSet<User>();
             this.UserClients = new HashSet<UserClient>();
-            this.TransactionLogs = new HashSet<TransactionLog>();
-            this.ClientSettings = new HashSet<ClientSetting>();
         }
     
         public int Id { get; set; }
@@ -39,16 +39,16 @@ namespace ChamsICSLib.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agent> Agents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClientSetting> ClientSettings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IdentityService> IdentityServices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Revenue> Revenues { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserClient> UserClients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientSetting> ClientSettings { get; set; }
     }
 }

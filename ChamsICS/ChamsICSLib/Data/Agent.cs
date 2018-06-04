@@ -18,8 +18,8 @@ namespace ChamsICSLib.Data
         public Agent()
         {
             this.Terminals = new HashSet<Terminal>();
-            this.UserAgents = new HashSet<UserAgent>();
             this.TransactionLogs = new HashSet<TransactionLog>();
+            this.UserAgents = new HashSet<UserAgent>();
         }
     
         public int Id { get; set; }
@@ -34,12 +34,12 @@ namespace ChamsICSLib.Data
         public Nullable<int> Status { get; set; }
         public string AgentManagerCode { get; set; }
     
+        public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Terminal> Terminals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserAgent> UserAgents { get; set; }
-        public virtual Client Client { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserAgent> UserAgents { get; set; }
     }
 }

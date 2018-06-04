@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ChamsICSWebService
 {
@@ -29,6 +30,12 @@ namespace ChamsICSWebService
         [WebInvoke(Method = "POST", UriTemplate = "/VerifyResidentId", BodyStyle = WebMessageBodyStyle.Bare)]
         [Description("Call this service to verify the identity of a resident. For Technical support, contact itsupport@chams.com ")]
         VerifyResidentIdRes VerifyResidentId(VerifyResidentIdReq req);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/VerifyAnambraResidentID", BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Call this service to verify the identity of an anambra resident. For Technical support, contact itsupport@chams.com ")]
+        Task<VerifyResidentRes> VerifyAnambraResidentID(VerifyResidentIdReq req);
+
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/UploadTransaction", BodyStyle = WebMessageBodyStyle.Bare)]

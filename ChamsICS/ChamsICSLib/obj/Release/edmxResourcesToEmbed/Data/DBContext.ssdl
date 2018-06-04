@@ -64,6 +64,9 @@
     <Property Name="ClientId" Type="int" Nullable="false" />
     <Property Name="PercentageDeduction" Type="decimal" Precision="18" Scale="2" />
     <Property Name="DefaultRevenueItemId" Type="int" />
+    <Property Name="ShowAmountUnpaid" Type="bit" />
+    <Property Name="WithholdingTaxRevenueItem" Type="int" />
+    <Property Name="ConsumptionTaxRevenueId" Type="int" />
   </EntityType>
   <EntityType Name="EOD">
     <Key>

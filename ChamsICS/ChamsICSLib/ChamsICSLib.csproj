@@ -177,7 +177,9 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Data\DBContext.edmx.diagram">
       <DependentUpon>DBContext.edmx</DependentUpon>
     </None>

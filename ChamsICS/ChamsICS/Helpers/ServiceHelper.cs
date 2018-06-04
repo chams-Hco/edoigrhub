@@ -423,6 +423,14 @@ namespace ChamsICSWebService
                     TerminalId = req.TerminalId,
                     ToDate = req.ToDate,
                     UploadDate = DateTime.Now,
+                    Address = req.Address,
+                    Email = req.Email,
+                    FirstName = req.FirstName,
+                    Lastname = req.LastName,
+                    Gender = req.Gender,
+                    MiddleName =req.MiddleName,
+                    PhoneNumber = req.PhoneNumber,
+                    ResidentId = req.ResidentId,                   
                     Name =req.Name
                     
 
@@ -454,6 +462,156 @@ namespace ChamsICSWebService
             return result;
         }
 
+        internal bool ValidateAndSaveMultiWebTransaction(List<WebTransactionReq> req, out string msg, out string tempResId, out string transactioncode, out string remittanceCode, out ChamsICSLib.Data.Terminal terminalret)
+        {
+            bool result = true;
+            msg = string.Empty;
+            tempResId = string.Empty;
+            transactioncode = string.Empty;
+            remittanceCode = string.Empty;
+            string outMsg = String.Empty;
+            terminalret = null;
+            if(req.Count <1)
+            {
+                msg = "Request is Empty";
+                return false;
+            }
+            int tID = req[0].TerminalId;
+            var terminal = db.Terminals.SingleOrDefault(a => a.Id == tID);
+
+            if (terminal == null)
+            {
+                msg = "Terminal Not Found";
+                return false;
+            }
+
+            terminalret = terminal;
+            string TerminalCode = terminal.Code;
+            string AgentCode = terminal.Agent != null ? terminal.Agent.Code : "";
+           
+            remittanceCode = GenerateEODReference(terminal.Id);
+
+            if (TerminalCode == "")
+            {
+                msg = "Could not load terminal Code or Agent Code";
+                return false;
+            }
+
+            
+
+
+
+            if (!ValidateRevenueId(req[0].RevenueItemId, out msg))
+            {
+                return false;
+            }
+            string revenueCode = msg;
+
+
+            if (terminal.UserDetails == null || String.IsNullOrEmpty(terminal.UserDetails.ElementAt(0).Name) || String.IsNullOrWhiteSpace(terminal.UserDetails.ElementAt(0).Name))
+            {
+                msg = "Terminal is either not linked to a user or the user doesnt have a name";
+                return false;
+            }
+
+
+            try
+            {
+                List<TransactionLog> transactions = new List<TransactionLog>();
+                foreach(var webpay in req)
+                {
+                    transactioncode = AgentCode + terminal.Id + DateTime.Now.ToString("ddMMyyHHmmssfff");
+                    //Validate TransactionCode EXIST
+                    if (ValidateTransactionCodeExist(transactioncode, out msg))
+                    {
+                        TransactionLog transaction = new TransactionLog
+                        {
+                            AgentId = terminal.AgentId,
+                            Amount = webpay.Amount,
+                            ClientId = terminal.Agent.ClientId,
+                            RevenueCode = revenueCode,
+                            DateOfBirth = DateTime.Today,
+                            Code = transactioncode,
+                            DrinkAmount = webpay.DrinkAmount,
+                            FoodAmount = webpay.FoodAmount,
+                            FromDate = webpay.FromDate,
+                            Income = webpay.Income,
+                            OtherAmount = webpay.OtherAmount,
+                            RentalAmount = webpay.RentalAmount,
+                            PaymentReference = remittanceCode,
+                            Percentage = webpay.PercentageDeduction,
+                            Status = 1,
+                            TransactionDate = DateTime.Now,
+                            TerminalId = webpay.TerminalId,
+                            ToDate = webpay.ToDate,
+                            UploadDate = DateTime.Now,
+                            Address = webpay.Address,
+                            Email = webpay.Email,
+                            FirstName = webpay.FirstName,
+                            Lastname = webpay.LastName,
+                            Gender = webpay.Gender,
+                            MiddleName = webpay.MiddleName,
+                            PhoneNumber = webpay.PhoneNumber,
+                            ResidentId = webpay.ResidentId,
+                            Name = webpay.Name,
+                            AnnualIncome = webpay.AnnualIncome,
+                            AnnualNHFund = webpay.AnnualNHFund,
+                            AnnualNHIS = webpay.AnnualNHIS,
+                            AnnualPension = webpay.AnnualPension,
+                            AnnualTaxPayable = webpay.AnnualTaxPayable,
+                            ComputedAnnualTax = webpay.ComputedAnnualTax,
+                            ConsolidatedReliefs = webpay.ComputedAnnualTax,
+                            DevelopmentLevyLiability = webpay.DevelopmentLevyLiability,
+                            EmployeeName = webpay.EmployeeName,
+                            LiabilityPerStaff = webpay.LiabilityPerStaff,
+                            MinimumTax = webpay.MinimumTax,
+                            Month = webpay.Month,
+                            MonthlyIncome = webpay.MonthlyIncome,
+                            MonthlyNHFund = webpay.MonthlyNHFund,
+                            MonthlyNHIS = webpay.MonthlyNHIS,
+                            MonthlyPension = webpay.MonthlyPension,
+                            MonthlyTaxLiability = webpay.MonthlyTaxLiability,
+                            NoOfStaff = webpay.NoOfStaff,
+                            StaffPayerID = webpay.StaffPayerID,
+                            TaxableIncome = webpay.TaxableIncome,
+                            WithholdingTaxActualAmount = webpay.WithholdingTaxActualAmount,
+                            WithholdingTaxLiability = webpay.WithholdingTaxLiability,
+                            WithholdingTaxRevenueDeductionPercentage = webpay.WithholdingTaxRevenueDeductionPercentage,
+                            WithholdingTaxRevenueName = webpay.WithholdingTaxRevenueName,
+                            Year = webpay.Year
+                        };
+                        transactions.Add(transaction);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    
+                }
+                
+                EOD EOD = new EOD
+                {
+                    Amount = transactions.Sum(a=>a.Amount.Value),
+                    Date = transactions.Last().TransactionDate.Value,
+                    TransactionReference = remittanceCode,
+                    Count = 1,
+                    Status = false,
+                    TerminalId = terminal.Id
+                };
+                db.TransactionLogs.AddRange(transactions);
+                db.EODs.Add(EOD);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+                return false;
+            }
+
+
+
+            return result;
+        }
         private bool ValidateRevenueId(int revenueItemId, out string msg)
         {
             bool result = true;

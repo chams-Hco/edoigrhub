@@ -64,6 +64,10 @@
     <Property Name="ClientId" Type="int" Nullable="false" />
     <Property Name="PercentageDeduction" Type="decimal" Precision="18" Scale="2" />
     <Property Name="DefaultRevenueItemId" Type="int" />
+    <Property Name="ShowAmountUnpaid" Type="bit" />
+    <Property Name="WithholdingTaxRevenueItem" Type="int" />
+    <Property Name="ConsumptionTaxRevenueId" Type="int" />
+    <Property Name="PayeeRevenueItem" Type="int" />
   </EntityType>
   <EntityType Name="EOD">
     <Key>
@@ -263,6 +267,31 @@
     <Property Name="OtherAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="FromDate" Type="date" />
     <Property Name="ToDate" Type="date" />
+    <Property Name="Month" Type="int" />
+    <Property Name="MonthlyIncome" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MonthlyPension" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MonthlyNHFund" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MonthlyNHIS" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="EmployeeName" Type="varchar" MaxLength="100" />
+    <Property Name="StaffPayerID" Type="varchar" MaxLength="50" />
+    <Property Name="AnnualIncome" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AnnualPension" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AnnualNHFund" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AnnualNHIS" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ConsolidatedReliefs" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TaxableIncome" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ComputedAnnualTax" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MinimumTax" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AnnualTaxPayable" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MonthlyTaxLiability" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Year" Type="int" />
+    <Property Name="NoOfStaff" Type="int" />
+    <Property Name="LiabilityPerStaff" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DevelopmentLevyLiability" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WithholdingTaxRevenueName" Type="varchar" MaxLength="50" />
+    <Property Name="WithholdingTaxRevenueDeductionPercentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WithholdingTaxActualAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WithholdingTaxLiability" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="TransactionLogException">
     <Key>

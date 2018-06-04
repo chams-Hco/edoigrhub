@@ -18,6 +18,10 @@ namespace ChamsICSLib.Data
         public int ClientId { get; set; }
         public Nullable<decimal> PercentageDeduction { get; set; }
         public Nullable<int> DefaultRevenueItemId { get; set; }
+        public Nullable<bool> ShowAmountUnpaid { get; set; }
+        public Nullable<int> WithholdingTaxRevenueItem { get; set; }
+        public Nullable<int> ConsumptionTaxRevenueId { get; set; }
+        public Nullable<int> PayeeRevenueItem { get; set; }
     
         public virtual Client Client { get; set; }
     }

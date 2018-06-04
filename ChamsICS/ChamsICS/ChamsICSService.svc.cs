@@ -16,6 +16,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Net;
 using System.Xml.Linq;
+using ChamsICSWebService.HttpAccessors;
 
 namespace ChamsICSWebService
 {
@@ -171,6 +172,115 @@ namespace ChamsICSWebService
             }
         }
 
+        public async Task<VerifyResidentRes> VerifyAnambraResidentID(VerifyResidentIdReq req)
+        {
+            VerifyResidentRes res = new VerifyResidentRes();
+
+            try
+            {
+                if (req == null || req.AgentCode == null || req.TerminalCode == null || req.ResidentId == null)
+                {
+                    res.ResponseCode = ResponseHelper.FAILED;
+                    res.ResponseDescription = "Invalid Requests";
+                    return res;
+                }
+                Response response;
+                var authorise = ServiceHelper.AuthoriseRequest(req.AgentCode, req.UserName, req.Password, out response);
+                if (!authorise)
+                {
+                    res.ResponseCode = response.ResponseCode;
+                    res.ResponseDescription = response.ResponseDescription;
+                    return res;
+                }
+
+                //Validate AgentCode
+                string msg = string.Empty;
+                bool ValidateRes = ServiceHelper.ValidateAgentCode(req.AgentCode, out msg);
+                if (!ValidateRes)
+                {
+                    res.ResponseCode = ResponseHelper.FAILED;
+                    res.ResponseDescription = msg;
+                    return res;
+                }
+
+                IdentityService serviceUrl = ServiceHelper.GetClientIdentityService(req.TerminalCode);
+                //Validate serviceURL Before Proceeding...
+                //Debug=== Remove before live release build
+                Logger.logToFile(DebugLogPath, "ServiceUrl-" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt", serviceUrl.URL);
+
+                if (serviceUrl == null || serviceUrl.URL.Trim() == "" || serviceUrl.URL == string.Empty)
+                {
+                    res.ResponseCode = ResponseHelper.FAILED;
+                    res.ResponseDescription = "Invalid Terminal Code";
+                    return res;
+                }
+                try
+                {
+                    MemberRequest request = new MemberRequest { OtherSearch = req.ResidentId };
+                   
+                    if (int.TryParse(req.ResidentId, out int result) == true)
+                    {
+                        request.Id = result;
+                        request.SearchType = SearchType.Id;
+                    }
+                    else
+                    {
+                        request.SearchType = SearchType.OtherSearch;
+                    }
+
+                    // VerifyIdResponse resident;
+                    List<MemberResponse> residents = null;
+                    var httpresp = await HttpRequestFactory.Post(serviceUrl.URL.Trim(), request);
+
+                    if (httpresp.IsSuccessStatusCode)
+                    {
+                        residents = await httpresp.ContentAsTypeAsync<List<MemberResponse>>();
+                        res.ResponseCode = httpresp.StatusCode.ToString();
+                        res.ResponseDescription = httpresp.ReasonPhrase;
+                        foreach(var resident in residents )
+                        {
+                            Resident currentresident = new Resident();
+                            currentresident.ResidentId = resident.RESIDENCYID;
+                            currentresident.FirstName = resident.FIRSTNAME;
+                            currentresident.MiddleName = resident.MIDDLENAME;
+                            currentresident.LastName = resident.SURNAME;
+                            currentresident.Address = resident.RESIDENTIAL_ADDRESS;
+                            currentresident.Email = resident.EMAIL;
+                            currentresident.PhoneNumber = resident.MOBILE;
+                            currentresident.DateOfBirth = resident.DOB;
+                            currentresident.Gender = resident.GENDER;
+                            currentresident.WebAccessPin = resident.WEBACCESSPIN;
+                            res.Residents.Add(currentresident);
+                        }
+                        return res;
+                    }
+                    else
+                    {
+                        res.ResponseCode = httpresp.StatusCode.ToString();
+                        res.ResponseDescription = httpresp.ReasonPhrase;
+                        return res;
+                    }
+                   
+                }
+                catch (Exception e)
+                {
+                    Logger.logToFile(e, ErrorLogPath);
+                    res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                    res.ResponseDescription = "Application Error";
+                    return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.logToFile(ex, ErrorLogPath);
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = "Application Error";
+                return res;
+            }
+        }
+
+
+
         public UploadTransactionRes UploadTransaction(UploadTransactionReq req)
         {
             UploadTransactionRes res = new UploadTransactionRes();
@@ -251,7 +361,16 @@ namespace ChamsICSWebService
                         TerminalCode = terminal.Code,
                         FirstName = (terminal.UserDetails != null) ? terminal.UserDetails.ElementAt(0).Name : "",
                         PaymentReference = remittanceCode,
-                        TransactionDate = DateTime.Now.ToString()
+                        TransactionDate = DateTime.Now.ToString(),
+                        Address = webTransactionReq.Address,
+                        DateOfBirth = webTransactionReq.DateOfBirth,
+                        Email = webTransactionReq.Email,
+                        Gender = webTransactionReq.Gender,
+                        LastName = webTransactionReq.LastName,
+                        MiddleName = webTransactionReq.MiddleName,
+                        PhoneNumber = webTransactionReq.PhoneNumber,
+                        ResidentId = webTransactionReq.ResidentId,
+                        RevenueCode = webTransactionReq.RevenueCode
                     };
                     ServiceHelper.UploadExceptionToDb(msg, req);
 
@@ -276,6 +395,104 @@ namespace ChamsICSWebService
                 res.ResponseDescription = "Application Error";
                 return res;
             }
+        }
+
+        public WebTransactionRes ProcessWebMultiTrancation(List<WebTransactionReq> webTransactionReq)
+        {
+            WebTransactionRes res = new WebTransactionRes();
+            if (webTransactionReq == null)
+            {
+                throw new ArgumentNullException("Invalid UploadTransaction Request");
+            }
+
+            string msg = string.Empty;
+            string tempResId = string.Empty;
+
+            //Validate Upload Data
+            try
+            {
+                bool ValidateRes = ServiceHelper.ValidateAndSaveMultiWebTransaction(webTransactionReq, out msg, out tempResId, out string transactioncode, out string remittanceCode, out ChamsICSLib.Data.Terminal terminal);
+                if (!ValidateRes)
+                {
+                    //Log Failed Upload Request
+                    string msgLog = msg + Environment.NewLine + XMLHelper.serializeObjectToXMLString(webTransactionReq);
+
+                    //====Log Failed Upload to File===
+                    Logger.logToFile(msgLog, DebugLogPath + "\\Failed_Upload\\", true, transactioncode, "xml", true);
+
+                    //====Log Failed Upload to Database====
+                    //UploadTransactionReq req = new UploadTransactionReq
+                    //{
+                    //    TransactionCode = transactioncode,
+                    //    Amount = webTransactionReq.Amount.ToString(),
+                    //    TerminalCode = terminal.Code,
+                    //    FirstName = (terminal.UserDetails != null) ? terminal.UserDetails.ElementAt(0).Name : "",
+                    //    PaymentReference = remittanceCode,
+                    //    TransactionDate = DateTime.Now.ToString(),
+                    //    Address = webTransactionReq.Address,
+                    //    DateOfBirth = webTransactionReq.DateOfBirth,
+                    //    Email = webTransactionReq.Email,
+                    //    Gender = webTransactionReq.Gender,
+                    //    LastName = webTransactionReq.LastName,
+                    //    MiddleName = webTransactionReq.MiddleName,
+                    //    PhoneNumber = webTransactionReq.PhoneNumber,
+                    //    ResidentId = webTransactionReq.ResidentId,
+                    //    RevenueCode = webTransactionReq.RevenueCode
+                    //};
+                    //ServiceHelper.UploadExceptionToDb(msg, req);
+
+                    res.ResponseCode = ResponseHelper.VALIDATION_ERROR;
+                    res.ResponseDescription = msg;
+                    return res;
+                }
+                else
+                {
+                    res.ResponseCode = ResponseHelper.SUCCESS;
+                    res.ResponseDescription = "Successful";
+                    res.RemittanceCode = remittanceCode;
+                    res.TransactionCode = transactioncode;
+                    res.TerminalCode = terminal.Code;
+                }
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Logger.logToFile(ex, ErrorLogPath);
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = "Application Error";
+                return res;
+            }
+        }
+
+        public async Task<CashWorkIntegrationRes> SubmitInterswitchInvoiceAsync(CashWorxIntegration cashWorxIntegration)
+        {
+            CashWorkIntegrationRes res = new CashWorkIntegrationRes();
+            if (cashWorxIntegration == null)
+            {
+                return null;
+            }
+
+            try
+            {
+               
+                var serviceUrl = "https://handshake.cashworxportal.com/integration/index.php?r=mda/sendinvoice";
+                var httpresp = await HttpRequestFactory.Post(serviceUrl.Trim(), cashWorxIntegration);
+
+                if (httpresp!= null)
+                {
+                    res = await httpresp.ContentAsTypeAsync<CashWorkIntegrationRes>();                   
+                }
+                else
+                {
+                    res = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                res = null;
+            }
+
+            return res;
         }
 
         public QueryTransactionRes QueryUploadTransaction(QueryTransactionReq req)
@@ -801,7 +1018,7 @@ namespace ChamsICSWebService
                 TerminalName = req.TerminalName,
                 UserName = req.AgentUserName,
                 TerminalSerialNumber = req.TerminalSerialNumber
-                
+
             };
             //Get UserRequest section of the request
             Model.User userReq = new Model.User
@@ -942,6 +1159,6 @@ namespace ChamsICSWebService
             }
         }
 
-       
+
     }
 }

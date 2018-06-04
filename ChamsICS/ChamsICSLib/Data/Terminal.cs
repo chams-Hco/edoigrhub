@@ -17,10 +17,10 @@ namespace ChamsICSLib.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Terminal()
         {
-            this.TerminalUpdateLogs = new HashSet<TerminalUpdateLog>();
             this.EODs = new HashSet<EOD>();
-            this.UserDetails = new HashSet<UserDetail>();
+            this.TerminalUpdateLogs = new HashSet<TerminalUpdateLog>();
             this.TransactionLogs = new HashSet<TransactionLog>();
+            this.UserDetails = new HashSet<UserDetail>();
         }
     
         public int Id { get; set; }
@@ -36,12 +36,12 @@ namespace ChamsICSLib.Data
     
         public virtual Agent Agent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TerminalUpdateLog> TerminalUpdateLogs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EOD> EODs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserDetail> UserDetails { get; set; }
+        public virtual ICollection<TerminalUpdateLog> TerminalUpdateLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserDetail> UserDetails { get; set; }
     }
 }

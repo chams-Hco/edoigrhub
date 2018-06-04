@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ChamsICSWebService
 {
@@ -94,6 +95,11 @@ namespace ChamsICSWebService
         #region webUsers
         [OperationContract]
         WebTransactionRes ProcessWebTrancation(WebTransactionReq webTransactionReq);
+        [OperationContract]
+        WebTransactionRes ProcessWebMultiTrancation(List<WebTransactionReq> webTransactionReq);
+
+        [OperationContract]
+        Task<CashWorkIntegrationRes> SubmitInterswitchInvoiceAsync(CashWorxIntegration cashWorxIntegration);
 
         #endregion
 

@@ -80,7 +80,7 @@ namespace ChamsICSWebService
 
         internal bool UpdateClient(UpdateClientReq req)
         {
-
+            
             var client = db.Clients.FirstOrDefault(x => x.Id == req.ClientId);
 
             if (client != null)
@@ -148,6 +148,10 @@ namespace ChamsICSWebService
                 {
                     percentageDeduction = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).PercentageDeduction : 0,
                     DefaultRevenueItemId = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).DefaultRevenueItemId : 0,
+                    ConsumptionTaxRevenueId = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).ConsumptionTaxRevenueId : 0,
+                    ShowAmountUnpaid = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).ShowAmountUnpaid : true,
+                    WithholdingTaxRevenueItem = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).WithholdingTaxRevenueItem : 0,
+                    PayeeRevenueItem = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).PayeeRevenueItem : 0,
                 };
             }
             return res;
@@ -193,6 +197,10 @@ namespace ChamsICSWebService
                 {
                     percentageDeduction = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).PercentageDeduction : 0,
                     DefaultRevenueItemId = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).DefaultRevenueItemId : 0,
+                    ConsumptionTaxRevenueId = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).ConsumptionTaxRevenueId : 0,
+                    ShowAmountUnpaid = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).ShowAmountUnpaid : true,
+                    WithholdingTaxRevenueItem = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).WithholdingTaxRevenueItem : 0,
+                    PayeeRevenueItem = client.ClientSettings != null && client.ClientSettings.Count > 0 ? client.ClientSettings.ElementAt(0).PayeeRevenueItem : 0,
                 };
             }
             return res;
@@ -219,6 +227,10 @@ namespace ChamsICSWebService
                     {
                         percentageDeduction = x.ClientSettings.Count > 0 ? x.ClientSettings.ElementAtOrDefault(0).PercentageDeduction : 0,
                         DefaultRevenueItemId = x.ClientSettings.Count > 0 ? x.ClientSettings.ElementAtOrDefault(0).DefaultRevenueItemId : 0,
+                        ConsumptionTaxRevenueId = x.ClientSettings != null && x.ClientSettings.Count > 0 ? x.ClientSettings.ElementAt(0).ConsumptionTaxRevenueId : 0,
+                        ShowAmountUnpaid = x.ClientSettings != null && x.ClientSettings.Count > 0 ? x.ClientSettings.ElementAt(0).ShowAmountUnpaid : true,
+                        WithholdingTaxRevenueItem = x.ClientSettings != null && x.ClientSettings.Count > 0 ? x.ClientSettings.ElementAt(0).WithholdingTaxRevenueItem : 0,
+                        PayeeRevenueItem = x.ClientSettings != null && x.ClientSettings.Count > 0 ? x.ClientSettings.ElementAt(0).PayeeRevenueItem : 0,
                     }
                 }
                 );
@@ -2697,7 +2709,8 @@ on x.MinistryId equals y.Id
                             userID = user.UserDetails.ElementAt(0).userID,
                             Website = user.UserDetails.ElementAt(0).Website,
                             Zoneid = user.UserDetails.ElementAt(0).Terminal != null ? user.UserDetails.ElementAt(0).Terminal.AgentId : 0,
-                            ZoneCode = user.UserDetails.ElementAt(0).Terminal != null ? user.UserDetails.ElementAt(0).Terminal.Agent.Name : "",
+                            ZoneName = user.UserDetails.ElementAt(0).Terminal != null ? user.UserDetails.ElementAt(0).Terminal.Agent.Name : "",
+                            ZoneCode = user.UserDetails.ElementAt(0).Terminal != null ? user.UserDetails.ElementAt(0).Terminal.Agent.Code : "",
                         }
                     };
 
@@ -2867,6 +2880,7 @@ on x.MinistryId equals y.Id
                     userID = (user.UserDetails != null && user.UserDetails.Count > 0) ? user.UserDetails.ElementAt(0).userID : 0,
                     Website = (user.UserDetails != null && user.UserDetails.Count > 0) ? user.UserDetails.ElementAt(0).Website : "",
                     ZoneCode = (user.UserDetails != null && user.UserDetails.Count > 0) ? user.UserDetails.ElementAt(0).Terminal != null ? user.UserDetails.ElementAt(0).Terminal.Agent.Code : "" : "",
+                    ZoneName = (user.UserDetails != null && user.UserDetails.Count > 0) ? user.UserDetails.ElementAt(0).Terminal != null ? user.UserDetails.ElementAt(0).Terminal.Agent.Name : "" : "",
                     Zoneid = (user.UserDetails != null && user.UserDetails.Count > 0) ? user.UserDetails.ElementAt(0).Terminal != null ? user.UserDetails.ElementAt(0).Terminal.Agent.Id : 0 : 0,
                 }
 
@@ -2945,6 +2959,7 @@ on x.MinistryId equals y.Id
                     userID = (user.UserDetails != null && user.UserDetails.Count > 0) ? user.UserDetails.ElementAt(0).userID : 0,
                     Website = (user.UserDetails != null && user.UserDetails.Count > 0) ? user.UserDetails.ElementAt(0).Website : "",
                     ZoneCode = (user.UserDetails != null && user.UserDetails.Count > 0) ? user.UserDetails.ElementAt(0).Terminal != null ? user.UserDetails.ElementAt(0).Terminal.Agent.Code : "" : "",
+                    ZoneName = (user.UserDetails != null && user.UserDetails.Count > 0) ? user.UserDetails.ElementAt(0).Terminal != null ? user.UserDetails.ElementAt(0).Terminal.Agent.Name : "" : "",
                     Zoneid = (user.UserDetails != null && user.UserDetails.Count > 0) ? user.UserDetails.ElementAt(0).Terminal != null ? user.UserDetails.ElementAt(0).Terminal.Agent.Id : 0 : 0,
                 }
 
@@ -3249,15 +3264,25 @@ on x.MinistryId equals y.Id
                 res.TotalTransaction = db.TransactionLogs.Where(x => x.ClientId == UserClientId).Count();
                 res.TransctionValue = Convert.ToDecimal(db.TransactionLogs.Where(x => x.ClientId == UserClientId).Sum(x => x.Amount));
 
-                //for EOD report summary in dashboard
-                res.TotalEODAmount = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).Sum(x => x.Amount);
+                if(db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).Any())
+                {
+                    var totalEODAMount = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId)?.Sum(x => (decimal?) x.Amount);
+                    res.TotalEODAmount = totalEODAMount != null ? totalEODAMount.Value : 0;
 
-                var totalamountPaid = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId && x.Status == true).Select(x => x.Amount);
-                res.TotalAmountPaid = totalamountPaid.Count() > 0 ? totalamountPaid.Sum() : 0;
-                var totalamountUnPaid = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId && x.Status == false).Select(x => x.Amount);
-                res.TotalAmountUnpaid = totalamountUnPaid.Count() > 0 ? totalamountUnPaid.Sum() : 0;
-                // res.TotalAmountUnpaid =db.EODs.Where(x => x.Status == false && x.Terminal != null && x.Terminal.Agent != null && x.Terminal.Agent.Client.Id == UserClientId).Sum(x => x.Amount);
-                res.TotalEODCount = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).Sum(x => x.Count);
+                    var totalamountPaid = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId && x.Status == true).Sum(x => (decimal?)x.Amount);
+                    res.TotalAmountPaid = totalamountPaid != null ? totalamountPaid.Value : 0;
+                    var totalamountUnPaid = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId && x.Status == false).Sum(x => (decimal?) x.Amount);
+                    res.TotalAmountUnpaid = totalamountUnPaid !=null ? totalamountUnPaid.Value : 0;
+                    // res.TotalAmountUnpaid =db.EODs.Where(x => x.Status == false && x.Terminal != null && x.Terminal.Agent != null && x.Terminal.Agent.Client.Id == UserClientId).Sum(x => x.Amount);
+                    res.TotalEODCount = db.EODs.Where(x => x.Terminal.Agent.Client.Id == UserClientId).Sum(x => x.Count);
+                }
+                else
+                {
+                    res.TotalAmountPaid = res.TotalEODAmount = res.TotalAmountUnpaid  = 0;
+                    res.TotalEODCount = 0;
+                }
+
+                
                 return res;
             }
             else if (req.RoleCode == "AA" || req.RoleCode == "AU")

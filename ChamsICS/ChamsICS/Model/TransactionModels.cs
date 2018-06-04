@@ -45,9 +45,33 @@ namespace ChamsICSWebService.Model
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public string Name { get; set; }
-
-
-
+        public int Month { get; set; }
+        public decimal? MonthlyIncome { get; set; } = 0;
+        public decimal? MonthlyPension { get; set; } = 0;
+        public decimal? MonthlyNHFund { get; set; } = 0;
+        public decimal? MonthlyNHIS { get; set; } = 0;
+        public string EmployeeName { get; set; }
+        public string StaffPayerID { get; set; }
+        public decimal? AnnualIncome { get; set; } = 0;
+        public decimal? AnnualPension { get; set; } = 0;
+        public decimal? AnnualNHFund { get; set; } = 0;
+        public decimal? AnnualNHIS { get; set; } = 0;
+        public decimal? ConsolidatedReliefs { get; set; } = 0;
+        public decimal? TaxableIncome { get; set; } = 0;
+        public decimal? ComputedAnnualTax { get; set; } = 0;
+        public decimal? MinimumTax { get; set; } = 0;
+        public decimal? AnnualTaxPayable { get; set; } = 0;
+        public decimal? MonthlyTaxLiability { get; set; } = 0;
+        //this section is for developmentlevyliabilty
+        public int? Year { get; set; } = DateTime.Now.Year;
+        public int? NoOfStaff { get; set; } = 0;
+        public decimal? LiabilityPerStaff { get; set; } = 0;
+        public decimal? DevelopmentLevyLiability { get; set; } = 0;
+        //this section is for Withholding Tax
+        public string WithholdingTaxRevenueName { get; set; }
+        public decimal? WithholdingTaxRevenueDeductionPercentage { get; set; } = 0;
+        public decimal? WithholdingTaxActualAmount { get; set; } = 0;
+        public decimal? WithholdingTaxLiability { get; set; } = 0;
     }
 
     public class FindTransactionRes : Response
@@ -135,6 +159,79 @@ namespace ChamsICSWebService.Model
         public decimal OtherAmount { get; set; }
         [DataMember]
         public string Name { get; set; }
+        [DataMember]
+        public string ResidentId { get; set; }
+        [DataMember]
+        public string FirstName { get; set; }
+        [DataMember]
+        public string MiddleName { get; set; }
+        [DataMember]
+        public string LastName { get; set; }
+        [DataMember]
+        public string Address { get; set; }
+        [DataMember]
+        public string Email { get; set; }
+        [DataMember]
+        public string PhoneNumber { get; set; }
+        [DataMember]
+        public string DateOfBirth { get; set; }
+        [DataMember]
+        public string Gender { get; set; }
+        [DataMember]
+        public string RevenueCode { get; set; }
+        [DataMember]
+        public int Month { get; set; }
+        [DataMember]
+        public decimal? MonthlyIncome { get; set; } = 0;
+        [DataMember]
+        public decimal? MonthlyPension { get; set; } = 0;
+        [DataMember]
+        public decimal? MonthlyNHFund { get; set; } = 0;
+        [DataMember]
+        public decimal? MonthlyNHIS { get; set; } = 0;
+        [DataMember]
+        public string EmployeeName { get; set; }
+        [DataMember]
+        public string StaffPayerID { get; set; }
+        [DataMember]
+        public decimal? AnnualIncome { get; set; } = 0;
+        [DataMember]
+        public decimal? AnnualPension { get; set; } = 0;
+        [DataMember]
+        public decimal? AnnualNHFund { get; set; } = 0;
+        [DataMember]
+        public decimal? AnnualNHIS { get; set; } = 0;
+        [DataMember]
+        public decimal? ConsolidatedReliefs { get; set; } = 0;
+        [DataMember]
+        public decimal? TaxableIncome { get; set; } = 0;
+        [DataMember]
+        public decimal? ComputedAnnualTax { get; set; } = 0;
+        [DataMember]
+        public decimal? MinimumTax { get; set; } = 0;
+        [DataMember]
+        public decimal? AnnualTaxPayable { get; set; } = 0;
+        [DataMember]
+        public decimal? MonthlyTaxLiability { get; set; } = 0;
+        //this section is for developmentlevyliabilty
+        [DataMember]
+        public int? Year { get; set; } = DateTime.Now.Year;
+        [DataMember]
+        public int? NoOfStaff { get; set; } = 0;
+        [DataMember]
+        public decimal? LiabilityPerStaff { get; set; } = 0;
+        [DataMember]
+        public decimal? DevelopmentLevyLiability { get; set; } = 0;
+        [DataMember]
+        //this section is for Withholding Tax
+        public string WithholdingTaxRevenueName { get; set; }
+        [DataMember]
+        public decimal? WithholdingTaxRevenueDeductionPercentage { get; set; } = 0;
+        [DataMember]
+        public decimal? WithholdingTaxActualAmount { get; set; } = 0;
+        [DataMember]
+        public decimal? WithholdingTaxLiability { get; set; } = 0;
+
     }
 
     [DataContract]

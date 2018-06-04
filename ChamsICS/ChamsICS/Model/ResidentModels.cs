@@ -86,4 +86,35 @@ namespace ChamsICSWebService.Model
         [DataMember]
         public string Gender { get; set; }
     }
+
+    [DataContract]
+    public class VerifyResidentRes : Response
+    {
+        [DataMember]
+        public List<Resident> Residents { get; set; } = new List<Resident>();
+    }
+
+    public class Resident
+    {
+        [DataMember]
+        public string ResidentId { get; set; }
+        [DataMember]
+        public string FirstName { get; set; }
+        [DataMember]
+        public string MiddleName { get; set; }
+        [DataMember]
+        public string LastName { get; set; }
+        [DataMember]
+        public string Address { get; set; }
+        [DataMember]
+        public string Email { get; set; }
+        [DataMember]
+        public string PhoneNumber { get; set; }
+        [DataMember]
+        public string DateOfBirth { get; set; }
+        [DataMember]
+        public string Gender { get; set; }
+        [DataMember]
+        public string WebAccessPin { get; set; }
+    }
 }

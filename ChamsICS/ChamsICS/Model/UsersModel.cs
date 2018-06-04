@@ -38,6 +38,7 @@ namespace ChamsICSWebService.Model
         public string TerinalCode { get; set;}
         public int? Zoneid { get; set; }
         public string ZoneCode { get; set; }
+        public string ZoneName { get; set; }
         public string RegistrationNumber { get; set; }
     }
 

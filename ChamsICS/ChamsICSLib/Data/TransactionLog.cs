@@ -36,6 +36,7 @@ namespace ChamsICSLib.Data
         public Nullable<int> Status { get; set; }
         public Nullable<int> LocationId { get; set; }
         public string LocationCode { get; set; }
+        public string Name { get; set; }
         public Nullable<decimal> Income { get; set; }
         public Nullable<decimal> Percentage { get; set; }
         public Nullable<decimal> FoodAmount { get; set; }
@@ -44,7 +45,31 @@ namespace ChamsICSLib.Data
         public Nullable<decimal> OtherAmount { get; set; }
         public Nullable<System.DateTime> FromDate { get; set; }
         public Nullable<System.DateTime> ToDate { get; set; }
-        public string Name { get; set; }
+        public Nullable<int> Month { get; set; }
+        public Nullable<decimal> MonthlyIncome { get; set; }
+        public Nullable<decimal> MonthlyPension { get; set; }
+        public Nullable<decimal> MonthlyNHFund { get; set; }
+        public Nullable<decimal> MonthlyNHIS { get; set; }
+        public string EmployeeName { get; set; }
+        public string StaffPayerID { get; set; }
+        public Nullable<decimal> AnnualIncome { get; set; }
+        public Nullable<decimal> AnnualPension { get; set; }
+        public Nullable<decimal> AnnualNHFund { get; set; }
+        public Nullable<decimal> AnnualNHIS { get; set; }
+        public Nullable<decimal> ConsolidatedReliefs { get; set; }
+        public Nullable<decimal> TaxableIncome { get; set; }
+        public Nullable<decimal> ComputedAnnualTax { get; set; }
+        public Nullable<decimal> MinimumTax { get; set; }
+        public Nullable<decimal> AnnualTaxPayable { get; set; }
+        public Nullable<decimal> MonthlyTaxLiability { get; set; }
+        public Nullable<int> Year { get; set; }
+        public Nullable<int> NoOfStaff { get; set; }
+        public Nullable<decimal> LiabilityPerStaff { get; set; }
+        public Nullable<decimal> DevelopmentLevyLiability { get; set; }
+        public string WithholdingTaxRevenueName { get; set; }
+        public Nullable<decimal> WithholdingTaxRevenueDeductionPercentage { get; set; }
+        public Nullable<decimal> WithholdingTaxActualAmount { get; set; }
+        public Nullable<decimal> WithholdingTaxLiability { get; set; }
     
         public virtual Agent Agent { get; set; }
         public virtual Client Client { get; set; }
