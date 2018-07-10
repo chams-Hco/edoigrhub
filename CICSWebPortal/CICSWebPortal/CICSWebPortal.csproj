@@ -47,6 +47,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hangfire.Core, Version=1.6.19.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\ChamsICS\packages\Hangfire.Core.1.6.19\lib\net45\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.6.19.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\ChamsICS\packages\Hangfire.SqlServer.1.6.19\lib\net45\Hangfire.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -199,6 +205,7 @@
     <Compile Include="Models\AgentSummary.cs" />
     <Compile Include="Models\AssessmentReq.cs" />
     <Compile Include="Models\Biodata.cs" />
+    <Compile Include="Models\CashWoxModel.cs" />
     <Compile Include="Models\EndOfDay.cs" />
     <Compile Include="Models\EndOfDayServiceResponse.cs" />
     <Compile Include="Models\EndofDayViewModel.cs" />
@@ -206,6 +213,7 @@
     <Compile Include="Models\ErrorTransactionFilter.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\MyRestrictiveAuthorizationFilter.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Taxpayer.cs" />
     <Compile Include="Models\TransactionFilter.cs" />
@@ -240,6 +248,8 @@
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="Models\VerifyResident.cs" />
+    <Compile Include="Models\VerifyResidentRequest.cs" />
     <Compile Include="Models\Wallet.cs" />
     <Compile Include="Models\WebPayment.cs" />
     <Compile Include="Models\WebTransactionResponse.cs" />
@@ -6528,6 +6538,52 @@
     <Content Include="Content\custom.css" />
     <Content Include="Content\dataTables.scroller.min.css" />
     <Content Include="Content\dataTables.tableTools.min.css" />
+    <Content Include="Content\DataTables\buttons.dataTables.min.css" />
+    <Content Include="Content\DataTables\buttons.flash.min.js" />
+    <Content Include="Content\DataTables\buttons.html5.min.js" />
+    <Content Include="Content\DataTables\buttons.print.min.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\dataTables.foundation.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\dataTables.semanticui.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\images\sort_asc.png" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\images\sort_both.png" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\images\sort_desc.png" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\dataTables.bootstrap.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\dataTables.bootstrap4.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\dataTables.foundation.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\dataTables.foundation.min.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\dataTables.jqueryui.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\dataTables.jqueryui.min.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\dataTables.semanticui.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\dataTables.semanticui.min.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\jquery.dataTables.js" />
+    <Content Include="Content\DataTables\DataTables-1.10.16\js\jquery.dataTables.min.js" />
+    <Content Include="Content\DataTables\dataTables.buttons.min.js" />
+    <Content Include="Content\DataTables\datatables.css" />
+    <Content Include="Content\DataTables\datatables.js" />
+    <Content Include="Content\DataTables\datatables.min.css" />
+    <Content Include="Content\DataTables\datatables.min.js" />
+    <Content Include="Content\DataTables\jquery-1.10.2.js" />
+    <Content Include="Content\DataTables\jquery-1.12.4.js" />
+    <Content Include="Content\DataTables\jquery-ui.js" />
+    <Content Include="Content\DataTables\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Content\DataTables\jszip.min.js" />
+    <Content Include="Content\DataTables\pdfmake.min.js" />
+    <Content Include="Content\DataTables\vfs_fonts.js" />
     <Content Include="Content\dist\css\AdminLTE.css" />
     <Content Include="Content\dist\css\AdminLTE.min.css" />
     <Content Include="Content\dist\css\alt\AdminLTE-bootstrap-social.css" />
@@ -7263,6 +7319,7 @@
     <Content Include="Content\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Content\dist\css\adminlte.css.map" />
     <Content Include="Content\dist\css\adminlte.min.css.map" />
+    <Content Include="Content\DataTables\pdfmake.min.js.map" />
     <None Include="Properties\PublishProfiles\CICSWebPortal.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -7293,6 +7350,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery3.2.1.js" />
+    <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\modernizr.min.js" />
@@ -7494,6 +7553,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.WebTransactionRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.VerifyResidentRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\CICSWebPortal.ServiceReference1.CashWorkIntegrationRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\ServiceReference2\ChamsICSService.wsdl" />
@@ -7890,6 +7955,12 @@
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.WebTransactionRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.VerifyResidentRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.CashWorkIntegrationRes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceReference\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference\configuration.svcinfo" />
     <None Include="Service References\ServiceReference\Reference.svcmap">
@@ -7913,6 +7984,12 @@
     <Content Include="Views\Payments\RemittanceForm.cshtml" />
     <Content Include="Views\Report\CollectionAgentsTransactions.cshtml" />
     <Content Include="Views\Report\GetCollectionAgentTransactions.cshtml" />
+    <Content Include="Views\Payments\TaxInvoicing.cshtml" />
+    <Content Include="Views\Payments\GenerateTaxInvoice.cshtml" />
+    <Content Include="Views\Payments\NonResidentTaxInvoicing.cshtml" />
+    <Content Include="Views\Payments\PayeForm.cshtml" />
+    <Content Include="Views\Payments\DevelopmentLevy.cshtml" />
+    <Content Include="Views\Payments\WithholdingTax.cshtml" />
     <None Include="Web References\EmailSv\WebService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -8030,6 +8107,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\swf\" />
+    <Folder Include="Uploads\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

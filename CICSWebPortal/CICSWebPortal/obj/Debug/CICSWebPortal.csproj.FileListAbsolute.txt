@@ -445,6 +445,8 @@ C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWe
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Antlr3.Runtime.dll
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\EntityFramework.dll
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\EntityFramework.SqlServer.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Hangfire.Core.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Hangfire.SqlServer.dll
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -468,6 +470,8 @@ C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWe
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\System.Web.WebPages.dll
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\System.Web.WebPages.Razor.dll
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\WebGrease.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Hangfire.Core.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Hangfire.SqlServer.xml
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\System.Web.Helpers.xml
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\System.Web.Mvc.xml
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\System.Web.Optimization.xml
@@ -491,8 +495,11 @@ C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWe
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\es\Hangfire.Core.resources.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\zh\Hangfire.Core.resources.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\zh-TW\Hangfire.Core.resources.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.csprojResolveAssemblyReference.cache
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.csproj.CoreCompileInputs.cache
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.csproj.CopyComplete
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.dll
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.pdb
-C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\obj\Debug\CICSWebPortal.csprojResolveAssemblyReference.cache

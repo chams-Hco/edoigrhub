@@ -4,6 +4,8 @@
     string roleCode = (string)Session["RoleCode"];
     bool cancreatewebUsers = (bool)Session["CanCreateWebUsers"];
 
+
+
 }
 <!DOCTYPE html>
 <html>
@@ -96,21 +98,21 @@
                     <ul id="main_nav">
                         <li>
                             @{
-                                var clientID = @Session["ClientId"].ToString();
-                                string clientLogo = clientID + ".png";
-                                var relativePath = "~/Images/clients/" + clientLogo;
-                                var absolutePath = System.Web.HttpContext.Current.Server.MapPath(relativePath);
-                                var relativePath2 = "~/Images/clients/logo2/" + clientLogo;
-                                var absolutePath2 = System.Web.HttpContext.Current.Server.MapPath(relativePath2);
+            var clientID = @Session["ClientId"].ToString();
+            string clientLogo = clientID + ".png";
+            var relativePath = "~/Images/clients/" + clientLogo;
+            var absolutePath = System.Web.HttpContext.Current.Server.MapPath(relativePath);
+            var relativePath2 = "~/Images/clients/logo2/" + clientLogo;
+            var absolutePath2 = System.Web.HttpContext.Current.Server.MapPath(relativePath2);
                             }
 
                             @if (File.Exists(absolutePath2))
-                            {
+        {
 
-                                <div style="text-align: center;">
-                                    <img src="/Images/clients/logo2/@clientLogo" style="vertical-align:middle;margin: 10px;">
-                                </div>
-                            }
+                    <div style="text-align: center;">
+                        <img src="/Images/clients/logo2/@clientLogo" style="vertical-align:middle;margin: 10px;">
+                    </div>
+}
                         </li>
                         <li>
                             <a href="/Home/">
@@ -124,9 +126,9 @@
                             </a>
                         </li>
                         @{
-                            string[] clientmenu = new string[] { "SA", "SU" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            // displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; }
+        string[] clientmenu = new string[] { "SA", "SU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle">
                             <a href="/Client/">
@@ -141,9 +143,9 @@
 
                         </li>
                         @{
-                            clientmenu = new string[] { "SA", "SU" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            //displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
+        clientmenu = new string[] { "SA", "SU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId > 2) { displayStyle = "display: none"; } }
                         }
 
                         <li style="@displayStyle">
@@ -159,9 +161,9 @@
                             </a>
                         </li>
                         @{
-                            clientmenu = new string[] { "SA", "SU", "CA", "CU" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            //displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; }
+        clientmenu = new string[] { "SA", "SU", "CA", "CU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle">
                             <a href="/Agent/">
@@ -176,9 +178,9 @@
                             </a>
                         </li>
                         @{
-                            clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            // displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle">
                             <a href="/Location/">
@@ -193,9 +195,9 @@
                             </a>
                         </li>
                         @{
-                            clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            //displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle">
                             <a href="/Terminal/">
@@ -211,9 +213,9 @@
 
                         </li>
                         @{
-                            clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            // displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle">
                             <a href="/Transaction/">
@@ -230,40 +232,40 @@
                         </li>
 
                         @*@{displayStyle = string.Empty; if (roleId != 3) { displayStyle = "display: none"; } }
-                            <li style="@displayStyle">
-                                <a href="/Invoice/">
-                                    <span class="menu-icon">
-                                        <i class="fa fa-tag fa-lg"></i>
-                                    </span>
-                                    <span class="text">
-                                        Invoices
-                                    </span>
+        <li style="@displayStyle">
+            <a href="/Invoice/">
+                <span class="menu-icon">
+                    <i class="fa fa-tag fa-lg"></i>
+                </span>
+                <span class="text">
+                    Invoices
+                </span>
 
-                                    <span class="menu-hover"></span>
-                                </a>
+                <span class="menu-hover"></span>
+            </a>
 
-                            </li>
-                            @{displayStyle = string.Empty; if (roleId != 3) { displayStyle = "display: none"; } }
-                            <li style="@displayStyle">
-                                <a href="/Taxpayer/">
-                                    <span class="menu-icon">
-                                        <i class="fa fa-tag fa-lg"></i>
-                                    </span>
-                                    <span class="text">
-                                        Taxpayers
-                                    </span>
+        </li>
+        @{displayStyle = string.Empty; if (roleId != 3) { displayStyle = "display: none"; } }
+        <li style="@displayStyle">
+            <a href="/Taxpayer/">
+                <span class="menu-icon">
+                    <i class="fa fa-tag fa-lg"></i>
+                </span>
+                <span class="text">
+                    Taxpayers
+                </span>
 
-                                    <span class="menu-hover"></span>
-                                </a>
+                <span class="menu-hover"></span>
+            </a>
 
-                            </li>*@
+        </li>*@
 
 
                         <!--for tax payers -->
                         @{
-                            clientmenu = new string[] { "TP" }; //this role has not been created but it wld be created in the future
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            // displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
+        clientmenu = new string[] { "TP" }; //this role has not been created but it wld be created in the future
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle" class="parent">
                             <a href="/Wallet/">
@@ -279,9 +281,9 @@
 
                         </li>
                         @{
-                            clientmenu = new string[] { "TP" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            //displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
+        clientmenu = new string[] { "TP" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle" class="parent">
                             <a href="/Invoice/">
@@ -297,9 +299,9 @@
 
                         </li>
                         @{
-                            clientmenu = new string[] { "TP" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            // displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
+        clientmenu = new string[] { "TP" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle" class="parent">
                             <a href="/Payments/">
@@ -315,9 +317,9 @@
 
                         </li>
                         @{
-                            clientmenu = new string[] { "TP" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            // displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
+        clientmenu = new string[] { "TP" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle" class="parent">
                             <a href="#">
@@ -335,9 +337,9 @@
 
 
                         @{
-                            clientmenu = new string[] { "SA", "SU", "CA", "CU" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            // displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; }
+        clientmenu = new string[] { "SA", "SU", "CA", "CU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle" class="parent" data-toggle="collapse" data-target="#revenue-sub-menu">
                             <a href="#">
@@ -402,9 +404,9 @@
                             </a>
                             <ul class="nav-child collapse large" id="report-sub-menu" style="padding-left:10px">
                                 @{
-                                    clientmenu = new string[] { "SA", "SU", "CA", "CU", "TP" };
-                                    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                                    //displayStyle = string.Empty; if (roleId > 4 && roleId != 7) { displayStyle = "display: none"; }
+                clientmenu = new string[] { "SA", "SU", "CA", "CU", "TP" };
+                displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+                //displayStyle = string.Empty; if (roleId > 4 && roleId != 7) { displayStyle = "display: none"; }
                                 }
                                 <li style="@displayStyle">
                                     <a href="/Report/">
@@ -414,9 +416,9 @@
                                     <br />
                                 </li>
                                 @{
-                                    clientmenu = new string[] { "SA", "SU" };
-                                    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                                    // displayStyle = string.Empty; if (!(roleId == 1 || roleId == 2)) { displayStyle = "display: none"; }
+                clientmenu = new string[] { "SA", "SU" };
+                displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+                // displayStyle = string.Empty; if (!(roleId == 1 || roleId == 2)) { displayStyle = "display: none"; }
                                 }
                                 <li style="@displayStyle">
                                     <a href="/Report/ClientSummary/">
@@ -425,9 +427,9 @@
                                     </a>
                                 </li>
                                 @{
-                                    clientmenu = new string[] { "CA", "CU" };
-                                    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                                    // displayStyle = string.Empty; if (!(roleId == 3 || roleId == 4)) { displayStyle = "display: none"; }
+                clientmenu = new string[] { "CA", "CU" };
+                displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+                // displayStyle = string.Empty; if (!(roleId == 3 || roleId == 4)) { displayStyle = "display: none"; }
                                 }
                                 <li style="@displayStyle">
                                     <a href="/Report/AgentSummary/">
@@ -442,21 +444,21 @@
                                     </a>
                                 </li>
                                 @{ if (cancreatewebUsers == true || roleCode == "SA" || roleCode == "SU" || roleCode == "WA")
-                                    {
-                                        <li>
-                                            <a href="/Report/CollectionAgentsTransactions">
-                                                <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                                <span class="text"> Collection Agent Transactions</span>
-                                            </a>
-                                        </li>
-                                    }
+                {
+                    <li>
+                        <a href="/Report/CollectionAgentsTransactions">
+                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                            <span class="text"> Collection Agent Transactions</span>
+                        </a>
+                    </li>
+}
                                 }
-                                <li style="@displayStyle">
-                                    <a href="/Report/LocationSummary/">
-                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                        <span class="text"> Location Summary</span>
-                                    </a>
-                                </li>
+                                @*<li style="@displayStyle">
+                    <a href="/Report/LocationSummary/">
+                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                        <span class="text"> Location Summary</span>
+                    </a>
+                </li>*@
                                 <li style="@displayStyle">
                                     <a href="/Report/TransactionReceipt/">
                                         <span class="menu-icon"><i class="fa fa-tasks"></i></span>
@@ -479,9 +481,9 @@
                         </li>
 
                         @{
-                            clientmenu = new string[] { "SA", "SU", "CA", "CU" };
-                            displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                            // displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; }
+        clientmenu = new string[] { "SA", "SU", "CA", "CU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        // displayStyle = string.Empty; if (roleId > 4) { displayStyle = "display: none"; }
                         }
                         <li style="@displayStyle" class="parent" data-toggle="collapse" data-target="#user-sub-menu">
                             <a href="#">
@@ -505,18 +507,18 @@
                                     </a>
                                 </li>
                                 @{
-                                    if (cancreatewebUsers == true)
-                                    {
-                                        <li>
-                                            <a href="/User/WebUser">
-                                                <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                                <span class="text"> Collection Agents</span>
+                if (cancreatewebUsers == true)
+                {
+                    <li>
+                        <a href="/User/WebUser">
+                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                            <span class="text"> Collection Agents</span>
 
-                                                <span class="menu-hover">
-                                                </span>
-                                            </a>
-                                        </li>
-                                    }
+                            <span class="menu-hover">
+                            </span>
+                        </a>
+                    </li>
+}
                                 }
 
 
@@ -525,99 +527,122 @@
 
 
                         @*<li class="parent">
-                                <a href="#">
-                                    <span data-toggle="collapse" data-target="#report-sub-menu">
-                                        <i class="fa fa-tasks fa-lg"></i>
-                                    </span>
-                                    <span>
-                                        Reports
-                                    </span>
-                                </a>
-                                <ul class="nav-child collapse large" id="report-sub-menu">
-                                    @{
-                                        clientmenu = new string[] { "SA", "SU", "CA", "CU", "TP" };
-                                        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                                        //displayStyle = string.Empty; if (roleId > 4 && roleId != 7) { displayStyle = "display: none"; }
-                                    }
-                                    <li style="@displayStyle">
-                                        <a href="/Report/">
-                                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                            <span class="text"> Transaction Reports</span>
-                                        </a>
-                                        <br />
-                                    </li>
-                                    @{
-                                        clientmenu = new string[] { "SA", "SU" };
-                                        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                                        // displayStyle = string.Empty; if (!(roleId == 1 || roleId == 2)) { displayStyle = "display: none"; }
-                                    }
-                                    <li style="@displayStyle">
-                                        <a href="/Report/ClientSummary/">
-                                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                            <span class="text"> Client Summary</span>
-                                        </a>
-                                    </li>
-                                    @{
-                                        clientmenu = new string[] { "CA", "CU" };
-                                        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
-                                        // displayStyle = string.Empty; if (!(roleId == 3 || roleId == 4)) { displayStyle = "display: none"; }
-                                    }
-                                    <li style="@displayStyle">
-                                        <a href="/Report/AgentSummary/">
-                                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                            <span class="text"> L.G.A / D.A Summary</span>
-                                        </a>
-                                    </li>
-                                    <li style="@displayStyle">
-                                        <a href="/Report/PeriodicDashBoard/">
-                                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                            <span class="text"> L.G.A / D.A Positions</span>
-                                        </a>
-                                    </li>
-                                    <li style="@displayStyle">
-                                        <a href="/Report/LocationSummary/">
-                                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                            <span class="text"> Location Summary</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/Report/TransactionReceipt/">
-                                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                            <span class="text">Transaction Receipt</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/Report/TransactionStatement/">
-                                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                            <span class="text">Transaction Statement</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/Report/EndOfDayReport/">
-                                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                            <span class="text">End Of Day Report</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>*@
+            <a href="#">
+                <span data-toggle="collapse" data-target="#report-sub-menu">
+                    <i class="fa fa-tasks fa-lg"></i>
+                </span>
+                <span>
+                    Reports
+                </span>
+            </a>
+            <ul class="nav-child collapse large" id="report-sub-menu">
+                @{
+                    clientmenu = new string[] { "SA", "SU", "CA", "CU", "TP" };
+                    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+                    //displayStyle = string.Empty; if (roleId > 4 && roleId != 7) { displayStyle = "display: none"; }
+                }
+                <li style="@displayStyle">
+                    <a href="/Report/">
+                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                        <span class="text"> Transaction Reports</span>
+                    </a>
+                    <br />
+                </li>
+                @{
+                    clientmenu = new string[] { "SA", "SU" };
+                    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+                    // displayStyle = string.Empty; if (!(roleId == 1 || roleId == 2)) { displayStyle = "display: none"; }
+                }
+                <li style="@displayStyle">
+                    <a href="/Report/ClientSummary/">
+                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                        <span class="text"> Client Summary</span>
+                    </a>
+                </li>
+                @{
+                    clientmenu = new string[] { "CA", "CU" };
+                    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+                    // displayStyle = string.Empty; if (!(roleId == 3 || roleId == 4)) { displayStyle = "display: none"; }
+                }
+                <li style="@displayStyle">
+                    <a href="/Report/AgentSummary/">
+                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                        <span class="text"> L.G.A / D.A Summary</span>
+                    </a>
+                </li>
+                <li style="@displayStyle">
+                    <a href="/Report/PeriodicDashBoard/">
+                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                        <span class="text"> L.G.A / D.A Positions</span>
+                    </a>
+                </li>
+                <li style="@displayStyle">
+                    <a href="/Report/LocationSummary/">
+                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                        <span class="text"> Location Summary</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Report/TransactionReceipt/">
+                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                        <span class="text">Transaction Receipt</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Report/TransactionStatement/">
+                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                        <span class="text">Transaction Statement</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Report/EndOfDayReport/">
+                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                        <span class="text">End Of Day Report</span>
+                    </a>
+                </li>
+            </ul>
+        </li>*@
 
 
 
                         <!--  WEB USER MENU   -->
 
                         @{
-                            if (roleCode == "WA")
-                            {
+        if (roleCode == "WA")
+        {
 
-                                <li>
-                                    <a href="/Payments/RemittanceForm">
-                                        <span class="menu-icon"><i class="fa fa-tasks"></i></span>
-                                        <span class="text"> Collection Form</span>
-                                    </a>
-                                    <br />
-                                </li>
+                    <li>
+                        <a href="/Payments/RemittanceForm">
+                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                            <span class="text"> Comsumption Tax Form</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Payments/PayeForm">
+                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                            <span class="text"> Paye Form</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Payments/DevelopmentLevy">
+                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                            <span class="text"> Development Levy</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Payments/WithholdingTax">
+                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                            <span class="text"> Withholding Tax Levy</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Payments/TaxInvoicing">
+                            <span class="menu-icon"><i class="fa fa-tasks"></i></span>
+                            <span class="text"> Resident Payment</span>
+                        </a>
+                    </li>
 
-                            }
+}
                         }
 
                     </ul>
@@ -764,6 +789,7 @@
     <script src="~/Content/dist/js/demo.js"></script>
     <!-- jsdpf for  -->
     <script src="~/Content/jspdf/dist/jspdf.min.js"></script>
+    <script src="~/Scripts/loader.js"></script>
 
 
 

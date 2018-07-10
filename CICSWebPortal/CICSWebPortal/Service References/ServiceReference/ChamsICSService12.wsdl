@@ -32,6 +32,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="VerifyAnambraResidentID">
+      <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyAnambraResidentID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UploadTransaction">
       <soap:operation soapAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/UploadTransaction" style="document" />
       <wsdl:input>
@@ -152,6 +161,24 @@
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_iChamsICSPortalService" type="i1:iChamsICSPortalService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllNotifications">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotifications" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAuditTrails">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetEODReport">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" style="document" />
       <wsdl:input>
@@ -593,6 +620,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ProcessWebMultiTrancation">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebMultiTrancation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitInterswitchInvoice">
+      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/SubmitInterswitchInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="FindErrorTransaction">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindErrorTransaction" style="document" />
       <wsdl:input>
@@ -1027,24 +1072,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetReportSummary">
       <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetReportSummary" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetAllNotifications">
-      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotifications" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetAllAuditTrails">
-      <soap:operation soapAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

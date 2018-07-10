@@ -25,6 +25,12 @@
   <wsdl:message name="iChamsICSService_VerifyResidentId_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerifyResidentIdResponse" />
   </wsdl:message>
+  <wsdl:message name="iChamsICSService_VerifyAnambraResidentID_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyAnambraResidentID" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSService_VerifyAnambraResidentID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyAnambraResidentIDResponse" />
+  </wsdl:message>
   <wsdl:message name="iChamsICSService_UploadTransaction_InputMessage">
     <wsdl:part name="parameters" element="tns:UploadTransaction" />
   </wsdl:message>
@@ -115,6 +121,10 @@
     <wsdl:operation name="VerifyResidentId">
       <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyResidentId" message="tns:iChamsICSService_VerifyResidentId_InputMessage" />
       <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyResidentIdResponse" message="tns:iChamsICSService_VerifyResidentId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyAnambraResidentID">
+      <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyAnambraResidentID" message="tns:iChamsICSService_VerifyAnambraResidentID_InputMessage" />
+      <wsdl:output wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyAnambraResidentIDResponse" message="tns:iChamsICSService_VerifyAnambraResidentID_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UploadTransaction">
       <wsdl:input wsaw:Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/UploadTransaction" message="tns:iChamsICSService_UploadTransaction_InputMessage" />

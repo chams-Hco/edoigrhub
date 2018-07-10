@@ -170,3 +170,10 @@ C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWe
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\obj\Release\CICSWebPortal.pdb
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\obj\Release\CICSWebPortal.XmlSerializers.dll
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\obj\Release\CICSWebPortal.csprojResolveAssemblyReference.cache
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Hangfire.Core.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Hangfire.SqlServer.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Hangfire.Core.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\Hangfire.SqlServer.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\es\Hangfire.Core.resources.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\zh\Hangfire.Core.resources.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\CICSWebPortal\CICSWebPortal\bin\zh-TW\Hangfire.Core.resources.dll

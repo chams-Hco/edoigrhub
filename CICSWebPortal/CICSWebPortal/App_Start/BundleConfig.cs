@@ -20,7 +20,8 @@ namespace CICSWebPortal
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-          "~/Scripts/jquery-1.10.2.min.js",
+           "~/Scripts/jquery-1.10.2.min.js",
+          //"~/Scripts/jquery3.2.1.js",
           "~/Scripts/bootstrap.min.js",
           "~/Scripts/jquery.dataTables.min.js",
           "~/Scripts/jquery.flot.min.js",
@@ -29,14 +30,22 @@ namespace CICSWebPortal
           "~/Scripts/jquery.colorbox.min.js",
           "~/Scripts/jquery.sparkline.min.js",
           "~/Scripts/pace.min.js",
-           "~/Scripts/jquery-ui.min.js",
+          "~/Scripts/jquery-ui.min.js",
           "~/Scripts/jquery.popupoverlay.min.js",
           "~/Scripts/jquery.slimscroll.min.js",
-           "~/Scripts/jquery.cookie.min.js",
-            "~/Scripts/dataTables.scroller.min.js",
+          "~/Scripts/jquery.cookie.min.js",
+          "~/Scripts/dataTables.scroller.min.js",
           "~/Scripts/dataTables.tableTools.min.js",
           "~/Scripts/modernizr.min.js",
           "~/Scripts/endless.js"
+          //"~/Content/DataTables/datatables.min.js",
+          //"~/Content/DataTables/dataTables.buttons.min.js",
+          // "~/Content/DataTables/buttons.flash.min.js",
+          // "~/Content/DataTables/jszip.min.js",
+          // "~/Content/DataTables/pdfmake.min.js",
+          // "~/Content/DataTables/fs_fonts.js",
+          // "~/Content/DataTables/buttons.html5.min.js",
+          // "~/Content/DataTables/buttons.print.min.js"
           ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -51,7 +60,10 @@ namespace CICSWebPortal
                       "~/Content/endless-skin.css",
                       "~/Content/dataTables.scroller.min",
                       "~/Content/dataTables.tableTools.min.css",
-                      "~/Content/custom.css"));
+                      "~/Content/custom.css"
+                      //"~/Content/DataTables/jquery.dataTables.min.css",
+                      //"~/Content/DataTables/buttons.dataTables.min.css"
+                      ));
         }
     }
 }

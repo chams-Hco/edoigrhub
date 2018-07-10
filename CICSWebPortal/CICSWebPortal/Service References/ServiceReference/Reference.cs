@@ -127,6 +127,7 @@ namespace CICSWebPortal.ServiceReference {
     [System.Runtime.Serialization.DataContractAttribute(Name="Response", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.VerifyResidentIdRes))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.VerifyResidentRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.UploadTransactionRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.QueryTransactionRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.GetTerminalDetailsRes))]
@@ -135,6 +136,8 @@ namespace CICSWebPortal.ServiceReference {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.GetAgentLocationsRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.CreateEndOfDayRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.QueryEndOfDayStatusRes))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.GetNotificationsRes))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.GetAuditTrailsRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.FetchEndOfDayRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.CreateLocationRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.FindLocationRes))]
@@ -178,8 +181,6 @@ namespace CICSWebPortal.ServiceReference {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.AgentSummaryRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.ClientSummaryRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.TransactionSummaryRes))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.GetNotificationsRes))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.GetAuditTrailsRes))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CICSWebPortal.ServiceReference.AuthoriseTerminalRes))]
     public partial class Response : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -384,6 +385,29 @@ namespace CICSWebPortal.ServiceReference {
                 if ((object.ReferenceEquals(this.ResidentIdField, value) != true)) {
                     this.ResidentIdField = value;
                     this.RaisePropertyChanged("ResidentId");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="VerifyResidentRes", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class VerifyResidentRes : CICSWebPortal.ServiceReference.Response {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CICSWebPortal.ServiceReference.Resident[] ResidentsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CICSWebPortal.ServiceReference.Resident[] Residents {
+            get {
+                return this.ResidentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ResidentsField, value) != true)) {
+                    this.ResidentsField = value;
+                    this.RaisePropertyChanged("Residents");
                 }
             }
         }
@@ -872,6 +896,52 @@ namespace CICSWebPortal.ServiceReference {
                 if ((object.ReferenceEquals(this.StatusField, value) != true)) {
                     this.StatusField = value;
                     this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetNotificationsRes", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class GetNotificationsRes : CICSWebPortal.ServiceReference.Response {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CICSWebPortal.ServiceReference.Notification[] NotificationsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CICSWebPortal.ServiceReference.Notification[] Notifications {
+            get {
+                return this.NotificationsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NotificationsField, value) != true)) {
+                    this.NotificationsField = value;
+                    this.RaisePropertyChanged("Notifications");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetAuditTrailsRes", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class GetAuditTrailsRes : CICSWebPortal.ServiceReference.Response {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CICSWebPortal.ServiceReference.AuditTrail[] AuditTrailsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CICSWebPortal.ServiceReference.AuditTrail[] AuditTrails {
+            get {
+                return this.AuditTrailsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AuditTrailsField, value) != true)) {
+                    this.AuditTrailsField = value;
+                    this.RaisePropertyChanged("AuditTrails");
                 }
             }
         }
@@ -3053,52 +3123,6 @@ namespace CICSWebPortal.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetNotificationsRes", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
-    [System.SerializableAttribute()]
-    public partial class GetNotificationsRes : CICSWebPortal.ServiceReference.Response {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CICSWebPortal.ServiceReference.Notification[] NotificationsField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CICSWebPortal.ServiceReference.Notification[] Notifications {
-            get {
-                return this.NotificationsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NotificationsField, value) != true)) {
-                    this.NotificationsField = value;
-                    this.RaisePropertyChanged("Notifications");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetAuditTrailsRes", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
-    [System.SerializableAttribute()]
-    public partial class GetAuditTrailsRes : CICSWebPortal.ServiceReference.Response {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CICSWebPortal.ServiceReference.AuditTrail[] AuditTrailsField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CICSWebPortal.ServiceReference.AuditTrail[] AuditTrails {
-            get {
-                return this.AuditTrailsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AuditTrailsField, value) != true)) {
-                    this.AuditTrailsField = value;
-                    this.RaisePropertyChanged("AuditTrails");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="AuthoriseTerminalRes", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
     [System.SerializableAttribute()]
     public partial class AuthoriseTerminalRes : CICSWebPortal.ServiceReference.Response {
@@ -3132,6 +3156,195 @@ namespace CICSWebPortal.ServiceReference {
                     this.TerminalSerialNumberField = value;
                     this.RaisePropertyChanged("TerminalSerialNumber");
                 }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Resident", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class Resident : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DateOfBirthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FirstNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GenderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MiddleNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ResidentIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WebAccessPinField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DateOfBirth {
+            get {
+                return this.DateOfBirthField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DateOfBirthField, value) != true)) {
+                    this.DateOfBirthField = value;
+                    this.RaisePropertyChanged("DateOfBirth");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FirstName {
+            get {
+                return this.FirstNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
+                    this.FirstNameField = value;
+                    this.RaisePropertyChanged("FirstName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Gender {
+            get {
+                return this.GenderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GenderField, value) != true)) {
+                    this.GenderField = value;
+                    this.RaisePropertyChanged("Gender");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LastName {
+            get {
+                return this.LastNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
+                    this.LastNameField = value;
+                    this.RaisePropertyChanged("LastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MiddleName {
+            get {
+                return this.MiddleNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MiddleNameField, value) != true)) {
+                    this.MiddleNameField = value;
+                    this.RaisePropertyChanged("MiddleName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhoneNumber {
+            get {
+                return this.PhoneNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
+                    this.PhoneNumberField = value;
+                    this.RaisePropertyChanged("PhoneNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ResidentId {
+            get {
+                return this.ResidentIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ResidentIdField, value) != true)) {
+                    this.ResidentIdField = value;
+                    this.RaisePropertyChanged("ResidentId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WebAccessPin {
+            get {
+                return this.WebAccessPinField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WebAccessPinField, value) != true)) {
+                    this.WebAccessPinField = value;
+                    this.RaisePropertyChanged("WebAccessPin");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3558,6 +3771,288 @@ namespace CICSWebPortal.ServiceReference {
                 if ((object.ReferenceEquals(this.LocationDescriptionField, value) != true)) {
                     this.LocationDescriptionField = value;
                     this.RaisePropertyChanged("LocationDescription");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Notification", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class Notification : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RecipientField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ReferenceIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> RetryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Recipient {
+            get {
+                return this.RecipientField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RecipientField, value) != true)) {
+                    this.RecipientField = value;
+                    this.RaisePropertyChanged("Recipient");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ReferenceId {
+            get {
+                return this.ReferenceIdField;
+            }
+            set {
+                if ((this.ReferenceIdField.Equals(value) != true)) {
+                    this.ReferenceIdField = value;
+                    this.RaisePropertyChanged("ReferenceId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Retry {
+            get {
+                return this.RetryField;
+            }
+            set {
+                if ((this.RetryField.Equals(value) != true)) {
+                    this.RetryField = value;
+                    this.RaisePropertyChanged("Retry");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StatusMessage {
+            get {
+                return this.StatusMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusMessageField, value) != true)) {
+                    this.StatusMessageField = value;
+                    this.RaisePropertyChanged("StatusMessage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuditTrail", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class AuditTrail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AuditLogField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ClientField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> LogDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TableAffectedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AuditLog {
+            get {
+                return this.AuditLogField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AuditLogField, value) != true)) {
+                    this.AuditLogField = value;
+                    this.RaisePropertyChanged("AuditLog");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Client {
+            get {
+                return this.ClientField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ClientField, value) != true)) {
+                    this.ClientField = value;
+                    this.RaisePropertyChanged("Client");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> LogDate {
+            get {
+                return this.LogDateField;
+            }
+            set {
+                if ((this.LogDateField.Equals(value) != true)) {
+                    this.LogDateField = value;
+                    this.RaisePropertyChanged("LogDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TableAffected {
+            get {
+                return this.TableAffectedField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TableAffectedField, value) != true)) {
+                    this.TableAffectedField = value;
+                    this.RaisePropertyChanged("TableAffected");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
                 }
             }
         }
@@ -4191,7 +4686,19 @@ namespace CICSWebPortal.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ConsumptionTaxRevenueIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> DefaultRevenueItemIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> PayeeRevenueItemField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<bool> ShowAmountUnpaidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> WithholdingTaxRevenueItemField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<decimal> percentageDeductionField;
@@ -4207,6 +4714,19 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ConsumptionTaxRevenueId {
+            get {
+                return this.ConsumptionTaxRevenueIdField;
+            }
+            set {
+                if ((this.ConsumptionTaxRevenueIdField.Equals(value) != true)) {
+                    this.ConsumptionTaxRevenueIdField = value;
+                    this.RaisePropertyChanged("ConsumptionTaxRevenueId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Nullable<int> DefaultRevenueItemId {
             get {
                 return this.DefaultRevenueItemIdField;
@@ -4215,6 +4735,45 @@ namespace CICSWebPortal.ServiceReference {
                 if ((this.DefaultRevenueItemIdField.Equals(value) != true)) {
                     this.DefaultRevenueItemIdField = value;
                     this.RaisePropertyChanged("DefaultRevenueItemId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> PayeeRevenueItem {
+            get {
+                return this.PayeeRevenueItemField;
+            }
+            set {
+                if ((this.PayeeRevenueItemField.Equals(value) != true)) {
+                    this.PayeeRevenueItemField = value;
+                    this.RaisePropertyChanged("PayeeRevenueItem");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> ShowAmountUnpaid {
+            get {
+                return this.ShowAmountUnpaidField;
+            }
+            set {
+                if ((this.ShowAmountUnpaidField.Equals(value) != true)) {
+                    this.ShowAmountUnpaidField = value;
+                    this.RaisePropertyChanged("ShowAmountUnpaid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> WithholdingTaxRevenueItem {
+            get {
+                return this.WithholdingTaxRevenueItemField;
+            }
+            set {
+                if ((this.WithholdingTaxRevenueItemField.Equals(value) != true)) {
+                    this.WithholdingTaxRevenueItemField = value;
+                    this.RaisePropertyChanged("WithholdingTaxRevenueItem");
                 }
             }
         }
@@ -4895,16 +5454,43 @@ namespace CICSWebPortal.ServiceReference {
         private decimal AmountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AnnualIncomeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AnnualNHFundField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AnnualNHISField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AnnualPensionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AnnualTaxPayableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ClientIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> ComputedAnnualTaxField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> ConsolidatedReliefsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime DateOfBirthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> DevelopmentLevyLiabilityField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<decimal> DrinkAmountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmployeeNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FirstNameField;
@@ -4928,16 +5514,43 @@ namespace CICSWebPortal.ServiceReference {
         private string LastNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> LiabilityPerStaffField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LocationNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MiddleNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MinimumTaxField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MinistryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MonthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MonthlyIncomeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MonthlyNHFundField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MonthlyNHISField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MonthlyPensionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MonthlyTaxLiabilityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> NoOfStaffField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<decimal> OtherAmountField;
@@ -4967,6 +5580,12 @@ namespace CICSWebPortal.ServiceReference {
         private string RevenueNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StaffPayerIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> TaxableIncomeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TerminalCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -4983,6 +5602,21 @@ namespace CICSWebPortal.ServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime UploadDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> WithholdingTaxActualAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> WithholdingTaxLiabilityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> WithholdingTaxRevenueDeductionPercentageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WithholdingTaxRevenueNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> YearField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int statusField;
@@ -5050,6 +5684,71 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AnnualIncome {
+            get {
+                return this.AnnualIncomeField;
+            }
+            set {
+                if ((this.AnnualIncomeField.Equals(value) != true)) {
+                    this.AnnualIncomeField = value;
+                    this.RaisePropertyChanged("AnnualIncome");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AnnualNHFund {
+            get {
+                return this.AnnualNHFundField;
+            }
+            set {
+                if ((this.AnnualNHFundField.Equals(value) != true)) {
+                    this.AnnualNHFundField = value;
+                    this.RaisePropertyChanged("AnnualNHFund");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AnnualNHIS {
+            get {
+                return this.AnnualNHISField;
+            }
+            set {
+                if ((this.AnnualNHISField.Equals(value) != true)) {
+                    this.AnnualNHISField = value;
+                    this.RaisePropertyChanged("AnnualNHIS");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AnnualPension {
+            get {
+                return this.AnnualPensionField;
+            }
+            set {
+                if ((this.AnnualPensionField.Equals(value) != true)) {
+                    this.AnnualPensionField = value;
+                    this.RaisePropertyChanged("AnnualPension");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AnnualTaxPayable {
+            get {
+                return this.AnnualTaxPayableField;
+            }
+            set {
+                if ((this.AnnualTaxPayableField.Equals(value) != true)) {
+                    this.AnnualTaxPayableField = value;
+                    this.RaisePropertyChanged("AnnualTaxPayable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Nullable<int> ClientId {
             get {
                 return this.ClientIdField;
@@ -5063,6 +5762,32 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> ComputedAnnualTax {
+            get {
+                return this.ComputedAnnualTaxField;
+            }
+            set {
+                if ((this.ComputedAnnualTaxField.Equals(value) != true)) {
+                    this.ComputedAnnualTaxField = value;
+                    this.RaisePropertyChanged("ComputedAnnualTax");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> ConsolidatedReliefs {
+            get {
+                return this.ConsolidatedReliefsField;
+            }
+            set {
+                if ((this.ConsolidatedReliefsField.Equals(value) != true)) {
+                    this.ConsolidatedReliefsField = value;
+                    this.RaisePropertyChanged("ConsolidatedReliefs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime DateOfBirth {
             get {
                 return this.DateOfBirthField;
@@ -5071,6 +5796,19 @@ namespace CICSWebPortal.ServiceReference {
                 if ((this.DateOfBirthField.Equals(value) != true)) {
                     this.DateOfBirthField = value;
                     this.RaisePropertyChanged("DateOfBirth");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> DevelopmentLevyLiability {
+            get {
+                return this.DevelopmentLevyLiabilityField;
+            }
+            set {
+                if ((this.DevelopmentLevyLiabilityField.Equals(value) != true)) {
+                    this.DevelopmentLevyLiabilityField = value;
+                    this.RaisePropertyChanged("DevelopmentLevyLiability");
                 }
             }
         }
@@ -5097,6 +5835,19 @@ namespace CICSWebPortal.ServiceReference {
                 if ((object.ReferenceEquals(this.EmailField, value) != true)) {
                     this.EmailField = value;
                     this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EmployeeName {
+            get {
+                return this.EmployeeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmployeeNameField, value) != true)) {
+                    this.EmployeeNameField = value;
+                    this.RaisePropertyChanged("EmployeeName");
                 }
             }
         }
@@ -5193,6 +5944,19 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> LiabilityPerStaff {
+            get {
+                return this.LiabilityPerStaffField;
+            }
+            set {
+                if ((this.LiabilityPerStaffField.Equals(value) != true)) {
+                    this.LiabilityPerStaffField = value;
+                    this.RaisePropertyChanged("LiabilityPerStaff");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string LocationName {
             get {
                 return this.LocationNameField;
@@ -5219,6 +5983,19 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MinimumTax {
+            get {
+                return this.MinimumTaxField;
+            }
+            set {
+                if ((this.MinimumTaxField.Equals(value) != true)) {
+                    this.MinimumTaxField = value;
+                    this.RaisePropertyChanged("MinimumTax");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Ministry {
             get {
                 return this.MinistryField;
@@ -5232,6 +6009,84 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Month {
+            get {
+                return this.MonthField;
+            }
+            set {
+                if ((this.MonthField.Equals(value) != true)) {
+                    this.MonthField = value;
+                    this.RaisePropertyChanged("Month");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MonthlyIncome {
+            get {
+                return this.MonthlyIncomeField;
+            }
+            set {
+                if ((this.MonthlyIncomeField.Equals(value) != true)) {
+                    this.MonthlyIncomeField = value;
+                    this.RaisePropertyChanged("MonthlyIncome");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MonthlyNHFund {
+            get {
+                return this.MonthlyNHFundField;
+            }
+            set {
+                if ((this.MonthlyNHFundField.Equals(value) != true)) {
+                    this.MonthlyNHFundField = value;
+                    this.RaisePropertyChanged("MonthlyNHFund");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MonthlyNHIS {
+            get {
+                return this.MonthlyNHISField;
+            }
+            set {
+                if ((this.MonthlyNHISField.Equals(value) != true)) {
+                    this.MonthlyNHISField = value;
+                    this.RaisePropertyChanged("MonthlyNHIS");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MonthlyPension {
+            get {
+                return this.MonthlyPensionField;
+            }
+            set {
+                if ((this.MonthlyPensionField.Equals(value) != true)) {
+                    this.MonthlyPensionField = value;
+                    this.RaisePropertyChanged("MonthlyPension");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MonthlyTaxLiability {
+            get {
+                return this.MonthlyTaxLiabilityField;
+            }
+            set {
+                if ((this.MonthlyTaxLiabilityField.Equals(value) != true)) {
+                    this.MonthlyTaxLiabilityField = value;
+                    this.RaisePropertyChanged("MonthlyTaxLiability");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
             get {
                 return this.NameField;
@@ -5240,6 +6095,19 @@ namespace CICSWebPortal.ServiceReference {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> NoOfStaff {
+            get {
+                return this.NoOfStaffField;
+            }
+            set {
+                if ((this.NoOfStaffField.Equals(value) != true)) {
+                    this.NoOfStaffField = value;
+                    this.RaisePropertyChanged("NoOfStaff");
                 }
             }
         }
@@ -5362,6 +6230,32 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StaffPayerID {
+            get {
+                return this.StaffPayerIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StaffPayerIDField, value) != true)) {
+                    this.StaffPayerIDField = value;
+                    this.RaisePropertyChanged("StaffPayerID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> TaxableIncome {
+            get {
+                return this.TaxableIncomeField;
+            }
+            set {
+                if ((this.TaxableIncomeField.Equals(value) != true)) {
+                    this.TaxableIncomeField = value;
+                    this.RaisePropertyChanged("TaxableIncome");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string TerminalCode {
             get {
                 return this.TerminalCodeField;
@@ -5435,6 +6329,71 @@ namespace CICSWebPortal.ServiceReference {
                 if ((this.UploadDateField.Equals(value) != true)) {
                     this.UploadDateField = value;
                     this.RaisePropertyChanged("UploadDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> WithholdingTaxActualAmount {
+            get {
+                return this.WithholdingTaxActualAmountField;
+            }
+            set {
+                if ((this.WithholdingTaxActualAmountField.Equals(value) != true)) {
+                    this.WithholdingTaxActualAmountField = value;
+                    this.RaisePropertyChanged("WithholdingTaxActualAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> WithholdingTaxLiability {
+            get {
+                return this.WithholdingTaxLiabilityField;
+            }
+            set {
+                if ((this.WithholdingTaxLiabilityField.Equals(value) != true)) {
+                    this.WithholdingTaxLiabilityField = value;
+                    this.RaisePropertyChanged("WithholdingTaxLiability");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> WithholdingTaxRevenueDeductionPercentage {
+            get {
+                return this.WithholdingTaxRevenueDeductionPercentageField;
+            }
+            set {
+                if ((this.WithholdingTaxRevenueDeductionPercentageField.Equals(value) != true)) {
+                    this.WithholdingTaxRevenueDeductionPercentageField = value;
+                    this.RaisePropertyChanged("WithholdingTaxRevenueDeductionPercentage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WithholdingTaxRevenueName {
+            get {
+                return this.WithholdingTaxRevenueNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WithholdingTaxRevenueNameField, value) != true)) {
+                    this.WithholdingTaxRevenueNameField = value;
+                    this.RaisePropertyChanged("WithholdingTaxRevenueName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Year {
+            get {
+                return this.YearField;
+            }
+            set {
+                if ((this.YearField.Equals(value) != true)) {
+                    this.YearField = value;
+                    this.RaisePropertyChanged("Year");
                 }
             }
         }
@@ -6633,6 +7592,9 @@ namespace CICSWebPortal.ServiceReference {
         private string ZoneCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ZoneNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ZoneidField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -6813,6 +7775,19 @@ namespace CICSWebPortal.ServiceReference {
                 if ((object.ReferenceEquals(this.ZoneCodeField, value) != true)) {
                     this.ZoneCodeField = value;
                     this.RaisePropertyChanged("ZoneCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ZoneName {
+            get {
+                return this.ZoneNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ZoneNameField, value) != true)) {
+                    this.ZoneNameField = value;
+                    this.RaisePropertyChanged("ZoneName");
                 }
             }
         }
@@ -8547,288 +9522,6 @@ namespace CICSWebPortal.ServiceReference {
                 if ((this.TransactionIdField.Equals(value) != true)) {
                     this.TransactionIdField = value;
                     this.RaisePropertyChanged("TransactionId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Notification", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
-    [System.SerializableAttribute()]
-    public partial class Notification : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MessageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RecipientField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> ReferenceIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> RetryField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StatusMessageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Recipient {
-            get {
-                return this.RecipientField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RecipientField, value) != true)) {
-                    this.RecipientField = value;
-                    this.RaisePropertyChanged("Recipient");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> ReferenceId {
-            get {
-                return this.ReferenceIdField;
-            }
-            set {
-                if ((this.ReferenceIdField.Equals(value) != true)) {
-                    this.ReferenceIdField = value;
-                    this.RaisePropertyChanged("ReferenceId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Retry {
-            get {
-                return this.RetryField;
-            }
-            set {
-                if ((this.RetryField.Equals(value) != true)) {
-                    this.RetryField = value;
-                    this.RaisePropertyChanged("Retry");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StatusMessage {
-            get {
-                return this.StatusMessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StatusMessageField, value) != true)) {
-                    this.StatusMessageField = value;
-                    this.RaisePropertyChanged("StatusMessage");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AuditTrail", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
-    [System.SerializableAttribute()]
-    public partial class AuditTrail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AuditLogField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ClientField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> LogDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TableAffectedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AuditLog {
-            get {
-                return this.AuditLogField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AuditLogField, value) != true)) {
-                    this.AuditLogField = value;
-                    this.RaisePropertyChanged("AuditLog");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Client {
-            get {
-                return this.ClientField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ClientField, value) != true)) {
-                    this.ClientField = value;
-                    this.RaisePropertyChanged("Client");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> LogDate {
-            get {
-                return this.LogDateField;
-            }
-            set {
-                if ((this.LogDateField.Equals(value) != true)) {
-                    this.LogDateField = value;
-                    this.RaisePropertyChanged("LogDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TableAffected {
-            get {
-                return this.TableAffectedField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TableAffectedField, value) != true)) {
-                    this.TableAffectedField = value;
-                    this.RaisePropertyChanged("TableAffected");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string User {
-            get {
-                return this.UserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserField, value) != true)) {
-                    this.UserField = value;
-                    this.RaisePropertyChanged("User");
                 }
             }
         }
@@ -10757,10 +11450,49 @@ namespace CICSWebPortal.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal AmountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AnnualIncomeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AnnualNHFundField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AnnualNHISField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AnnualPensionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AnnualTaxPayableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> ComputedAnnualTaxField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> ConsolidatedReliefsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DateOfBirthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> DevelopmentLevyLiabilityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal DrinkAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmployeeNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal FoodAmountField;
@@ -10769,10 +11501,46 @@ namespace CICSWebPortal.ServiceReference {
         private System.DateTime FromDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GenderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal IncomeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> LiabilityPerStaffField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MiddleNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MinimumTaxField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MonthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MonthlyIncomeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MonthlyNHFundField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MonthlyNHISField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MonthlyPensionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> MonthlyTaxLiabilityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> NoOfStaffField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal OtherAmountField;
@@ -10781,16 +11549,46 @@ namespace CICSWebPortal.ServiceReference {
         private decimal PercentageDeductionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal RentalAmountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ResidentIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RevenueCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int RevenueItemIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StaffPayerIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> TaxableIncomeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int TerminalIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime ToDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> WithholdingTaxActualAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> WithholdingTaxLiabilityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> WithholdingTaxRevenueDeductionPercentageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WithholdingTaxRevenueNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> YearField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -10799,6 +11597,19 @@ namespace CICSWebPortal.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
             }
         }
         
@@ -10816,6 +11627,123 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AnnualIncome {
+            get {
+                return this.AnnualIncomeField;
+            }
+            set {
+                if ((this.AnnualIncomeField.Equals(value) != true)) {
+                    this.AnnualIncomeField = value;
+                    this.RaisePropertyChanged("AnnualIncome");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AnnualNHFund {
+            get {
+                return this.AnnualNHFundField;
+            }
+            set {
+                if ((this.AnnualNHFundField.Equals(value) != true)) {
+                    this.AnnualNHFundField = value;
+                    this.RaisePropertyChanged("AnnualNHFund");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AnnualNHIS {
+            get {
+                return this.AnnualNHISField;
+            }
+            set {
+                if ((this.AnnualNHISField.Equals(value) != true)) {
+                    this.AnnualNHISField = value;
+                    this.RaisePropertyChanged("AnnualNHIS");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AnnualPension {
+            get {
+                return this.AnnualPensionField;
+            }
+            set {
+                if ((this.AnnualPensionField.Equals(value) != true)) {
+                    this.AnnualPensionField = value;
+                    this.RaisePropertyChanged("AnnualPension");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AnnualTaxPayable {
+            get {
+                return this.AnnualTaxPayableField;
+            }
+            set {
+                if ((this.AnnualTaxPayableField.Equals(value) != true)) {
+                    this.AnnualTaxPayableField = value;
+                    this.RaisePropertyChanged("AnnualTaxPayable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> ComputedAnnualTax {
+            get {
+                return this.ComputedAnnualTaxField;
+            }
+            set {
+                if ((this.ComputedAnnualTaxField.Equals(value) != true)) {
+                    this.ComputedAnnualTaxField = value;
+                    this.RaisePropertyChanged("ComputedAnnualTax");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> ConsolidatedReliefs {
+            get {
+                return this.ConsolidatedReliefsField;
+            }
+            set {
+                if ((this.ConsolidatedReliefsField.Equals(value) != true)) {
+                    this.ConsolidatedReliefsField = value;
+                    this.RaisePropertyChanged("ConsolidatedReliefs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DateOfBirth {
+            get {
+                return this.DateOfBirthField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DateOfBirthField, value) != true)) {
+                    this.DateOfBirthField = value;
+                    this.RaisePropertyChanged("DateOfBirth");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> DevelopmentLevyLiability {
+            get {
+                return this.DevelopmentLevyLiabilityField;
+            }
+            set {
+                if ((this.DevelopmentLevyLiabilityField.Equals(value) != true)) {
+                    this.DevelopmentLevyLiabilityField = value;
+                    this.RaisePropertyChanged("DevelopmentLevyLiability");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public decimal DrinkAmount {
             get {
                 return this.DrinkAmountField;
@@ -10824,6 +11752,45 @@ namespace CICSWebPortal.ServiceReference {
                 if ((this.DrinkAmountField.Equals(value) != true)) {
                     this.DrinkAmountField = value;
                     this.RaisePropertyChanged("DrinkAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EmployeeName {
+            get {
+                return this.EmployeeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmployeeNameField, value) != true)) {
+                    this.EmployeeNameField = value;
+                    this.RaisePropertyChanged("EmployeeName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FirstName {
+            get {
+                return this.FirstNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
+                    this.FirstNameField = value;
+                    this.RaisePropertyChanged("FirstName");
                 }
             }
         }
@@ -10855,6 +11822,19 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Gender {
+            get {
+                return this.GenderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GenderField, value) != true)) {
+                    this.GenderField = value;
+                    this.RaisePropertyChanged("Gender");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public decimal Income {
             get {
                 return this.IncomeField;
@@ -10868,6 +11848,136 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LastName {
+            get {
+                return this.LastNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
+                    this.LastNameField = value;
+                    this.RaisePropertyChanged("LastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> LiabilityPerStaff {
+            get {
+                return this.LiabilityPerStaffField;
+            }
+            set {
+                if ((this.LiabilityPerStaffField.Equals(value) != true)) {
+                    this.LiabilityPerStaffField = value;
+                    this.RaisePropertyChanged("LiabilityPerStaff");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MiddleName {
+            get {
+                return this.MiddleNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MiddleNameField, value) != true)) {
+                    this.MiddleNameField = value;
+                    this.RaisePropertyChanged("MiddleName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MinimumTax {
+            get {
+                return this.MinimumTaxField;
+            }
+            set {
+                if ((this.MinimumTaxField.Equals(value) != true)) {
+                    this.MinimumTaxField = value;
+                    this.RaisePropertyChanged("MinimumTax");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Month {
+            get {
+                return this.MonthField;
+            }
+            set {
+                if ((this.MonthField.Equals(value) != true)) {
+                    this.MonthField = value;
+                    this.RaisePropertyChanged("Month");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MonthlyIncome {
+            get {
+                return this.MonthlyIncomeField;
+            }
+            set {
+                if ((this.MonthlyIncomeField.Equals(value) != true)) {
+                    this.MonthlyIncomeField = value;
+                    this.RaisePropertyChanged("MonthlyIncome");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MonthlyNHFund {
+            get {
+                return this.MonthlyNHFundField;
+            }
+            set {
+                if ((this.MonthlyNHFundField.Equals(value) != true)) {
+                    this.MonthlyNHFundField = value;
+                    this.RaisePropertyChanged("MonthlyNHFund");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MonthlyNHIS {
+            get {
+                return this.MonthlyNHISField;
+            }
+            set {
+                if ((this.MonthlyNHISField.Equals(value) != true)) {
+                    this.MonthlyNHISField = value;
+                    this.RaisePropertyChanged("MonthlyNHIS");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MonthlyPension {
+            get {
+                return this.MonthlyPensionField;
+            }
+            set {
+                if ((this.MonthlyPensionField.Equals(value) != true)) {
+                    this.MonthlyPensionField = value;
+                    this.RaisePropertyChanged("MonthlyPension");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> MonthlyTaxLiability {
+            get {
+                return this.MonthlyTaxLiabilityField;
+            }
+            set {
+                if ((this.MonthlyTaxLiabilityField.Equals(value) != true)) {
+                    this.MonthlyTaxLiabilityField = value;
+                    this.RaisePropertyChanged("MonthlyTaxLiability");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
             get {
                 return this.NameField;
@@ -10876,6 +11986,19 @@ namespace CICSWebPortal.ServiceReference {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> NoOfStaff {
+            get {
+                return this.NoOfStaffField;
+            }
+            set {
+                if ((this.NoOfStaffField.Equals(value) != true)) {
+                    this.NoOfStaffField = value;
+                    this.RaisePropertyChanged("NoOfStaff");
                 }
             }
         }
@@ -10907,6 +12030,19 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhoneNumber {
+            get {
+                return this.PhoneNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
+                    this.PhoneNumberField = value;
+                    this.RaisePropertyChanged("PhoneNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public decimal RentalAmount {
             get {
                 return this.RentalAmountField;
@@ -10920,6 +12056,32 @@ namespace CICSWebPortal.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ResidentId {
+            get {
+                return this.ResidentIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ResidentIdField, value) != true)) {
+                    this.ResidentIdField = value;
+                    this.RaisePropertyChanged("ResidentId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RevenueCode {
+            get {
+                return this.RevenueCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RevenueCodeField, value) != true)) {
+                    this.RevenueCodeField = value;
+                    this.RaisePropertyChanged("RevenueCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int RevenueItemId {
             get {
                 return this.RevenueItemIdField;
@@ -10928,6 +12090,32 @@ namespace CICSWebPortal.ServiceReference {
                 if ((this.RevenueItemIdField.Equals(value) != true)) {
                     this.RevenueItemIdField = value;
                     this.RaisePropertyChanged("RevenueItemId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StaffPayerID {
+            get {
+                return this.StaffPayerIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StaffPayerIDField, value) != true)) {
+                    this.StaffPayerIDField = value;
+                    this.RaisePropertyChanged("StaffPayerID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> TaxableIncome {
+            get {
+                return this.TaxableIncomeField;
+            }
+            set {
+                if ((this.TaxableIncomeField.Equals(value) != true)) {
+                    this.TaxableIncomeField = value;
+                    this.RaisePropertyChanged("TaxableIncome");
                 }
             }
         }
@@ -10954,6 +12142,536 @@ namespace CICSWebPortal.ServiceReference {
                 if ((this.ToDateField.Equals(value) != true)) {
                     this.ToDateField = value;
                     this.RaisePropertyChanged("ToDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> WithholdingTaxActualAmount {
+            get {
+                return this.WithholdingTaxActualAmountField;
+            }
+            set {
+                if ((this.WithholdingTaxActualAmountField.Equals(value) != true)) {
+                    this.WithholdingTaxActualAmountField = value;
+                    this.RaisePropertyChanged("WithholdingTaxActualAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> WithholdingTaxLiability {
+            get {
+                return this.WithholdingTaxLiabilityField;
+            }
+            set {
+                if ((this.WithholdingTaxLiabilityField.Equals(value) != true)) {
+                    this.WithholdingTaxLiabilityField = value;
+                    this.RaisePropertyChanged("WithholdingTaxLiability");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> WithholdingTaxRevenueDeductionPercentage {
+            get {
+                return this.WithholdingTaxRevenueDeductionPercentageField;
+            }
+            set {
+                if ((this.WithholdingTaxRevenueDeductionPercentageField.Equals(value) != true)) {
+                    this.WithholdingTaxRevenueDeductionPercentageField = value;
+                    this.RaisePropertyChanged("WithholdingTaxRevenueDeductionPercentage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WithholdingTaxRevenueName {
+            get {
+                return this.WithholdingTaxRevenueNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WithholdingTaxRevenueNameField, value) != true)) {
+                    this.WithholdingTaxRevenueNameField = value;
+                    this.RaisePropertyChanged("WithholdingTaxRevenueName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Year {
+            get {
+                return this.YearField;
+            }
+            set {
+                if ((this.YearField.Equals(value) != true)) {
+                    this.YearField = value;
+                    this.RaisePropertyChanged("Year");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CashWorxIntegration", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class CashWorxIntegration : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string accesskeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CICSWebPortal.ServiceReference.CashWorkInvoice[] invoicesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string mdacodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string accesskey {
+            get {
+                return this.accesskeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.accesskeyField, value) != true)) {
+                    this.accesskeyField = value;
+                    this.RaisePropertyChanged("accesskey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CICSWebPortal.ServiceReference.CashWorkInvoice[] invoices {
+            get {
+                return this.invoicesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.invoicesField, value) != true)) {
+                    this.invoicesField = value;
+                    this.RaisePropertyChanged("invoices");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string mdacode {
+            get {
+                return this.mdacodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.mdacodeField, value) != true)) {
+                    this.mdacodeField = value;
+                    this.RaisePropertyChanged("mdacode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CashWorkInvoice", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class CashWorkInvoice : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string customerfilenoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string customeridField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string customernameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string invoicedateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string invoicelogidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string invoicenoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string invoicevaliduntilField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int isreversalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CICSWebPortal.ServiceReference.CashWorkItem[] itemsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string originalamountField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string customerfileno {
+            get {
+                return this.customerfilenoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.customerfilenoField, value) != true)) {
+                    this.customerfilenoField = value;
+                    this.RaisePropertyChanged("customerfileno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string customerid {
+            get {
+                return this.customeridField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.customeridField, value) != true)) {
+                    this.customeridField = value;
+                    this.RaisePropertyChanged("customerid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string customername {
+            get {
+                return this.customernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.customernameField, value) != true)) {
+                    this.customernameField = value;
+                    this.RaisePropertyChanged("customername");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string invoicedate {
+            get {
+                return this.invoicedateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.invoicedateField, value) != true)) {
+                    this.invoicedateField = value;
+                    this.RaisePropertyChanged("invoicedate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string invoicelogid {
+            get {
+                return this.invoicelogidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.invoicelogidField, value) != true)) {
+                    this.invoicelogidField = value;
+                    this.RaisePropertyChanged("invoicelogid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string invoiceno {
+            get {
+                return this.invoicenoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.invoicenoField, value) != true)) {
+                    this.invoicenoField = value;
+                    this.RaisePropertyChanged("invoiceno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string invoicevaliduntil {
+            get {
+                return this.invoicevaliduntilField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.invoicevaliduntilField, value) != true)) {
+                    this.invoicevaliduntilField = value;
+                    this.RaisePropertyChanged("invoicevaliduntil");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int isreversal {
+            get {
+                return this.isreversalField;
+            }
+            set {
+                if ((this.isreversalField.Equals(value) != true)) {
+                    this.isreversalField = value;
+                    this.RaisePropertyChanged("isreversal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CICSWebPortal.ServiceReference.CashWorkItem[] items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
+                    this.itemsField = value;
+                    this.RaisePropertyChanged("items");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string originalamount {
+            get {
+                return this.originalamountField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.originalamountField, value) != true)) {
+                    this.originalamountField = value;
+                    this.RaisePropertyChanged("originalamount");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CashWorkItem", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class CashWorkItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal itemamountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string itemcodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string itemnameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal itemamount {
+            get {
+                return this.itemamountField;
+            }
+            set {
+                if ((this.itemamountField.Equals(value) != true)) {
+                    this.itemamountField = value;
+                    this.RaisePropertyChanged("itemamount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string itemcode {
+            get {
+                return this.itemcodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemcodeField, value) != true)) {
+                    this.itemcodeField = value;
+                    this.RaisePropertyChanged("itemcode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string itemname {
+            get {
+                return this.itemnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemnameField, value) != true)) {
+                    this.itemnameField = value;
+                    this.RaisePropertyChanged("itemname");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CashWorkIntegrationRes", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class CashWorkIntegrationRes : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<string, CICSWebPortal.ServiceReference.CashWorkIntegrationResponses> responsesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<string, CICSWebPortal.ServiceReference.CashWorkIntegrationResponses> responses {
+            get {
+                return this.responsesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.responsesField, value) != true)) {
+                    this.responsesField = value;
+                    this.RaisePropertyChanged("responses");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CashWorkIntegrationResponses", Namespace="http://schemas.datacontract.org/2004/07/ChamsICSWebService.Model")]
+    [System.SerializableAttribute()]
+    public partial class CashWorkIntegrationResponses : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string invoicelogidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int statusidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string statusmsgField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string invoicelogid {
+            get {
+                return this.invoicelogidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.invoicelogidField, value) != true)) {
+                    this.invoicelogidField = value;
+                    this.RaisePropertyChanged("invoicelogid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int statusid {
+            get {
+                return this.statusidField;
+            }
+            set {
+                if ((this.statusidField.Equals(value) != true)) {
+                    this.statusidField = value;
+                    this.RaisePropertyChanged("statusid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string statusmsg {
+            get {
+                return this.statusmsgField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.statusmsgField, value) != true)) {
+                    this.statusmsgField = value;
+                    this.RaisePropertyChanged("statusmsg");
                 }
             }
         }
@@ -12428,6 +14146,14 @@ namespace CICSWebPortal.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyResidentId", ReplyAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyResidentIdResponse")]
         System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.VerifyResidentIdRes> VerifyResidentIdAsync(CICSWebPortal.ServiceReference.VerifyResidentIdReq req);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyAnambraResidentID", ReplyAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyAnambraResidentIDRe" +
+            "sponse")]
+        CICSWebPortal.ServiceReference.VerifyResidentRes VerifyAnambraResidentID(CICSWebPortal.ServiceReference.VerifyResidentIdReq req);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyAnambraResidentID", ReplyAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/VerifyAnambraResidentIDRe" +
+            "sponse")]
+        System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.VerifyResidentRes> VerifyAnambraResidentIDAsync(CICSWebPortal.ServiceReference.VerifyResidentIdReq req);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://3rdpartyservices.cics.chams.com/iChamsICSService/UploadTransaction", ReplyAction="http://3rdpartyservices.cics.chams.com/iChamsICSService/UploadTransactionResponse" +
             "")]
         CICSWebPortal.ServiceReference.UploadTransactionRes UploadTransaction(CICSWebPortal.ServiceReference.UploadTransactionReq req);
@@ -12572,6 +14298,14 @@ namespace CICSWebPortal.ServiceReference {
             return base.Channel.VerifyResidentIdAsync(req);
         }
         
+        public CICSWebPortal.ServiceReference.VerifyResidentRes VerifyAnambraResidentID(CICSWebPortal.ServiceReference.VerifyResidentIdReq req) {
+            return base.Channel.VerifyAnambraResidentID(req);
+        }
+        
+        public System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.VerifyResidentRes> VerifyAnambraResidentIDAsync(CICSWebPortal.ServiceReference.VerifyResidentIdReq req) {
+            return base.Channel.VerifyAnambraResidentIDAsync(req);
+        }
+        
         public CICSWebPortal.ServiceReference.UploadTransactionRes UploadTransaction(CICSWebPortal.ServiceReference.UploadTransactionReq req) {
             return base.Channel.UploadTransaction(req);
         }
@@ -12680,6 +14414,22 @@ namespace CICSWebPortal.ServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://portalservices.cics.chams.com", ConfigurationName="ServiceReference.iChamsICSPortalService")]
     public interface iChamsICSPortalService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotifications", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotificationsRe" +
+            "sponse")]
+        CICSWebPortal.ServiceReference.GetNotificationsRes GetAllNotifications();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotifications", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotificationsRe" +
+            "sponse")]
+        System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.GetNotificationsRes> GetAllNotificationsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrailsResp" +
+            "onse")]
+        CICSWebPortal.ServiceReference.GetAuditTrailsRes GetAllAuditTrails();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrailsResp" +
+            "onse")]
+        System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.GetAuditTrailsRes> GetAllAuditTrailsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReportResponse")]
         CICSWebPortal.ServiceReference.FetchEndOfDayRes GetEODReport(CICSWebPortal.ServiceReference.FetchEndOfDayReq request);
@@ -13086,6 +14836,26 @@ namespace CICSWebPortal.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebTrancation", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebTrancationR" +
             "esponse")]
         System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.WebTransactionRes> ProcessWebTrancationAsync(CICSWebPortal.ServiceReference.WebTransactionReq webTransactionReq);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebMultiTranca" +
+            "tion", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebMultiTranca" +
+            "tionResponse")]
+        CICSWebPortal.ServiceReference.WebTransactionRes ProcessWebMultiTrancation(CICSWebPortal.ServiceReference.WebTransactionReq[] webTransactionReq);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebMultiTranca" +
+            "tion", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebMultiTranca" +
+            "tionResponse")]
+        System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.WebTransactionRes> ProcessWebMultiTrancationAsync(CICSWebPortal.ServiceReference.WebTransactionReq[] webTransactionReq);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/SubmitInterswitchInvo" +
+            "ice", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/SubmitInterswitchInvo" +
+            "iceResponse")]
+        CICSWebPortal.ServiceReference.CashWorkIntegrationRes SubmitInterswitchInvoice(CICSWebPortal.ServiceReference.CashWorxIntegration cashWorxIntegration);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/SubmitInterswitchInvo" +
+            "ice", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/SubmitInterswitchInvo" +
+            "iceResponse")]
+        System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.CashWorkIntegrationRes> SubmitInterswitchInvoiceAsync(CICSWebPortal.ServiceReference.CashWorxIntegration cashWorxIntegration);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindErrorTransaction", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/FindErrorTransactionR" +
             "esponse")]
@@ -13504,22 +15274,6 @@ namespace CICSWebPortal.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetReportSummary", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetReportSummaryRespo" +
             "nse")]
         System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.TransactionSummaryRes> GetReportSummaryAsync(CICSWebPortal.ServiceReference.TransactionSummary request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotifications", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotificationsRe" +
-            "sponse")]
-        CICSWebPortal.ServiceReference.GetNotificationsRes GetAllNotifications();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotifications", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotificationsRe" +
-            "sponse")]
-        System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.GetNotificationsRes> GetAllNotificationsAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrailsResp" +
-            "onse")]
-        CICSWebPortal.ServiceReference.GetAuditTrailsRes GetAllAuditTrails();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails", ReplyAction="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrailsResp" +
-            "onse")]
-        System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.GetAuditTrailsRes> GetAllAuditTrailsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -13547,6 +15301,22 @@ namespace CICSWebPortal.ServiceReference {
         
         public iChamsICSPortalServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public CICSWebPortal.ServiceReference.GetNotificationsRes GetAllNotifications() {
+            return base.Channel.GetAllNotifications();
+        }
+        
+        public System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.GetNotificationsRes> GetAllNotificationsAsync() {
+            return base.Channel.GetAllNotificationsAsync();
+        }
+        
+        public CICSWebPortal.ServiceReference.GetAuditTrailsRes GetAllAuditTrails() {
+            return base.Channel.GetAllAuditTrails();
+        }
+        
+        public System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.GetAuditTrailsRes> GetAllAuditTrailsAsync() {
+            return base.Channel.GetAllAuditTrailsAsync();
         }
         
         public CICSWebPortal.ServiceReference.FetchEndOfDayRes GetEODReport(CICSWebPortal.ServiceReference.FetchEndOfDayReq request) {
@@ -13941,6 +15711,22 @@ namespace CICSWebPortal.ServiceReference {
             return base.Channel.ProcessWebTrancationAsync(webTransactionReq);
         }
         
+        public CICSWebPortal.ServiceReference.WebTransactionRes ProcessWebMultiTrancation(CICSWebPortal.ServiceReference.WebTransactionReq[] webTransactionReq) {
+            return base.Channel.ProcessWebMultiTrancation(webTransactionReq);
+        }
+        
+        public System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.WebTransactionRes> ProcessWebMultiTrancationAsync(CICSWebPortal.ServiceReference.WebTransactionReq[] webTransactionReq) {
+            return base.Channel.ProcessWebMultiTrancationAsync(webTransactionReq);
+        }
+        
+        public CICSWebPortal.ServiceReference.CashWorkIntegrationRes SubmitInterswitchInvoice(CICSWebPortal.ServiceReference.CashWorxIntegration cashWorxIntegration) {
+            return base.Channel.SubmitInterswitchInvoice(cashWorxIntegration);
+        }
+        
+        public System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.CashWorkIntegrationRes> SubmitInterswitchInvoiceAsync(CICSWebPortal.ServiceReference.CashWorxIntegration cashWorxIntegration) {
+            return base.Channel.SubmitInterswitchInvoiceAsync(cashWorxIntegration);
+        }
+        
         public CICSWebPortal.ServiceReference.FindErrorTransactionRes FindErrorTransaction(int Id) {
             return base.Channel.FindErrorTransaction(Id);
         }
@@ -14331,22 +16117,6 @@ namespace CICSWebPortal.ServiceReference {
         
         public System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.TransactionSummaryRes> GetReportSummaryAsync(CICSWebPortal.ServiceReference.TransactionSummary request) {
             return base.Channel.GetReportSummaryAsync(request);
-        }
-        
-        public CICSWebPortal.ServiceReference.GetNotificationsRes GetAllNotifications() {
-            return base.Channel.GetAllNotifications();
-        }
-        
-        public System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.GetNotificationsRes> GetAllNotificationsAsync() {
-            return base.Channel.GetAllNotificationsAsync();
-        }
-        
-        public CICSWebPortal.ServiceReference.GetAuditTrailsRes GetAllAuditTrails() {
-            return base.Channel.GetAllAuditTrails();
-        }
-        
-        public System.Threading.Tasks.Task<CICSWebPortal.ServiceReference.GetAuditTrailsRes> GetAllAuditTrailsAsync() {
-            return base.Channel.GetAllAuditTrailsAsync();
         }
     }
 }

@@ -1,0 +1,622 @@
+﻿@model  CICSWebPortal.Models.WebPayment
+@{
+    ViewBag.Title = "RemittanceForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string displayStyle = string.Empty;
+    int roleId = Convert.ToInt32(Session["RoleId"]);
+    string roleCode = (string)Session["RoleCode"];
+    bool cancreatewebUsers = (bool)Session["CanCreateWebUsers"];
+    var user = (CICSWebPortal.ViewModels.UserDashBoardViewModel)Session["LoggedInUser"];
+    var percentage = (ViewBag.PercentageDeduction != null) ? (decimal)ViewBag.PercentageDeduction : 0;
+}
+@{
+    string[] clientmenu = new string[] { "TP" };
+    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+    //displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
+}
+<div style="@displayStyle; padding-left: 20px">
+    <h4>Welcome, @ViewBag.TaxpayerName</h4>
+</div>
+
+<div id="breadcrumb">
+    <ul class="breadcrumb">
+        <li><i class="fa fa-home"></i><a href="#"> Home</a></li>
+        <li class="active">RemittanceForm</li>
+    </ul>
+</div><!-- /breadcrumb-->
+<div class="main-header clearfix">
+    @{
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
+    }
+    <div class="page-title" style="@displayStyle">
+        <div class="alert alert-warning">
+            <span>You Cannot View This Page.</span>
+        </div>
+    </div><!-- /page-title -->
+
+    @{
+        clientmenu = new string[] { "WA" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+    }
+
+    @{
+        if (ViewBag.Status != null)
+        {
+            bool status = (bool)ViewBag.Status;
+            if (status == true)
+            {
+                <div class="title">
+                    <div class="alert alert-success">
+                        @Html.Raw(ViewBag.Message)
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="title">
+                    <div class="alert alert-danger">
+                        @ViewBag.Message
+                    </div>
+                </div>
+            }
+        }
+    }
+
+    <div style="@displayStyle" class="title">
+        <div id="invoicemessage" class="alert " style="display:none">
+            <span id="invoicemessagelabel"></span>
+        </div>
+        <div class="row">
+            <div class="row col-lg-6">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <i class="fa fa-money"></i>
+
+                        <h3 class="box-title">Payee Collection Form</h3>
+                        <!-- tools box -->
+                        <div class="pull-right box-tools">
+
+                        </div>
+                        <!-- /. tools -->
+                    </div>
+                    @using (Html.BeginForm("RemittanceForm", "Payments", FormMethod.Post))
+                    {
+                        <div class="box-body">
+
+
+                            @Html.AntiForgeryToken()
+
+
+                            <div class="form-group">
+                                <label>Month</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DropDownList("Month", new SelectList(Enum.GetValues(typeof(CICSWebPortal.Models.Month))),
+                            "Select Month",
+                            new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MonthlyIncome">Year</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <select class="form-control" id="Year">
+
+                                        @{
+                                            int year = DateTime.Now.Year;
+                                            for (int i = year - 10; i <= year; i++)
+                                            {
+                                                if (i == year)
+                                                {
+                                                    <option value="@i" selected>@i</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@i">@i</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MonthlyIncome">Staff Payer ID</label>
+                                @Html.EditorFor(model => model.StaffPayerID, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "StaffPayerID", required = true, name = "StaffPayerID", placeholder = "Staff Payer ID" } })
+                            </div>
+                            <div class="form-group">
+                                <label for="MonthlyIncome">Employee Name</label>
+                                @Html.EditorFor(model => model.EmployeeName, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "EmployeeName", required = true, name = "EmployeeName", placeholder = "Employee Name" } })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="MonthlyIncome">Monthly Income</label>
+                                @Html.EditorFor(model => model.MonthlyIncome, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "MonthlyIncome", required = true, name = "MonthlyIncome", placeholder = "Monthly Income" } })
+                                @*@Html.EditorFor(model => model.AnnualIncome, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "AnnualIncome", required = true, name = "AnnualIncome", placeholder = "Annual Income", @readonly = "readonly", tabIndex = "-1" } })*@
+                            </div>
+
+                            <div class="form-group">
+                                <label for="MonthlyPension">Monthly Pension</label>
+                                @Html.EditorFor(model => model.MonthlyPension, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "MonthlyPension", required = true, name = "MonthlyPension", placeholder = "Monthly Pension" } })
+                                @*@Html.EditorFor(model => model.AnnualPension, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "AnnualPension", required = true, name = "AnnualPension", placeholder = "Annual Pension", @readonly = "readonly", tabIndex = "-1" } })*@
+                            </div>
+                            <div class="form-group">
+                                <label for="MonthlyNHFund">Monthly NH Fund</label>
+                                @Html.EditorFor(model => model.MonthlyNHFund, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "MonthlyNHFund", required = true, name = "MonthlyNHFund", placeholder = "Monthly NHFund" } })
+                                @*@Html.EditorFor(model => model.AnnualNHFund, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "AnnualNHFund", required = true, name = "AnnualNHFund", placeholder = "Annual NHFund", @readonly = "readonly", tabIndex = "-1" } })*@
+                            </div>
+                            <div class="form-group">
+                                <label for="MonthlyNHIS">Monthly NHIS</label>
+                                @Html.EditorFor(model => model.MonthlyNHIS, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "MonthlyNHIS", required = true, name = "MonthlyNHIS", placeholder = "Monthly NHIS" } })
+                                @*@Html.EditorFor(model => model.AnnualNHIS, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "AnnualNHIS", required = true, name = "AnnualNHIS", placeholder = "Annual NHIS", @readonly = "readonly", tabIndex = "-1" } })*@
+                            </div>
+                            <hr />
+                            @*<div class="form-group">
+                                    <label for="MonthlyNHIS">Payee Computation</label>
+                                    <div><span>Consolidated Relief </span>  @Html.EditorFor(model => model.ConsolidatedReliefs, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "ConsolidatedReliefs", required = true, name = "ConsolidatedReliefs", placeholder = "Consolidated Reliefs", @readonly = "readonly", tabIndex = "-1" } })</div>
+                                    <div><span>Taxable Income </span>  @Html.EditorFor(model => model.TaxableIncome, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "TaxableIncome", required = true, name = "TaxableIncome", placeholder = "Taxable Income", @readonly = "readonly", tabIndex = "-1" } })</div>
+                                    <div><span>Computed Annual Tax </span>  @Html.EditorFor(model => model.ComputedAnnualTax, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "ComputedAnnualTax", required = true, name = "ComputedAnnualTax", placeholder = "ComputedAnnualTax", @readonly = "readonly", tabIndex = "-1" } })</div>
+                                    <div><span>Minimum Tax </span>  @Html.EditorFor(model => model.MinimumTax, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "MinimumTax", required = true, name = "MinimumTax", placeholder = "Minimum Tax", @readonly = "readonly", tabIndex = "-1" } })</div>
+                                    <div><span>Annual Tax Payable </span>  @Html.EditorFor(model => model.AnnualTaxPayable, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "AnnualTaxPayable", required = true, name = "AnnualTaxPayable", placeholder = "Annaul Tax Payable", @readonly = "readonly", tabIndex = "-1" } })</div>
+                                </div>*@
+                            <hr />
+
+                            <div class="form-group">
+                                <label for="MonthlyTaxLiability">Monthly Tax Liability</label>
+                                @Html.EditorFor(model => model.MonthlyTaxLiability, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "MonthlyTaxLiability", required = true, name = "MonthlyNHIS", placeholder = "Monthly Tax Liability", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                        <div class="box-footer clearfix">
+                            <button type="submit" class="pull-right btn btn-default" id="addpayeerecord">
+                                Add
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="row col-lg-6">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <i class="fa fa-money"></i>
+
+                        <h3 class="box-title">Payee Information</h3>
+                        <!-- tools box -->
+                        <div class="pull-right box-tools">
+
+                        </div>
+
+                        <!-- /. tools -->
+                    </div>
+                    <div class="box-body">
+                        @{
+                            if (ViewBag.TerminalTransaction != null)
+                            {
+                                var transactions = (List<CICSWebPortal.Models.Transaction>)ViewBag.TerminalTransaction;
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th style="width: 15%">Date</th>
+                                        <th>Amount</th>
+                                        <th style="width:32%">Name</th>
+                                        <th style="width: 32%">Staff PayerID</th>
+                                        <th style="width: 10%">Remove</th>
+                                    </tr>
+                                    <tbody id="payeebody"></tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" style="text-align:left">
+                                                <button class="btn btn-success" id="paypayee"><i class="fa fa-money"></i>PAY PAYEE</button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+
+                                </table>
+                            }
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- /.col
+            -->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div><!-- /page-title -->
+
+
+<div style="display:none" id="printdiv">
+    <div class="header">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <img src="" />
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <span class="h3"> INVOICE </span><hr />
+                <span class="h3" id="printbusinessname"></span> <hr />
+                <span class="h4" id="printRemittanceCode"></span><hr />
+                <span class="h4" id="printTransactionCode"></span><hr />
+                <span class="h5" id="printDate"></span><hr />
+                <span class="h5" id="printperiod"></span>
+            </div>
+
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th style="width: 15%">Item</th>
+                <th style="width: 15%">Amount (₦)</th>
+                <th style="width: 15%">percentage (%)</th>
+                <th style="width: 15%">Payment Due (₦)</th>
+            </tr>
+            <tr>
+                <td>Food</td>
+                <td><span id="printFoodAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printFoodAmountPayable"></span></td>
+            </tr>
+            <tr>
+                <td>Drink</td>
+                <td><span id="printDrinkAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printDrinkAmountPayable"></span></td>
+            </tr>
+            <tr>
+                <td>Rental</td>
+                <td><span id="printRentalAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printRentalAmountPayable"></span></td>
+            </tr>
+            <tr>
+                <td>Others</td>
+                <td><span id="printOtherAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printOtherAmountPayable"></span></td>
+            </tr>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <th><span id="printTotalAmount"></span></th>
+                    <th><span class="perentagededuction"></span></th>
+                    <th><span id="printTotalAmountPayable"></span></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+
+
+@section JavaScript
+{
+    <script type="text/javascript">
+
+
+        @*var percentage = @percentage;
+        var percentagevalue = percentage * 100;
+        var foodamt = 0;
+        var drinkamt = 0;
+        var rentalamt = 0;
+        var otheramt = 0;
+        var totalamt = 0;*@
+
+        var payee = {
+            MonthlyIncome: 0,
+            AnnualIncome: 0,
+            MonthlyPension: 0,
+            AnnualPension: 0,
+            MonthlyNHFund: 0,
+            AnnualNHFund: 0,
+            MonthlyNHIS: 0,
+            AnnualNHIS: 0,
+            ConsolidatedReliefs: 0,
+            TaxableIncome: 0,
+            ComputedAnnualTax: 0,
+            TaxableIncome: 0,
+            ComputedAnnualTax: 0,
+            MinimumTax: 0,
+            AnnualTaxPayable: 0,
+            MonthlyTaxLiability: 0,
+            StaffPayerID : '',
+            EmployeeName:'',
+            Month: '',
+            Year: 0
+
+        };
+
+        var payable = [];
+
+
+        $('#MonthlyIncome').on('input keyup blur change keypress', function () {
+            payee.MonthlyIncome = $(this).val();
+            calculateCollection();
+        });
+        $('#MonthlyPension').on('input keyup blur change keypress', function () {
+            payee.MonthlyPension = $(this).val();
+            calculateCollection();
+        });
+        $('#MonthlyNHFund').on('input keyup blur change keypress', function () {
+            payee.MonthlyNHFund = $(this).val();
+            calculateCollection();
+        });
+        $('#MonthlyNHIS').on('input keyup blur change keypress', function () {
+            payee.MonthlyNHIS = $(this).val();
+            calculateCollection();
+        });
+        $('#addpayeerecord').on('click', function (e) {
+            e.preventDefault();
+            payee.EmployeeName = $('#EmployeeName').val();
+            payee.StaffPayerID = $('#StaffPayerID').val();
+            payee.Month = $("#Month option:selected").text();
+            payee.Year = $("#Year").val();
+            if (checkCanAdd()) {
+                payable.push(payee);
+                ShowAllPayables();
+                resetPayee();
+            }
+        });
+        $('#paypayee').on('click', function (e) {
+            e.preventDefault();
+            payables = JSON.stringify({ 'model': payable });
+            $.ajax({
+                type: "POST",
+                url: '/Payments/PayeeInvoice',
+                data: payables,
+                contentType: 'application/json; charset=utf-8',
+                datatype: "json",
+                beforeSend: function () {
+                    waitingDialog.show("Generating invoice");
+                },
+                complete: function () {
+                    waitingDialog.hide();
+                },
+                success: function (response) {
+
+                    if (response.status == true) {
+                        $('#invoicemessage').removeClass('alert-danger').addClass('alert-success');
+                        //$('#invoicemessagelabel').html('Invoice generated successfully, Invoice No: <b>' + response.result.RemittanceCode + '</b>  <button class=\"btn btn-danger\" id=\"downloadinvoice\" transactioncode=\"' + response.result.TransactionCode + '\"> Download Invoice </button> ');
+                        $('#invoicemessagelabel').html(response.message);
+                        $('#invoicemessage').show();
+                        //console.log(response);
+                    }
+                    else {
+                        $('#invoicemessage').removeClass('alert-success').addClass('alert-danger');
+                        $('#invoicemessagelabel').html('Invoice generation failed');
+                        $('#invoicemessage').show();
+                    }
+
+                },
+                error: function () {
+
+                }
+
+            });
+        });
+
+        $(document).on('click', '.removepayee', function (e) {
+            e.preventDefault();
+            var index = $(this).attr('data-id');
+            payable.splice(index, 1);
+            ShowAllPayables();
+
+        });
+
+
+        var checkCanAdd = function () {
+            if (payee.EmployeeName == null || payee.EmployeeName == '') {
+                alert('Please Enter Employee Name');
+                return false;
+            }
+            //if (payee.StaffPayerID == null || payee.StaffPayerID == '') {
+            //    alert('Please Enter Staff Payer ID');
+            //    return false;
+            //}
+            if (payee.MonthlyTaxLiability <= 0) {
+                alert('Please check your enteries');
+                return false;
+            }
+
+            if (payee.Month == "Select Month") {
+                alert('Please Select Month');
+                return false;
+            }
+            return true;
+        };
+
+        var ShowAllPayables = function () {
+            //var payeebody = $("#payeebody");
+            var innerhtml = '';
+            var total = 0;
+            for (var i = 0; i < payable.length; i++) {
+                innerhtml += '<tr>';
+                innerhtml += '<td>' + payable[i].Month + ', '+ payable[i].Year + '</td>';
+                innerhtml += '<td>' + commaseparatedfunction(payable[i].MonthlyTaxLiability.toFixed(2)) + '</td>';
+                innerhtml += '<td>' + payable[i].EmployeeName + '</td>';
+                innerhtml += '<td>' + payable[i].StaffPayerID + '</td>';
+                innerhtml += '<td> <a class="btn btn-danger removepayee" data-id=' + i + '> Remove </a></td>';
+                innerhtml += '</tr>';
+                total += payable[i].MonthlyTaxLiability;
+            }
+
+            innerhtml += '<tr style="font-weight:bolder" >';
+            innerhtml += '<td>TOTAL</td>';
+            innerhtml += '<td colspan="4" style="text-align:center">' + commaseparatedfunction(total.toFixed(2)) + '</td>';
+            innerhtml += '</tr>';
+
+            $("#payeebody").html(innerhtml);
+        };
+
+        $.fn.digits = function(){
+            return this.each(function(){
+                $(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );
+            })
+        };
+
+        var commaseparatedfunction = function(number){
+           var parts = number.toString().split(".");
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            var joined = parts.join(".");
+            return joined;
+        };
+
+        var calculateCollection = function () {
+
+
+            payee.AnnualIncome = payee.MonthlyIncome * 12;
+            payee.AnnualPension = payee.MonthlyPension * 12;
+            payee.AnnualNHFund = payee.MonthlyNHFund * 12;
+            payee.AnnualNHIS = payee.MonthlyNHIS * 12;
+            //IF(H5*1%>200000,H5*1%+H5*20%,200000+H5*20%)
+
+            if ((payee.AnnualIncome * 0.01) > 200000)
+                payee.ConsolidatedReliefs = (payee.AnnualIncome * 0.21);
+            else
+                payee.ConsolidatedReliefs = ((payee.AnnualIncome * 0.20) + 200000);
+
+            payee.TaxableIncome = payee.AnnualIncome - payee.AnnualPension - payee.AnnualNHFund - payee.AnnualNHIS - payee.ConsolidatedReliefs;
+
+            if (payee.TaxableIncome < 300000) {
+                payee.ComputedAnnualTax = payee.TaxableIncome * 0.07;
+            }
+            else if (payee.TaxableIncome > 300000 && payee.TaxableIncome <= 600000) {
+                payee.ComputedAnnualTax = 21000 + ((payee.TaxableIncome - 300000) * 0.11);
+            }
+            else if (payee.TaxableIncome > 600000 && payee.TaxableIncome <= 1100000) {
+                payee.ComputedAnnualTax = 54000 + ((payee.TaxableIncome - 600000) * 0.15);
+            }
+            else if (payee.TaxableIncome > 1100000 && payee.TaxableIncome <= 1600000) {
+                payee.ComputedAnnualTax = 129000 + ((payee.TaxableIncome - 1100000) * 0.19);
+            }
+            else if (payee.TaxableIncome > 1600000 && payee.TaxableIncome <= 3200000) {
+                payee.ComputedAnnualTax = 224000 + ((payee.TaxableIncome - 1600000) * 0.21);
+            }
+            else {
+                payee.ComputedAnnualTax = 560000 + ((payee.TaxableIncome - 3200000) * 0.24);
+            }
+
+            payee.MinimumTax = 0.01 * payee.AnnualIncome;
+
+            if (payee.ComputedAnnualTax < payee.MinimumTax) {
+                payee.AnnualTaxPayable = payee.MinimumTax;
+            }
+            else {
+                payee.AnnualTaxPayable = payee.ComputedAnnualTax;
+            }
+
+            payee.MonthlyTaxLiability = (payee.AnnualTaxPayable / 12);
+
+            $('#MonthlyTaxLiability').val(commaseparatedfunction(payee.MonthlyTaxLiability.toFixed(2)));
+        };
+
+        var resetPayee = function () {
+            payee = {
+                MonthlyIncome: 0,
+                AnnualIncome: 0,
+                MonthlyPension: 0,
+                AnnualPension: 0,
+                MonthlyNHFund: 0,
+                AnnualNHFund: 0,
+                MonthlyNHIS: 0,
+                AnnualNHIS: 0,
+                ConsolidatedReliefs: 0,
+                TaxableIncome: 0,
+                ComputedAnnualTax: 0,
+                TaxableIncome: 0,
+                ComputedAnnualTax: 0,
+                MinimumTax: 0,
+                AnnualTaxPayable: 0,
+                MonthlyTaxLiability: 0,
+                StaffPayerID: '',
+                EmployeeName: '',
+                Month: '',
+                Year: 0
+            };
+
+            $('#MonthlyIncome').val('');
+            $('#MonthlyPension').val('');
+            $('#MonthlyNHFund').val('');
+            $('#MonthlyNHIS').val('');
+            $('#EmployeeName').val('');
+            $('#StaffPayerID').val('');
+            $('#MonthlyTaxLiability').val('');
+        };
+
+
+        $(function () {
+            $('#period').daterangepicker({ format: 'DD/MM/YYYY' });
+        });
+
+
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+
+        $('#printbutton').click(function () {
+            var transactioncode = $(this).attr("transactionCode");
+            loadInvoice(transactioncode);
+            //printinvoice();
+
+        });
+
+        $('#downloadinvoice').click(function () {
+            var transactioncode = $(this).attr("transactionCode");
+            loadInvoice(transactioncode);
+            //printinvoice();
+
+        });
+
+        var loadInvoice = function (transactioncode) {
+            $.get("@Url.Action("FindTransaction")/" + transactioncode, function (data, status) {
+                if (status == "success") {
+
+                    var percentage = data.Transaction.Percentage / 100;
+                    $('#printTransactionCode').text('Transaction Code: #' + data.Transaction.TransactionCode);
+                    $('#printbusinessname').text('Business Name: ' + data.Transaction.Name);
+                    $('#printRemittanceCode').text('Remittance Code: #' + data.Transaction.PaymentReference);
+                    $('.perentagededuction').text(data.Transaction.Percentage);
+                    $('#printDate').text('Date : ' + data.TransactionDate);
+                    $('#printperiod').text('Period : ' + data.Period);
+
+
+                    $('#printFoodAmount').text(data.Transaction.FoodAmount);
+                    $('#printFoodAmountPayable').text(data.Transaction.FoodAmount * percentage);
+
+                    $('#printDrinkAmount').text(data.Transaction.DrinkAmount);
+                    $('#printDrinkAmountPayable').text(data.Transaction.DrinkAmount * percentage);
+
+                    $('#printRentalAmount').text(data.Transaction.RentalAmount);
+                    $('#printRentalAmountPayable').text(data.Transaction.RentalAmount * percentage);
+
+                    $('#printOtherAmount').text(data.Transaction.OtherAmount);
+                    $('#printOtherAmountPayable').text(data.Transaction.OtherAmount * percentage);
+
+                    $('#printTotalAmount').text(data.Transaction.Amount / percentage);
+                    $('#printTotalAmountPayable').text(data.Transaction.Amount);
+
+
+                }
+                printinvoice();
+            });
+        };
+        var printinvoice = function () {
+            doc.fromHTML($('#printdiv').html(), 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            doc.save('invoice.pdf');
+        }
+
+
+    </script>
+}
+

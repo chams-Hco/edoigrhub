@@ -43,6 +43,8 @@ namespace CICSWebPortal.Services
 
         #region Transaction
         WebTransactionResponse ProcessWebTrancation(WebPayment webPayment);
+        WebTransactionResponse ProcessMultiWebTrancation(List<WebPayment> webPayment);
+        CashWoxIntegrationResponse SendInterswitchInvoice(CashWoxModel cashwoxmodel);
         IList<Models.Transaction> GetAllTransactions(Models.GetTransactionRequest req);
         IList<Models.Transaction> GetLast10TransactionsByTerminalId(int TerminalId);
         Transaction FindTransactionById(int id);
@@ -163,6 +165,6 @@ namespace CICSWebPortal.Services
 
         List<Models.Notification> GetAllNotifications();
         List<Models.AuditTrail> GetAllAuditTrail();
-
+        VerifyResident FindResident(VerifyResidentRequest req);
     }
 }

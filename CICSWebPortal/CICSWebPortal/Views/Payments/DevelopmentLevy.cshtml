@@ -1,0 +1,373 @@
+﻿@model  CICSWebPortal.Models.WebPayment
+@{
+    ViewBag.Title = "RemittanceForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string displayStyle = string.Empty;
+    int roleId = Convert.ToInt32(Session["RoleId"]);
+    string roleCode = (string)Session["RoleCode"];
+    bool cancreatewebUsers = (bool)Session["CanCreateWebUsers"];
+    var user = (CICSWebPortal.ViewModels.UserDashBoardViewModel)Session["LoggedInUser"];
+    var percentage = (ViewBag.PercentageDeduction != null) ? (decimal)ViewBag.PercentageDeduction : 0;
+}
+@{
+    string[] clientmenu = new string[] { "TP" };
+    displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+    //displayStyle = string.Empty; if (roleId != 7) { displayStyle = "display: none"; }
+}
+<div style="@displayStyle; padding-left: 20px">
+    <h4>Welcome, @ViewBag.TaxpayerName</h4>
+</div>
+
+<div id="breadcrumb">
+    <ul class="breadcrumb">
+        <li><i class="fa fa-home"></i><a href="#"> Home</a></li>
+        <li class="active">Development Levy</li>
+    </ul>
+</div><!-- /breadcrumb-->
+<div class="main-header clearfix">
+    @{
+        clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        //displayStyle = string.Empty; if (roleId == 7) { displayStyle = "display: none"; }
+    }
+    <div class="page-title" style="@displayStyle">
+        <div class="alert alert-warning">
+            <span>You Cannot View This Page.</span>
+        </div>
+    </div><!-- /page-title -->
+
+    @{
+        clientmenu = new string[] { "WA" };
+        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+    }
+
+    @{
+        if (ViewBag.Status != null)
+        {
+            bool status = (bool)ViewBag.Status;
+            if (status == true)
+            {
+                <div class="title">
+                    <div class="alert alert-success">
+                        @Html.Raw(ViewBag.Message)
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="title">
+                    <div class="alert alert-danger">
+                        @ViewBag.Message
+                    </div>
+                </div>
+            }
+        }
+    }
+
+    <div style="@displayStyle" class="title">
+        <div id="invoicemessage" class="alert " style="display:none">
+            <span id="invoicemessagelabel"></span>
+        </div>
+        <div class="row">
+            <div class="row col-lg-6">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <i class="fa fa-money"></i>
+
+                        <h3 class="box-title">Development Levy Form</h3>
+                        <!-- tools box -->
+                        <div class="pull-right box-tools">
+
+                        </div>
+                        <!-- /. tools -->
+                    </div>
+                    @using (Html.BeginForm("RemittanceForm", "Payments", FormMethod.Post))
+                    {
+                        <div class="box-body">
+
+
+                            @Html.AntiForgeryToken()
+
+
+                            <div class="form-group">
+                                <label for="Year">Year</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <select class="form-control" id="Year">
+
+                                        @{
+                                            int year = DateTime.Now.Year;
+                                            for (int i = year - 10; i <= year; i++)
+                                            {
+                                                if (i == year)
+                                                {
+                                                    <option value="@i" selected>@i</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@i">@i</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="NoOfStaff">Number of Staff</label>
+                                @Html.EditorFor(model => model.NoOfStaff, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "NoOfStaff", required = true, name = "NoOfStaff", placeholder = "Number Of Staff" } })
+                            </div>
+                            <div class="form-group">
+                                <label for="MonthlyIncome">
+                                    Development Levy Liability @@ @Model.LiabilityPerStaff.Value / Staff
+                                </label>
+                                @Html.EditorFor(model => model.DevelopmentLevyLiability, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "DevelopmentLevyLiability", required = true, name = "DevelopmentLevyLiability", placeholder = "Development Levy Liability" } })
+                            </div>
+
+                            <hr />
+
+
+
+                        </div>
+                        <div class="box-footer clearfix">
+                            <button type="submit" class="pull-right btn btn-default" id="generateInvoice">
+                                Generate Invoice
+                                <i class="fa fa-send-o"></i>
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div><!-- /page-title -->
+
+
+<div style="display:none" id="printdiv">
+    <div class="header">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <img src="" />
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <span class="h3"> INVOICE </span><hr />
+                <span class="h3" id="printbusinessname"></span> <hr />
+                <span class="h4" id="printRemittanceCode"></span><hr />
+                <span class="h4" id="printTransactionCode"></span><hr />
+                <span class="h5" id="printDate"></span><hr />
+                <span class="h5" id="printperiod"></span>
+            </div>
+
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th style="width: 15%">Item</th>
+                <th style="width: 15%">Amount (₦)</th>
+                <th style="width: 15%">percentage (%)</th>
+                <th style="width: 15%">Payment Due (₦)</th>
+            </tr>
+            <tr>
+                <td>Food</td>
+                <td><span id="printFoodAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printFoodAmountPayable"></span></td>
+            </tr>
+            <tr>
+                <td>Drink</td>
+                <td><span id="printDrinkAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printDrinkAmountPayable"></span></td>
+            </tr>
+            <tr>
+                <td>Rental</td>
+                <td><span id="printRentalAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printRentalAmountPayable"></span></td>
+            </tr>
+            <tr>
+                <td>Others</td>
+                <td><span id="printOtherAmount"></span></td>
+                <td><span class="perentagededuction"></span></td>
+                <td><span id="printOtherAmountPayable"></span></td>
+            </tr>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <th><span id="printTotalAmount"></span></th>
+                    <th><span class="perentagededuction"></span></th>
+                    <th><span id="printTotalAmountPayable"></span></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+
+
+@section JavaScript
+{
+    <script type="text/javascript">
+
+
+        var laibilityperstaff = @Model.LiabilityPerStaff.Value ;
+
+        var devlevy = {
+            NoOfStaff : 0,
+            DevelopmentLevyLiability: '',
+            Year: 0
+
+        };
+
+        
+
+
+        $('#NoOfStaff').on('input keyup blur change keypress', function () {
+            var noofstaff  = parseInt($(this).val());
+            if(noofstaff != null && noofstaff > 0)
+            {
+                devlevy.NoOfStaff = noofstaff;
+                calculateCollection();
+            }
+        });
+
+        
+
+        $('#generateInvoice').on('click', function (e) {
+            e.preventDefault();
+            devlevy.Year = $('#Year').val();
+            payables = JSON.stringify({ 'model': devlevy });
+            $.ajax({
+                type: "POST",
+                url: '/Payments/DevelopmentLevyInvoice',
+                data: payables,
+                contentType: 'application/json; charset=utf-8',
+                datatype: "json",
+                beforeSend: function () {
+                    waitingDialog.show("Generating invoice");
+                },
+                complete: function () {
+                    waitingDialog.hide();
+                },
+                success: function (response) {
+
+                    if (response.status == true) {
+                        $('#invoicemessage').removeClass('alert-danger').addClass('alert-success');
+                        $('#invoicemessagelabel').html(response.message);
+                        $('#invoicemessage').show();
+                        resetPayee();
+                    }
+                    else {
+                        $('#invoicemessage').removeClass('alert-success').addClass('alert-danger');
+                        $('#invoicemessagelabel').html('Invoice generation failed');
+                        $('#invoicemessage').show();
+                    }
+
+                },
+                error: function () {
+
+                }
+                
+
+            });
+        });
+
+      
+
+
+
+
+
+
+        var calculateCollection = function () {
+
+        devlevy.DevelopmentLevyLiability = devlevy.NoOfStaff * laibilityperstaff;
+            $('#DevelopmentLevyLiability').val(devlevy.DevelopmentLevyLiability);
+        };
+
+        var resetPayee = function () {
+            devlevy = {
+                NoOfStaff : 0,
+                DevelopmentLevyLiability: '',
+                Year: 0
+            };
+
+            $('#NoOfStaff').val('');
+            $('#DevelopmentLevyLiability').val('');
+
+        };
+
+
+
+
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+
+        $('#printbutton').click(function () {
+            var transactioncode = $(this).attr("transactionCode");
+            loadInvoice(transactioncode);
+            //printinvoice();
+
+        });
+
+        $('#downloadinvoice').click(function () {
+            var transactioncode = $(this).attr("transactionCode");
+            loadInvoice(transactioncode);
+            //printinvoice();
+
+        });
+
+        var loadInvoice = function (transactioncode) {
+            $.get("@Url.Action("FindTransaction")/" + transactioncode, function (data, status) {
+                if (status == "success") {
+
+                    var percentage = data.Transaction.Percentage / 100;
+                    $('#printTransactionCode').text('Transaction Code: #' + data.Transaction.TransactionCode);
+                    $('#printbusinessname').text('Business Name: ' + data.Transaction.Name);
+                    $('#printRemittanceCode').text('Remittance Code: #' + data.Transaction.PaymentReference);
+                    $('.perentagededuction').text(data.Transaction.Percentage);
+                    $('#printDate').text('Date : ' + data.TransactionDate);
+                    $('#printperiod').text('Period : ' + data.Period);
+
+
+                    $('#printFoodAmount').text(data.Transaction.FoodAmount);
+                    $('#printFoodAmountPayable').text(data.Transaction.FoodAmount * percentage);
+
+                    $('#printDrinkAmount').text(data.Transaction.DrinkAmount);
+                    $('#printDrinkAmountPayable').text(data.Transaction.DrinkAmount * percentage);
+
+                    $('#printRentalAmount').text(data.Transaction.RentalAmount);
+                    $('#printRentalAmountPayable').text(data.Transaction.RentalAmount * percentage);
+
+                    $('#printOtherAmount').text(data.Transaction.OtherAmount);
+                    $('#printOtherAmountPayable').text(data.Transaction.OtherAmount * percentage);
+
+                    $('#printTotalAmount').text(data.Transaction.Amount / percentage);
+                    $('#printTotalAmountPayable').text(data.Transaction.Amount);
+
+
+                }
+                printinvoice();
+            });
+        };
+        var printinvoice = function () {
+            doc.fromHTML($('#printdiv').html(), 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            doc.save('invoice.pdf');
+        }
+
+
+    </script>
+}
+

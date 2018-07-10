@@ -56,12 +56,24 @@
                 }
             }
 
-            <div class="col-sm-4" id="terminalPanel" style="@displayStyle">
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2">Terminal Code:</span>
-                    @Html.TextBoxFor(a => a.TerminalCode, new { @class = "form-control", type = "text" })
-                </div>
-            </div>
+            @{
+                if (roles.Contains(user.RoleCode))
+                {
+                    <div class="col-sm-4" id="terminalPanel" style="@displayStyle">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon2">Terminal Code:</span>
+                            @Html.TextBoxFor(a => a.TerminalCode, new { @class = "form-control", type = "text" })
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    @Html.HiddenFor(a => a.TerminalCode)
+                }
+            }
+
+
+
         </div>
 
         <div class="row padding-xs">

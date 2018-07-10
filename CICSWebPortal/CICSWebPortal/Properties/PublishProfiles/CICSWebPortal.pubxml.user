@@ -16,19 +16,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/03/2018 17:09:21</publishTime>
     </File>
     <File Include="bin/CICSWebPortal.dll">
-      <publishTime>04/19/2018 10:19:37</publishTime>
+      <publishTime>06/05/2018 18:29:50</publishTime>
     </File>
     <File Include="bin/CICSWebPortal.pdb">
-      <publishTime>04/19/2018 10:19:37</publishTime>
+      <publishTime>06/05/2018 18:29:50</publishTime>
     </File>
     <File Include="bin/CICSWebPortal.XmlSerializers.dll">
-      <publishTime>04/19/2018 10:19:38</publishTime>
+      <publishTime>06/05/2018 18:29:52</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>04/03/2018 17:09:21</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
       <publishTime>04/03/2018 17:09:21</publishTime>
+    </File>
+    <File Include="bin/es/Hangfire.Core.resources.dll">
+      <publishTime>04/06/2018 18:38:10</publishTime>
+    </File>
+    <File Include="bin/Hangfire.Core.dll">
+      <publishTime>04/06/2018 18:38:08</publishTime>
+    </File>
+    <File Include="bin/Hangfire.SqlServer.dll">
+      <publishTime>04/06/2018 18:38:12</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>04/03/2018 17:09:21</publishTime>
@@ -98,6 +107,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>04/03/2018 17:09:24</publishTime>
+    </File>
+    <File Include="bin/zh-TW/Hangfire.Core.resources.dll">
+      <publishTime>04/06/2018 18:38:10</publishTime>
+    </File>
+    <File Include="bin/zh/Hangfire.Core.resources.dll">
+      <publishTime>04/06/2018 18:38:10</publishTime>
     </File>
     <File Include="ClassDiagram1.cd">
       <publishTime>01/16/2016 17:12:14</publishTime>
@@ -20196,6 +20211,147 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/dataTables.tableTools.min.css">
       <publishTime>04/03/2018 17:09:11</publishTime>
     </File>
+    <File Include="Content/DataTables/buttons.dataTables.min.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/buttons.flash.min.js">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/buttons.html5.min.js">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/buttons.print.min.js">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/dataTables.bootstrap4.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/dataTables.foundation.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/dataTables.foundation.min.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/dataTables.jqueryui.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/dataTables.jqueryui.min.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/dataTables.semanticui.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/dataTables.semanticui.min.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/jquery.dataTables.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/css/jquery.dataTables.min.css">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/images/sort_asc.png">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/images/sort_asc_disabled.png">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/images/sort_both.png">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/images/sort_desc.png">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/images/sort_desc_disabled.png">
+      <publishTime>05/10/2018 14:29:17</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/dataTables.bootstrap.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/dataTables.bootstrap.min.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/dataTables.bootstrap4.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/dataTables.foundation.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/dataTables.foundation.min.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/dataTables.jqueryui.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/dataTables.jqueryui.min.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/dataTables.semanticui.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/dataTables.semanticui.min.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/jquery.dataTables.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/dataTables.buttons.min.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/datatables.css">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/datatables.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/datatables.min.css">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/datatables.min.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/jquery-1.10.2.js">
+      <publishTime>05/10/2018 14:29:18</publishTime>
+    </File>
+    <File Include="Content/DataTables/jquery-1.12.4.js">
+      <publishTime>05/10/2018 14:29:19</publishTime>
+    </File>
+    <File Include="Content/DataTables/jquery-ui.js">
+      <publishTime>05/10/2018 14:29:19</publishTime>
+    </File>
+    <File Include="Content/DataTables/jquery.dataTables.min.css">
+      <publishTime>05/10/2018 14:29:19</publishTime>
+    </File>
+    <File Include="Content/DataTables/jquery.dataTables.min.js">
+      <publishTime>05/10/2018 14:29:19</publishTime>
+    </File>
+    <File Include="Content/DataTables/jszip.min.js">
+      <publishTime>05/10/2018 14:29:19</publishTime>
+    </File>
+    <File Include="Content/DataTables/pdfmake.min.js">
+      <publishTime>05/10/2018 14:29:19</publishTime>
+    </File>
+    <File Include="Content/DataTables/pdfmake.min.js.map">
+      <publishTime>05/10/2018 14:29:19</publishTime>
+    </File>
+    <File Include="Content/DataTables/vfs_fonts.js">
+      <publishTime>05/10/2018 14:29:19</publishTime>
+    </File>
     <File Include="Content/dist/css/AdminLTE.css">
       <publishTime>04/12/2018 16:36:41</publishTime>
     </File>
@@ -21031,7 +21187,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/03/2018 17:09:11</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>04/03/2018 17:09:21</publishTime>
+      <publishTime>04/19/2018 15:55:04</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/03/2018 17:09:11</publishTime>
@@ -21183,6 +21339,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
       <publishTime>04/03/2018 17:09:11</publishTime>
     </File>
+    <File Include="Scripts/jquery3.2.1.js">
+      <publishTime>05/10/2018 16:07:53</publishTime>
+    </File>
+    <File Include="Scripts/loader.js">
+      <publishTime>06/04/2018 12:43:03</publishTime>
+    </File>
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>04/03/2018 17:09:11</publishTime>
     </File>
@@ -21217,544 +21379,556 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/03/2018 17:09:11</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.AgentSummaryRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.AssessmentModelRes.datasource">
       <publishTime>01/12/2018 14:12:26</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.AuthoriseTerminalRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
+    </File>
+    <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.CashWorkIntegrationRes.datasource">
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.ClientSummaryRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.CreateAgentRes.datasource">
-      <publishTime>04/18/2018 19:44:00</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.CreateClientRes.datasource">
-      <publishTime>04/18/2018 19:43:58</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.CreateEndOfDayRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.CreateIdentityRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.CreateLocationRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.CreateRevenueRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.CreateUserRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.DashboardRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.ExecutiveDashboardRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FetchEndOfDayRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindAgentRes.datasource">
-      <publishTime>04/18/2018 19:44:00</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindClientRes.datasource">
-      <publishTime>04/18/2018 19:43:58</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindClientWithZoneRes.datasource">
-      <publishTime>04/18/2018 19:43:58</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindErrorTransactionRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindIdentityRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindLocationRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindRevenueRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindRoleRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindTerminalRes.datasource">
-      <publishTime>04/18/2018 19:44:00</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindTransactionRes.datasource">
-      <publishTime>04/18/2018 19:44:00</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindUserRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.FindWalletRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAgentLocationsRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAllAgentRes.datasource">
-      <publishTime>04/18/2018 19:44:00</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAllClientsRes.datasource">
-      <publishTime>04/18/2018 19:44:00</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAllClientsWithZoneRes.datasource">
-      <publishTime>04/18/2018 19:44:00</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAllErrorTransactionRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAllIdentityRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAllLocationRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAllRevenueRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAllTerminalRes.datasource">
-      <publishTime>04/18/2018 19:44:00</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAllTransactionRes.datasource">
-      <publishTime>04/18/2018 19:44:00</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAllUserRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetAuditTrailsRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetInvoicePaymentRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetNotificationsRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetServiceRevenueRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetTerminalDetailsRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetTerminalsRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.GetUserInvoicesRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.Invoice.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.Ministry.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.QueryEndOfDayStatusRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.QueryTransactionRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.Response.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.RevenueCategory.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.RevenueHead.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.RevenueItem.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.RoleRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.Taxpayer.datasource">
       <publishTime>01/12/2018 14:12:26</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.TaxpayerDashboardRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.TaxpayersRes.datasource">
       <publishTime>01/12/2018 14:12:26</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.TransactionSummaryRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:14</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.UploadTransactionRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.UserLoginRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.VerifyResidentIdRes.datasource">
-      <publishTime>04/18/2018 19:43:57</publishTime>
+      <publishTime>06/02/2018 23:24:12</publishTime>
+    </File>
+    <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.VerifyResidentRes.datasource">
+      <publishTime>06/02/2018 23:24:12</publishTime>
     </File>
     <File Include="Service References/ServiceReference/CICSWebPortal.ServiceReference.WebTransactionRes.datasource">
-      <publishTime>04/18/2018 19:44:01</publishTime>
+      <publishTime>06/02/2018 23:24:13</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.AgentSummaryRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.AuthoriseTerminalRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
+    </File>
+    <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.CashWorkIntegrationRes.datasource">
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.ClientSummaryRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.CreateAgentRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.CreateClientRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.CreateEndOfDayRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>05/25/2018 17:59:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.CreateIdentityRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.CreateLocationRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>05/25/2018 17:59:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.CreateRevenueRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>05/25/2018 17:59:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.CreateUserRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.DashboardRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.ExecutiveDashboardRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FetchEndOfDayRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>05/25/2018 17:59:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindAgentRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindClientRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindClientWithZoneRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindErrorTransactionRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>05/25/2018 17:59:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindIdentityRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindLocationRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>05/25/2018 17:59:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindRevenueRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>05/25/2018 17:59:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindRoleRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindTerminalRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindTransactionRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindUserRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.FindWalletRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAgentLocationsRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>05/25/2018 17:59:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAllAgentRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAllClientsRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAllClientsWithZoneRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAllErrorTransactionRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>05/25/2018 17:59:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAllIdentityRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAllLocationRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAllRevenueRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>05/25/2018 17:59:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAllTerminalRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAllTransactionRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAllUserRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetAuditTrailsRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetInvoicePaymentRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetNotificationsRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetServiceRevenueRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>05/25/2018 17:59:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetTerminalDetailsRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>05/25/2018 17:59:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetTerminalsRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>05/25/2018 17:59:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.GetUserInvoicesRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.Invoice.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.Ministry.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.QueryEndOfDayStatusRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>05/25/2018 17:59:44</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.QueryTransactionRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:43</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.Response.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:43</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.RevenueCategory.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.RevenueHead.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.RevenueItem.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.RoleRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.TaxpayerDashboardRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.TransactionSummaryRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.UploadTransactionRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:43</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.UserLoginRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>06/02/2018 23:24:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.VerifyResidentIdRes.datasource">
-      <publishTime>04/18/2018 20:12:40</publishTime>
+      <publishTime>06/02/2018 23:24:43</publishTime>
+    </File>
+    <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.VerifyResidentRes.datasource">
+      <publishTime>06/02/2018 23:24:43</publishTime>
     </File>
     <File Include="Service References/ServiceReference1/CICSWebPortal.ServiceReference1.WebTransactionRes.datasource">
-      <publishTime>04/18/2018 20:12:41</publishTime>
+      <publishTime>05/25/2018 17:59:45</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.AgentSummaryRes.datasource">
-      <publishTime>04/18/2018 12:08:43</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.AssessmentModelRes.datasource">
       <publishTime>01/12/2018 14:12:28</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.AuthoriseTerminalRes.datasource">
-      <publishTime>04/18/2018 12:08:47</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.ClientSummaryRes.datasource">
-      <publishTime>04/18/2018 12:08:44</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.CreateAgentRes.datasource">
-      <publishTime>04/18/2018 12:08:29</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.CreateClientRes.datasource">
-      <publishTime>04/18/2018 12:08:26</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.CreateEndOfDayRes.datasource">
-      <publishTime>04/18/2018 12:08:22</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.CreateIdentityRes.datasource">
-      <publishTime>04/18/2018 12:08:36</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.CreateLocationRes.datasource">
-      <publishTime>04/18/2018 12:08:46</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.CreateRevenueRes.datasource">
-      <publishTime>04/18/2018 12:08:34</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.CreateUserRes.datasource">
-      <publishTime>04/18/2018 12:08:38</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.DashboardRes.datasource">
-      <publishTime>04/18/2018 12:08:41</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.ExecutiveDashboardRes.datasource">
-      <publishTime>04/18/2018 12:08:42</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FetchEndOfDayRes.datasource">
-      <publishTime>04/18/2018 12:08:46</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindAgentRes.datasource">
-      <publishTime>04/18/2018 12:08:29</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindClientRes.datasource">
-      <publishTime>04/18/2018 12:08:27</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindClientWithZoneRes.datasource">
-      <publishTime>04/18/2018 12:08:27</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindErrorTransactionRes.datasource">
-      <publishTime>04/18/2018 12:08:33</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindIdentityRes.datasource">
-      <publishTime>04/18/2018 12:08:36</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindLocationRes.datasource">
-      <publishTime>04/18/2018 12:08:47</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindRevenueRes.datasource">
-      <publishTime>04/18/2018 12:08:35</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindRoleRes.datasource">
-      <publishTime>04/18/2018 12:08:39</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindTerminalRes.datasource">
-      <publishTime>04/18/2018 12:08:30</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindTransactionRes.datasource">
-      <publishTime>04/18/2018 12:08:32</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindUserRes.datasource">
-      <publishTime>04/18/2018 12:08:40</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.FindWalletRes.datasource">
-      <publishTime>04/18/2018 12:08:23</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAgentLocationsRes.datasource">
-      <publishTime>04/18/2018 12:08:21</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAllAgentRes.datasource">
-      <publishTime>04/18/2018 12:08:30</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAllClientsRes.datasource">
-      <publishTime>04/18/2018 12:08:28</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAllClientsWithZoneRes.datasource">
-      <publishTime>04/18/2018 12:08:28</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAllErrorTransactionRes.datasource">
-      <publishTime>04/18/2018 12:08:33</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAllIdentityRes.datasource">
-      <publishTime>04/18/2018 12:08:37</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAllLocationRes.datasource">
-      <publishTime>04/18/2018 12:08:23</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAllRevenueRes.datasource">
-      <publishTime>04/18/2018 12:08:35</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAllTerminalRes.datasource">
-      <publishTime>04/18/2018 12:08:31</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAllTransactionRes.datasource">
-      <publishTime>04/18/2018 12:08:32</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAllUserRes.datasource">
-      <publishTime>04/18/2018 12:08:40</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetAuditTrailsRes.datasource">
-      <publishTime>04/18/2018 12:08:45</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetInvoicePaymentRes.datasource">
-      <publishTime>04/18/2018 12:08:25</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetNotificationsRes.datasource">
-      <publishTime>04/18/2018 12:08:45</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetServiceRevenueRes.datasource">
-      <publishTime>04/18/2018 12:08:21</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetTerminalDetailsRes.datasource">
-      <publishTime>04/18/2018 09:27:19</publishTime>
+      <publishTime>05/29/2018 08:38:51</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetTerminalsRes.datasource">
-      <publishTime>04/18/2018 12:08:20</publishTime>
+      <publishTime>05/29/2018 08:38:51</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.GetUserInvoicesRes.datasource">
-      <publishTime>04/18/2018 12:08:24</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.Invoice.datasource">
-      <publishTime>04/18/2018 12:08:25</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.Ministry.datasource">
-      <publishTime>04/18/2018 12:08:48</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.QueryEndOfDayStatusRes.datasource">
-      <publishTime>04/18/2018 12:08:22</publishTime>
+      <publishTime>05/29/2018 08:38:52</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.QueryTransactionRes.datasource">
-      <publishTime>04/18/2018 09:27:19</publishTime>
+      <publishTime>05/29/2018 08:38:51</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.Response.datasource">
-      <publishTime>04/18/2018 12:08:17</publishTime>
+      <publishTime>05/29/2018 08:38:51</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.ResponseModel.datasource">
       <publishTime>01/13/2016 19:37:23</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.RevenueCategory.datasource">
-      <publishTime>04/18/2018 12:08:49</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.RevenueHead.datasource">
-      <publishTime>04/18/2018 12:08:49</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.RevenueItem.datasource">
-      <publishTime>04/18/2018 12:08:51</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.RoleRes.datasource">
-      <publishTime>04/18/2018 12:08:39</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.Taxpayer.datasource">
       <publishTime>01/12/2018 14:12:28</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.TaxpayerDashboardRes.datasource">
-      <publishTime>04/18/2018 12:08:42</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.TaxpayersRes.datasource">
       <publishTime>01/12/2018 14:12:28</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.TransactionSummaryRes.datasource">
-      <publishTime>04/18/2018 12:08:44</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.UploadTransactionRes.datasource">
-      <publishTime>04/18/2018 12:08:18</publishTime>
+      <publishTime>05/29/2018 08:38:51</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.UserLoginRes.datasource">
-      <publishTime>04/18/2018 12:08:38</publishTime>
+      <publishTime>05/29/2018 08:38:53</publishTime>
     </File>
     <File Include="Service References/ServiceReference2/CICSWebPortal.ServiceReference2.VerifyResidentIdRes.datasource">
-      <publishTime>04/18/2018 12:08:17</publishTime>
+      <publishTime>05/29/2018 08:38:51</publishTime>
     </File>
     <File Include="Services/swf/copy_csv_xls.swf">
       <publishTime>04/03/2018 17:09:11</publishTime>
@@ -21868,7 +22042,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/22/2015 17:53:26</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>04/15/2018 23:21:42</publishTime>
+      <publishTime>04/20/2018 15:31:17</publishTime>
     </File>
     <File Include="Views/Identity/Create.cshtml">
       <publishTime>04/03/2018 17:09:11</publishTime>
@@ -21924,11 +22098,29 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Notification/Index.cshtml">
       <publishTime>04/03/2018 17:09:11</publishTime>
     </File>
+    <File Include="Views/Payments/DevelopmentLevy.cshtml">
+      <publishTime>06/04/2018 13:21:14</publishTime>
+    </File>
+    <File Include="Views/Payments/GenerateTaxInvoice.cshtml">
+      <publishTime>06/05/2018 18:29:14</publishTime>
+    </File>
     <File Include="Views/Payments/Index.cshtml">
       <publishTime>04/03/2018 17:09:11</publishTime>
     </File>
+    <File Include="Views/Payments/NonResidentTaxInvoicing.cshtml">
+      <publishTime>06/05/2018 18:29:43</publishTime>
+    </File>
+    <File Include="Views/Payments/PayeForm.cshtml">
+      <publishTime>06/04/2018 17:14:32</publishTime>
+    </File>
     <File Include="Views/Payments/RemittanceForm.cshtml">
-      <publishTime>04/16/2018 12:53:01</publishTime>
+      <publishTime>06/05/2018 15:48:04</publishTime>
+    </File>
+    <File Include="Views/Payments/TaxInvoicing.cshtml">
+      <publishTime>06/05/2018 18:29:43</publishTime>
+    </File>
+    <File Include="Views/Payments/WithholdingTax.cshtml">
+      <publishTime>06/04/2018 17:30:44</publishTime>
     </File>
     <File Include="Views/Report/AgentSummary.cshtml">
       <publishTime>04/18/2018 14:06:00</publishTime>
@@ -21937,7 +22129,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2018 14:06:00</publishTime>
     </File>
     <File Include="Views/Report/CollectionAgentsTransactions.cshtml">
-      <publishTime>04/18/2018 20:06:50</publishTime>
+      <publishTime>04/19/2018 15:46:48</publishTime>
     </File>
     <File Include="Views/Report/EndOfDayReport.cshtml">
       <publishTime>04/18/2018 14:05:59</publishTime>
@@ -21949,7 +22141,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2018 17:56:35</publishTime>
     </File>
     <File Include="Views/Report/GetEndOfDayReport.cshtml">
-      <publishTime>04/03/2018 17:09:11</publishTime>
+      <publishTime>05/10/2018 15:16:59</publishTime>
     </File>
     <File Include="Views/Report/index.cshtml">
       <publishTime>04/18/2018 14:05:59</publishTime>
@@ -22033,7 +22225,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2018 20:02:56</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/19/2018 09:21:38</publishTime>
+      <publishTime>06/05/2018 18:19:26</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>04/03/2018 17:09:11</publishTime>
@@ -22081,7 +22273,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/11/2018 10:20:19</publishTime>
     </File>
     <File Include="Views/Transaction/TransactionReceipt.cshtml">
-      <publishTime>04/19/2018 10:18:35</publishTime>
+      <publishTime>04/19/2018 13:08:54</publishTime>
     </File>
     <File Include="Views/Transaction/TransactionsFilter.cshtml">
       <publishTime>04/11/2018 10:20:19</publishTime>
@@ -22114,19 +22306,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/03/2018 17:09:11</publishTime>
     </File>
     <File Include="Views/User/CreateWebUser.cshtml">
-      <publishTime>04/10/2018 11:57:44</publishTime>
+      <publishTime>04/19/2018 11:12:49</publishTime>
     </File>
     <File Include="Views/User/Edit.cshtml">
       <publishTime>02/03/2016 03:16:15</publishTime>
     </File>
     <File Include="Views/User/Index.cshtml">
-      <publishTime>04/05/2018 14:34:44</publishTime>
+      <publishTime>05/15/2018 11:50:16</publishTime>
     </File>
     <File Include="Views/User/ResetPassword.cshtml">
       <publishTime>04/03/2018 17:09:11</publishTime>
     </File>
     <File Include="Views/User/WebUser.cshtml">
-      <publishTime>04/11/2018 20:09:02</publishTime>
+      <publishTime>05/28/2018 19:02:17</publishTime>
     </File>
     <File Include="Views/Wallet/Index.cshtml">
       <publishTime>04/03/2018 17:09:11</publishTime>
@@ -22141,7 +22333,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/03/2018 17:09:11</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/18/2018 12:37:14</publishTime>
+      <publishTime>06/05/2018 11:35:41</publishTime>
     </File>
   </ItemGroup>
 </Project>

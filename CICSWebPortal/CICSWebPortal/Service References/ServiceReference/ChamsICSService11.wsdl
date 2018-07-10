@@ -9,6 +9,18 @@
       <xsd:import schemaLocation="http://localhost:39562/ChamsICSService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="iChamsICSPortalService_GetAllNotifications_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllNotifications" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllNotifications_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllNotificationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllAuditTrails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAuditTrails" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_GetAllAuditTrails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAuditTrailsResponse" />
+  </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_GetEODReport_InputMessage">
     <wsdl:part name="parameters" element="tns:GetEODReport" />
   </wsdl:message>
@@ -302,6 +314,18 @@
   </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_ProcessWebTrancation_OutputMessage">
     <wsdl:part name="parameters" element="tns:ProcessWebTrancationResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_ProcessWebMultiTrancation_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessWebMultiTrancation" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_ProcessWebMultiTrancation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessWebMultiTrancationResponse" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_SubmitInterswitchInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitInterswitchInvoice" />
+  </wsdl:message>
+  <wsdl:message name="iChamsICSPortalService_SubmitInterswitchInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitInterswitchInvoiceResponse" />
   </wsdl:message>
   <wsdl:message name="iChamsICSPortalService_FindErrorTransaction_InputMessage">
     <wsdl:part name="parameters" element="tns:FindErrorTransaction" />
@@ -597,19 +621,15 @@
   <wsdl:message name="iChamsICSPortalService_GetReportSummary_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetReportSummaryResponse" />
   </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllNotifications_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllNotifications" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllNotifications_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllNotificationsResponse" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllAuditTrails_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllAuditTrails" />
-  </wsdl:message>
-  <wsdl:message name="iChamsICSPortalService_GetAllAuditTrails_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllAuditTrailsResponse" />
-  </wsdl:message>
   <wsdl:portType name="iChamsICSPortalService">
+    <wsdl:operation name="GetAllNotifications">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotifications" message="tns:iChamsICSPortalService_GetAllNotifications_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotificationsResponse" message="tns:iChamsICSPortalService_GetAllNotifications_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAuditTrails">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails" message="tns:iChamsICSPortalService_GetAllAuditTrails_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrailsResponse" message="tns:iChamsICSPortalService_GetAllAuditTrails_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetEODReport">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReport" message="tns:iChamsICSPortalService_GetEODReport_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetEODReportResponse" message="tns:iChamsICSPortalService_GetEODReport_OutputMessage" />
@@ -806,6 +826,14 @@
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebTrancation" message="tns:iChamsICSPortalService_ProcessWebTrancation_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebTrancationResponse" message="tns:iChamsICSPortalService_ProcessWebTrancation_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ProcessWebMultiTrancation">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebMultiTrancation" message="tns:iChamsICSPortalService_ProcessWebMultiTrancation_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/ProcessWebMultiTrancationResponse" message="tns:iChamsICSPortalService_ProcessWebMultiTrancation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitInterswitchInvoice">
+      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/SubmitInterswitchInvoice" message="tns:iChamsICSPortalService_SubmitInterswitchInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/SubmitInterswitchInvoiceResponse" message="tns:iChamsICSPortalService_SubmitInterswitchInvoice_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="FindErrorTransaction">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindErrorTransaction" message="tns:iChamsICSPortalService_FindErrorTransaction_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/FindErrorTransactionResponse" message="tns:iChamsICSPortalService_FindErrorTransaction_OutputMessage" />
@@ -1001,14 +1029,6 @@
     <wsdl:operation name="GetReportSummary">
       <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetReportSummary" message="tns:iChamsICSPortalService_GetReportSummary_InputMessage" />
       <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetReportSummaryResponse" message="tns:iChamsICSPortalService_GetReportSummary_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllNotifications">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotifications" message="tns:iChamsICSPortalService_GetAllNotifications_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllNotificationsResponse" message="tns:iChamsICSPortalService_GetAllNotifications_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllAuditTrails">
-      <wsdl:input wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrails" message="tns:iChamsICSPortalService_GetAllAuditTrails_InputMessage" />
-      <wsdl:output wsaw:Action="http://portalservices.cics.chams.com/iChamsICSPortalService/GetAllAuditTrailsResponse" message="tns:iChamsICSPortalService_GetAllAuditTrails_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

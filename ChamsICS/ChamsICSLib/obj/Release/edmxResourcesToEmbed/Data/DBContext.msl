@@ -64,6 +64,7 @@
     <EntitySetMapping Name="ClientSettings">
       <EntityTypeMapping TypeName="CICSModel.ClientSetting">
         <MappingFragment StoreEntitySet="ClientSettings">
+          <ScalarProperty Name="PayeeRevenueItem" ColumnName="PayeeRevenueItem" />
           <ScalarProperty Name="ConsumptionTaxRevenueId" ColumnName="ConsumptionTaxRevenueId" />
           <ScalarProperty Name="WithholdingTaxRevenueItem" ColumnName="WithholdingTaxRevenueItem" />
           <ScalarProperty Name="ShowAmountUnpaid" ColumnName="ShowAmountUnpaid" />
@@ -253,6 +254,31 @@
     <EntitySetMapping Name="TransactionLogs">
       <EntityTypeMapping TypeName="CICSModel.TransactionLog">
         <MappingFragment StoreEntitySet="TransactionLog">
+          <ScalarProperty Name="WithholdingTaxLiability" ColumnName="WithholdingTaxLiability" />
+          <ScalarProperty Name="WithholdingTaxActualAmount" ColumnName="WithholdingTaxActualAmount" />
+          <ScalarProperty Name="WithholdingTaxRevenueDeductionPercentage" ColumnName="WithholdingTaxRevenueDeductionPercentage" />
+          <ScalarProperty Name="WithholdingTaxRevenueName" ColumnName="WithholdingTaxRevenueName" />
+          <ScalarProperty Name="DevelopmentLevyLiability" ColumnName="DevelopmentLevyLiability" />
+          <ScalarProperty Name="LiabilityPerStaff" ColumnName="LiabilityPerStaff" />
+          <ScalarProperty Name="NoOfStaff" ColumnName="NoOfStaff" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="MonthlyTaxLiability" ColumnName="MonthlyTaxLiability" />
+          <ScalarProperty Name="AnnualTaxPayable" ColumnName="AnnualTaxPayable" />
+          <ScalarProperty Name="MinimumTax" ColumnName="MinimumTax" />
+          <ScalarProperty Name="ComputedAnnualTax" ColumnName="ComputedAnnualTax" />
+          <ScalarProperty Name="TaxableIncome" ColumnName="TaxableIncome" />
+          <ScalarProperty Name="ConsolidatedReliefs" ColumnName="ConsolidatedReliefs" />
+          <ScalarProperty Name="AnnualNHIS" ColumnName="AnnualNHIS" />
+          <ScalarProperty Name="AnnualNHFund" ColumnName="AnnualNHFund" />
+          <ScalarProperty Name="AnnualPension" ColumnName="AnnualPension" />
+          <ScalarProperty Name="AnnualIncome" ColumnName="AnnualIncome" />
+          <ScalarProperty Name="StaffPayerID" ColumnName="StaffPayerID" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="MonthlyNHIS" ColumnName="MonthlyNHIS" />
+          <ScalarProperty Name="MonthlyNHFund" ColumnName="MonthlyNHFund" />
+          <ScalarProperty Name="MonthlyPension" ColumnName="MonthlyPension" />
+          <ScalarProperty Name="MonthlyIncome" ColumnName="MonthlyIncome" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
           <ScalarProperty Name="ToDate" ColumnName="ToDate" />
           <ScalarProperty Name="FromDate" ColumnName="FromDate" />
           <ScalarProperty Name="OtherAmount" ColumnName="OtherAmount" />

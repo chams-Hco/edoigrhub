@@ -23,7 +23,7 @@ namespace CICSWebPortal.Services
         {
             _client = new iChamsICSPortalServiceClient("BasicHttpBinding_iChamsICSPortalService1");
             _client2 = new iChamsICSServiceClient("BasicHttpBinding_iChamsICSService1");
-                                                   
+
 
         }
 
@@ -41,7 +41,7 @@ namespace CICSWebPortal.Services
                 PhoneNo2 = e.Phone2,
                 Status = e.status == 1 ? true : false,
                 HasWebUsers = e.HasWebUsers
-                
+
             }).ToList();
         }
 
@@ -58,6 +58,15 @@ namespace CICSWebPortal.Services
                 PhoneNo2 = e.Phone2,
                 Status = e.status == 1 ? true : false,
                 HasWebUsers = e.HasWebUsers,
+                ClientSetting = new Models.ClientSetting
+                {
+                    PercentageDeduction = e.ClientSetting != null ? e.ClientSetting.percentageDeduction : 0,
+                    DefaultRevenueItemId = e.ClientSetting != null ? e.ClientSetting.DefaultRevenueItemId : 0,
+                    ConsumptionTaxRevenueId = e.ClientSetting != null ? e.ClientSetting.ConsumptionTaxRevenueId : 0,
+                    ShowAmountUnpaid = e.ClientSetting != null ? e.ClientSetting.ShowAmountUnpaid : false,
+                    WithholdingTaxRevenueItem = e.ClientSetting != null ? e.ClientSetting.WithholdingTaxRevenueItem : 0,
+                    PayeeRevenueItem = e.ClientSetting != null ? e.ClientSetting.PayeeRevenueItem : 0,
+                },
                 Agents = e.Agents.Select(p => new Models.Agent
                 {
                     Address = p.Address,
@@ -93,8 +102,12 @@ namespace CICSWebPortal.Services
                 HasWebUsers = client.HasWebUsers,
                 ClientSetting = new Models.ClientSetting
                 {
-                    PercentageDeduction = client.ClientSetting!= null ?client.ClientSetting.percentageDeduction : 0,
-                    DefaultRevenueItemId = client.ClientSetting != null ? client.ClientSetting.DefaultRevenueItemId.Value : 0,
+                    PercentageDeduction = client.ClientSetting != null ? client.ClientSetting.percentageDeduction : 0,
+                    DefaultRevenueItemId = client.ClientSetting != null ? client.ClientSetting.DefaultRevenueItemId : 0,
+                    ConsumptionTaxRevenueId = client.ClientSetting != null ? client.ClientSetting.ConsumptionTaxRevenueId : 0,
+                    ShowAmountUnpaid = client.ClientSetting != null ? client.ClientSetting.ShowAmountUnpaid : false,
+                    WithholdingTaxRevenueItem = client.ClientSetting != null ? client.ClientSetting.WithholdingTaxRevenueItem : 0,
+                    PayeeRevenueItem = client.ClientSetting != null ? client.ClientSetting.PayeeRevenueItem : 0,
                 }
             };
         }
@@ -118,6 +131,10 @@ namespace CICSWebPortal.Services
                 {
                     PercentageDeduction = client.ClientSetting != null ? client.ClientSetting.percentageDeduction : 0,
                     DefaultRevenueItemId = client.ClientSetting != null ? client.ClientSetting.DefaultRevenueItemId.Value : 0,
+                    ConsumptionTaxRevenueId = client.ClientSetting != null ? client.ClientSetting.ConsumptionTaxRevenueId : 0,
+                    ShowAmountUnpaid = client.ClientSetting != null ? client.ClientSetting.ShowAmountUnpaid : false,
+                    WithholdingTaxRevenueItem = client.ClientSetting != null ? client.ClientSetting.WithholdingTaxRevenueItem : 0,
+                    PayeeRevenueItem = client.ClientSetting != null ? client.ClientSetting.PayeeRevenueItem : 0,
                 }
             };
         }
@@ -141,6 +158,10 @@ namespace CICSWebPortal.Services
                 {
                     PercentageDeduction = client.ClientSetting != null ? client.ClientSetting.percentageDeduction : 0,
                     DefaultRevenueItemId = client.ClientSetting != null ? client.ClientSetting.DefaultRevenueItemId.Value : 0,
+                    ConsumptionTaxRevenueId = client.ClientSetting != null ? client.ClientSetting.ConsumptionTaxRevenueId : 0,
+                    ShowAmountUnpaid = client.ClientSetting != null ? client.ClientSetting.ShowAmountUnpaid : false,
+                    WithholdingTaxRevenueItem = client.ClientSetting != null ? client.ClientSetting.WithholdingTaxRevenueItem : 0,
+                    PayeeRevenueItem = client.ClientSetting != null ? client.ClientSetting.PayeeRevenueItem : 0,
                 },
                 Agents = client.Agents.Select(p => new Models.Agent
                 {
@@ -155,10 +176,10 @@ namespace CICSWebPortal.Services
                     PhoneNo2 = p.Phone2,
                     Status = p.status == 1 ? true : false
 
-                }) 
+                })
             };
         }
-        
+
 
         public void AddClient(Models.Client client)
         {
@@ -408,23 +429,177 @@ namespace CICSWebPortal.Services
             var result = _client.ProcessWebTrancation(new WebTransactionReq
             {
                 Amount = webPayment.Amount,
-                DrinkAmount = webPayment.DrinkAmount,
-                FoodAmount = webPayment.FoodAmount,
+                DrinkAmount = webPayment.DrinkAmount.HasValue?webPayment.DrinkAmount.Value : 0,
+                FoodAmount = webPayment.FoodAmount.HasValue?webPayment.FoodAmount.Value: 0,
                 FromDate = webPayment.FromDate,
-                OtherAmount = webPayment.OtherAmount,
-                PercentageDeduction = webPayment.PercentageDeduction,
-                RentalAmount = webPayment.RentalAmount,
+                OtherAmount = webPayment.OtherAmount.HasValue ? webPayment.OtherAmount.Value:0,
+                PercentageDeduction = webPayment.PercentageDeduction.HasValue ? webPayment.PercentageDeduction.Value : 0,
+                RentalAmount = webPayment.RentalAmount.HasValue ? webPayment.RentalAmount.Value:0,
                 RevenueItemId = webPayment.RevenueItemId,
                 TerminalId = webPayment.TerminalId,
-                Income = webPayment.GrossIncome,
+                Income = webPayment.GrossIncome.HasValue ? webPayment.GrossIncome.Value :0,
                 ToDate = webPayment.ToDate,
-                Name = webPayment.Name
+                Name = webPayment.Name,
+                Address = webPayment.Address,
+                DateOfBirth = webPayment.DateOfBirth,
+                Email = webPayment.Email,
+                FirstName = webPayment.FirstName,
+                Gender = webPayment.Gender,
+                LastName = webPayment.LastName,
+                MiddleName = webPayment.MiddleName,
+                PhoneNumber = webPayment.PhoneNumber,
+                ResidentId = webPayment.ResidentId,
+                RevenueCode = webPayment.RevenueCode,
+                AnnualIncome = webPayment.AnnualIncome,
+                AnnualNHFund = webPayment.AnnualNHFund,
+                AnnualNHIS = webPayment.AnnualNHIS,
+                AnnualPension = webPayment.AnnualPension,
+                AnnualTaxPayable = webPayment.AnnualTaxPayable,
+                ComputedAnnualTax = webPayment.ComputedAnnualTax,
+                ConsolidatedReliefs = webPayment.ConsolidatedReliefs,
+                DevelopmentLevyLiability = webPayment.DevelopmentLevyLiability,
+                EmployeeName = webPayment.EmployeeName,
+                LiabilityPerStaff = webPayment.LiabilityPerStaff,
+                MinimumTax = webPayment.MinimumTax,
+                Month = webPayment.Month.HasValue ? int.Parse(webPayment.Month.Value.ToString()) : 0,
+                MonthlyIncome =webPayment.MonthlyIncome ,
+                MonthlyNHFund = webPayment.MonthlyNHFund,
+                MonthlyNHIS = webPayment.MonthlyNHIS,
+                MonthlyPension = webPayment.MonthlyPension,
+                NoOfStaff = webPayment.NoOfStaff,
+                StaffPayerID = webPayment.StaffPayerID,
+                MonthlyTaxLiability = webPayment.MonthlyTaxLiability,
+                TaxableIncome = webPayment.TaxableIncome,
+                WithholdingTaxActualAmount = webPayment.WithholdingTaxActualAmount,
+                WithholdingTaxLiability = webPayment.WithholdingTaxLiability,
+                WithholdingTaxRevenueDeductionPercentage = webPayment.WithholdingTaxRevenueDeductionPercentage,
+                WithholdingTaxRevenueName = webPayment.WithholdingTaxRevenueName                            
             });
 
-            if( result.ResponseCode =="0000")
+            if (result.ResponseCode == "0000")
             {
                 return new WebTransactionResponse { RemittanceCode = result.RemittanceCode, ResponseCode = result.ResponseCode, ResponseDescription = result.ResponseDescription, TerminalCode = result.TerminalCode, TransactionCode = result.TransactionCode };
 
+            }
+            return null;
+        }
+
+        public WebTransactionResponse ProcessMultiWebTrancation(List<WebPayment> webPayments)
+        {
+            List<WebTransactionReq> Request = new List<WebTransactionReq>();
+            foreach ( var webPayment in webPayments)
+            {
+                Request.Add(new WebTransactionReq
+                {
+                    Amount = webPayment.Amount,
+                    DrinkAmount = webPayment.DrinkAmount.HasValue ? webPayment.DrinkAmount.Value : 0,
+                    FoodAmount = webPayment.FoodAmount.HasValue ? webPayment.FoodAmount.Value : 0,
+                    FromDate = webPayment.FromDate,
+                    OtherAmount = webPayment.OtherAmount.HasValue ? webPayment.OtherAmount.Value : 0,
+                    PercentageDeduction = webPayment.PercentageDeduction.HasValue ? webPayment.PercentageDeduction.Value : 0,
+                    RentalAmount = webPayment.RentalAmount.HasValue ? webPayment.RentalAmount.Value : 0,
+                    RevenueItemId = webPayment.RevenueItemId,
+                    TerminalId = webPayment.TerminalId,
+                    Income = webPayment.GrossIncome.HasValue ? webPayment.GrossIncome.Value : 0,
+                    ToDate = webPayment.ToDate,
+                    Name = webPayment.Name,
+                    Address = webPayment.Address,
+                    DateOfBirth = webPayment.DateOfBirth,
+                    Email = webPayment.Email,
+                    FirstName = webPayment.FirstName,
+                    Gender = webPayment.Gender,
+                    LastName = webPayment.LastName,
+                    MiddleName = webPayment.MiddleName,
+                    PhoneNumber = webPayment.PhoneNumber,
+                    ResidentId = webPayment.ResidentId,
+                    RevenueCode = webPayment.RevenueCode,
+                    AnnualIncome = webPayment.AnnualIncome,
+                    AnnualNHFund = webPayment.AnnualNHFund,
+                    AnnualNHIS = webPayment.AnnualNHIS,
+                    AnnualPension = webPayment.AnnualPension,
+                    AnnualTaxPayable = webPayment.AnnualTaxPayable,
+                    ComputedAnnualTax = webPayment.ComputedAnnualTax,
+                    ConsolidatedReliefs = webPayment.ConsolidatedReliefs,
+                    DevelopmentLevyLiability = webPayment.DevelopmentLevyLiability,
+                    EmployeeName = webPayment.EmployeeName,
+                    LiabilityPerStaff = webPayment.LiabilityPerStaff,
+                    MinimumTax = webPayment.MinimumTax,
+                    Month = webPayment.Month.HasValue ? (int)webPayment.Month.Value : 0,
+                    MonthlyIncome = webPayment.MonthlyIncome,
+                    MonthlyNHFund = webPayment.MonthlyNHFund,
+                    MonthlyNHIS = webPayment.MonthlyNHIS,
+                    MonthlyPension = webPayment.MonthlyPension,
+                    NoOfStaff = webPayment.NoOfStaff,
+                    StaffPayerID = webPayment.StaffPayerID,
+                    MonthlyTaxLiability = webPayment.MonthlyTaxLiability,
+                    TaxableIncome = webPayment.TaxableIncome,
+                    WithholdingTaxActualAmount = webPayment.WithholdingTaxActualAmount,
+                    WithholdingTaxLiability = webPayment.WithholdingTaxLiability,
+                    WithholdingTaxRevenueDeductionPercentage = webPayment.WithholdingTaxRevenueDeductionPercentage,
+                    WithholdingTaxRevenueName = webPayment.WithholdingTaxRevenueName
+                });
+            }
+            var result = _client.ProcessWebMultiTrancation(Request.ToArray());
+
+            if (result.ResponseCode == "0000")
+            {
+                return new WebTransactionResponse { RemittanceCode = result.RemittanceCode, ResponseCode = result.ResponseCode, ResponseDescription = result.ResponseDescription, TerminalCode = result.TerminalCode, TransactionCode = result.TransactionCode };
+
+            }
+            return null;
+        }
+
+        public CashWoxIntegrationResponse SendInterswitchInvoice(CashWoxModel cashwoxmodel)
+        {
+            CashWorxIntegration CashwoxInteration = new CashWorxIntegration
+            {
+                accesskey = cashwoxmodel.accesskey,
+                mdacode = cashwoxmodel.mdacode,
+                
+            };
+
+            List<CashWorkInvoice> invoices = new List<CashWorkInvoice>();
+            foreach(var invoice in cashwoxmodel.invoices)
+            {
+                CashWorkInvoice inv = new CashWorkInvoice
+                {
+                    customerfileno = invoice.customerfileno,
+                    customerid = invoice.customerid,
+                    customername = invoice.customername,
+                    invoiceno = invoice.invoiceno,
+                    invoicedate = invoice.invoicedate,
+                    invoicelogid = invoice.invoicelogid,
+                    invoicevaliduntil = invoice.invoicevaliduntil,
+                    isreversal = invoice.isreversal,
+                    originalamount = invoice.originalamount
+                };
+                List<CashWorkItem> items = new List<CashWorkItem>();
+
+                foreach(var item in invoice.items)
+                {
+                    CashWorkItem itm = new CashWorkItem
+                    {
+                        itemamount = item.itemamount,
+                        itemcode = item.itemcode,
+                        itemname = item.itemname
+
+                    };
+                    items.Add(itm);
+                }
+                inv.items = items.ToArray();
+                invoices.Add(inv);
+            }
+            CashwoxInteration.invoices = invoices.ToArray();
+            var result = _client.SubmitInterswitchInvoice(CashwoxInteration);
+
+            if (result!=null)
+            {
+                CashWoxIntegrationResponse response = new CashWoxIntegrationResponse();
+                foreach (var x in result.responses)
+                {
+                    response.responses.Add(x.Key, new CashWoxIntegrationResponses { invoicelogid = x.Value.invoicelogid, statusid = x.Value.statusid, statusmsg = x.Value.statusmsg });
+                }
+                return response;
             }
             return null;
         }
@@ -616,45 +791,45 @@ namespace CICSWebPortal.Services
         {
             var result = _client.GetLast10TransactionByTerminalId(terminalId);
 
-            if(result.Transactions!= null)
-            return result.Transactions.Select(e => new Models.Transaction
-            {
-                ResidentId = e.ResidentId,
-                FirstName = e.FirstName,
-                LastName = e.LastName,
-                MiddleName = e.MiddleName,
-                Email = e.Email,
-                Gender = e.Gender,
-                DateOfBirth = e.DateOfBirth,
-                PhoneNumber = e.PhoneNumber,
-                Status = e.status,
-                TerminalCode = e.TerminalCode,
-                Amount = Convert.ToDecimal(e.Amount),
-                Address = e.Address,
-                UploadDate = e.UploadDate,
-                PaymentReference = e.PaymentReference,
-                TransactionDate = e.TransactionDate,
-                TransactionCode = e.TransactionCode,
-                RevenueCode = e.RevenueCode,
-                RevenueName = e.RevenueName,
-                Ministry = e.Ministry,
-                RevenueHead = e.RevenueHead,
-                TransactionId = Convert.ToInt32(e.Id),
-                AgentId = Convert.ToInt32(e.AgentId),
-                AgentName = e.AgentName,
-                LocationName = e.LocationName,
-                ClientId = Convert.ToInt32(e.ClientId),
-                TerminalId = Convert.ToInt32(e.TerminalId),
-                DrinkAmount = e.DrinkAmount,
-                FoodAmount = e.FoodAmount,
-                FromDate = e.FromDate,
-                Income = e.Income,
-                OtherAmount = e.OtherAmount,
-                Percentage = e.Percentage,
-                RentalAmount = e.RentalAmount,
-                ToDate = e.ToDate,
-                Name = e.Name
-            }).OrderByDescending(x => x.TransactionDate).ToList();
+            if (result.Transactions != null)
+                return result.Transactions.Select(e => new Models.Transaction
+                {
+                    ResidentId = e.ResidentId,
+                    FirstName = e.FirstName,
+                    LastName = e.LastName,
+                    MiddleName = e.MiddleName,
+                    Email = e.Email,
+                    Gender = e.Gender,
+                    DateOfBirth = e.DateOfBirth,
+                    PhoneNumber = e.PhoneNumber,
+                    Status = e.status,
+                    TerminalCode = e.TerminalCode,
+                    Amount = Convert.ToDecimal(e.Amount),
+                    Address = e.Address,
+                    UploadDate = e.UploadDate,
+                    PaymentReference = e.PaymentReference,
+                    TransactionDate = e.TransactionDate,
+                    TransactionCode = e.TransactionCode,
+                    RevenueCode = e.RevenueCode,
+                    RevenueName = e.RevenueName,
+                    Ministry = e.Ministry,
+                    RevenueHead = e.RevenueHead,
+                    TransactionId = Convert.ToInt32(e.Id),
+                    AgentId = Convert.ToInt32(e.AgentId),
+                    AgentName = e.AgentName,
+                    LocationName = e.LocationName,
+                    ClientId = Convert.ToInt32(e.ClientId),
+                    TerminalId = Convert.ToInt32(e.TerminalId),
+                    DrinkAmount = e.DrinkAmount,
+                    FoodAmount = e.FoodAmount,
+                    FromDate = e.FromDate,
+                    Income = e.Income,
+                    OtherAmount = e.OtherAmount,
+                    Percentage = e.Percentage,
+                    RentalAmount = e.RentalAmount,
+                    ToDate = e.ToDate,
+                    Name = e.Name
+                }).OrderByDescending(x => x.TransactionDate).ToList();
 
             return new List<Models.Transaction>();
         }
@@ -873,16 +1048,20 @@ namespace CICSWebPortal.Services
         public CICSWebPortal.Models.Revenue FindRevenueById(int id)
         {
             var e = _client.FindRevenue(id);
-            return new Models.Revenue
+            if (e != null)
             {
-                RevenueId = e.Revenue.RevenueId,
-                ClientId = e.Revenue.ClientId,
-                Code = e.Revenue.RevenueCode,
-                Name = e.Revenue.Name,
-                Amount = e.Revenue.Amount,
-                MDA = e.Revenue.MDA,
-                Status = e.Revenue.Status == 1 ? true : false
-            };
+                return new Models.Revenue
+                {
+                    RevenueId = e.Revenue.RevenueId,
+                    ClientId = e.Revenue.ClientId,
+                    Code = e.Revenue.RevenueCode,
+                    Name = e.Revenue.Name,
+                    Amount = e.Revenue.Amount,
+                    MDA = e.Revenue.MDA,
+                    Status = e.Revenue.Status == 1 ? true : false
+                };
+            }
+            else return null;
         }
 
         public void AddRevenue(CICSWebPortal.Models.Revenue revenue)
@@ -1218,16 +1397,17 @@ namespace CICSWebPortal.Services
                 user.ClientName = result.UserDashBoardData.ClientName;
                 user.ClientLogoUrl = result.UserDashBoardData.ClientLogoUrl;
                 user.UserTypeParentId = result.UserDashBoardData.UserTypeParentId;
-                if(result.User!=null && result.User.userDetail!= null)
+                if (result.User != null && result.User.userDetail != null)
                 {
                     user.TerminalCode = result.User.userDetail.TerinalCode;
                     user.TerminalId = result.User.userDetail.TerminalId;
                     user.ZoneID = result.User.userDetail.Zoneid;
-                    user.ZoneName = result.User.userDetail.ZoneCode;
+                    user.ZoneName = result.User.userDetail.ZoneName;
+                    user.ZoneCode = result.User.userDetail.ZoneCode;
                     user.Address = result.User.userDetail.Address;
                     user.Name = result.User.userDetail.Name;
                 }
-                
+
 
             }
             return user;
@@ -1481,11 +1661,11 @@ namespace CICSWebPortal.Services
                 Address = e.userDetail?.Address,
                 Name = e.userDetail?.Name,
                 Mobile = e.Mobile,
-                
+
 
             }).ToList();
         }
-       
+
 
         public IList<Models.User> GetUserAssesibleUsers(int roleId, int clientId)
         {
@@ -1735,7 +1915,7 @@ namespace CICSWebPortal.Services
                     OtherAmount = x.OtherAmount,
                     RemittanceCode = x.PaymentReference,
                     RentalAmount = x.RentalAmount
-                    
+
                 }).ToList();
                 return rvm;
             }
@@ -1755,7 +1935,7 @@ namespace CICSWebPortal.Services
                 startDate = request.startDate,
                 endDate = request.endDate,
                 TerminalIds = request.TerminalIds.ToArray(),
-                
+
             });
 
             var cSummary = (cSummaryList != null && cSummaryList.EndOfDayReport != null) ? cSummaryList.EndOfDayReport.ToList() : null;
@@ -2204,10 +2384,10 @@ namespace CICSWebPortal.Services
             ServiceReference.AuthoriseWebUserReq userReq = new ServiceReference.AuthoriseWebUserReq()
             {
                 UserId = user.createdby,
-                UserTypeParentId = user.SelectedClientId,
+                UserTypeParentId = user.SelectedAgentId,
                 ClientId = user.SelectedClientId,
                 Email = user.Email,
-                PasswordStatus = 0,
+                PasswordStatus = 1,
                 Password = user.Password,
                 Mobile = user.Phone,
                 RoleId = user.RoleId,
@@ -2217,17 +2397,17 @@ namespace CICSWebPortal.Services
                 AgentUserName = user.AgentUsername,
                 AgentCode = user.AgentCode,
                 TerminalSerialNumber = Guid.NewGuid().ToString(),
-                TerminalName = user.Name ,
-                userDetail= new UserDetailModel
+                TerminalName = user.Name,
+                userDetail = new UserDetailModel
                 {
-                   Address = user.Address,
-                   Email = user.Email,
-                   Firstname = "",// implement later,
-                   Name = user.Name,
-                   
+                    Address = user.Address,
+                    Email = user.Email,
+                    Firstname = "",// implement later,
+                    Name = user.Name,
+
                 }
-                
-                
+
+
             };
 
             var result = _client2.AuthoriseWebUser(userReq);
@@ -2251,7 +2431,7 @@ namespace CICSWebPortal.Services
                     RoleId = user.RoleId,
                     Status = true,
                     TerminalCode = result.TerminalCode,
-                    
+
 
 
                 };
@@ -2262,7 +2442,7 @@ namespace CICSWebPortal.Services
         public Models.Role FindRole(int ID)
         {
             var resp = _client.FindRole(ID);
-            if(resp !=null && resp.ResponseCode =="0000")
+            if (resp != null && resp.ResponseCode == "0000")
             {
                 return new Models.Role
                 {
@@ -2289,7 +2469,44 @@ namespace CICSWebPortal.Services
             return null;
         }
 
-        
+        public VerifyResident FindResident(VerifyResidentRequest req)
+        {
+            var resp = _client2.VerifyAnambraResidentID(new VerifyResidentIdReq
+            {
+                UserName = req.UserName,
+                ResidentId = req.ResidentId,
+                AgentCode = req.AgentCode,
+                Password = req.Password,
+                TerminalCode = req.TerminalCode
+            });
+            if (resp != null && resp.ResponseCode == "OK")
+            {
+                VerifyResident returnresidents = new VerifyResident();
+                returnresidents.ResponseCode = resp.ResponseCode;
+                returnresidents.ResponseDescription = resp.ResponseDescription;
+                foreach (var resident in resp.Residents)
+                {
+                    returnresidents.Resident.Add(
+                        new Models.Resident
+                        {
+                            Address = resident.Address,
+                            DateOfBirth = resident.DateOfBirth,
+                            Email = resident.Email,
+                            FirstName = resident.FirstName,
+                            Gender = resident.Gender,
+                            LastName = resident.LastName,
+                            MiddleName = resident.MiddleName,
+                            PhoneNumber = resident.PhoneNumber,
+                            ResidentId = resident.ResidentId,
+                            WebAccessPin = resident.WebAccessPin,
+                        });
+                }
+                return returnresidents;
+            }
+            return null;
+        }
+
+
 
 
 

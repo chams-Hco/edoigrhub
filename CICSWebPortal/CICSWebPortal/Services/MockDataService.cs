@@ -825,6 +825,21 @@ namespace CICSWebPortal.Services
         {
             throw new NotImplementedException();
         }
+
+        public VerifyResident FindResident(VerifyResidentRequest req)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CashWoxIntegrationResponse SendInterswitchInvoice(CashWoxModel cashwoxmodel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public WebTransactionResponse ProcessMultiWebTrancation(List<WebPayment> webPayment)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

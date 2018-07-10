@@ -1,0 +1,307 @@
+﻿@model CICSWebPortal.Models.Resident
+@{
+    ViewBag.Title = "GenerateTaxInvoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var revenueitem = (List<CICSWebPortal.Models.RevenueItem>)ViewBag.RevenueItems;
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+        <li class="breadcrumb-item"><a href="/Payments/TaxInvoicing">VerifyResident</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tax Invoicing</li>
+    </ol>
+</nav>
+
+<h2>Tax Invoicing</h2>
+
+@{
+    if (ViewBag.Status != null)
+    {
+        bool status = (bool)ViewBag.Status;
+        if (status == false)
+        {
+            <div class="title">
+                <div class="alert alert-danger">
+                    @ViewBag.Message
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="box box-info">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-10 col-xs-12">
+
+
+                        <div class="box-header">
+                            <i class="fa fa-money"></i>
+
+                            <h3 class="box-title">Tax Invoicing Form</h3>
+                            <!-- tools box -->
+                            <div class="pull-right box-tools">
+
+                            </div>
+                            <!-- /. tools -->
+                        </div>
+                        <form id="invoiceform">
+                            <div class="box-body">
+                                @Html.AntiForgeryToken()
+                                <div id="invoicemessage" class="alert " style="display:none">
+                                    <span id="invoicemessagelabel"></span>
+                                </div>
+                                <table id="searchtable" class="table col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                                    <tr>
+                                        <th>FULLNAME</th>
+                                        <td>@Model.LastName @Model.FirstName @Model.MiddleName </td>
+                                    </tr>
+                                    <tr>
+                                        <th>WEB ACCESS PIN</th>
+                                        <td>@Model.WebAccessPin </td>
+                                    </tr>
+                                    <tr>
+                                        <th>PHONE NUMBER</th>
+                                        <td>@Model.PhoneNumber </td>
+                                    </tr>
+                                    <tr>
+                                        <th>EMAIL</th>
+                                        <td>@Model.Email </td>
+                                    </tr>
+                                    <tr>
+                                        <th>SELECT REVENUE ITEM</th>
+                                        <td>
+                                            <select id="revenueitem" class="form-control">
+                                                <option value="-1">----SELECT REVENUE ITEM----</option>
+                                                @{
+                                                    foreach (var revitem in revenueitem)
+                                                    {
+                                                        <option value="@revitem.Id"> @revitem.Name </option>
+                                                    }
+                                                }
+
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>AMOUNT</th>
+                                        <td><input type="text" readonly id="amount" class="form-control" /> </td>
+                                    </tr>
+                                </table>
+
+
+                            </div>
+                            <div class="box-footer clearfix">
+                                <button type="submit" class="pull-right btn btn-default" id="sendinvoice">
+                                    Send Invoice
+                                    <i class="fa fa-send-o"></i>
+                                </button>
+                            </div>
+
+                        </form>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:none" id="printdiv">
+                <div class="header">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <img src="" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <span class="h3"> INVOICE </span><hr />
+                            <span class="h3" id="printbusinessname"></span> <hr />
+                            <span class="h4" id="printRemittanceCode"></span><hr />
+                            <span class="h4" id="printTransactionCode"></span><hr />
+                            <span class="h5" id="printDate"></span><hr />
+                            <span class="h5" id="printperiod"></span>
+                        </div>
+
+                    </div>
+                    <table class="table table-striped">
+                        <tr>
+                            <th style="width: 15%">Revenue Item</th>
+                            <th style="width: 15%">Amount (₦)</th>
+
+                        </tr>
+                        <tr>
+
+                            <td><span id="printrevenuename"></span></td>
+                            <td><span id="printAmount"></span></td>
+
+                        </tr>
+
+                        <tfoot>
+                            <tr>
+                                <th>Total</th>
+
+                                <th><span id="printTotalAmountPayable"></span></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+        }
+    }
+}
+
+
+
+
+@section JavaScript
+{
+    <script type="text/javascript">
+
+        var revitems = @Html.Raw(Json.Encode(revenueitem));
+
+        var resident = @Html.Raw(Json.Encode(Model));
+
+        var selectedrevenue = null;
+
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+
+         $(document).on('change', '#revenueitem', function () {
+            var item = $(this).val();
+            if(item != null && item!=-1)
+            {
+                selectedrevenue = searchrevitem(item);
+                if(selectedrevenue !=null)
+                {
+                    $('#amount').val(selectedrevenue.Amount);
+                }
+                else
+                {
+                    $('#amount').val('');
+                }
+            }
+            else
+            {
+                $('#amount').val('');
+            }
+        });
+
+
+        $(document).on('click', '#sendinvoice', function (e) {
+            e.preventDefault();
+            var revenueitem = selectedrevenue.Id;
+            var name = resident.LastName + ' ' + resident.FirstName + ' [' + resident.WebAccessPin+ ']' ;
+            var amount = selectedrevenue.Amount;
+            var form = $('#invoiceform');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+            // election.__RequestVerificationToken = token;
+            $.ajax({
+                type: "POST",
+                url: '/Payments/InvoiceGeneration',
+                data: {
+                    __RequestVerificationToken: token,
+                    RevenueItemId: revenueitem,
+                    Amount: amount,
+                    Name: name,
+                    ResidentId: resident.ResidentId
+                },
+                datatype: "json",
+                beforeSend: function () {
+                    waitingDialog.show("Generating Invoice");
+                },
+                complete: function () {
+                    waitingDialog.hide();
+                },
+                success: function (response) {
+
+                    if (response.status == true) {
+                        $('#invoicemessage').removeClass('alert-danger').addClass('alert-success');
+                        $('#invoicemessagelabel').html('Invoice generated successfully, Invoice No: <b>' + response.result.RemittanceCode + '</b>  <button class=\"btn btn-danger\" id=\"downloadinvoice\" transactioncode=\"' + response.result.TransactionCode + '\"> Download Invoice </button> ');
+                        $('#invoicemessage').show();
+                        //console.log(response);
+                    }
+                    else {
+                        $('#invoicemessage').removeClass('alert-success').addClass('alert-danger');
+                        $('#invoicemessagelabel').html('Invoice generation failed');
+                        $('#invoicemessage').show();
+                    }
+
+                },
+                error: function () {
+                    // waitingDialog.hide();
+                    // $.toaster({ priority: 'danger', title: 'Service Error', message: "error" });
+                }
+
+            });
+
+
+
+        });
+
+        function searchrevitem(id)
+        {
+            for(var i=0; i<revitems.length; i++)
+            {
+                if(revitems[i].Id == id)
+                    return revitems[i];
+            }
+        }
+
+        $(document).on('click', '#downloadinvoice', function (e) {
+            e.preventDefault();
+            var transactioncode = $(this).attr("transactionCode");
+            loadInvoice(transactioncode);
+            //printinvoice();
+
+        });
+
+
+        var loadInvoice = function (transactioncode) {
+            $.get("@Url.Action("FindTransaction")/" + transactioncode, function (data, status) {
+                if (status == "success") {
+
+                    var percentage = data.Transaction.Percentage / 100;
+                    $('#printTransactionCode').text('Transaction Code: #' + data.Transaction.TransactionCode);
+                    $('#printbusinessname').text('Resident Name: ' + resident.LastName + ' ' + resident.FirstName + ' [' + resident.WebAccessPin + ']');
+                    $('#printRemittanceCode').text('Remittance Code: #' +data.Transaction.PaymentReference);
+                    //$('.perentagededuction').text(data.Transaction.Percentage);
+                    $('#printDate').text('Date : ' + data.TransactionDate);
+                    //$('#printperiod').text('Period : ' + data.Period);
+
+
+                    $('#printrevenuename').text(selectedrevenue.Name);
+                    $('#printAmount').text(data.Transaction.Amount);
+
+                    //$('#printDrinkAmount').text(data.Transaction.DrinkAmount);
+                    //$('#printDrinkAmountPayable').text(data.Transaction.DrinkAmount * percentage);
+
+                    //$('#printRentalAmount').text(data.Transaction.RentalAmount);
+                    //$('#printRentalAmountPayable').text(data.Transaction.RentalAmount * percentage);
+
+                    //$('#printOtherAmount').text(data.Transaction.OtherAmount);
+                    //$('#printOtherAmountPayable').text(data.Transaction.OtherAmount * percentage);
+
+                    //$('#printTotalAmount').text(data.Transaction.Amount / percentage);
+                    $('#printTotalAmountPayable').text(data.Transaction.Amount );
+
+
+                }
+                printinvoice();
+            });
+        }
+        var printinvoice = function () {
+            doc.fromHTML($('#printdiv').html(), 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            doc.save('invoice.pdf');
+        }
+
+
+    </script>
+}
+

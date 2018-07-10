@@ -1,5 +1,6 @@
 ﻿using CICSWebPortal.Infrastructure;
 using CICSWebPortal.Models;
+using Hangfire;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace CICSWebPortal
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        private BackgroundJobServer _backgroundJobServer;
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -19,10 +21,19 @@ namespace CICSWebPortal
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalFilters.Filters.Add(new CustomAuthorize());
-           
+
+            GlobalConfiguration.Configuration
+               .UseSqlServerStorage("HangFireConfig");
+
+            _backgroundJobServer = new BackgroundJobServer();
+
         }
 
-        
+        protected void Application_End(object sender, EventArgs e)
+        {
+            _backgroundJobServer.Dispose();
+        }
+
     }
 
 }

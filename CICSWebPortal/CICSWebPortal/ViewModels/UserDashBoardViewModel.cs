@@ -22,6 +22,7 @@ namespace CICSWebPortal.ViewModels
         public int? ZoneID { get; set; }
         public string TerminalCode { get; set; }
         public string ZoneName { get; set; }
+        public string ZoneCode { get; set; }
         public string Address { get; set; }
         public string Name { get;  set; }
     }

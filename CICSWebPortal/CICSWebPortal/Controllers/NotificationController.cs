@@ -13,7 +13,7 @@ namespace CICSWebPortal.Controllers
 
         public NotificationController():this(MainContainer.DataService())
         {
-
+            
         }
 
         public NotificationController(IDataService DataContext)
@@ -22,6 +22,19 @@ namespace CICSWebPortal.Controllers
         }
 
         public ActionResult Index()
+        {
+            int RoleId = Convert.ToInt32(Session["RoleId"]);
+            int UserTypeParentId = Convert.ToInt32(Session["UserTypeParentId"]);
+
+            if (RoleId > 2)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(DataContext.GetAllNotifications());
+        }
+
+        public ActionResult Periodic ()
         {
             int RoleId = Convert.ToInt32(Session["RoleId"]);
             int UserTypeParentId = Convert.ToInt32(Session["UserTypeParentId"]);

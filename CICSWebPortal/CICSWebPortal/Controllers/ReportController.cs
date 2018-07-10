@@ -349,6 +349,7 @@ namespace CICSWebPortal.Controllers
             {
                 ReportViewModel model = new ReportViewModel
                 {
+                    TerminalCode = currentUser.TerminalCode,
                     StartDate = DateTime.Today.AddDays(-7),
                     EndDate = DateTime.Today.AddDays(1),
                 };

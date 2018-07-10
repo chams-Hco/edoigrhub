@@ -11,6 +11,9 @@ using Microsoft.Owin.Security;
 using CICSWebPortal.Models;
 using CICSWebPortal.Services;
 using CICSWebPortal.Infrastructure;
+using System.Collections.Generic;
+using System.Web.Security;
+using System.Net;
 
 namespace CICSWebPortal.Controllers
 {
@@ -88,7 +91,29 @@ namespace CICSWebPortal.Controllers
                 Session.Add("UserTypeParentId", result.UserTypeParentId);
                 Session.Add("ClientId", result.ClientId);
                 Session.Add("RoleName", result.RoleName);
+                Session["password"] = model.Password;
                 Session["LoggedInUser"] = result;
+
+                List<Claim> claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Email, result.Email),
+                    new Claim("USERNAME", result.Email),
+                    new Claim("ID", result.UserId.ToString()),
+                    new Claim("ROLEID", result.RoleId.ToString()),
+                    new Claim(ClaimTypes.Role, result.RoleName),
+                    new Claim("RoleCode", result.RoleCode),
+                };
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "cookie");
+                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+              //  AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = model.RememberMe }, claimsPrincipal);
+
+              //  AuthenticationManager.SignIn(new AuthenticationProperties(), claimsIdentity);
+              //  FormsAuthentication.SetAuthCookie(result.Email, true);
+                //AuthenticationManager.AuthenticateAsync("")
+                //sign in
+                //await HttpContext.SignInAsync(
+                //    scheme: "VotingSecurityScheme",
+                //    principal: claimsPrincipal);
 
                 getClientSettings(result.ClientId);
 
@@ -101,6 +126,8 @@ namespace CICSWebPortal.Controllers
             }
         }
 
+        
+
         private void getClientSettings(int clientId)
         {
             try
@@ -112,7 +139,7 @@ namespace CICSWebPortal.Controllers
                 }
             }
             catch (Exception)
-            {             
+            {
             }
         }
 
@@ -401,7 +428,7 @@ namespace CICSWebPortal.Controllers
         {
             Session.Abandon();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("login", "Account");
         }
 
         //

@@ -187,6 +187,7 @@
     <Property Name="ShowAmountUnpaid" Type="Boolean" />
     <Property Name="WithholdingTaxRevenueItem" Type="Int32" />
     <Property Name="ConsumptionTaxRevenueId" Type="Int32" />
+    <Property Name="PayeeRevenueItem" Type="Int32" />
     <NavigationProperty Name="Client" Relationship="CICSModel.FK_Client_Settings_Client" FromRole="ClientSetting" ToRole="Client" />
   </EntityType>
   <EntityType Name="EOD">
@@ -400,6 +401,31 @@
     <Property Name="OtherAmount" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="FromDate" Type="DateTime" Precision="0" />
     <Property Name="ToDate" Type="DateTime" Precision="0" />
+    <Property Name="Month" Type="Int32" />
+    <Property Name="MonthlyIncome" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MonthlyPension" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MonthlyNHFund" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MonthlyNHIS" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EmployeeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="StaffPayerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AnnualIncome" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AnnualPension" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AnnualNHFund" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AnnualNHIS" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ConsolidatedReliefs" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TaxableIncome" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ComputedAnnualTax" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MinimumTax" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AnnualTaxPayable" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MonthlyTaxLiability" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="NoOfStaff" Type="Int32" />
+    <Property Name="LiabilityPerStaff" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DevelopmentLevyLiability" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WithholdingTaxRevenueName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WithholdingTaxRevenueDeductionPercentage" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WithholdingTaxActualAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WithholdingTaxLiability" Type="Decimal" Precision="18" Scale="2" />
     <NavigationProperty Name="Agent" Relationship="CICSModel.FK_TransactionLog_Agent" FromRole="TransactionLog" ToRole="Agent" />
     <NavigationProperty Name="Client" Relationship="CICSModel.FK_TransactionLog_Client" FromRole="TransactionLog" ToRole="Client" />
     <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_TransactionLog_Terminal" FromRole="TransactionLog" ToRole="Terminal" />

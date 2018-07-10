@@ -101,22 +101,22 @@
 
                             <div class="form-group">
                                 <label for="DrinkAmount">Food Amount</label>
-                                @Html.EditorFor(model => model.FoodAmount, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "FoodAmount", required = true, name = "FoodAmount", placeholder = "Food Amount" } })
+                                @Html.EditorFor(model => model.FoodAmount, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "FoodAmount", required = false, name = "FoodAmount", placeholder = "Food Amount" } })
                                 <input type="text" class="form-control" id="FoodAmountDeduction" name="FoodAmountDeduction" readonly tabIndex="-1">
                             </div>
                             <div class="form-group">
                                 <label for="DrinkAmount">Drink Amount</label>
-                                @Html.EditorFor(model => model.DrinkAmount, new { htmlAttributes = new { @class = "form-control col-lg-6 col-md-6 col-sm-8 col-xs-4", type = "number", id = "DrinkAmount", required = true, name = "DrinkAmount", placeholder = "Drink Amount" } })
+                                @Html.EditorFor(model => model.DrinkAmount, new { htmlAttributes = new { @class = "form-control col-lg-6 col-md-6 col-sm-8 col-xs-4", type = "number", id = "DrinkAmount", required = false, name = "DrinkAmount", placeholder = "Drink Amount" } })
                                 <input type="text" class="form-control" id="DrinkAmountDeduction" name="DrinkAmountDeduction" readonly tabIndex="-1">
                             </div>
                             <div class="form-group">
                                 <label for="RentalAmount">Rental Amount</label>
-                                @Html.EditorFor(model => model.RentalAmount, new { htmlAttributes = new { @class = "form-control col-lg-6 col-md-6 col-sm-8 col-xs-4", type = "number", id = "RentalAmount", required = true, name = "RentalAmount", placeholder = "Rental Amount" } })
+                                @Html.EditorFor(model => model.RentalAmount, new { htmlAttributes = new { @class = "form-control col-lg-6 col-md-6 col-sm-8 col-xs-4", type = "number", id = "RentalAmount", required = false, name = "RentalAmount", placeholder = "Rental Amount" } })
                                 <input type="text" class="form-control" id="RentalAmountDeduction" name="RentalAmountDeduction" readonly tabIndex="-1">
                             </div>
                             <div class="form-group">
                                 <label for="OtherAmount">Other Amount</label>
-                                @Html.EditorFor(model => model.OtherAmount, new { htmlAttributes = new { @class = "form-control col-lg-6 col-md-6 col-sm-8 col-xs-4", type = "number", id = "OtherAmount", required = true, name = "OtherAmount", placeholder = "Other Amount" } })
+                                @Html.EditorFor(model => model.OtherAmount, new { htmlAttributes = new { @class = "form-control col-lg-6 col-md-6 col-sm-8 col-xs-4", type = "number", id = "OtherAmount", required = false, name = "OtherAmount", placeholder = "Other Amount" } })
                                 <input type="text" class="form-control" id="OtherAmountDeduction" name="OtherAmountDeduction" readonly tabIndex="-1">
                             </div>
                             <div class="form-group">

@@ -38,7 +38,7 @@
                             <tr><th>Phone</th> <td>@Model.PhoneNumber</td> </tr>
 
                         }
-                        else if (roles2.Contains(roleCode) || cancreatewebUsers == true)
+                        if (roles2.Contains(roleCode) || cancreatewebUsers == true)
                         {
                             <tr><th>Name</th> <td>@Model.Name</td></tr>
                             <tr><th>Food Amount</th> <td>@Model.FoodAmount</td></tr>
@@ -46,7 +46,7 @@
                             <tr><th>Rental Amount</th> <td>@Model.Amount  </td></tr>
                             <tr><th>Other Amount</th> <td>@Model.OtherAmount</td></tr>
                             <tr><th>Income</th> <td>@Model.Income</td></tr>
-                            <tr><th>PErcentage Deduction</th> <td>@Model.Percentage %</td></tr>
+                            <tr><th>Percentage Deduction</th> <td>@Model.Percentage %</td></tr>
                         }
 
                     }

@@ -8,6 +8,10 @@ using System.Web.Mvc;
 using CICSWebPortal.Models;
 using CICSWebPortal.ViewModels;
 using CICSWebPortal.Helpers;
+using System.Text;
+using System.IO;
+using System.Data;
+using System.Data.OleDb;
 
 namespace CICSWebPortal.Controllers
 {
@@ -69,7 +73,7 @@ namespace CICSWebPortal.Controllers
         }
 
         //[Route("[action]/{status?}/{message?}")]
-        public ActionResult WebUser(int status = 0, string message = "")
+        public ActionResult WebUser(int status = -1, string message = "")
         {
             var user = (UserDashBoardViewModel)Session["LoggedInUser"];
             if (user == null)
@@ -80,10 +84,10 @@ namespace CICSWebPortal.Controllers
                 return View();
             }
 
-            
-            
-             
-           
+
+
+
+
 
             if (user.RoleCode == "SA")
             {
@@ -92,7 +96,7 @@ namespace CICSWebPortal.Controllers
                 ViewBag.Clients = clients;
                 return View(users);
 
-                
+
             }
             else if (user.RoleCode == "CA")
             {
@@ -107,6 +111,11 @@ namespace CICSWebPortal.Controllers
 
                 var users = DataContext.GetAllUsersByClientId(user.ClientId).Where(a => a.RoleCode == "WA");
                 ViewBag.Clients = clients;
+                if (status == 1)
+                    ViewBag.Status = true;
+                else if (status == 0)
+                    ViewBag.Status = false;
+                ViewBag.Message = message;
                 return View(users);
             }
             else
@@ -148,7 +157,7 @@ namespace CICSWebPortal.Controllers
                 ViewBag.Status = true;
                 ViewBag.Clients = clients;
 
-                model.Clients = clients.Select(a=> new SelectListItem { Text = a.ClientName, Value = a.clientId.ToString() });
+                model.Clients = clients.Select(a => new SelectListItem { Text = a.ClientName, Value = a.clientId.ToString() });
                 model.Agents = new List<SelectListItem>();
                 return View(model);
 
@@ -172,7 +181,7 @@ namespace CICSWebPortal.Controllers
                 clientList.Add(new SelectListItem { Text = clients.ClientName, Value = clients.ClientId.ToString() });
                 model.Clients = clientList;
                 model.Agents = clients.Agents.Select(a => new SelectListItem { Text = a.Name, Value = a.AgentId.ToString() });
-                
+
                 return View(model);
             }
             else
@@ -181,8 +190,8 @@ namespace CICSWebPortal.Controllers
                 ViewBag.Message = "You do not have sufficient permission to view this page, Please contact administrator";
                 return View();
             }
-            
-            
+
+
         }
 
         [HttpPost]
@@ -192,12 +201,12 @@ namespace CICSWebPortal.Controllers
             var agent = DataContext.FindAgentById(model.SelectedAgentId);
             var role = DataContext.FindRoleByCode("WA");
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction("WebUser",new {status= false,  message="Invalid Parameters" });
+                return RedirectToAction("WebUser", new { status = false, message = "Invalid Parameters" });
             }
 
-            if(agent == null)
+            if (agent == null)
             {
                 return RedirectToAction("WebUser", new { status = false, message = "Please select appropriate zone" });
             }
@@ -220,10 +229,10 @@ namespace CICSWebPortal.Controllers
             model.AgentCode = agent.Code;
             model.AgentUsername = user.Email;
             model.createdby = user.UserId;
-            
+
 
             var result = DataContext.AddWebUser(model);
-            if(result != null)
+            if (result != null)
             {
                 return RedirectToAction("WebUser", new { status = true, message = "Saved Successfully" });
             }
@@ -233,8 +242,8 @@ namespace CICSWebPortal.Controllers
             }
 
 
-            
-           
+
+
 
 
         }
@@ -265,7 +274,7 @@ namespace CICSWebPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 var User = new User
                 {
                     UserId = userVM.UserId,
@@ -398,5 +407,132 @@ namespace CICSWebPortal.Controllers
                 return View();
             }
         }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UploadWebUser(HttpPostedFileBase uploadFile)
+        {
+            var user = (UserDashBoardViewModel)Session["LoggedInUser"];
+            var agents = DataContext.GetAllAgentsByClientId(user.ClientId);
+            var role = DataContext.FindRoleByCode("WA");
+
+
+
+            if (agents == null)
+            {
+                return RedirectToAction("WebUser", new { status = false, message = "Please select appropriate zone" });
+            }
+
+            if (user == null)
+            {
+                return RedirectToAction("WebUser", new { status = false, message = "You need to Sign In" });
+            }
+            if (user.CanCreateWebUsers == false)
+            {
+                return RedirectToAction("WebUser", new { status = false, message = "You cannot create web users" });
+            }
+            if (role == null)
+            {
+                return RedirectToAction("WebUser", new { status = false, message = "Please contact Super Administrators" });
+            }
+
+
+
+
+            StringBuilder strValidations = new StringBuilder(string.Empty);
+            try
+            {
+                if (uploadFile.ContentLength > 0)
+                {
+                    string filePath = Path.Combine(HttpContext.Server.MapPath("/Uploads"),
+                   Path.GetFileName(uploadFile.FileName));
+                    uploadFile.SaveAs(filePath);
+                    DataSet ds = new DataSet();
+
+                    //A 32-bit provider which enables the use of
+
+                    string ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + ";Extended Properties=Excel 12.0;";
+
+                    using (OleDbConnection conn = new System.Data.OleDb.OleDbConnection(ConnectionString))
+                    {
+                        conn.Open();
+                        using (DataTable dtExcelSchema = conn.GetSchema("Tables"))
+                        {
+                            string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+                            string query = "SELECT * FROM [" + sheetName + "]";
+                            OleDbDataAdapter adapter = new OleDbDataAdapter(query, conn);
+                            //DataSet ds = new DataSet();
+                            adapter.Fill(ds, "Items");
+                            if (ds.Tables.Count > 0)
+                            {
+                                if (ds.Tables[0].Rows.Count > 0)
+                                {
+                                    int success = 0;
+                                    int failure = 0;
+                                    string msg = "";
+                                    for (int i = 1; i < ds.Tables[0].Rows.Count; i++)
+                                    {
+                                        try
+                                        {
+                                            var rowitem = ds.Tables[0].Rows[i].ItemArray;
+                                            var hotelname = rowitem[1].ToString().Trim();
+                                            var address = $"{rowitem[2].ToString().Trim()} {rowitem[3].ToString().Trim()}";
+                                            var lga = rowitem[4].ToString().ToUpper().Trim();
+                                            long phoneint = long.Parse(rowitem[5].ToString());
+                                            //int.TryParse(.ToString(), out int );
+                                            var phone = phoneint.ToString("00000000000");
+                                            var currentagent = agents.SingleOrDefault(a => a.Name.ToUpper().Equals(lga)) ?? agents[0];
+
+                                            WebUserViewModel WebUser = new WebUserViewModel
+                                            {
+                                                AgentUsername = user.Email,
+                                                SelectedAgentId = currentagent.AgentId,
+                                                RoleId = role.RoleId,
+                                                Status = true,
+                                                AgentCode = currentagent.Code,
+                                                createdby = user.UserId,
+                                                Name = hotelname,
+                                                Address = address,
+                                                Email = $"{hotelname.Replace(" ", "")}@igrhub.com",
+                                                Password = "welcome12@",
+                                                Phone = phone,
+                                                RePassword = "welcome12@",
+                                                SelectedClientId = user.ClientId
+
+                                            };
+
+
+
+                                            var result = DataContext.AddWebUser(WebUser);
+                                            success++;
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            failure++;
+                                            msg += ex.Message + " on record " + i + "{{br}}";
+                                        }
+                                    }
+
+                                    if (success > 0)
+                                    {
+                                        return RedirectToAction("WebUser", new { status = 1, message = success + "Saved Successfully {{br}}" + failure + ((failure > 0) ? " Saving Failed {{br}}" + msg : "") });
+                                    }
+                                    else
+                                    {
+                                        return RedirectToAction("WebUser", new { status = 0, message =  failure + ((failure > 0) ? " Saving Failed {{br}}" + msg : "") });
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("WebUser", new { status = false, message = "Saving Failed." + ex.Message });
+            }
+            return RedirectToAction("WebUser", new { status = false, message = "Saving Failed." });
+        }
+
     }
 }

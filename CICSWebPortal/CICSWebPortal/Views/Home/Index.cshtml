@@ -6,6 +6,7 @@
     string roleCode = (string)Session["RoleCode"];
     bool cancreatewebUsers = (bool)Session["CanCreateWebUsers"];
     var user = (CICSWebPortal.ViewModels.UserDashBoardViewModel)Session["LoggedInUser"];
+    var currentClient = (CICSWebPortal.Models.Client)Session["CurrentClient"];
 }
 
 @{
@@ -354,7 +355,7 @@
 
     @{
         clientmenu = new string[] { "SA", "SU", "CA", "CU", "AA", "AU" };
-        displayStyle = (clientmenu.Contains(roleCode)) ? string.Empty : "display: none";
+        displayStyle = (clientmenu.Contains(roleCode) && currentClient.ClientSetting.ShowAmountUnpaid == true) ? string.Empty : "display: none";
         //displayStyle = string.Empty;
     }
     <div class="panel-stat3 bg-success col-md-3" style="background-color:red; margin:0 10px 10px 0; @displayStyle">

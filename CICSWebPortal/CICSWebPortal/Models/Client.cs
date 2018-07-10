@@ -25,5 +25,10 @@ namespace CICSWebPortal.Models
     {
         public decimal? PercentageDeduction { get; set; }
         public int? DefaultRevenueItemId { get; set; }
+        public bool? ShowAmountUnpaid { get; set; } = true;
+        public int? ConsumptionTaxRevenueId { get; set; }
+        public int? WithholdingTaxRevenueItem { get; set; }
+        public int? PayeeRevenueItem { get; set; }
+
     }
 }

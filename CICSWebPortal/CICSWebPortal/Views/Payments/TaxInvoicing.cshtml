@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "TaxInvoicing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tax Income</li>
+    </ol>
+</nav>
+<h2>TaxInvoicing</h2>
+
+
+
+<div class="box box-info">
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-10 col-xs-12">
+
+
+            <div class="box-header">
+                <i class="fa fa-money"></i>
+
+                <h3 class="box-title">Collection Form</h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+
+                </div>
+                <!-- /. tools -->
+            </div>
+            <form id="searchform">
+                <div class="box-body">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label>Search :</label>
+
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="search" placeholder="Please enter webaccess pin or name">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="box-footer clearfix">
+                    <button type="submit" class="pull-right btn btn-default" id="fetch">
+                        Search
+                        <i class="fa fa-search-plus"></i>
+                    </button>
+                </div>
+                <div class="info-box">
+                    <code> No Enrollment record? <a href="NonResidentTaxInvoicing"> click here</a></code>
+                </div>
+            </form>
+            <div>
+                <table id="searchtable" class="table col-lg-10 col-md-10 col-sm-12 col-xs-12"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section JavaScript
+{
+    <script type="text/javascript">
+
+        $('#fetch').click(function (e) {
+            e.preventDefault();
+            var form = $('#searchform');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+            var searchid = $('#search').val();
+            // election.__RequestVerificationToken = token;
+            $.ajax({
+                type: "POST",
+                url: '/Payments/ResidentSearch',
+                data: {
+                    __RequestVerificationToken: token,
+                    id: searchid
+                },
+                datatype: "json",
+                 beforeSend: function () {
+                    waitingDialog.show("Searching for Resident. Please Wait.");
+                },
+                complete: function () {
+                    waitingDialog.hide();
+                },
+                success: function (response) {
+
+                    if (response.status == true) {
+                        var html = "<tr><th scope=\"col\">Fullname</th> <th>Address</th><th> WebAccessPin</th><th>DOB</th><th>Gender</th><th>Phone</th></tr>";
+
+                        for (var x = 0; x < response.result.Resident.length; x++) {
+                            html += "<tr><td>" + response.result.Resident[x].LastName + " " + response.result.Resident[x].FirstName + " " + response.result.Resident[x].MiddleName + "</td>";
+                            html += "<td>" + response.result.Resident[x].Address + "</td>";
+                            html += "<td>" + response.result.Resident[x].WebAccessPin + "</td>";
+                            html += "<td>" + response.result.Resident[x].DateOfBirth + "</td>";
+                            html += "<td>" + response.result.Resident[x].Gender + "</td>";
+                            html += "<td>" + response.result.Resident[x].PhoneNumber + "</td>";
+                            html += "<td><a class=\"pull-right btn btn-success\" id=\"paybutton\" data-id=\"" + response.result.Resident[x].WebAccessPin + "\" href=\"GenerateTaxInvoice/" + response.result.Resident[x].WebAccessPin + "\"> Proceed to Pay. <i class=\"fa fa-money\"></i></a></td></tr>";
+                        }
+
+                        $('#searchtable').html(html);
+
+                    }
+                    else {
+                        var html = "<tr><th scope=\"col\">No result Found</td></tr>";
+                        $('#searchtable').html(html);
+                    }
+
+                },
+                error: function () {
+                    // waitingDialog.hide();
+                    // $.toaster({ priority: 'danger', title: 'Service Error', message: "error" });
+                }
+
+            });
+        });
+
+        $(document).on('click', '#paybutton', function () {
+            var residentid = $(this).attr("data-id");
+            console.log(residentid);
+        });
+
+    </script>
+}
+

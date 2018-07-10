@@ -22,7 +22,7 @@
 <div class="panel panel-default table-responsive">
     <div class="panel-heading">
         @{
-            string[] clientmenu = new string[] { "SA" };
+            string[] clientmenu = new string[] { "SA", "CA", "AA" };
             string displayStyle = (clientmenu.Contains(currentUser.RoleCode)) ? string.Empty : "display: none";
             //string displayStyle = string.Empty; if ((Convert.ToInt32(Session["RoleID"]) == 2) || (Convert.ToInt32(Session["RoleID"]) == 4) || (Convert.ToInt32(Session["RoleID"]) == 6)) { displayStyle = "display: none"; }
         }
