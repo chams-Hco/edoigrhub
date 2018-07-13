@@ -43,5 +43,6 @@ namespace CICSWebPortal.Models
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public string Name { get; set; }
+        public string BatchCode { get; set; } //Maps to transaction ref in EOD
     }
 }

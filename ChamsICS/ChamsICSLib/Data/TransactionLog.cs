@@ -70,6 +70,7 @@ namespace ChamsICSLib.Data
         public Nullable<decimal> WithholdingTaxRevenueDeductionPercentage { get; set; }
         public Nullable<decimal> WithholdingTaxActualAmount { get; set; }
         public Nullable<decimal> WithholdingTaxLiability { get; set; }
+        public string BatchCode { get; set; }
     
         public virtual Agent Agent { get; set; }
         public virtual Client Client { get; set; }

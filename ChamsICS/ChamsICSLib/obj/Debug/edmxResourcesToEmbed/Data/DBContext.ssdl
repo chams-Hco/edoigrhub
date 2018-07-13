@@ -80,7 +80,7 @@
     <Property Name="Status" Type="bit" Nullable="false" />
     <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="Count" Type="int" Nullable="false" />
-    <Property Name="TransactionReference" Type="varchar" MaxLength="50" />
+    <Property Name="TransactionReference" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="EODPaymentNotificationLog">
     <Key>
@@ -292,6 +292,7 @@
     <Property Name="WithholdingTaxRevenueDeductionPercentage" Type="decimal" Precision="18" Scale="2" />
     <Property Name="WithholdingTaxActualAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="WithholdingTaxLiability" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="BatchCode" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TransactionLogException">
     <Key>
@@ -560,6 +561,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_TransactionLog_TransactionLog' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_TransactionLog_TransactionLog" />-->
   <Association Name="FK_User_Client">
     <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
     <End Role="User" Type="Self.User" Multiplicity="*" />

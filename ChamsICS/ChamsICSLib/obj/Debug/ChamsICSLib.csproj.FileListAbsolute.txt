@@ -89,3 +89,15 @@ C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csproj.CopyComplete
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
 C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll.config
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.dll
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\ChamsICSLib.pdb
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.dll
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.xml
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csprojAssemblyReference.cache
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csproj.CoreCompileInputs.cache
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.csproj.CopyComplete
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.dll
+C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ChamsICSLib\obj\Debug\ChamsICSLib.pdb

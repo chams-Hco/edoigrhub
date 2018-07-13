@@ -72,6 +72,7 @@ namespace ChamsICSWebService.Model
         public decimal? WithholdingTaxRevenueDeductionPercentage { get; set; } = 0;
         public decimal? WithholdingTaxActualAmount { get; set; } = 0;
         public decimal? WithholdingTaxLiability { get; set; } = 0;
+        public string BatchCode { get; set; } //Maps to transaction ref in EOD
     }
 
     public class FindTransactionRes : Response
@@ -119,6 +120,8 @@ namespace ChamsICSWebService.Model
         public string Amount { get; set; }
         [DataMember]
         public string PaymentReference { get; set; }
+        [DataMember]
+        public string BatchCode { get; set; } //Maps to transaction ref in EOD
     }
 
     [DataContract]

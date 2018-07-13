@@ -257,7 +257,7 @@ namespace ChamsICSWebService
 
             return result;
         }
-
+        
         internal bool ValidateUploadTransaction(UploadTransactionReq req, out string msg, out string tempResId)
         {
             bool result = true;
@@ -267,6 +267,16 @@ namespace ChamsICSWebService
 
             string TerminalCode = req.TransactionCode.Substring(4, 6);
             string AgentCode = req.TransactionCode.Substring(0, 4);
+
+            //if request has batch code, validate it
+            if (!string.IsNullOrEmpty(req.BatchCode))
+            {
+                if (db.EODs.Any(p => p.TransactionReference == req.BatchCode) == false)
+                {
+                    msg = "Batch Code doesn't exist";
+                    return false;
+                }
+            }
 
             //Validate TransactionCode
             if (!ValidateTransactionCodeLength(req.TransactionCode, out msg))

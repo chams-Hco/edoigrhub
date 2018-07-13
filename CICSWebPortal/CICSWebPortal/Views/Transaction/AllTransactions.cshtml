@@ -59,6 +59,7 @@
                     <th>ResidentID</th>
                     <th>Amount</th>
                     <th>TransactionDate</th>
+                    <th>Batch Code</th>
                     <th width="15%"></th>
                     <th width="15%"></th>
                 </tr>
@@ -74,6 +75,7 @@
                         <td>@Html.DisplayFor(modelItem => item.ResidentId)</td>
                         <td>@Html.DisplayFor(modelItem => item.Amount)</td>
                         <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.BatchCode)</td>
                         <td><a data-target='#view_modal' role='button' data-view-id='@Html.DisplayFor(modelItem => item.TransactionId)' class='btn btn-default viewButton' data-toggle='modal'><i class='fa fa-edit'></i> View Details</a></td>
                         <td>@Html.ActionLink("Print Receipt", "TransactionReceipt", "Transaction", new { id = item.TransactionId }, new { role = "button", @class = "btn btn-primary" })</td>
                     </tr>

@@ -147,6 +147,18 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Type" Type="nvarchar" MaxLength="20" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'CICS.dbo.Restored_EOD' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Restored_EOD">
+          <Property Name="Id" Type="varchar" MaxLength="50" />
+          <Property Name="Date" Type="varchar" MaxLength="50" />
+          <Property Name="TerminalId" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="timestamp" Type="varchar" MaxLength="50" />
+          <Property Name="Count" Type="varchar" MaxLength="50" />
+          <Property Name="TransactionReference" Type="varchar" MaxLength="50" />
+        </EntityType>-->
   <EntityType Name="Revenue">
     <Key>
       <PropertyRef Name="Id" />

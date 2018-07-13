@@ -642,7 +642,8 @@ namespace CICSWebPortal.Services
                 Percentage = e.Percentage,
                 RentalAmount = e.RentalAmount,
                 ToDate = e.ToDate,
-                Name = e.Name
+                Name = e.Name,
+                BatchCode = e.BatchCode
             };
         }
 
@@ -686,7 +687,8 @@ namespace CICSWebPortal.Services
                     Percentage = e.Percentage,
                     RentalAmount = e.RentalAmount,
                     ToDate = e.ToDate,
-                    Name = e.Name
+                    Name = e.Name,
+                    BatchCode = e.BatchCode
                 };
             }
             else { return new Models.Transaction() { }; }
@@ -729,7 +731,8 @@ namespace CICSWebPortal.Services
                 Percentage = e.Percentage,
                 RentalAmount = e.RentalAmount,
                 ToDate = e.ToDate,
-                Name = e.Name
+                Name = e.Name,
+                BatchCode = e.BatchCode
             }).ToList();
         }
 
@@ -783,7 +786,7 @@ namespace CICSWebPortal.Services
                 Percentage = e.Percentage,
                 RentalAmount = e.RentalAmount,
                 ToDate = e.ToDate,
-                Name = e.Name
+                Name = e.Name,
             }).OrderByDescending(x => x.TransactionDate).ToList();
         }
 
@@ -828,7 +831,8 @@ namespace CICSWebPortal.Services
                     Percentage = e.Percentage,
                     RentalAmount = e.RentalAmount,
                     ToDate = e.ToDate,
-                    Name = e.Name
+                    Name = e.Name,
+                    BatchCode = e.BatchCode
                 }).OrderByDescending(x => x.TransactionDate).ToList();
 
             return new List<Models.Transaction>();

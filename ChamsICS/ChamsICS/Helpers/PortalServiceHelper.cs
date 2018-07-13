@@ -705,7 +705,8 @@ namespace ChamsICSWebService
                 ToDate = tLogsObj.ToDate,
                 LocationId = tLogsObj.LocationId,
                 LocationName = tLogsObj.LocationCode,
-                Name = (tLogsObj.TerminalId != null && tLogsObj.Terminal.UserDetails.Any()) ? tLogsObj.Terminal.UserDetails.FirstOrDefault().Name : ""
+                Name = (tLogsObj.TerminalId != null && tLogsObj.Terminal.UserDetails.Any()) ? tLogsObj.Terminal.UserDetails.FirstOrDefault().Name : "",
+                BatchCode = tLogsObj.BatchCode
             };
 
             if (tLogs == null)
@@ -773,7 +774,8 @@ namespace ChamsICSWebService
                 ToDate = tLogsObj.ToDate,
                 LocationId = tLogsObj.LocationId,
                 LocationName = tLogsObj.LocationCode,
-                Name = (tLogsObj.TerminalId != null && tLogsObj.Terminal.UserDetails.Any()) ? tLogsObj.Terminal.UserDetails.FirstOrDefault().Name : ""
+                Name = (tLogsObj.TerminalId != null && tLogsObj.Terminal.UserDetails.Any()) ? tLogsObj.Terminal.UserDetails.FirstOrDefault().Name : "",
+                BatchCode = tLogsObj.BatchCode
             };
             if (tLogs == null)
             {
@@ -839,7 +841,8 @@ namespace ChamsICSWebService
                             RentalAmount = tlogs.RentalAmount,
                             Percentage = tlogs.Percentage,
                             ToDate = tlogs.ToDate,
-                            Name = (tlogs.TerminalId != null && tlogs.Terminal.UserDetails.Any()) ? tlogs.Terminal.UserDetails.FirstOrDefault().Name : ""
+                            Name = (tlogs.TerminalId != null && tlogs.Terminal.UserDetails.Any()) ? tlogs.Terminal.UserDetails.FirstOrDefault().Name : "",
+                            BatchCode = tlogs.BatchCode
 
                         };
 

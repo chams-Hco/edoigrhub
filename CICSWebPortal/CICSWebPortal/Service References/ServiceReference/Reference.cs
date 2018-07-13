@@ -5469,6 +5469,9 @@ namespace CICSWebPortal.ServiceReference {
         private System.Nullable<decimal> AnnualTaxPayableField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BatchCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ClientIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -5744,6 +5747,19 @@ namespace CICSWebPortal.ServiceReference {
                 if ((this.AnnualTaxPayableField.Equals(value) != true)) {
                     this.AnnualTaxPayableField = value;
                     this.RaisePropertyChanged("AnnualTaxPayable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BatchCode {
+            get {
+                return this.BatchCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BatchCodeField, value) != true)) {
+                    this.BatchCodeField = value;
+                    this.RaisePropertyChanged("BatchCode");
                 }
             }
         }
@@ -9661,6 +9677,9 @@ namespace CICSWebPortal.ServiceReference {
         private string AmountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BatchCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DateOfBirthField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -9734,6 +9753,19 @@ namespace CICSWebPortal.ServiceReference {
                 if ((object.ReferenceEquals(this.AmountField, value) != true)) {
                     this.AmountField = value;
                     this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BatchCode {
+            get {
+                return this.BatchCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BatchCodeField, value) != true)) {
+                    this.BatchCodeField = value;
+                    this.RaisePropertyChanged("BatchCode");
                 }
             }
         }
