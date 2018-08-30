@@ -37,7 +37,9 @@ namespace CICSWebPortal
           "~/Scripts/dataTables.scroller.min.js",
           "~/Scripts/dataTables.tableTools.min.js",
           "~/Scripts/modernizr.min.js",
-          "~/Scripts/endless.js"
+          "~/Scripts/endless.js",
+          "~/Scripts/xlsx.core.min.js",
+          "~/Scripts/xls.core.min.js"
           //"~/Content/DataTables/datatables.min.js",
           //"~/Content/DataTables/dataTables.buttons.min.js",
           // "~/Content/DataTables/buttons.flash.min.js",

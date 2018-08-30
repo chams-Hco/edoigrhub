@@ -7320,6 +7320,8 @@
     <Content Include="Content\dist\css\adminlte.css.map" />
     <Content Include="Content\dist\css\adminlte.min.css.map" />
     <Content Include="Content\DataTables\pdfmake.min.js.map" />
+    <Content Include="Content\Templates\payeeTemplate.xlsx" />
+    <Content Include="Content\Templates\withholdingtaxTemplate.xlsx" />
     <None Include="Properties\PublishProfiles\CICSWebPortal.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -7362,6 +7364,8 @@
     <Content Include="Scripts\rapheal.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\xls.core.min.js" />
+    <Content Include="Scripts\xlsx.core.min.js" />
     <Content Include="Scripts\_references.js" />
     <None Include="Service References\ServiceReference1\ChamsICSService.wsdl" />
     <None Include="Service References\ServiceReference1\ChamsICSService.xsd">

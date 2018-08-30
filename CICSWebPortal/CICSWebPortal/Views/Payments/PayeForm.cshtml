@@ -74,7 +74,7 @@
                     <div class="box-header">
                         <i class="fa fa-money"></i>
 
-                        <h3 class="box-title">Payee Collection Form</h3>
+                        <h3 class="box-title">Pay as you earn form</h3>
                         <!-- tools box -->
                         <div class="pull-right box-tools">
 
@@ -96,8 +96,8 @@
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     @Html.DropDownList("Month", new SelectList(Enum.GetValues(typeof(CICSWebPortal.Models.Month))),
-                            "Select Month",
-                            new { @class = "form-control" })
+"Select Month",
+new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -124,6 +124,18 @@
                                         }
                                     </select>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                Select Upload Template
+                                <input type="file" id="excelfile" class="form-control" />
+                                <input type="button" class="btn btn-primary pull-right" style="margin-top:3px" id="viewfile" value="Load Records" onclick="ExportToTable()" />
+                            </div>
+                            <div class="form-group">
+                                Don't have a template? <a href="~/Content/Templates/payeeTemplate.xlsx"> download here</a>
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                Unit Specifications
                             </div>
                             <div class="form-group">
                                 <label for="MonthlyIncome">Staff Payer ID</label>
@@ -186,7 +198,7 @@
                     <div class="box-header">
                         <i class="fa fa-money"></i>
 
-                        <h3 class="box-title">Payee Information</h3>
+                        <h3 class="box-title">Pay as you earn  Information</h3>
                         <!-- tools box -->
                         <div class="pull-right box-tools">
 
@@ -333,6 +345,123 @@
 
         var payable = [];
 
+        function ExportToTable() {
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;
+            /*Checks whether the file is a valid excel file*/
+            if (regex.test($("#excelfile").val().toLowerCase())) {
+                var xlsxflag = false; /*Flag for checking whether excel is .xls format or .xlsx format*/
+                if ($("#excelfile").val().toLowerCase().indexOf(".xlsx") > 0) {
+                    xlsxflag = true;
+                }
+                /*Checks whether the browser supports HTML5*/
+                if (typeof (FileReader) != "undefined") {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var data = e.target.result;
+                        /*Converts the excel data in to object*/
+                        if (xlsxflag) {
+                            var workbook = XLSX.read(data, { type: 'binary' });
+                        }
+                        else {
+                            var workbook = XLS.read(data, { type: 'binary' });
+                        }
+                        /*Gets all the sheetnames of excel in to a variable*/
+                        var sheet_name_list = workbook.SheetNames;
+
+                        var cnt = 0; /*This is used for restricting the script to consider only first sheet of excel*/
+                        sheet_name_list.forEach(function (y) { /*Iterate through all sheets*/
+                            /*Convert the cell value to Json*/
+                            if (xlsxflag) {
+                                var exceljson = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
+                            }
+                            else {
+                                var exceljson = XLS.utils.sheet_to_row_object_array(workbook.Sheets[y]);
+                            }
+                            if (exceljson.length > 0 && cnt == 0) {
+                                readrecords(exceljson);
+                                cnt++;
+                            }
+                        });
+                        $('#exceltable').show();
+                    }
+                    if (xlsxflag) {/*If excel file is .xlsx extension than creates a Array Buffer from excel*/
+                        reader.readAsArrayBuffer($("#excelfile")[0].files[0]);
+                    }
+                    else {
+                        reader.readAsBinaryString($("#excelfile")[0].files[0]);
+                    }
+                }
+                else {
+                    alert("Sorry! Your browser does not support HTML5!");
+                }
+            }
+            else {
+                alert("Please upload a valid Excel file!");
+            }
+        }
+
+        function readrecords(jsondata) {
+            for (var i = 0; i < jsondata.length; i++) {
+                var columns = readcolumnheader(jsondata);
+                if (checkcolumns(columns)) {
+                    for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+                        var cellValue = jsondata[i][columns[colIndex]];
+                        switch (colIndex) {
+                            case 1:
+                                payee.EmployeeName = cellValue.replace(',', '');
+                                break;
+                            case 2:
+                                payee.StaffPayerID = cellValue.replace(',', '');
+                                break;
+                            case 3:
+                                payee.MonthlyIncome = cellValue.replace(',', '');
+                                break;
+                            case 4:
+                                payee.MonthlyPension = cellValue.replace(',', '');
+                                break;
+                            case 5:
+                                payee.MonthlyNHFund = cellValue.replace(',', '');
+                                break;
+                            case 6:
+                                payee.MonthlyNHIS = cellValue.replace(',', '');
+                                break;
+                            default:
+                        }
+                        if (cellValue == null)
+                            cellValue = "";
+                    }
+                    calculateCollection();
+                    payee.Month = $("#Month option:selected").text();
+                    payee.Year = $("#Year").val();
+                    addpayeerecord();
+                    resetPayee();
+                }
+            }
+            ShowAllPayables();
+        }
+
+        function readcolumnheader(jsondata) {
+            var columnSet = [];
+            for (var i = 0; i < jsondata.length; i++) {
+                var rowHash = jsondata[i];
+                for (var key in rowHash) {
+                    if (rowHash.hasOwnProperty(key)) {
+                        if ($.inArray(key, columnSet) == -1) {/*Adding each unique column names to a variable array*/
+                            columnSet.push(key);
+                        }
+                    }
+                }
+            }
+            return columnSet;
+        }
+
+        function checkcolumns(columns) {
+            if (columns.length != 7)
+                return false;
+            else
+                return true;
+        }
+
 
         $('#MonthlyIncome').on('input keyup blur change keypress', function () {
             payee.MonthlyIncome = $(this).val();
@@ -356,12 +485,17 @@
             payee.StaffPayerID = $('#StaffPayerID').val();
             payee.Month = $("#Month option:selected").text();
             payee.Year = $("#Year").val();
+            addpayeerecord();
+            resetPayee();
+            ShowAllPayables();
+
+        });
+
+        function addpayeerecord() {
             if (checkCanAdd()) {
                 payable.push(payee);
-                ShowAllPayables();
-                resetPayee();
             }
-        });
+        }
         $('#paypayee').on('click', function (e) {
             e.preventDefault();
             payables = JSON.stringify({ 'model': payable });

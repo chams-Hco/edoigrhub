@@ -109,12 +109,24 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            Select Upload Template
+                            <input type="file" id="excelfile" class="form-control" />
+                            <input type="button" class="btn btn-primary pull-right" style="margin-top:3px" id="viewfile" value="Load Records" onclick="ExportToTable()" />
+                        </div>
+                        <div class="form-group">
+                            Don't have a template? <a href="~/Content/Templates/withholdingtaxTemplate.xlsx"> download here</a>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            Unit Specifications
+                        </div>
+                        <div class="form-group">
                             <label for="Name">Beneficiary Name</label>
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "Name", required = true, name = "Name", placeholder = "Beneficiary Name" } })
                         </div>
                         <div class="form-group">
-                            <label for="Name">Beneficiary Name</label>
-                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "Name", required = true, name = "Address", placeholder = "Beneficiary Address" } })
+                            <label for="Name">Beneficiary Address</label>
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "Address", required = true, name = "Address", placeholder = "Beneficiary Address" } })
                         </div>
                         <div class="form-group">
                             <label for="Amount">Amount</label>
@@ -145,7 +157,7 @@
                     <div class="box-header">
                         <i class="fa fa-money"></i>
 
-                        <h3 class="box-title">WHT Information</h3>
+                        <h3 class="box-title">Withholding Tax Information</h3>
                         <!-- tools box -->
                         <div class="pull-right box-tools">
 
@@ -274,6 +286,119 @@
         };
 
         var payable = [];
+
+        function ExportToTable() {
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;
+            /*Checks whether the file is a valid excel file*/
+            if (regex.test($("#excelfile").val().toLowerCase())) {
+                var xlsxflag = false; /*Flag for checking whether excel is .xls format or .xlsx format*/
+                if ($("#excelfile").val().toLowerCase().indexOf(".xlsx") > 0) {
+                    xlsxflag = true;
+                }
+                /*Checks whether the browser supports HTML5*/
+                if (typeof (FileReader) != "undefined") {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var data = e.target.result;
+                        /*Converts the excel data in to object*/
+                        if (xlsxflag) {
+                            var workbook = XLSX.read(data, { type: 'binary' });
+                        }
+                        else {
+                            var workbook = XLS.read(data, { type: 'binary' });
+                        }
+                        /*Gets all the sheetnames of excel in to a variable*/
+                        var sheet_name_list = workbook.SheetNames;
+
+                        var cnt = 0; /*This is used for restricting the script to consider only first sheet of excel*/
+                        sheet_name_list.forEach(function (y) { /*Iterate through all sheets*/
+                            /*Convert the cell value to Json*/
+                            if (xlsxflag) {
+                                var exceljson = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
+                            }
+                            else {
+                                var exceljson = XLS.utils.sheet_to_row_object_array(workbook.Sheets[y]);
+                            }
+                            if (exceljson.length > 0 && cnt == 0) {
+                                readrecords(exceljson);
+                                cnt++;
+                            }
+                        });
+                        $('#exceltable').show();
+                    }
+                    if (xlsxflag) {/*If excel file is .xlsx extension than creates a Array Buffer from excel*/
+                        reader.readAsArrayBuffer($("#excelfile")[0].files[0]);
+                    }
+                    else {
+                        reader.readAsBinaryString($("#excelfile")[0].files[0]);
+                    }
+                }
+                else {
+                    alert("Sorry! Your browser does not support HTML5!");
+                }
+            }
+            else {
+                alert("Please upload a valid Excel file!");
+            }
+        }
+
+        function readrecords(jsondata) {
+            for (var i = 0; i < jsondata.length; i++) {
+                var columns = readcolumnheader(jsondata);
+                if (checkcolumns(columns)) {
+                    for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+                        var cellValue = jsondata[i][columns[colIndex]];
+                        switch (colIndex) {
+                            case 1:
+                                payee.Name = cellValue.replace(',', '');
+                                break;
+                            case 2:
+                                payee.Address = cellValue.replace(',', '');
+                                break;
+                            case 3:
+                                payee.WithholdingTaxActualAmount = cellValue.replace(',', '');
+                                break;
+                            default:
+                        }
+                        if (cellValue == null)
+                            cellValue = "";
+                    }
+                    calculateCollection();
+                    addpayeerecord();
+                    resetPayee(false);
+                }
+            }
+            ShowAllPayables();
+            resetPayee();
+        }
+
+        function readcolumnheader(jsondata) {
+            var columnSet = [];
+            for (var i = 0; i < jsondata.length; i++) {
+                var rowHash = jsondata[i];
+                for (var key in rowHash) {
+                    if (rowHash.hasOwnProperty(key)) {
+                        if ($.inArray(key, columnSet) == -1) {/*Adding each unique column names to a variable array*/
+                            columnSet.push(key);
+                        }
+                    }
+                }
+            }
+            return columnSet;
+        }
+
+        function addpayeerecord() {
+            if (checkCanAdd()) {
+                payable.push(payee);
+            }
+        }
+
+        function checkcolumns(columns) {
+            if (columns.length != 4)
+                return false;
+            else
+                return true;
+        }
 
 
         $('#WhtSelect').on('input keyup blur change keypress', function () {
@@ -436,16 +561,19 @@
             $('#WithholdingTaxLiability').val(payee.WithholdingTaxLiability.toFixed(2));
         };
 
-        var resetPayee = function () {
+        var resetPayee = function (clearSelect = true) {
             payee = {
                 Name: '',
                 Address: '',
-                WithholdingTaxRevenueName : '',
+                WithholdingTaxRevenueName : payee.WithholdingTaxRevenueName,
                 WithholdingTaxActualAmount : 0,
                 WithholdingTaxLiability :0,
             };
 
-            $('#WhtSelect').val('-1');
+            if (clearSelect) {
+                $('#WhtSelect').val('-1');
+                payee.WithholdingTaxRevenueName = '';
+            }
             $('#WithholdingTaxActualAmount').val('');
             $('#Name').val('');
             $('#Address').val('');

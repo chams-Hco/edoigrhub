@@ -237,15 +237,15 @@ namespace CICSWebPortal.Controllers
                              customerid = user.UserId.ToString(),
                              customername = user.Name,
                              invoicedate = DateTime.Now.ToString(),
-                             invoicelogid = result.TransactionCode,
+                             invoicelogid = result.RemittanceCode,
                              invoiceno = result.RemittanceCode,
                              isreversal = 0,
                              invoicevaliduntil = DateTime.Now.AddYears(1).ToString(),
-                             originalamount = model.Amount.ToString(),
+                             originalamount = model.Amount.ToString() ?? "",
                              items = new List<CashWoxItemModel>() {
                                 new CashWoxItemModel
                                 {
-                                    itemamount = int.Parse(model.Amount.ToString()),
+                                    itemamount = decimal.Parse(model.Amount.ToString()),
                                     itemcode = revenueItem.Code,
                                     itemname =revenueItem.Name
                                 }
