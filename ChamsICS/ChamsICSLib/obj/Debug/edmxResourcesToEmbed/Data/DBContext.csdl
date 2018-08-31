@@ -201,7 +201,7 @@
     <Property Name="Status" Type="Boolean" Nullable="false" />
     <Property Name="timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
     <Property Name="Count" Type="Int32" Nullable="false" />
-    <Property Name="TransactionReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TransactionReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_EOD_Terminal" FromRole="EOD" ToRole="Terminal" />
     <NavigationProperty Name="EODPaymentNotificationLogs" Relationship="CICSModel.FK_EODPaymentNotificationLog_EOD" FromRole="EOD" ToRole="EODPaymentNotificationLog" />
   </EntityType>
@@ -429,6 +429,7 @@
     <NavigationProperty Name="Agent" Relationship="CICSModel.FK_TransactionLog_Agent" FromRole="TransactionLog" ToRole="Agent" />
     <NavigationProperty Name="Client" Relationship="CICSModel.FK_TransactionLog_Client" FromRole="TransactionLog" ToRole="Client" />
     <NavigationProperty Name="Terminal" Relationship="CICSModel.FK_TransactionLog_Terminal" FromRole="TransactionLog" ToRole="Terminal" />
+    <Property Name="BatchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="TransactionLogException">
     <Key>

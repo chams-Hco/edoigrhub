@@ -254,6 +254,7 @@
     <EntitySetMapping Name="TransactionLogs">
       <EntityTypeMapping TypeName="CICSModel.TransactionLog">
         <MappingFragment StoreEntitySet="TransactionLog">
+          <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
           <ScalarProperty Name="WithholdingTaxLiability" ColumnName="WithholdingTaxLiability" />
           <ScalarProperty Name="WithholdingTaxActualAmount" ColumnName="WithholdingTaxActualAmount" />
           <ScalarProperty Name="WithholdingTaxRevenueDeductionPercentage" ColumnName="WithholdingTaxRevenueDeductionPercentage" />

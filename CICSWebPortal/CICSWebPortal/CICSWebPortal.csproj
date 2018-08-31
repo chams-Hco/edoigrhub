@@ -7761,27 +7761,13 @@
     <Content Include="Service References\ServiceReference2\CICSWebPortal.ServiceReference2.VerifyResidentIdRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Service References\ServiceReference\ChamsICSService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference\ChamsICSService1.wsdl" />
-    <None Include="Service References\ServiceReference\ChamsICSService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference\ChamsICSService11.wsdl" />
-    <None Include="Service References\ServiceReference\ChamsICSService12.wsdl" />
-    <None Include="Service References\ServiceReference\ChamsICSService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference\ChamsICSService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ServiceReference2\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference2\configuration.svcinfo" />
     <None Include="Service References\ServiceReference2\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ServiceReference\ChamsICSService.disco" />
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.AgentSummaryRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -7935,9 +7921,6 @@
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.VerifyResidentIdRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Service References\ServiceReference\ChamsICSService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.CreateEndOfDayRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -7965,6 +7948,24 @@
     <Content Include="Service References\ServiceReference\CICSWebPortal.ServiceReference.CashWorkIntegrationRes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Service References\ServiceReference\ChamsICSService.wsdl" />
+    <None Include="Service References\ServiceReference\ChamsICSService1.wsdl" />
+    <None Include="Service References\ServiceReference\ChamsICSService2.wsdl" />
+    <None Include="Service References\ServiceReference\ChamsICSService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference\ChamsICSService51.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference\ChamsICSService52.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference\ChamsICSService53.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference\ChamsICSService54.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceReference\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference\configuration.svcinfo" />
     <None Include="Service References\ServiceReference\Reference.svcmap">
