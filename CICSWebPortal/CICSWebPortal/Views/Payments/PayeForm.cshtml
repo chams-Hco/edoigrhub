@@ -318,6 +318,7 @@ new { @class = "form-control" })
         var rentalamt = 0;
         var otheramt = 0;
         var totalamt = 0;*@
+        var validationText = '';
 
         var payee = {
             MonthlyIncome: 0,
@@ -346,6 +347,11 @@ new { @class = "form-control" })
         var payable = [];
 
         function ExportToTable() {
+            validationText = '';
+            $('#invoicemessage').hide();
+            if(precheck()==false){
+                return false;
+            }
             var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;
             /*Checks whether the file is a valid excel file*/
             if (regex.test($("#excelfile").val().toLowerCase())) {
@@ -433,7 +439,9 @@ new { @class = "form-control" })
                     calculateCollection();
                     payee.Month = $("#Month option:selected").text();
                     payee.Year = $("#Year").val();
-                    addpayeerecord();
+                    if (checkCanAddRecord((i+1))) {
+                        payable.push(payee);
+                    }
                     resetPayee();
                 }
             }
@@ -541,6 +549,48 @@ new { @class = "form-control" })
             ShowAllPayables();
 
         });
+
+        var precheck = function(){
+            var errorText = '';
+            var returnvalue = true;
+            if ($("#Month option:selected").text() == "Select Month" || $("#Month option:selected").text() == "" ) {
+                errorText+='<p> -Please Select Month </p>';
+                returnvalue = false;
+            }
+            if(errorText != ''){
+                    validationText += '<p><span style="font-weigh"t:bold"> # Parameter Error </span><p>';
+                    validationText += errorText;
+                    $('#invoicemessage').removeClass('alert-success').addClass('alert-danger');
+                    $('#invoicemessagelabel').html(validationText);
+                    $('#invoicemessage').show();
+            }
+            return returnvalue;
+        }
+
+        var checkCanAddRecord = function (index) {
+        
+            var errorText = '';
+            var returnvalue = true;
+            if (payee.EmployeeName == null || payee.EmployeeName == '') {
+                errorText+='<p> - Please Enter Employee Name </p>';
+                returnvalue = false;
+            }
+            if (payee.MonthlyTaxLiability <= 0) {
+                 errorText+='<p> - Please check your enteries </p>';
+                 returnvalue = false;
+            }
+
+            
+
+            if(errorText != ''){
+                validationText += '<p><span style="font-weigh"t:bold">#' + index + '</span><p>';
+                validationText += errorText;
+                $('#invoicemessage').removeClass('alert-success').addClass('alert-danger');
+                $('#invoicemessagelabel').html(validationText);
+                $('#invoicemessage').show();
+            }
+            return returnvalue;
+        };
 
 
         var checkCanAdd = function () {

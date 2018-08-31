@@ -83,65 +83,65 @@
                     </div>
                     @using (Html.BeginForm("WithholdingTaxInvoice", "Payments", FormMethod.Post))
                     {
-                    <div class="box-body">
+                        <div class="box-body">
 
 
-                        @Html.AntiForgeryToken()
+                            @Html.AntiForgeryToken()
 
 
-                        <div class="form-group">
-                            <label for="Year">Select Withholding Tax Payable </label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
+                            <div class="form-group">
+                                <label for="Year">Select Withholding Tax Payable </label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+
+                                    <select class="form-control" id="WhtSelect">
+                                        <option value="-1">---Select Withholding Tax Payable---</option>
+                                        <option value="CS">Contract And Supply</option>
+                                        <option value="CP">Consultancy Or Proffesional Fee</option>
+                                        <option value="R">Rent</option>
+                                        <option value="D">Dividend</option>
+                                        <option value="DF">Director Fee</option>
+                                        <option value="S">Services</option>
+                                        <option value="C">Commission</option>
+                                    </select>
                                 </div>
-
-                                <select class="form-control" id="WhtSelect">
-                                    <option value="-1">---Select Withholding Tax Payable---</option>
-                                    <option value="CS">Contract And Supply</option>
-                                    <option value="CP">Consultancy Or Proffesional Fee</option>
-                                    <option value="R">Rent</option>
-                                    <option value="D">Dividend</option>
-                                    <option value="DF">Director Fee</option>
-                                    <option value="S">Services</option>
-                                    <option value="C">Commission</option>
-                                </select>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            Select Upload Template
-                            <input type="file" id="excelfile" class="form-control" />
-                            <input type="button" class="btn btn-primary pull-right" style="margin-top:3px" id="viewfile" value="Load Records" onclick="ExportToTable()" />
-                        </div>
-                        <div class="form-group">
-                            Don't have a template? <a href="~/Content/Templates/withholdingtaxTemplate.xlsx"> download here</a>
-                        </div>
-                        <hr />
-                        <div class="form-group">
-                            Unit Specifications
-                        </div>
-                        <div class="form-group">
-                            <label for="Name">Beneficiary Name</label>
-                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "Name", required = true, name = "Name", placeholder = "Beneficiary Name" } })
-                        </div>
-                        <div class="form-group">
-                            <label for="Name">Beneficiary Address</label>
-                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "Address", required = true, name = "Address", placeholder = "Beneficiary Address" } })
-                        </div>
-                        <div class="form-group">
-                            <label for="Amount">Amount</label>
-                            @Html.EditorFor(model => model.WithholdingTaxActualAmount, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "WithholdingTaxActualAmount", required = true, name = "WithholdingTaxActualAmount", placeholder = "Withholding Tax ActualAmount" } })
-                        </div>
-                        <div class="form-group">
-                            <label for="MonthlyIncome">
-                                Amount Payable
-                            </label>
-                            @Html.EditorFor(model => model.WithholdingTaxLiability, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "WithholdingTaxLiability", required = true, name = "WithholdingTaxLiability", placeholder = "Withholding Tax Liability", @readonly = "readonly" } })
-                        </div>
+                            <div class="form-group">
+                                Select Upload Template
+                                <input type="file" id="excelfile" class="form-control" />
+                                <input type="button" class="btn btn-primary pull-right" style="margin-top:3px" id="viewfile" value="Load Records" onclick="ExportToTable()" />
+                            </div>
+                            <div class="form-group">
+                                Don't have a template? <a href="~/Content/Templates/withholdingtaxTemplate.xlsx"> download here</a>
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                Unit Specifications
+                            </div>
+                            <div class="form-group">
+                                <label for="Name">Beneficiary Name</label>
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "Name", required = true, name = "Name", placeholder = "Beneficiary Name" } })
+                            </div>
+                            <div class="form-group">
+                                <label for="Name">Beneficiary Address</label>
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "text", id = "Address", required = true, name = "Address", placeholder = "Beneficiary Address" } })
+                            </div>
+                            <div class="form-group">
+                                <label for="Amount">Amount</label>
+                                @Html.EditorFor(model => model.WithholdingTaxActualAmount, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "WithholdingTaxActualAmount", required = true, name = "WithholdingTaxActualAmount", placeholder = "Withholding Tax ActualAmount" } })
+                            </div>
+                            <div class="form-group">
+                                <label for="MonthlyIncome">
+                                    Amount Payable
+                                </label>
+                                @Html.EditorFor(model => model.WithholdingTaxLiability, new { htmlAttributes = new { @class = " col-lg-6 col-md-6 col-sm-8 col-xs-4 form-control", type = "number", id = "WithholdingTaxLiability", required = true, name = "WithholdingTaxLiability", placeholder = "Withholding Tax Liability", @readonly = "readonly" } })
+                            </div>
 
-                        <hr />
+                            <hr />
 
-                    </div>
+                        </div>
                         <div class="box-footer clearfix">
                             <button type="submit" class="pull-right btn btn-default" id="addpayeerecord">
                                 Add
@@ -288,6 +288,12 @@
         var payable = [];
 
         function ExportToTable() {
+
+            //check if revenue item has been selected
+            if (payee.WithholdingTaxRevenueName == null || payee.WithholdingTaxRevenueName == '') {
+                    alert('Please Select a Withholding Tax Revenue Type');
+                    return false;
+              }
             var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;
             /*Checks whether the file is a valid excel file*/
             if (regex.test($("#excelfile").val().toLowerCase())) {
@@ -343,7 +349,7 @@
         }
 
         function readrecords(jsondata) {
-            for (var i = 0; i < jsondata.length; i++) {
+                for (var i = 0; i < jsondata.length; i++) {
                 var columns = readcolumnheader(jsondata);
                 if (checkcolumns(columns)) {
                     for (var colIndex = 0; colIndex < columns.length; colIndex++) {
@@ -406,6 +412,9 @@
             if(taxcode != "-1"){
                payee.WithholdingTaxRevenueName = $('#WhtSelect option:selected').text();
             }
+            else{
+                payee.WithholdingTaxRevenueName = null;
+            }
 
             if(taxcode == "-1"){
                 currentpercentage = 0;
@@ -440,7 +449,7 @@
             calculateCollection();
         });
 
-        
+
 
         $('#Name').on('input keyup blur change keypress', function () {
             payee.Name = $(this).val();
@@ -517,7 +526,7 @@
                 alert('Please Select a Withholding Tax Revenue Type');
                 return false;
             }
-            
+
             if (payee.WithholdingTaxLiability <= 0) {
                 alert('Please check your enteries');
                 return false;
@@ -526,7 +535,7 @@
                 alert('Please Enter Amount');
                 return false;
             }
-     
+
             return true;
         };
 
@@ -540,7 +549,7 @@
                 innerhtml += '<td>' + payable[i].Name + '</td>';
                 innerhtml += '<td>' + payable[i].WithholdingTaxActualAmount + '</td>';
                 innerhtml += '<td>' + payable[i].WithholdingTaxLiability + '</td>';
-                
+
                 innerhtml += '<td> <a class="btn btn-danger removepayee" data-id=' + i + '> Remove </a></td>';
                 innerhtml += '</tr>';
                 total += payable[i].WithholdingTaxLiability;
@@ -582,7 +591,7 @@
         };
 
 
-       
+
 
 
         var doc = new jsPDF();
