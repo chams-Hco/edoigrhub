@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using CICSWebPortal.ServiceReference;   //chenge to 1 on deployment and change line 24 and 25
+using CICSWebPortal.ServiceReference1;   //chenge to 1 on deployment and change line 24 and 25
 using CICSWebPortal.ViewModels;
 using System.Web.Helpers;
 using CICSWebPortal.Helpers;
@@ -21,8 +21,8 @@ namespace CICSWebPortal.Services
 
         public DataService()
         {
-            _client = new iChamsICSPortalServiceClient("BasicHttpBinding_iChamsICSPortalService1");
-            _client2 = new iChamsICSServiceClient("BasicHttpBinding_iChamsICSService1");
+            _client = new iChamsICSPortalServiceClient("BasicHttpBinding_iChamsICSPortalService");
+            _client2 = new iChamsICSServiceClient("BasicHttpBinding_iChamsICSService");
 
 
         }
@@ -183,7 +183,7 @@ namespace CICSWebPortal.Services
 
         public void AddClient(Models.Client client)
         {
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = client.userId,
                 clientId = client.clientId
@@ -208,7 +208,7 @@ namespace CICSWebPortal.Services
 
         public void UpdateClient(Models.Client client)
         {
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = client.userId,
                 clientId = client.clientId
@@ -294,12 +294,12 @@ namespace CICSWebPortal.Services
 
         public void AddAgent(Models.Agent agent)
         {
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = agent.userId,
                 clientId = agent.clientId
             };
-            ServiceReference.Agent agentReq = new ServiceReference.Agent();
+            ServiceReference1.Agent agentReq = new ServiceReference1.Agent();
             agentReq.ClientId = agent.ClientId;
             agentReq.Name = agent.Name;
             agentReq.Company = agent.Company;
@@ -320,12 +320,12 @@ namespace CICSWebPortal.Services
 
         public void UpdateAgent(Models.Agent agent)
         {
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = agent.userId,
                 clientId = agent.clientId
             };
-            ServiceReference.Agent agentReq = new ServiceReference.Agent();
+            ServiceReference1.Agent agentReq = new ServiceReference1.Agent();
             agentReq.Id = agent.AgentId;
             agentReq.ClientId = agent.ClientId;
             agentReq.Name = agent.Name;
@@ -739,7 +739,7 @@ namespace CICSWebPortal.Services
 
         public IList<Models.Transaction> GetAllTransactions(Models.GetTransactionRequest req)
         {
-            var result = _client.GetTransactions(new ServiceReference.GetTransactionRequest
+            var result = _client.GetTransactions(new ServiceReference1.GetTransactionRequest
             {
                 UserType = req.UserType,
                 UserTypeId = req.UserTypeId,
@@ -940,7 +940,7 @@ namespace CICSWebPortal.Services
         {
             try
             {
-                var result = _client.GetErrorTransaction(new ServiceReference.GetTransactionRequest
+                var result = _client.GetErrorTransaction(new ServiceReference1.GetTransactionRequest
                 {
                     UserType = req.UserType,
                     UserTypeId = req.UserTypeId,
@@ -1070,7 +1070,7 @@ namespace CICSWebPortal.Services
 
         public void AddRevenue(CICSWebPortal.Models.Revenue revenue)
         {
-            ServiceReference.Revenue revenueReq = new ServiceReference.Revenue()
+            ServiceReference1.Revenue revenueReq = new ServiceReference1.Revenue()
             {
                 RevenueId = revenue.RevenueId,
                 ClientId = revenue.ClientId,
@@ -1091,7 +1091,7 @@ namespace CICSWebPortal.Services
 
         public void UpdateRevenue(CICSWebPortal.Models.Revenue revenue)
         {
-            ServiceReference.Revenue revenueReq = new ServiceReference.Revenue()
+            ServiceReference1.Revenue revenueReq = new ServiceReference1.Revenue()
             {
                 RevenueId = revenue.RevenueId,
                 ClientId = revenue.ClientId,
@@ -1324,13 +1324,13 @@ namespace CICSWebPortal.Services
 
         public void AddIdentity(CICSWebPortal.Models.Identity identity)
         {
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = identity.userId,
                 clientId = identity.clientId
             };
 
-            ServiceReference.Identity req = new ServiceReference.Identity()
+            ServiceReference1.Identity req = new ServiceReference1.Identity()
             {
                 URL = identity.URL,
                 ClientId = identity.ClientId,
@@ -1350,13 +1350,13 @@ namespace CICSWebPortal.Services
 
         public void UpdateIdentity(CICSWebPortal.Models.Identity identity)
         {
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = identity.userId,
                 clientId = identity.clientId
             };
 
-            ServiceReference.Identity req = new ServiceReference.Identity()
+            ServiceReference1.Identity req = new ServiceReference1.Identity()
             {
                 IdentityId = identity.IdentityId,
                 URL = identity.URL,
@@ -1724,13 +1724,13 @@ namespace CICSWebPortal.Services
                 throw new Exception("User is null or empty");
             }
 
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = user.userId,
                 clientId = user.clientId
             };
 
-            ServiceReference.User userReq = new ServiceReference.User()
+            ServiceReference1.User userReq = new ServiceReference1.User()
             {
                 UserId = user.UserId,
                 UserTypeParentId = user.UserTypeParentId,
@@ -1759,12 +1759,12 @@ namespace CICSWebPortal.Services
             {
                 throw new Exception("User is null or empty");
             }
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = user.userId,
                 clientId = user.clientId
             };
-            ServiceReference.User userReq = new ServiceReference.User()
+            ServiceReference1.User userReq = new ServiceReference1.User()
             {
                 UserId = user.UserId,
                 UserTypeParentId = user.UserTypeParentId,
@@ -1780,7 +1780,7 @@ namespace CICSWebPortal.Services
 
         public void ResetUserPassword(ResetPasswordModel user)
         {
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = user.userId,
                 clientId = user.clientId
@@ -1795,7 +1795,7 @@ namespace CICSWebPortal.Services
 
         public void ChangeUserPassword(ChangeUserPasswordModel user)
         {
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = user.userId,
                 clientId = user.clientId
@@ -1817,7 +1817,7 @@ namespace CICSWebPortal.Services
                 throw new Exception("User is null or empty");
             }
 
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = user.userId,
                 clientId = user.clientId
@@ -2083,13 +2083,13 @@ namespace CICSWebPortal.Services
 
         public string AddLocation(Models.Location location)
         {
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = location.userId,
                 clientId = location.clientId
             };
 
-            ServiceReference.Location loc = new ServiceReference.Location
+            ServiceReference1.Location loc = new ServiceReference1.Location
             {
                 AgentId = location.AgentId,
                 ClientId = location.ClientId,
@@ -2104,13 +2104,13 @@ namespace CICSWebPortal.Services
 
         public string UpdateLocation(Models.Location location)
         {
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = location.userId,
                 clientId = location.clientId
             };
 
-            ServiceReference.Location loc = new ServiceReference.Location
+            ServiceReference1.Location loc = new ServiceReference1.Location
             {
                 Id = location.Id,
                 AgentId = location.AgentId,
@@ -2155,12 +2155,12 @@ namespace CICSWebPortal.Services
                 throw new Exception("paymet is null or empty");
             }
 
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData()
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData()
             {
                 userId = payment.UserId
             };
 
-            ServiceReference.Payment paymentReq = new ServiceReference.Payment()
+            ServiceReference1.Payment paymentReq = new ServiceReference1.Payment()
             {
                 WalletId = payment.WalletId,
                 TransactionId = payment.TransactionId,
@@ -2222,7 +2222,7 @@ namespace CICSWebPortal.Services
 
         public List<Models.Payment> GetTransactionDetails(int id, string email)
         {
-            ServiceReference.PaymentReq _paymentReq = new ServiceReference.PaymentReq
+            ServiceReference1.PaymentReq _paymentReq = new ServiceReference1.PaymentReq
             {
                 InvoiceId = id,
                 Email = email
@@ -2239,7 +2239,7 @@ namespace CICSWebPortal.Services
 
         public List<Models.Payment> GetAllTransactionDetailsByUser(int id, string email)
         {
-            ServiceReference.PaymentReq _paymentReq = new ServiceReference.PaymentReq
+            ServiceReference1.PaymentReq _paymentReq = new ServiceReference1.PaymentReq
             {
                 InvoiceId = id,
                 Email = email
@@ -2258,7 +2258,7 @@ namespace CICSWebPortal.Services
 
         public Boolean MakePayment(Models.PaymentReq payment)
         {
-            ServiceReference.PaymentReq _paymentReq = new ServiceReference.PaymentReq
+            ServiceReference1.PaymentReq _paymentReq = new ServiceReference1.PaymentReq
             {
                 Amount = payment.Amount,
                 Email = payment.Email,
@@ -2298,7 +2298,7 @@ namespace CICSWebPortal.Services
 
         public Boolean AddTaxpayer(Models.Taxpayer taxpayer)
         {
-            //ServiceReference.Taxpayer _taxpayerReq = new ServiceReference.Taxpayer
+            //ServiceReference1.Taxpayer _taxpayerReq = new ServiceReference1.Taxpayer
             //{
             //    Email = taxpayer.Email,
             //    Firstname = taxpayer.Firstname,
@@ -2338,7 +2338,7 @@ namespace CICSWebPortal.Services
 
         public List<Models.RevenueItem> GetAssessmentByRole(Models.AssessmentReq assessmentReq)
         {
-            //ServiceReference.AssessmentReq _assessmentRequest = new ServiceReference.AssessmentReq
+            //ServiceReference1.AssessmentReq _assessmentRequest = new ServiceReference1.AssessmentReq
             //{
             //    roleid = assessmentReq.roleid,
             //    email = assessmentReq.email,
@@ -2357,7 +2357,7 @@ namespace CICSWebPortal.Services
 
         public Boolean GenerateInvoice(Models.GenerateInvoice generateInvoice)
         {
-            //ServiceReference.GenerateInvoice _generateInvoice = new ServiceReference.GenerateInvoice
+            //ServiceReference1.GenerateInvoice _generateInvoice = new ServiceReference1.GenerateInvoice
             //{
             //    RevenueCode = generateInvoice.RevenueCode,
             //    TaxpayerId = generateInvoice.TaxpayerId,
@@ -2379,13 +2379,13 @@ namespace CICSWebPortal.Services
                 throw new Exception("User is null or empty");
             }
 
-            ServiceReference.AuditTrailData _AuditTrailData = new ServiceReference.AuditTrailData
+            ServiceReference1.AuditTrailData _AuditTrailData = new ServiceReference1.AuditTrailData
             {
                 userId = user.createdby,
                 clientId = user.SelectedClientId
             };
 
-            ServiceReference.AuthoriseWebUserReq userReq = new ServiceReference.AuthoriseWebUserReq()
+            ServiceReference1.AuthoriseWebUserReq userReq = new ServiceReference1.AuthoriseWebUserReq()
             {
                 UserId = user.createdby,
                 UserTypeParentId = user.SelectedAgentId,

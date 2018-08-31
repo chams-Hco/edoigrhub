@@ -152,6 +152,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BatchCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DateOfBirth" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
@@ -948,6 +949,7 @@
       <xs:element minOccurs="0" name="AnnualNHIS" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="AnnualPension" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="AnnualTaxPayable" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BatchCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ClientId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="ComputedAnnualTax" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="ConsolidatedReliefs" nillable="true" type="xs:decimal" />
