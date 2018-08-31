@@ -385,10 +385,6 @@ namespace CICSWebPortal.Controllers
             }
         }
 
-
-
-
-
         [CustomAuthorize]
         [HttpPost]
         public ActionResult PayeeInvoice(List<WebPayment> model)
