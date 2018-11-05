@@ -33,6 +33,38 @@ namespace ChamsICSWebService
             //Assume Gabage Collection will happen
         }
 
+        internal bool AuthenticateUser(string email, string password, out Response res)
+        {
+            UserLoginRes loginRes = new UserLoginRes();
+            res = new Response();
+            bool isAuthenticated = false;
+
+            var result = UserLogin(new UserLoginReq
+            {
+                Email = email,
+                UserPassword = password
+            }, out loginRes);
+
+            if(!result)
+            {
+                res.ResponseCode = loginRes.ResponseCode;
+                res.ResponseDescription = loginRes.ResponseDescription;
+                isAuthenticated = false;
+            }
+            else if (loginRes.AccountStatus == 0)
+            {
+                res.ResponseCode = ResponseHelper.FAILED;
+                res.ResponseDescription = "Account is disabled";
+                isAuthenticated = false;
+            }
+            else
+            {
+                isAuthenticated = true;
+            }
+
+            return isAuthenticated;
+        }
+
         internal bool AuthoriseRequest(String AgentCode, string Username, string Password, out Response res)
         {
             UserLoginRes loginRes = new UserLoginRes();

@@ -1159,6 +1159,58 @@ namespace ChamsICSWebService
             }
         }
 
+        /// <summary>
+        /// This Service method is Implemented to satisfy the needs of Expresspay
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        public GetAllTransactionRes GetAllTransactions(GetAllTransactionRequest req)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            DateTime? startDate = null;
+            DateTime? endDate = null;
 
+            try
+            {
+                //convert date string to datetime
+                startDate = Convert.ToDateTime(req.StartDate);
+                endDate = Convert.ToDateTime(req.EndDate);
+                //prep start date and end date
+                startDate = new DateTime(startDate.Value.Year, startDate.Value.Month, startDate.Value.Day, 0, 0, 0);
+                endDate = new DateTime(endDate.Value.Year, endDate.Value.Month, endDate.Value.Day, 23, 59, 59);
+            }
+            catch (Exception ex)
+            {
+                Logger.logToFile(ex, ErrorLogPath);
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = "Pls make sure dates are in required format";
+                return res;
+            }
+
+            try
+            {
+                var isAuthenticated = ServiceHelper.AuthenticateUser(req.Email, req.Password, out Response response);
+                if (!isAuthenticated)
+                {
+                    res.ResponseCode = response.ResponseCode;
+                    res.ResponseDescription = response.ResponseDescription;
+                    return res;
+                }
+                var userRes = ServiceHelper.GetUserByEmail(req.Email);
+                if(userRes.ResponseCode == ResponseHelper.SUCCESS)
+                {
+                    //Get Transactions by the user's client id
+                    res = ServiceHelper.GetAllTransactionByClientPerPeriod((int)userRes.User.ClientId, startDate, endDate);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Logger.logToFile(ex, ErrorLogPath);
+                res.ResponseCode = ResponseHelper.APPLICATION_ERROR;
+                res.ResponseDescription = "Application Error";
+            }
+            return res;
+        }
     }
 }

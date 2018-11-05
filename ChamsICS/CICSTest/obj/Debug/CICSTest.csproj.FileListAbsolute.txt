@@ -28,3 +28,16 @@ C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\CICSTest\bin\De
 C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\CICSTest\obj\Debug\CICSTest.csprojResolveAssemblyReference.cache
 C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\CICSTest\obj\Debug\CICSTest.exe
 C:\Users\Coleola\Desktop\ChamsICS\EDO-IGRHub\EDO-IGRHub\ChamsICS\CICSTest\obj\Debug\CICSTest.pdb
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\bin\Debug\CICSTest.exe.config
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\bin\Debug\CICSTest.exe
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\bin\Debug\CICSTest.pdb
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\bin\Debug\ChamsICSLib.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\bin\Debug\EntityFramework.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\bin\Debug\ChamsICSLib.pdb
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\bin\Debug\ChamsICSLib.dll.config
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\bin\Debug\EntityFramework.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\obj\Debug\CICSTest.csprojResolveAssemblyReference.cache
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\obj\Debug\CICSTest.csproj.CoreCompileInputs.cache
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\obj\Debug\CICSTest.csproj.CopyComplete
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\obj\Debug\CICSTest.exe
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\CICSTest\obj\Debug\CICSTest.pdb

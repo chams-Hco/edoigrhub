@@ -140,3 +140,22 @@ C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ICSWinService\obj\D
 C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.csproj.CopyComplete
 C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.exe
 C:\Users\ayobami\Documents\Projects\CHAMS\edoigrhub\ChamsICS\ICSWinService\obj\Debug\ICSWinService.pdb
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\bin\Debug\ICSWinService.exe.config
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\bin\Debug\ICSWinService.exe
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\bin\Debug\ICSWinService.pdb
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\bin\Debug\ChamsICSLib.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\bin\Debug\EntityFramework.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\bin\Debug\ChamsICSLib.pdb
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\bin\Debug\ChamsICSLib.dll.config
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\bin\Debug\EntityFramework.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\obj\Debug\ICSWinService.csprojResolveAssemblyReference.cache
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\obj\Debug\ICSWinService.About.resources
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\obj\Debug\ICSWinService.FormMain.resources
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\obj\Debug\ICSWinService.Properties.Resources.resources
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\obj\Debug\ICSWinService.csproj.GenerateResource.cache
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\obj\Debug\ICSWinService.csproj.CoreCompileInputs.cache
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\obj\Debug\ICSWinService.csproj.CopyComplete
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\obj\Debug\ICSWinService.exe
+C:\Users\chams\Documents\Visual Studio 2017\Projects\IGRNEW\ChamsICS\ICSWinService\obj\Debug\ICSWinService.pdb

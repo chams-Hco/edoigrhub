@@ -13,4 +13,12 @@ namespace ChamsICSWebService.Model
         public DateTime? StartDate { get; set; }
         public DateTime? EndtDate { get; set; }
     }
+
+    public class GetAllTransactionRequest
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public String StartDate { get; set; }
+        public String EndDate { get; set; }
+    }
 }

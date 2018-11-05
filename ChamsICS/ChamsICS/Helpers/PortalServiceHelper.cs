@@ -1441,6 +1441,66 @@ namespace ChamsICSWebService
             return res;
         }
 
+        internal GetAllTransactionRes GetAllTransactionByClientPerPeriod(int clientId, DateTime? fromdate, DateTime? todate)
+        {
+            GetAllTransactionRes res = new GetAllTransactionRes();
+            var tLogs = from x in db.TransactionLogs
+                        join z in db.Agents on x.AgentId equals z.Id
+                        join y in db.RevenueItems on x.RevenueCode equals y.Code
+                        join revenueHead in db.RevenueHeads on y.RevenueHeadId equals revenueHead.Id
+                        join ministry in db.Ministries on y.MinistryId equals ministry.Id
+
+                        where x.ClientId == clientId
+                        select new Transaction
+                        {
+                            Id = x.Id,
+                            AgentId = x.AgentId.Value,
+                            AgentName = z.Name,
+                            TerminalId = x.TerminalId.Value,
+                            TransactionCode = x.Code,
+                            ResidentId = x.ResidentId,
+                            FirstName = x.FirstName,
+                            MiddleName = x.MiddleName,
+                            LastName = x.Lastname,
+                            Address = x.Address,
+                            Email = x.Email,
+                            PhoneNumber = x.PhoneNumber,
+                            DateOfBirth = x.DateOfBirth.Value,
+                            Gender = x.Gender,
+                            RevenueCode = x.RevenueCode,
+                            RevenueName = y.Name,
+                            Ministry = ministry != null ? ministry.Name : "",
+                            RevenueHead = revenueHead != null ? revenueHead.Name : "",
+                            Amount = x.Amount.Value,
+                            PaymentReference = x.PaymentReference,
+                            TransactionDate = x.TransactionDate.Value,
+                            UploadDate = x.UploadDate.Value,
+                            status = x.Status.Value,
+                            DrinkAmount = x.DrinkAmount,
+                            FoodAmount = x.FoodAmount,
+                            FromDate = x.FromDate,
+                            ClientId = x.ClientId,
+                            LocationId = x.LocationId,
+                            Income = x.Income,
+                            LocationName = x.LocationCode,
+                            OtherAmount = x.OtherAmount,
+                            RentalAmount = x.RentalAmount,
+                            Percentage = x.Percentage,
+                            TerminalCode = x.Terminal != null ? x.Terminal.Code : "",
+                            ToDate = x.ToDate,
+                            Name = (x.TerminalId != null && x.Terminal.UserDetails.Any()) ? x.Terminal.UserDetails.FirstOrDefault().Name : ""
+                        };
+
+            if (fromdate != null && todate != null)
+            {
+                tLogs = tLogs.Where(x => x.TransactionDate >= fromdate && x.TransactionDate <= todate);
+            }
+
+            res.Transactions = tLogs.ToList().OrderByDescending(x => x.Id);
+
+            return res;
+        }
+
         internal GetAllTransactionRes GetAllTransactionByAgentPerPeriod(int agentId, DateTime fromdate, DateTime todate)
         {
             GetAllTransactionRes res = new GetAllTransactionRes();
@@ -3075,6 +3135,7 @@ on x.MinistryId equals y.Id
                 Password = req.Password,
                 PasswordStatus = req.PasswordStatus.Value,
                 Status = req.Status.Value,
+                ClientId = req.ClientId
             };
 
             if (user == null)

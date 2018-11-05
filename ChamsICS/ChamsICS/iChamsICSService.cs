@@ -87,6 +87,11 @@ namespace ChamsICSWebService
         [Description("Call this service to get all locations details for the agent. For Technical support, contact itsupport@chams.com ")]
         GetAgentLocationsRes GetAgentLocations(GetAgentLocationsReq req);
 
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/GetAllTransactions", BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Call this service to get all transactions. This service was made due to the needs of Express pay")]
+        GetAllTransactionRes GetAllTransactions(GetAllTransactionRequest req);
+
         //service interface for End of day transaction
         #region EOD SERVICE INTERFACE
         /// <summary>
